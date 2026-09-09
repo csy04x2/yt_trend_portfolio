@@ -61,7 +61,7 @@
 
   <figure>
     <div class="scroll">
-      <svg viewBox="0 0 1000 620" role="img" aria-label="Next.js 프론트가 FastAPI에 요청하고, API가 작업을 등록하면 백그라운드 워커가 수집·정규화·영상 유형·댓글 선별·댓글 라벨·집계 여섯 단계를 순서대로 실행한다. 수집은 YouTube Data API를, 유형·선별·라벨은 Claude API를 호출하고, 모든 단계와 API가 SQLite 파일 하나를 읽고 쓴다.">
+      <svg viewBox="0 0 1000 620" role="img" aria-label="Next.js 프론트가 FastAPI에 요청하고, API가 작업을 등록하면 백그라운드 워커가 수집·정규화·영상 유형·댓글 선별·댓글 라벨·집계 여섯 단계를 순서대로 실행한다. 수집은 YouTube Data API를, 유형·선별·라벨·결론 문장은 Claude API를 호출하고, 모든 단계와 API가 SQLite 파일 하나를 읽고 쓴다.">
         <defs>
           <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
@@ -164,16 +164,20 @@
         <line class="flow-ext" x1="690" y1="226" x2="758" y2="226" marker-end="url(#ax)"/>
         <line class="flow-ext" x1="690" y1="296" x2="758" y2="296" marker-end="url(#ax)"/>
         <line class="flow-ext" x1="690" y1="366" x2="758" y2="366" marker-end="url(#ax)"/>
-        <rect class="card-ext" x="760" y="200" width="220" height="192" rx="6"/>
-        <text class="t-b" x="870" y="240" text-anchor="middle">Claude API</text>
-        <text class="t-sub" x="870" y="262" text-anchor="middle">구조화 출력 · 프롬프트 버전</text>
+        <line class="flow-ext" x1="690" y1="436" x2="758" y2="436" marker-end="url(#ax)"/>
+        <rect class="card-ext" x="760" y="200" width="220" height="252" rx="6"/>
+        <text class="t-b" x="870" y="238" text-anchor="middle">Claude API</text>
+        <text class="t-sub" x="870" y="260" text-anchor="middle">구조화 출력 · 프롬프트 버전 · 모델</text>
         <text class="t-sub" x="870" y="292" text-anchor="middle">3 유형 체계 제안 · 라벨</text>
         <text class="t-sub" x="870" y="310" text-anchor="middle">4 스팸 · 무관 판정</text>
         <text class="t-sub" x="870" y="328" text-anchor="middle">5 감성 · 주제</text>
-        <text class="t-ext" x="870" y="366" text-anchor="middle">같은 입력은 캐시에서 · 재호출 없음</text>
+        <text class="t-sub" x="870" y="346" text-anchor="middle">6 결론 문장 다듬기</text>
+        <text class="t-ext" x="870" y="380" text-anchor="middle">이미 분류된 항목은</text>
+        <text class="t-ext" x="870" y="396" text-anchor="middle">다시 보내지 않음</text>
+        <text class="t-ext" x="870" y="424" text-anchor="middle">거절·오류는 미분류로 남김</text>
       </svg>
     </div>
-    <figcaption>파란 실선은 내부 호출, 주황 점선 상자는 외부 서비스입니다. 재개는 완료되지 않은 첫 단계부터 다시 실행하며, 각 단계가 이미 처리한 항목을 건너뛰므로 결과가 중복되지 않습니다.</figcaption>
+    <figcaption>파란 실선은 내부 호출, 주황 점선 상자는 외부 서비스입니다. 재개는 완료되지 않은 첫 단계부터 다시 실행하며, 각 단계가 이미 처리한 항목을 건너뛰므로 결과가 중복되지 않습니다. 건너뛰기의 기준은 프롬프트 캐시가 아니라 해석 테이블의 키 (대상, 프롬프트 버전, 모델)입니다. 워커는 이벤트 루프가 아닌 전용 스레드에서 돕니다.</figcaption>
   </figure>
 </div>
 </body>

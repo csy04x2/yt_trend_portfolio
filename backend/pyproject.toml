@@ -1,0 +1,9 @@
+[project]
+name = "yt-trend-backend"
+version = "0.0.1"
+description = "YT Trend 파이프라인 프로토타입 — 수집과 규칙 필터"
+requires-python = ">=3.11"
+dependencies = []   # 수집·규칙은 표준 라이브러리만 쓴다. Claude 단계에서 anthropic 추가
+
+[tool.yt-trend]
+note = "프로토타입 단계. FastAPI·워커·프론트는 아직 없다."

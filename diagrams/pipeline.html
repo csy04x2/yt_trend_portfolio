@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 파이프라인</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --ink: #0E1420;
+    --muted: #8A93A1;
+    --line: #D9DEE6;
+    --tile-bg: #FFFFFF;
+    --tile-line: #0E1420;
+    --accent: #2E7CF6;
+    --accent-bg: #EDF4FF;
+    --accent-line: #9FC4FA;
+    --badge-ink: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1117; --ink: #E7ECF3; --muted: #7E8895; --line: #2A323D;
+      --tile-bg: #141A22; --tile-line: #E7ECF3;
+      --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+      --badge-ink: #0D1117;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1117; --ink: #E7ECF3; --muted: #7E8895; --line: #2A323D;
+    --tile-bg: #141A22; --tile-line: #E7ECF3;
+    --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+    --badge-ink: #0D1117;
+  }
+
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .page { padding: 44px 32px 40px; max-width: 1440px; margin: 0 auto; }
+
+  .title { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; }
+  .title .rule { width: 34px; height: 2px; background: var(--accent); flex: none; }
+  .title h1 {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+  }
+
+  .scroll { overflow-x: auto; padding-bottom: 6px; }
+  .chart {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    min-width: 1240px;
+    position: relative;
+  }
+
+  /* ---- 실행 주체 밴드 ---- */
+  .band { padding: 0 8px 14px; text-align: center; }
+  .band span {
+    display: block;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 7px; white-space: nowrap;
+  }
+  .band i {
+    display: block; height: 5px;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+
+  /* ---- 스텝 ---- */
+  .step {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 12px 6px 0;
+  }
+  .tile {
+    position: relative;
+    width: 72px; height: 72px; border-radius: 14px;
+    border: 1.6px solid var(--tile-line); background: var(--tile-bg);
+    display: flex; align-items: center; justify-content: center; color: var(--ink);
+  }
+  .step.is-llm .tile { border-color: var(--accent-line); background: var(--accent-bg); color: var(--accent); }
+  .tile svg { width: 28px; height: 28px; display: block; }
+
+  .badge {
+    position: absolute; top: -11px; right: -11px;
+    width: 23px; height: 23px; border-radius: 50%;
+    background: var(--ink); color: var(--badge-ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; font-weight: 600;
+  }
+  .step.is-llm .badge { background: var(--accent); color: #FFFFFF; }
+
+  .label { margin-top: 18px; font-size: 13.5px; font-weight: 600; line-height: 1.35; min-height: 19px; }
+  .sub { margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
+  /* 타일 중심을 잇는 레일 — 타일 뒤로 지나간다 */
+  .rail {
+    position: absolute; left: 5%; right: 5%;
+    height: 2px; background: var(--line); z-index: 0;
+  }
+
+  /* ---- 저장소 밴드 ---- */
+  .store { margin-top: 26px; padding: 0 8px; }
+  .store i {
+    display: block; height: 5px;
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .store span {
+    display: block; text-align: center; margin-top: 8px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  }
+
+  .legend {
+    margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 12.5px; color: var(--muted);
+  }
+  .key { display: flex; align-items: center; gap: 8px; }
+  .swatch { width: 13px; height: 13px; border-radius: 4px; border: 1.5px solid var(--tile-line); background: var(--tile-bg); flex: none; }
+  .swatch.llm { border-color: var(--accent-line); background: var(--accent-bg); }
+  .note { margin-top: 14px; font-size: 12.5px; color: var(--muted); max-width: 90ch; line-height: 1.75; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="title">
+    <span class="rule"></span>
+    <h1>Processing pipeline — YT Trend</h1>
+  </div>
+
+  <div class="scroll">
+    <div class="chart" role="img" aria-label="열 단계 전체 흐름. 프론트에서 채널 URL을 넣으면 API가 작업을 등록하고, 백그라운드 워커가 수집·정규화·영상 유형·댓글 선별·댓글 라벨·집계 여섯 단계를 순서대로 돌린 뒤, API가 리포트를 내주고 프론트가 결론·근거·상세 순으로 보여준다. 영상 유형부터 집계까지 네 단계에 Claude 호출이 있고, 02번부터 09번까지가 SQLite 파일 하나를 읽고 쓴다.">
+
+      <!-- 실행 주체 -->
+      <div class="band" style="grid-column: 1 / span 1"><span>프론트</span><i></i></div>
+      <div class="band" style="grid-column: 2 / span 1"><span>API</span><i></i></div>
+      <div class="band" style="grid-column: 3 / span 6"><span>백그라운드 워커 · 파이프라인</span><i></i></div>
+      <div class="band" style="grid-column: 9 / span 1"><span>API</span><i></i></div>
+      <div class="band" style="grid-column: 10 / span 1"><span>프론트</span><i></i></div>
+
+      <div class="rail" style="grid-row: 2; grid-column: 1 / -1; top: 71px;"></div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">01</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.5 13.5a4 4 0 0 0 5.66 0l2.5-2.5a4 4 0 1 0-5.66-5.66l-1.2 1.2"/>
+            <path d="M13.5 10.5a4 4 0 0 0-5.66 0l-2.5 2.5a4 4 0 1 0 5.66 5.66l1.2-1.2"/>
+          </svg>
+        </div>
+        <div class="label">분석 요청</div>
+        <div class="sub">채널 URL 입력</div>
+      </div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">02</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6.5h16"/><path d="M4 12h9"/><path d="M4 17.5h9"/>
+            <path d="M17.5 13.5v7"/><path d="M14 17h7"/>
+          </svg>
+        </div>
+        <div class="label">작업 등록</div>
+        <div class="sub">큐 · 상태 저장</div>
+      </div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">03</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/>
+            <path d="M4 16.5V19a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-2.5"/>
+          </svg>
+        </div>
+        <div class="label">수집</div>
+        <div class="sub">YouTube API</div>
+      </div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">04</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4v16M12 4v16M18 4v16"/>
+            <circle cx="6" cy="9" r="2.3" fill="var(--tile-bg)"/>
+            <circle cx="12" cy="15" r="2.3" fill="var(--tile-bg)"/>
+            <circle cx="18" cy="7.5" r="2.3" fill="var(--tile-bg)"/>
+          </svg>
+        </div>
+        <div class="label">정규화</div>
+        <div class="sub">조회 배수 · 길이 축</div>
+      </div>
+
+      <div class="step is-llm">
+        <div class="tile"><span class="badge">05</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 21 8l-9 5-9-5 9-5Z"/><path d="M3 12.5 12 17.5l9-5"/><path d="M3 16.5 12 21.5l9-5"/>
+          </svg>
+        </div>
+        <div class="label">영상 유형</div>
+        <div class="sub">체계 제안 → 라벨</div>
+      </div>
+
+      <div class="step is-llm">
+        <div class="tile"><span class="badge">06</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h16l-6.2 7.6V20l-3.6-1.9v-5.5L4 5Z"/>
+          </svg>
+        </div>
+        <div class="label">댓글 선별</div>
+        <div class="sub">규칙 → 스팸 판정</div>
+      </div>
+
+      <div class="step is-llm">
+        <div class="tile"><span class="badge">07</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 4.5h7.2l9.8 9.8-7.2 7.2-9.8-9.8V4.5Z"/><circle cx="8" cy="9" r="1.5"/>
+          </svg>
+        </div>
+        <div class="label">댓글 라벨</div>
+        <div class="sub">감성 · 주제</div>
+      </div>
+
+      <div class="step is-llm">
+        <div class="tile"><span class="badge">08</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 20.5h17"/><path d="M7.5 20.5V12.5"/><path d="M12 20.5V5.5"/><path d="M16.5 20.5V15.5"/>
+          </svg>
+        </div>
+        <div class="label">집계</div>
+        <div class="sub">결론 문장 초안</div>
+      </div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">09</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="4.5" width="17" height="6" rx="1.6"/><rect x="3.5" y="13.5" width="17" height="6" rx="1.6"/>
+            <path d="M7 7.5h.01M7 16.5h.01"/>
+          </svg>
+        </div>
+        <div class="label">리포트 조회</div>
+        <div class="sub">GET /report</div>
+      </div>
+
+      <div class="step">
+        <div class="tile"><span class="badge">10</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9h17"/>
+            <path d="M7 12.5h7"/><path d="M7 16h10"/>
+          </svg>
+        </div>
+        <div class="label">리포트 화면</div>
+        <div class="sub">결론 → 근거 → 상세</div>
+      </div>
+
+      <!-- 저장소 -->
+      <div class="store" style="grid-column: 2 / span 8"><i></i><span>SQLite — 원본 · 해석 · 집계 · 작업 상태</span></div>
+
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="key"><span class="swatch"></span> Claude 호출 없음</span>
+    <span class="key"><span class="swatch llm"></span> Claude 호출 — 비용과 비결정성이 여기에만 있다</span>
+  </div>
+  <p class="note">
+    03~08은 순서대로 돌고, 각 단계는 이미 처리한 항목을 건너뛴다. 재개·증분 수집·재시도가 모두 이 성질 하나에서 나온다.
+    03·04만 끝나도 성과 리포트는 만들어지므로(completeness=performance_only), 구현은 여기까지를 먼저 세운다.
+    진행 중에는 프론트가 작업 상태를 2초마다 조회한다 — 01에서 10으로 곧장 가지 않고, 02와 09 사이를 오가며 진행률을 받는다.
+  </p>
+
+</div>
+</body>
+</html>
