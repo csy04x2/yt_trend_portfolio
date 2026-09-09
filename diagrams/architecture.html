@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 아키텍처</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #F5F6F8; --card: #FFFFFF; --zone: #EBEEF2; --ink: #1B2430; --muted: #66707D;
+    --line: #C3CAD4; --accent: #2457D6; --amber: #B96F0E; --amber-bg: #FBF1E1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11161D; --card: #1E252E; --zone: #181E26; --ink: #E6EAF0; --muted: #98A2B0;
+      --line: #3B4553; --accent: #7B9DF5; --amber: #E3A24C; --amber-bg: #2A2217;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11161D; --card: #1E252E; --zone: #181E26; --ink: #E6EAF0; --muted: #98A2B0;
+    --line: #3B4553; --accent: #7B9DF5; --amber: #E3A24C; --amber-bg: #2A2217;
+  }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 14px; line-height: 1.5;
+  }
+  .page { max-width: 1040px; margin: 0 auto; padding: 40px 24px 56px; display: flex; flex-direction: column; gap: 20px; }
+  header { display: flex; flex-direction: column; gap: 6px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .lede { margin: 0; color: var(--muted); font-size: 14px; max-width: 62ch; }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .scroll { overflow-x: auto; }
+  svg { display: block; width: 100%; min-width: 760px; height: auto; font-family: inherit; color: var(--ink); }
+  figcaption { font-size: 13px; color: var(--muted); }
+
+  .zone { fill: var(--zone); stroke: none; }
+  .card { fill: var(--card); stroke: var(--line); stroke-width: 1; }
+  .card-ext { fill: var(--card); stroke: var(--amber); stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .db { fill: var(--card); stroke: var(--accent); stroke-width: 1.4; }
+  .flow { stroke: var(--accent); stroke-width: 1.6; fill: none; }
+  .flow-ext { stroke: var(--amber); stroke-width: 1.6; fill: none; }
+  .t-b { font-size: 13px; font-weight: 600; fill: var(--ink); }
+  .t-zone { font-size: 13px; font-weight: 700; fill: var(--ink); }
+  .t-sub { font-size: 11px; fill: var(--muted); }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 10.5px; fill: var(--muted); }
+  .t-flow { font-size: 11px; font-weight: 500; fill: var(--accent); }
+  .t-ext { font-size: 11px; font-weight: 500; fill: var(--amber); }
+  .arrow { fill: var(--accent); }
+  .arrow-ext { fill: var(--amber); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">YT Trend · architecture v0.1</div>
+    <h1>YT Trend 아키텍처</h1>
+    <p class="lede">프론트는 API만 알고, 파이프라인은 SQLite와 외부 API만 안다. 워커가 여섯 단계를 순서대로 돌리고, 모든 단계는 다시 실행해도 안전하다.</p>
+  </header>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1000 620" role="img" aria-label="Next.js 프론트가 FastAPI에 요청하고, API가 작업을 등록하면 백그라운드 워커가 수집·정규화·영상 유형·댓글 선별·댓글 라벨·집계 여섯 단계를 순서대로 실행한다. 수집은 YouTube Data API를, 유형·선별·라벨은 Claude API를 호출하고, 모든 단계와 API가 SQLite 파일 하나를 읽고 쓴다.">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+          </marker>
+          <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="arrow-ext"/>
+          </marker>
+        </defs>
+
+        <!-- backend zone -->
+        <rect class="zone" x="200" y="20" width="520" height="590" rx="10"/>
+        <text class="t-zone" x="220" y="44">백엔드 · FastAPI 단일 프로세스</text>
+
+        <!-- frontend -->
+        <rect class="card" x="20" y="60" width="140" height="60" rx="6"/>
+        <text class="t-b" x="90" y="86" text-anchor="middle">프론트</text>
+        <text class="t-mono" x="90" y="104" text-anchor="middle">Next.js · 직접 디자인</text>
+
+        <line class="flow" x1="160" y1="90" x2="218" y2="90" marker-end="url(#a)"/>
+        <text class="t-flow" x="189" y="78" text-anchor="middle">JSON · 폴링</text>
+
+        <!-- API -->
+        <rect class="card" x="220" y="60" width="200" height="60" rx="6"/>
+        <text class="t-b" x="320" y="86" text-anchor="middle">API 계층</text>
+        <text class="t-mono" x="320" y="104" text-anchor="middle">분석 요청 · 작업 상태 · 리포트</text>
+
+        <line class="flow" x1="320" y1="120" x2="320" y2="148" marker-end="url(#a)"/>
+        <text class="t-flow" x="330" y="139">작업 등록</text>
+
+        <!-- worker -->
+        <rect class="card" x="220" y="150" width="200" height="60" rx="6"/>
+        <text class="t-b" x="320" y="176" text-anchor="middle">백그라운드 워커</text>
+        <text class="t-mono" x="320" y="194" text-anchor="middle">단계 실행 · 실패 → 일시 정지 · 재개</text>
+
+        <!-- worker -> steps spine -->
+        <line class="flow" x1="420" y1="180" x2="440" y2="180"/>
+        <line class="flow" x1="440" y1="86" x2="440" y2="436"/>
+        <line class="flow" x1="440" y1="86" x2="458" y2="86" marker-end="url(#a)"/>
+        <line class="flow" x1="440" y1="156" x2="458" y2="156" marker-end="url(#a)"/>
+        <line class="flow" x1="440" y1="226" x2="458" y2="226" marker-end="url(#a)"/>
+        <line class="flow" x1="440" y1="296" x2="458" y2="296" marker-end="url(#a)"/>
+        <line class="flow" x1="440" y1="366" x2="458" y2="366" marker-end="url(#a)"/>
+        <line class="flow" x1="440" y1="436" x2="458" y2="436" marker-end="url(#a)"/>
+
+        <!-- steps -->
+        <rect class="card" x="460" y="60" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="82">1 수집</text>
+        <text class="t-sub" x="474" y="100">영상 메타 · 통계 스냅샷 · 댓글 증분</text>
+
+        <rect class="card" x="460" y="130" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="152">2 정규화</text>
+        <text class="t-sub" x="474" y="170">길이 축 · 조회 배수 · 좋아요율</text>
+
+        <rect class="card" x="460" y="200" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="222">3 영상 유형</text>
+        <text class="t-sub" x="474" y="240">체계 제안 → 영상별 라벨</text>
+
+        <rect class="card" x="460" y="270" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="292">4 댓글 선별</text>
+        <text class="t-sub" x="474" y="310">규칙 필터 → 스팸 · 무관 판정</text>
+
+        <rect class="card" x="460" y="340" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="362">5 댓글 라벨</text>
+        <text class="t-sub" x="474" y="380">감성 · 주제 (다중)</text>
+
+        <rect class="card" x="460" y="410" width="230" height="52" rx="6"/>
+        <text class="t-b" x="474" y="432">6 집계</text>
+        <text class="t-sub" x="474" y="450">영상별 · 유형별 · 결론 문장</text>
+
+        <!-- step chain -->
+        <line class="flow" x1="575" y1="112" x2="575" y2="128" marker-end="url(#a)"/>
+        <line class="flow" x1="575" y1="182" x2="575" y2="198" marker-end="url(#a)"/>
+        <line class="flow" x1="575" y1="252" x2="575" y2="268" marker-end="url(#a)"/>
+        <line class="flow" x1="575" y1="322" x2="575" y2="338" marker-end="url(#a)"/>
+        <line class="flow" x1="575" y1="392" x2="575" y2="408" marker-end="url(#a)"/>
+
+        <!-- steps -> SQLite -->
+        <line class="flow" x1="575" y1="462" x2="575" y2="518" marker-end="url(#a)"/>
+        <text class="t-flow" x="585" y="494">모든 단계가 읽고 씀</text>
+
+        <!-- SQLite -->
+        <rect class="db" x="460" y="520" width="230" height="64" rx="8"/>
+        <text class="t-b" x="575" y="546" text-anchor="middle">SQLite 파일 하나</text>
+        <text class="t-mono" x="575" y="564" text-anchor="middle">원본 · 해석 · 집계 · 작업 상태 · 캐시</text>
+
+        <!-- API/worker -> SQLite (left rail) -->
+        <line class="flow" x1="220" y1="104" x2="212" y2="104"/>
+        <line class="flow" x1="220" y1="194" x2="212" y2="194"/>
+        <line class="flow" x1="212" y1="104" x2="212" y2="552"/>
+        <line class="flow" x1="212" y1="552" x2="458" y2="552" marker-end="url(#a)"/>
+        <text class="t-flow" x="230" y="542">작업 상태 기록 · 리포트 조회</text>
+
+        <!-- external: YouTube -->
+        <line class="flow-ext" x1="690" y1="86" x2="758" y2="86" marker-end="url(#ax)"/>
+        <rect class="card-ext" x="760" y="60" width="220" height="52" rx="6"/>
+        <text class="t-b" x="870" y="82" text-anchor="middle">YouTube Data API</text>
+        <text class="t-sub" x="870" y="100" text-anchor="middle">하루 10,000유닛 · 소진 시 일시 정지</text>
+
+        <!-- external: Claude -->
+        <line class="flow-ext" x1="690" y1="226" x2="758" y2="226" marker-end="url(#ax)"/>
+        <line class="flow-ext" x1="690" y1="296" x2="758" y2="296" marker-end="url(#ax)"/>
+        <line class="flow-ext" x1="690" y1="366" x2="758" y2="366" marker-end="url(#ax)"/>
+        <rect class="card-ext" x="760" y="200" width="220" height="192" rx="6"/>
+        <text class="t-b" x="870" y="240" text-anchor="middle">Claude API</text>
+        <text class="t-sub" x="870" y="262" text-anchor="middle">구조화 출력 · 프롬프트 버전</text>
+        <text class="t-sub" x="870" y="292" text-anchor="middle">3 유형 체계 제안 · 라벨</text>
+        <text class="t-sub" x="870" y="310" text-anchor="middle">4 스팸 · 무관 판정</text>
+        <text class="t-sub" x="870" y="328" text-anchor="middle">5 감성 · 주제</text>
+        <text class="t-ext" x="870" y="366" text-anchor="middle">같은 입력은 캐시에서 · 재호출 없음</text>
+      </svg>
+    </div>
+    <figcaption>파란 실선은 내부 호출, 주황 점선 상자는 외부 서비스입니다. 재개는 완료되지 않은 첫 단계부터 다시 실행하며, 각 단계가 이미 처리한 항목을 건너뛰므로 결과가 중복되지 않습니다.</figcaption>
+  </figure>
+</div>
+</body>
+</html>
