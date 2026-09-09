@@ -22,6 +22,7 @@ import uuid
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
+from app import config  # noqa: E402
 from app.clients.youtube import (  # noqa: E402
     ChannelNotFound,
     QuotaExhausted,
@@ -29,6 +30,11 @@ from app.clients.youtube import (  # noqa: E402
     classify_live,
 )
 from app.db.connection import connect  # noqa: E402
+from app.pipeline.offline_llm import (  # noqa: E402
+    ValidationError,
+    export_batch,
+    validate_result,
+)
 from app.pipeline.rules import (  # noqa: E402
     DEFAULT_CONFIG,
     MODEL_RULE,
@@ -59,13 +65,14 @@ def parse_duration(iso: str) -> int:
 # --------------------------------------------------------------------------
 
 def cmd_collect(args) -> int:
-    key = os.environ.get("YOUTUBE_API_KEY")
-    if not key:
-        print("YOUTUBE_API_KEY 가 없다. .env 를 읽거나 환경변수로 넣어라.", file=sys.stderr)
-        return 2
-
+    key = config.require(
+        "YOUTUBE_API_KEY",
+        "Google Cloud Console에서 YouTube Data API v3를 켜고 API 키를 발급받는다.",
+    )
     conn = connect(args.db)
-    yt = YouTubeClient(api_key=key)
+    yt = YouTubeClient(
+        api_key=key, daily_quota=int(config.get("YOUTUBE_DAILY_QUOTA"))
+    )
     run_id = uuid.uuid4().hex[:12]
 
     try:
@@ -231,10 +238,101 @@ def cmd_rules(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# export-batch / import-batch  (API 없이 Claude Code가 판정하는 경로)
+# --------------------------------------------------------------------------
+
+def cmd_export_batch(args) -> int:
+    comments, source = _load_comments(args)
+    screens = {s.comment_id: s for s in screen_comments(comments, DEFAULT_CONFIG)}
+    # 규칙을 통과한 것만 LLM으로 간다 (keep, suspect_repeat)
+    target = [c for c in comments
+              if screens[c["comment_id"]].verdict in ("keep", "suspect_repeat")]
+    if not target:
+        print("판정할 댓글이 없다.", file=sys.stderr)
+        return 1
+    target = target[: args.size]
+
+    title = args.video_title
+    if not title and not args.fixture:
+        row = connect(args.db).execute(
+            "SELECT title FROM videos WHERE video_id=?", (target[0].get("video_id"),)
+        ).fetchone()
+        title = row["title"] if row else "(제목 없음)"
+    if not title:
+        data = json.loads(pathlib.Path(args.fixture).read_text(encoding="utf-8"))
+        title = data.get("_video_title", "(제목 없음)")
+
+    out_dir = pathlib.Path(args.out)
+    path = export_batch(target, title, args.batch_id, out_dir)
+    print(f"출처: {source}")
+    print(f"내보냈다: {path}   (댓글 {len(target)}건)")
+    print(f"\n다음: 이 파일을 Claude Code에 읽히고, 판정 결과를")
+    print(f"      {out_dir / (args.batch_id + '.result.json')} 로 저장한 뒤")
+    print(f"      python -m app.cli import-batch {args.batch_id} --out {args.out}")
+    return 0
+
+
+def cmd_import_batch(args) -> int:
+    out_dir = pathlib.Path(args.out)
+    map_path = out_dir / f"{args.batch_id}.map.json"
+    res_path = out_dir / f"{args.batch_id}.result.json"
+    for p in (map_path, res_path):
+        if not p.exists():
+            print(f"없다: {p}", file=sys.stderr)
+            return 1
+
+    mapping = json.loads(map_path.read_text(encoding="utf-8"))["map"]
+    result = json.loads(res_path.read_text(encoding="utf-8"))
+    try:
+        rows = validate_result(result, mapping)
+    except ValidationError as e:
+        print(f"검증 실패 — 저장하지 않았다.\n  {e}", file=sys.stderr)
+        return 1
+
+    version = result.get("prompt_version", "v1")
+    model = result.get("model", "claude-code-offline")
+    print(f"검증 통과: {len(rows)}건  (prompt_version={version}, model={model})")
+
+    if args.dry_run:
+        for r in rows[: args.show]:
+            print(f"  {r['idx']:>3}. {r['sentiment']:<9} conf={r['confidence']} "
+                  f"{'[반어의심]' if r['sarcasm_suspect'] else '':<10} {','.join(r['topics'])}")
+        print("\n--dry-run 이라 DB에 쓰지 않았다.")
+        return 0
+
+    conn = connect(args.db)
+    written = 0
+    for r in rows:
+        try:
+            conn.execute(
+                """INSERT INTO comment_labels (comment_id, prompt_version, model,
+                       sentiment, sentiment_confidence, is_sarcasm_suspect,
+                       topics_json, labeled_at)
+                   VALUES (?,?,?,?,?,?,?,?)
+                   ON CONFLICT(comment_id, prompt_version, model) DO UPDATE SET
+                       sentiment=excluded.sentiment,
+                       sentiment_confidence=excluded.sentiment_confidence,
+                       is_sarcasm_suspect=excluded.is_sarcasm_suspect,
+                       topics_json=excluded.topics_json,
+                       labeled_at=excluded.labeled_at""",
+                (r["comment_id"], version, model, r["sentiment"], r["confidence"],
+                 int(r["sarcasm_suspect"]),
+                 json.dumps(r["topics"], ensure_ascii=False), now()),
+            )
+            written += 1
+        except Exception as e:      # 표본에서 온 comment_id는 DB에 없을 수 있다
+            print(f"  건너뜀 {r['comment_id']}: {e}", file=sys.stderr)
+    print(f"comment_labels 에 {written}건 저장했다.")
+    return 0
+
+
+# --------------------------------------------------------------------------
 # stats
 # --------------------------------------------------------------------------
 
 def cmd_stats(args) -> int:
+    print(f"설정: {config.describe()}")
+    print()
     conn = connect(args.db)
     for label, sql in (
         ("채널", "SELECT COUNT(*) FROM channels"),
@@ -256,7 +354,8 @@ def cmd_stats(args) -> int:
 
 def main() -> int:
     p = argparse.ArgumentParser(prog="yt-trend", description=__doc__)
-    p.add_argument("--db", default=os.environ.get("DB_PATH", DEFAULT_DB))
+    config.load_env()
+    p.add_argument("--db", default=config.get("DB_PATH", DEFAULT_DB))
     sub = p.add_subparsers(dest="cmd", required=True)
 
     c = sub.add_parser("collect", help="채널 URL → SQLite (비용 0, YouTube 키 필요)")
@@ -273,7 +372,24 @@ def main() -> int:
     r.add_argument("--save", action="store_true", help="comment_screens 에 저장")
     r.set_defaults(fn=cmd_rules)
 
-    s = sub.add_parser("stats", help="수집 현황")
+    e = sub.add_parser("export-batch", help="댓글 묶음을 판정용 파일로 (API 불필요)")
+    e.add_argument("batch_id")
+    e.add_argument("--fixture", help="DB 대신 표본 JSON 을 쓴다")
+    e.add_argument("--video-id")
+    e.add_argument("--video-title")
+    e.add_argument("--limit", type=int)
+    e.add_argument("--size", type=int, default=20, help="묶음 크기")
+    e.add_argument("--out", default="./data/batches")
+    e.set_defaults(fn=cmd_export_batch)
+
+    i = sub.add_parser("import-batch", help="판정 결과를 검증하고 저장")
+    i.add_argument("batch_id")
+    i.add_argument("--out", default="./data/batches")
+    i.add_argument("--dry-run", action="store_true", help="검증만 하고 DB에 안 씀")
+    i.add_argument("--show", type=int, default=20)
+    i.set_defaults(fn=cmd_import_batch)
+
+    s = sub.add_parser("stats", help="수집 현황과 설정 상태")
     s.set_defaults(fn=cmd_stats)
 
     args = p.parse_args()

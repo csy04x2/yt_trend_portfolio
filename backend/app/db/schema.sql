@@ -75,6 +75,21 @@ CREATE TABLE IF NOT EXISTS comment_screens (
     PRIMARY KEY (comment_id, prompt_version, model)
 );
 
+-- 5단계 결과. model='claude-code-offline' 이면 API가 아니라 Claude Code가 판정한 것.
+CREATE TABLE IF NOT EXISTS comment_labels (
+    comment_id           TEXT NOT NULL REFERENCES comments(comment_id),
+    prompt_version       TEXT NOT NULL,
+    model                TEXT NOT NULL,
+    sentiment            TEXT NOT NULL,
+    sentiment_confidence REAL,
+    is_sarcasm_suspect   INTEGER NOT NULL DEFAULT 0,
+    topics_json          TEXT NOT NULL,
+    labeled_at           TEXT NOT NULL,
+    PRIMARY KEY (comment_id, prompt_version, model)
+);
+CREATE INDEX IF NOT EXISTS idx_comment_labels_version
+    ON comment_labels(prompt_version, model);
+
 CREATE TABLE IF NOT EXISTS quota_ledger (
     day_pt     TEXT PRIMARY KEY,
     units_used INTEGER NOT NULL DEFAULT 0
