@@ -1,0 +1,77 @@
+{
+  "_note": "규칙 튜닝용 손으로 만든 표본. API 키 없이 규칙을 돌려보기 위한 것이다. 0단계에서 실제 채널 댓글로 교체한다.",
+  "_video_title": "[단독] 예산안 심사 막판 진통…쟁점은",
+  "comments": [
+    {"comment_id": "c01", "author_channel_id": "UCa", "text": "👍👍👍", "like_count": 42,
+     "_expect": "keep", "_why": "감정 이모지 반복. 규칙이 긍정으로 못 박지 않고 LLM에 넘긴다"},
+
+    {"comment_id": "c02", "author_channel_id": "UCb", "text": "❤️", "like_count": 3,
+     "_expect": "keep", "_why": "이모지 하나. 마찬가지로 통과"},
+
+    {"comment_id": "c03", "author_channel_id": "UCc", "text": "ㅋㅋㅋㅋㅋ", "like_count": 88,
+     "_expect": "keep", "_why": "긍정인지 조롱인지 맥락이 필요하다. 규칙이 판단하지 않는다"},
+
+    {"comment_id": "c04", "author_channel_id": "UCd", "text": "유익함", "like_count": 12,
+     "_expect": "keep", "_why": "세 글자지만 완결된 피드백. 자수로 자르지 않는다"},
+
+    {"comment_id": "c05", "author_channel_id": "UCe", "text": "아쉽다", "like_count": 5,
+     "_expect": "keep", "_why": "위와 같음. 부정 피드백"},
+
+    {"comment_id": "c06", "author_channel_id": "UCf",
+     "text": "이 수치 틀렸습니다. 기재부 원자료는 https://www.moef.go.kr/example 여기 있어요", "like_count": 210,
+     "_expect": "keep", "_why": "핵심 사례. URL이 있지만 출처 제시다. 언론사 채널에서 가장 값진 피드백"},
+
+    {"comment_id": "c07", "author_channel_id": "UCg", "text": "12:34 이 부분 다시 보세요", "like_count": 31,
+     "_expect": "keep", "_why": "타임스탬프. 버리면 안 된다"},
+
+    {"comment_id": "c08", "author_channel_id": "UCh",
+     "text": "무료 체험 문의는 카톡으로 👉 https://spam.example.com", "like_count": 0,
+     "_expect": "promo", "_why": "유인 문구 + URL + 홍보 이모지. 확정 제외"},
+
+    {"comment_id": "c09", "author_channel_id": "UCi",
+     "text": "월 500 부업 수익 인증 텔레그램 오세요", "like_count": 0,
+     "_expect": "keep", "_why": "유인 문구는 있으나 URL·홍보 이모지가 없다. 규칙이 확정하지 않고 LLM이 판단"},
+
+    {"comment_id": "c10", "author_channel_id": "UCj", "text": "1등", "like_count": 1,
+     "_expect": "irrelevant", "_why": "선점 댓글. 스팸은 아니지만 피드백 가치 0"},
+
+    {"comment_id": "c11", "author_channel_id": "UCk", "text": "first!!", "like_count": 0,
+     "_expect": "irrelevant", "_why": "위와 같음"},
+
+    {"comment_id": "c12", "author_channel_id": "UCl", "text": "선댓", "like_count": 0,
+     "_expect": "irrelevant", "_why": "위와 같음"},
+
+    {"comment_id": "c13", "author_channel_id": "UCm", "text": "기자님 응원합니다", "like_count": 55,
+     "_expect": "keep", "_why": "T8 감정·응원"},
+
+    {"comment_id": "c14", "author_channel_id": "UCn", "text": "자막 좀 키워주세요 안 보여요", "like_count": 18,
+     "_expect": "keep", "_why": "T2 편집·연출 부정"},
+
+    {"comment_id": "c15", "author_channel_id": "UCo", "text": "너무 길어요", "like_count": 9,
+     "_expect": "keep", "_why": "T3. 영상 길이인지 문장 길이인지는 LLM이 제목과 함께 판단"},
+
+    {"comment_id": "c16", "author_channel_id": "UCp", "text": "구독하고 갑니다", "like_count": 2,
+     "_expect": "suspect_repeat", "_why": "같은 작성자가 3회 반복"},
+    {"comment_id": "c17", "author_channel_id": "UCp", "text": "구독하고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+    {"comment_id": "c18", "author_channel_id": "UCp", "text": "구독하고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+
+    {"comment_id": "c19", "author_channel_id": "UCq", "text": "잘 보고 갑니다", "like_count": 1,
+     "_expect": "suspect_repeat", "_why": "서로 다른 작성자 5명이 같은 문장. 복붙이 돌고 있다"},
+    {"comment_id": "c20", "author_channel_id": "UCr", "text": "잘 보고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+    {"comment_id": "c21", "author_channel_id": "UCs", "text": "잘 보고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+    {"comment_id": "c22", "author_channel_id": "UCt", "text": "잘 보고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+    {"comment_id": "c23", "author_channel_id": "UCu", "text": "잘 보고 갑니다", "like_count": 0,
+     "_expect": "suspect_repeat", "_why": "위와 같음"},
+
+    {"comment_id": "c24", "author_channel_id": "UCv", "text": "🔥🔥🔥🔥🔥", "like_count": 7,
+     "_expect": "keep", "_why": "이모지만. 통과"},
+
+    {"comment_id": "c25", "author_channel_id": "UCw", "text": "ㅠㅠ", "like_count": 4,
+     "_expect": "keep", "_why": "자음 표현. 규칙이 판단하지 않는다"}
+  ]
+}
