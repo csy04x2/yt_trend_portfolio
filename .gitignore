@@ -1,0 +1,18 @@
+# Obsidian 개인 작업 상태
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# macOS
+.DS_Store
+
+# 백엔드 (구현 시)
+backend/.env
+backend/data/
+backend/.venv/
+__pycache__/
+*.pyc
+
+# 프론트 (구현 시)
+frontend/node_modules/
+frontend/.next/
+frontend/.env*.local
