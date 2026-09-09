@@ -197,15 +197,28 @@ def collect_video(conn, yt: YouTubeClient, url: str, run_id: str,
 
 def collect_channel(conn, yt: YouTubeClient, url: str, run_id: str,
                     max_videos: int, max_comments: int,
+                    with_comments: bool = True,
                     log: Progress = print) -> dict:
+    """채널의 영상 목록·통계를 받고, 선택적으로 댓글까지 받는다.
+
+    `with_comments=False` 는 조회 배수의 분모를 만들려고 있다. 배수는 같은
+    길이 축·같은 분기 영상들의 조회수 중앙값이 필요할 뿐 댓글은 쓰지 않는다.
+    영상 300개 메타만 받으면 13유닛에 몇 초면 끝나는데, 댓글까지 받으면
+    수백 번의 호출과 몇 분이 든다. 분석할 영상의 댓글은 collect_video 로
+    따로 받는다.
+    """
     ch = yt.resolve_channel(url)
     log(f"[채널] {ch['title']}  ({ch['channel_id']})")
     upsert_channel(conn, ch, url)
 
     ids = yt.list_upload_ids(ch["uploads_playlist"], max_videos)
-    log(f"[영상] {len(ids)}개")
+    log(f"[영상] {len(ids)}개 목록 확보")
     for item in yt.fetch_videos(ids):
         upsert_video(conn, item, ch["channel_id"], run_id)
+    log(f"[메타] {len(ids)}개 저장 · 할당량 {yt.units_used}유닛")
+
+    if not with_comments:
+        return {"channel_id": ch["channel_id"], "videos": len(ids), "comments": 0}
 
     total = 0
     rows = conn.execute(

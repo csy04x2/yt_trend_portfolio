@@ -32,6 +32,7 @@ from app.clients.youtube import (  # noqa: E402
 )
 from app.db.connection import connect  # noqa: E402
 from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
+from app.pipeline.normalize import run as normalize_run  # noqa: E402
 from app.pipeline.offline_llm import (  # noqa: E402
     ValidationError,
     export_batch,
@@ -74,7 +75,8 @@ def _report(yt, db) -> None:
 def cmd_collect(args) -> int:
     conn, yt, run_id = _client(args)
     try:
-        collect_channel(conn, yt, args.url, run_id, args.max_videos, args.max_comments)
+        collect_channel(conn, yt, args.url, run_id, args.max_videos,
+                        args.max_comments, with_comments=not args.no_comments)
     except ChannelNotFound as e:
         print(f"채널을 찾을 수 없다: {e}", file=sys.stderr)
         return 1
@@ -99,6 +101,43 @@ def cmd_collect_video(args) -> int:
         _report(yt, args.db)
         return 1
     _report(yt, args.db)
+    return 0
+
+
+# --------------------------------------------------------------------------
+# normalize
+# --------------------------------------------------------------------------
+
+def cmd_normalize(args) -> int:
+    conn = connect(args.db)
+    run_id = uuid.uuid4().hex[:12]
+    channels = [r["channel_id"] for r in conn.execute("SELECT channel_id FROM channels")]
+    if not channels:
+        print("채널이 없다. 먼저 collect 를 돌려라.", file=sys.stderr)
+        return 1
+
+    for cid in channels:
+        rows = normalize_run(conn, cid, run_id)
+        if not rows:
+            continue
+        title = conn.execute("SELECT title FROM channels WHERE channel_id=?",
+                             (cid,)).fetchone()["title"]
+        print(f"[{title}]  영상 {len(rows)}개\n")
+        print(f"  {'영상':<34}{'축':<10}{'조회':>10}{'좋아요율':>10}{'댓글율':>10}{'배수':>8}")
+        print("  " + "-" * 80)
+        for m in sorted(rows, key=lambda r: -(r["view_count"] or 0)):
+            lr = f"{m['like_rate']*100:.2f}%" if m["like_rate"] is not None else "비공개"
+            cr = f"{m['comment_rate']*100:.3f}%" if m["comment_rate"] is not None else "-"
+            mult = f"{m['view_multiple']:.2f}" if m["view_multiple"] is not None else "—"
+            print(f"  {m['title'][:32]:<34}{m['length_axis']:<10}"
+                  f"{m['view_count']:>10,}{lr:>10}{cr:>10}{mult:>8}")
+
+        missing = [m for m in rows if m["view_multiple"] is None]
+        if missing:
+            print(f"\n  조회 배수 없음 {len(missing)}건 — 근거:")
+            for m in missing[: args.show]:
+                print(f"    {m['title'][:30]:<32} {m['view_multiple_basis']}")
+    print(f"\nvideo_metrics 갱신 (run_id={run_id})")
     return 0
 
 
@@ -297,12 +336,18 @@ def main() -> int:
     c.add_argument("url")
     c.add_argument("--max-videos", type=int, default=50)
     c.add_argument("--max-comments", type=int, default=2000)
+    c.add_argument("--no-comments", action="store_true",
+                   help="영상 메타·통계만 받는다. 조회 배수의 분모를 만들 때 쓴다")
     c.set_defaults(fn=cmd_collect)
 
     v = sub.add_parser("collect-video", help="영상 URL 하나만 → SQLite (약 5유닛)")
     v.add_argument("url", help="watch?v=… / youtu.be/… / shorts/… / 맨 영상 ID")
     v.add_argument("--max-comments", type=int, default=2000)
     v.set_defaults(fn=cmd_collect_video)
+
+    n = sub.add_parser("normalize", help="길이 축·좋아요율·댓글율·조회 배수 계산 (비용 0)")
+    n.add_argument("--show", type=int, default=10)
+    n.set_defaults(fn=cmd_normalize)
 
     r = sub.add_parser("rules", help="규칙 필터를 돌려보고 무엇이 걸렸는지 본다 (비용 0)")
     r.add_argument("--fixture", help="DB 대신 표본 JSON 을 쓴다")

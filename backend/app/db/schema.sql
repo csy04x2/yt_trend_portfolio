@@ -75,6 +75,24 @@ CREATE TABLE IF NOT EXISTS comment_screens (
     PRIMARY KEY (comment_id, prompt_version, model)
 );
 
+-- 2단계 결과. 항상 전체 재계산하므로 실행(run_id)마다 새로 쌓는다.
+-- view_multiple_basis 는 분모를 어떻게 잡았는지, 못 잡았으면 왜인지를 적는다.
+-- 분모 정의가 아직 미결이라(결정 문서 3장) 근거를 값과 함께 남겨야
+-- 리포트가 "왜 비었는지"를 말할 수 있다.
+CREATE TABLE IF NOT EXISTS video_metrics (
+    video_id            TEXT NOT NULL REFERENCES videos(video_id),
+    run_id              TEXT NOT NULL,
+    length_axis         TEXT,
+    view_count          INTEGER,
+    like_rate           REAL,          -- 좋아요 비공개면 NULL. 0 이 아니다
+    comment_rate        REAL,
+    views_per_day       REAL,
+    view_multiple       REAL,          -- 비교군이 모자라면 NULL
+    view_multiple_basis TEXT,
+    computed_at         TEXT NOT NULL,
+    PRIMARY KEY (video_id, run_id)
+);
+
 -- 5단계 결과. model='claude-code-offline' 이면 API가 아니라 Claude Code가 판정한 것.
 CREATE TABLE IF NOT EXISTS comment_labels (
     comment_id           TEXT NOT NULL REFERENCES comments(comment_id),

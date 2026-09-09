@@ -27,6 +27,26 @@ def connect(db_path: str | pathlib.Path) -> sqlite3.Connection:
 
     # schema.sql은 IF NOT EXISTS라 매번 돌려도 안전하다
     conn.executescript(SCHEMA.read_text(encoding="utf-8"))
+    _add_missing_columns(conn)
     if fresh:
         print(f"[db] 새 파일 생성: {path}")
     return conn
+
+
+# 나중에 추가된 열. CREATE TABLE IF NOT EXISTS 는 이미 있는 표를 건드리지
+# 않으므로, 먼저 만든 DB 에는 이 열들이 없다. 프로토타입 단계라 번호 매긴
+# 마이그레이션 대신 "없으면 붙인다"로 둔다.
+LATE_COLUMNS = {
+    "videos": {
+        "description_clean": "TEXT",     # 2단계 정규화가 채운다
+    },
+}
+
+
+def _add_missing_columns(conn: sqlite3.Connection) -> None:
+    for table, cols in LATE_COLUMNS.items():
+        have = {r[1] for r in conn.execute(f"PRAGMA table_info({table})")}
+        for name, decl in cols.items():
+            if name not in have:
+                conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+                print(f"[db] 열 추가: {table}.{name}")

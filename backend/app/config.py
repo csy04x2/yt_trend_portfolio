@@ -49,12 +49,19 @@ def load_env(path: pathlib.Path = ENV_FILE) -> list[str]:
     filled: list[str] = []
     if not path.exists():
         return filled
-    for raw in path.read_text(encoding="utf-8").splitlines():
-        line = raw.strip()
+
+    # utf-8-sig 로 읽는 이유: 윈도우 메모장과 PowerShell 의 Set-Content 는
+    # UTF-8 저장 시 파일 앞에 BOM(EF BB BF)을 붙인다. 그냥 utf-8 로 읽으면
+    # 첫 줄의 키 이름이 "﻿YOUTUBE_API_KEY" 가 되어 아무도 못 읽는다.
+    # 파일은 멀쩡해 보이고 값도 들어 있는데 "키가 없다"고만 나와서 원인을
+    # 찾기 어렵다. utf-8-sig 는 BOM 이 없어도 그대로 동작한다.
+    for raw in path.read_text(encoding="utf-8-sig").splitlines():
+        line = raw.strip().lstrip("﻿")
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, _, value = line.partition("=")
-        key, value = key.strip(), value.strip().strip('"').strip("'")
+        key = key.strip().lstrip("﻿")
+        value = value.strip().strip('"').strip("'")
         if key and value and key not in os.environ:
             os.environ[key] = value
             filled.append(key)
