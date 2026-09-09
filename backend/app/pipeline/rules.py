@@ -57,7 +57,7 @@ class RuleConfig:
 
     # 선점 댓글 — 피드백 가치가 0이라 집계에서 뺀다. 스팸은 아니다.
     first_post_patterns: tuple[str, ...] = (
-        r"^\s*1\s*(등|빠|착)\s*$",
+        r"^\s*\d+\s*(등|빠|착)\s*[!！?.。~ㅋㅎ\u110f\u1112]*\s*$",
         r"^\s*first\s*!*\s*$",
         r"^\s*선\s*(댓|점)\s*$",
         r"^\s*\d+\s*번째\s*$",

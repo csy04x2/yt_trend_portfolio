@@ -80,9 +80,9 @@ def test_short_korean_feedback_survives():
 
 
 def test_first_post_detected():
-    for text in ("1등", "first!!", "선댓", "1빠", "3번째"):
+    for text in ("1등", "4등!!", "10빠", "3착", "2등ㅋㅋㅋ", "first!!", "선댓", "1빠", "3번째"):
         assert is_first_post(text, DEFAULT_CONFIG), f"{text} 를 선점으로 못 잡았다"
-    for text in ("1등이라니 대단하네요", "first impression 좋았어요"):
+    for text in ("1등이라니 대단하네요", "4등이라니 대단하네요", "3착으로 들어왔지만 재밌게 봤어요", "first impression 좋았어요"):
         assert not is_first_post(text, DEFAULT_CONFIG), f"{text} 를 잘못 잡았다"
 
 
