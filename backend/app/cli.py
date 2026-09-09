@@ -4,6 +4,7 @@ Anthropic API 를 부르는 명령은 아직 없다. 전부 금전 비용 0이�
 
     collect        채널 URL → SQLite (YouTube 키 필요)
     collect-video  영상 URL 하나만 → SQLite (약 5유닛)
+    engagement     댓글 참여가 호응인지 논쟁인지 가른다 (라벨 필요)
     rules          쌓인 댓글에 규칙을 적용하고 무엇이 걸렸는지 본다
     export-batch   댓글 묶음을 판정용 파일로 (Claude Code 가 판정)
     import-batch   판정 결과를 검증하고 저장
@@ -32,6 +33,7 @@ from app.clients.youtube import (  # noqa: E402
 )
 from app.db.connection import connect  # noqa: E402
 from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
+from app.pipeline.engagement import run as engagement_run  # noqa: E402
 from app.pipeline.normalize import run as normalize_run  # noqa: E402
 from app.pipeline.offline_llm import (  # noqa: E402
     ValidationError,
@@ -123,21 +125,99 @@ def cmd_normalize(args) -> int:
         title = conn.execute("SELECT title FROM channels WHERE channel_id=?",
                              (cid,)).fetchone()["title"]
         print(f"[{title}]  영상 {len(rows)}개\n")
-        print(f"  {'영상':<34}{'축':<10}{'조회':>10}{'좋아요율':>10}{'댓글율':>10}{'배수':>8}")
-        print("  " + "-" * 80)
+        print(f"  {'영상':<34}{'축':<10}{'조회':>10}{'좋아요율':>10}{'댓글율':>10}"
+              f"{'조회배수':>10}{'댓글배수':>10}")
+        print("  " + "-" * 96)
         for m in sorted(rows, key=lambda r: -(r["view_count"] or 0)):
             lr = f"{m['like_rate']*100:.2f}%" if m["like_rate"] is not None else "비공개"
             cr = f"{m['comment_rate']*100:.3f}%" if m["comment_rate"] is not None else "-"
             mult = f"{m['view_multiple']:.2f}" if m["view_multiple"] is not None else "—"
+            cmult = (f"{m['comment_rate_multiple']:.2f}"
+                     if m["comment_rate_multiple"] is not None else "—")
             print(f"  {m['title'][:32]:<34}{m['length_axis']:<10}"
-                  f"{m['view_count']:>10,}{lr:>10}{cr:>10}{mult:>8}")
+                  f"{m['view_count']:>10,}{lr:>10}{cr:>10}{mult:>10}{cmult:>10}")
 
-        missing = [m for m in rows if m["view_multiple"] is None]
-        if missing:
-            print(f"\n  조회 배수 없음 {len(missing)}건 — 근거:")
-            for m in missing[: args.show]:
-                print(f"    {m['title'][:30]:<32} {m['view_multiple_basis']}")
+        # 두 배수 모두 "왜 비었는지"를 말해야 한다. 조회 배수만 근거를 찍고
+        # 댓글율 배수는 빈칸으로 두면 리포트가 반쪽이 된다.
+        for label, key, basis_key in (
+            ("조회 배수", "view_multiple", "view_multiple_basis"),
+            ("댓글율 배수", "comment_rate_multiple", "comment_rate_multiple_basis"),
+        ):
+            missing = [m for m in rows if m[key] is None]
+            if missing:
+                print(f"\n  {label} 없음 {len(missing)}건 — 근거:")
+                for m in missing[: args.show]:
+                    print(f"    {m['title'][:30]:<32} {m[basis_key]}")
+
+        print("\n  댓글율·댓글율 배수는 '댓글이 많다'까지만 말한다.")
+        print("  그 댓글이 호응이냐 논쟁이냐는 `engagement` 가 라벨을 보고 가른다.")
     print(f"\nvideo_metrics 갱신 (run_id={run_id})")
+    return 0
+
+
+# --------------------------------------------------------------------------
+# engagement
+# --------------------------------------------------------------------------
+
+def cmd_engagement(args) -> int:
+    """댓글율이 높은 이유가 호응인지 논쟁인지 본다.
+
+    댓글율은 긍정과 부정을 똑같이 올린다. 여기서 5단계 감성 라벨을 영상
+    단위로 접어 approval(어느 쪽으로 기울었나)과 contention(갈렸나)으로 나눈다.
+    """
+    conn = connect(args.db)
+    run_id = uuid.uuid4().hex[:12]
+    rows = engagement_run(conn, run_id, args.prompt_version, args.model)
+    if not rows:
+        print("라벨된 댓글이 없다. import-batch 로 감성 라벨을 먼저 채워라.",
+              file=sys.stderr)
+        return 1
+
+    # 댓글율·댓글율 배수는 2단계가 낸 값이다. 영상마다 가장 최근 실행 것을 쓴다.
+    metrics = {
+        r["video_id"]: r
+        for r in conn.execute(
+            """SELECT m.* FROM video_metrics m
+               WHERE m.computed_at = (SELECT MAX(computed_at) FROM video_metrics
+                                      WHERE video_id = m.video_id)"""
+        )
+    }
+
+    by_version: dict[tuple[str, str], list[dict]] = {}
+    for e in rows:
+        by_version.setdefault((e["prompt_version"], e["model"]), []).append(e)
+
+    for (pv, mdl), group in by_version.items():
+        print(f"[prompt_version={pv} · model={mdl}]  댓글이 있는 영상 {len(group)}개\n")
+        print(f"  {'영상':<34}{'댓글율':>9}{'댓글배수':>10}{'호응':>8}{'논쟁':>8}"
+              f"{'라벨비율':>10}{'긍/부/중':>14}")
+        print("  " + "-" * 96)
+        for e in sorted(group, key=lambda r: -(r["comment_count_collected"] or 0)):
+            m = metrics.get(e["video_id"])
+            cr = (f"{m['comment_rate']*100:.3f}%"
+                  if m is not None and m["comment_rate"] is not None else "-")
+            cmult = (f"{m['comment_rate_multiple']:.2f}"
+                     if m is not None and m["comment_rate_multiple"] is not None
+                     else "—")
+            ap = f"{e['approval']:.2f}" if e["approval"] is not None else "—"
+            ct = f"{e['contention']:.2f}" if e["contention"] is not None else "—"
+            lr = (f"{e['labeled_ratio']*100:.0f}%"
+                  if e["labeled_ratio"] is not None else "—")
+            mix = f"{e['positive']}/{e['negative']}/{e['neutral']}"
+            print(f"  {e['title'][:32]:<34}{cr:>9}{cmult:>10}{ap:>8}{ct:>8}"
+                  f"{lr:>10}{mix:>14}")
+
+        missing = [e for e in group if e["approval"] is None]
+        if missing:
+            print(f"\n  호응·논쟁 없음 {len(missing)}건 — 근거:")
+            for e in missing[: args.show]:
+                print(f"    {e['title'][:30]:<32} {e['basis']}")
+        print()
+
+    print("  호응(approval)   = 긍정 ÷ (긍정+부정).  0 전부 부정 ~ 1 전부 긍정")
+    print("  논쟁(contention) = 2·min(긍정,부정) ÷ (긍정+부정).  0 쏠림 ~ 1 반반")
+    print("  neutral 은 두 값의 분모에서 뺀다. 라벨비율이 낮으면 그만큼만 믿는다.")
+    print(f"\ncomment_engagement 갱신 (run_id={run_id})")
     return 0
 
 
@@ -223,6 +303,30 @@ def cmd_export_batch(args) -> int:
     if not target:
         print("판정할 댓글이 없다.", file=sys.stderr)
         return 1
+    if args.all:
+        # 영상마다 따로 묶는다. 판정에 영상 제목이 맥락으로 들어가므로
+        # 한 묶음에 여러 영상의 댓글이 섞이면 그 맥락이 틀어진다.
+        by_video: dict[str, list] = {}
+        for c in target:
+            by_video.setdefault(c.get("video_id") or "?", []).append(c)
+
+        conn = connect(args.db)
+        titles = {r["video_id"]: r["title"]
+                  for r in conn.execute("SELECT video_id, title FROM videos")}
+        out_dir = pathlib.Path(args.out)
+        n = 0
+        for vid, group in by_video.items():
+            for i in range(0, len(group), args.size):
+                n += 1
+                chunk = group[i:i + args.size]
+                bid = f"{args.batch_id}_{n:03d}"
+                export_batch(chunk, titles.get(vid, "(제목 없음)"), bid, out_dir)
+        print(f"출처: {source}")
+        print(f"{len(target)}건을 {n}묶음으로 내보냈다 → {out_dir}")
+        print(f"\n다음: 각 묶음의 .md 를 읽고 판정해 <batch>.result.json 으로 저장한 뒤")
+        print(f"      python -m app.cli import-batch {args.batch_id}_001 --out {args.out}")
+        return 0
+
     target = target[: args.size]
 
     title = args.video_title
@@ -345,9 +449,17 @@ def main() -> int:
     v.add_argument("--max-comments", type=int, default=2000)
     v.set_defaults(fn=cmd_collect_video)
 
-    n = sub.add_parser("normalize", help="길이 축·좋아요율·댓글율·조회 배수 계산 (비용 0)")
+    n = sub.add_parser("normalize",
+                       help="길이 축·좋아요율·댓글율·조회 배수·댓글율 배수 (비용 0)")
     n.add_argument("--show", type=int, default=10)
     n.set_defaults(fn=cmd_normalize)
+
+    g = sub.add_parser("engagement",
+                       help="댓글 참여가 호응인지 논쟁인지 가른다 (라벨 필요, 비용 0)")
+    g.add_argument("--prompt-version", help="특정 라벨 버전만. 없으면 DB의 전 조합")
+    g.add_argument("--model", help="특정 모델만. 없으면 DB의 전 조합")
+    g.add_argument("--show", type=int, default=10)
+    g.set_defaults(fn=cmd_engagement)
 
     r = sub.add_parser("rules", help="규칙 필터를 돌려보고 무엇이 걸렸는지 본다 (비용 0)")
     r.add_argument("--fixture", help="DB 대신 표본 JSON 을 쓴다")
@@ -365,6 +477,8 @@ def main() -> int:
     e.add_argument("--limit", type=int)
     e.add_argument("--size", type=int, default=20, help="묶음 크기")
     e.add_argument("--out", default="./data/batches")
+    e.add_argument("--all", action="store_true",
+                   help="전체를 size 단위 묶음으로 쪼개 내보낸다 (영상별로 나눔)")
     e.set_defaults(fn=cmd_export_batch)
 
     i = sub.add_parser("import-batch", help="판정 결과를 검증하고 저장")

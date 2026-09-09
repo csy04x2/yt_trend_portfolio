@@ -89,6 +89,11 @@ CREATE TABLE IF NOT EXISTS video_metrics (
     views_per_day       REAL,
     view_multiple       REAL,          -- 비교군이 모자라면 NULL
     view_multiple_basis TEXT,
+    -- 댓글율 배수. 비교군 잡는 법은 view_multiple 과 똑같다.
+    -- "댓글이 많다"까지만 말한다 — 그 댓글이 호응이냐 논쟁이냐는
+    -- comment_engagement 가 5단계 라벨을 보고 가른다
+    comment_rate_multiple       REAL,
+    comment_rate_multiple_basis TEXT,
     computed_at         TEXT NOT NULL,
     PRIMARY KEY (video_id, run_id)
 );
@@ -107,6 +112,28 @@ CREATE TABLE IF NOT EXISTS comment_labels (
 );
 CREATE INDEX IF NOT EXISTS idx_comment_labels_version
     ON comment_labels(prompt_version, model);
+
+-- 6단계 결과. 5단계 라벨(comment_labels)을 영상 단위로 접은 것.
+-- 댓글이 많다는 사실만으로는 호응인지 논쟁인지 알 수 없다. approval 이
+-- 어느 쪽으로 기울었는지, contention 이 갈렸는지를 나눠서 말한다.
+-- PK 에 프롬프트 버전과 모델이 들어가는 것은 comment_labels 와 같다 —
+-- 라벨이 바뀌면 여기서 나온 값도 다른 값이다.
+-- 표본이 모자라면 값 대신 basis 에 이유를 남긴다 (view_multiple 과 같은 규칙).
+CREATE TABLE IF NOT EXISTS comment_engagement (
+    video_id       TEXT NOT NULL REFERENCES videos(video_id),
+    run_id         TEXT NOT NULL,
+    prompt_version TEXT NOT NULL,
+    model          TEXT NOT NULL,
+    positive       INTEGER NOT NULL DEFAULT 0,
+    negative       INTEGER NOT NULL DEFAULT 0,
+    neutral        INTEGER NOT NULL DEFAULT 0,
+    approval       REAL,          -- 긍정 ÷ (긍정+부정). neutral 은 분모에서 뺀다
+    contention     REAL,          -- 2·min(긍정,부정) ÷ (긍정+부정). 0 쏠림 ~ 1 반반
+    labeled_ratio  REAL,          -- 라벨된 댓글 ÷ 그 영상의 수집 댓글
+    basis          TEXT NOT NULL,
+    computed_at    TEXT NOT NULL,
+    PRIMARY KEY (video_id, run_id, prompt_version, model)
+);
 
 CREATE TABLE IF NOT EXISTS quota_ledger (
     day_pt     TEXT PRIMARY KEY,

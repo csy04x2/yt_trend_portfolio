@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT))
 
 from app.pipeline.normalize import (  # noqa: E402
     DEFAULT,
+    comment_rate_multiple,
     compute,
     length_axis,
     quarter_of,
@@ -93,6 +94,50 @@ def test_strip_boilerplate_leaves_small_sets_alone():
     """영상이 적으면 우연히 겹친 줄까지 지울 위험이 크다."""
     ds = ["같은 줄\nA", "같은 줄\nB"]
     assert strip_boilerplate(ds, DEFAULT) == ds
+
+
+# --------------------------------------------------------------------------
+# 댓글율 배수 — 비교군 잡는 법은 조회 배수와 똑같아야 한다
+# --------------------------------------------------------------------------
+
+def test_comment_rate_multiple_excludes_self():
+    """자기 자신이 분모에 들어가면 배수가 1 쪽으로 눌린다."""
+    target = _v("a", 100_000, comment_count=400)          # 댓글율 0.4%
+    pop = [target] + [_v(f"p{i}", 100_000, comment_count=100) for i in range(4)]
+    mult, basis = comment_rate_multiple(target, pop, DEFAULT)
+    assert mult == 4.0, f"기대 4.0 → {mult}"              # 0.4% / 중앙값 0.1%
+    assert "중앙값" in basis
+
+
+def test_comment_rate_multiple_refuses_small_population():
+    """조회 배수와 같은 규칙 — 표본이 모자라면 값 대신 이유."""
+    a, b = _v("a", 100_000, comment_count=400), _v("b", 100_000, comment_count=100)
+    mult, basis = comment_rate_multiple(a, [a, b], DEFAULT)
+    assert mult is None
+    assert "비교군 부족" in basis and "1개" in basis
+
+
+def test_comment_rate_multiple_splits_by_axis_and_quarter():
+    """조회 배수와 같은 비교군을 써야 둘을 나란히 읽을 수 있다."""
+    target = _v("t", 50_000, dur=1500, when="2026-07-01T00:00:00Z")
+    others = (
+        [_v(f"s{i}", 10_000, dur=60, when="2026-07-01T00:00:00Z") for i in range(4)] +
+        [_v(f"q{i}", 10_000, dur=1500, when="2026-01-01T00:00:00Z") for i in range(4)]
+    )
+    mult, _ = comment_rate_multiple(target, [target] + others, DEFAULT)
+    assert mult is None, "축·분기가 다른 영상이 비교군에 들어갔다"
+
+
+def test_comment_rate_multiple_in_compute():
+    """compute 가 값과 근거를 함께 낸다. 근거 없이 빈 값만 내면 안 된다."""
+    target = _v("a", 100_000, comment_count=400)
+    pop = [target] + [_v(f"p{i}", 100_000, comment_count=100) for i in range(4)]
+    m = compute(target, pop)
+    assert m["comment_rate_multiple"] == 4.0
+    assert m["comment_rate_multiple_basis"]
+    lonely = compute(_v("z", 1000), [_v("z", 1000)])
+    assert lonely["comment_rate_multiple"] is None
+    assert "비교군 부족" in lonely["comment_rate_multiple_basis"]
 
 
 if __name__ == "__main__":

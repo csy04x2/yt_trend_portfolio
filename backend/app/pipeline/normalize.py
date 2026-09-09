@@ -10,6 +10,13 @@
     comment_rate   댓글 ÷ 조회        반응의 강도. 긍정·부정 양쪽 다 올린다
     views_per_day  조회 ÷ 경과일      보조. 오래된 영상에 불리해 단독 사용 금지
     view_multiple  조회 ÷ 비교군 중앙값
+    comment_rate_multiple
+                   댓글율 ÷ 비교군 댓글율 중앙값
+
+댓글율 배수까지가 이 단계의 몫이다. **댓글이 호응이냐 논쟁이냐는 여기서
+가르지 않는다** — 그 판단에는 5단계(`comment_labels`)의 감성 라벨이 필요한데
+이 단계는 그보다 먼저 돈다. 정규화가 라벨을 읽으면 의존 방향이 거꾸로 뒤집힌다.
+분별은 `app/pipeline/engagement.py` 가 맡는다.
 
 **조회 배수의 분모는 아직 미결이다** (결정 문서 3장). 여기서는 후보 ①
 "같은 길이 축 · 같은 분기의 중앙값"을 기본값으로 쓰되, 표본이 모자라면
@@ -87,6 +94,23 @@ def strip_boilerplate(descriptions: list[str], cfg: NormalizeConfig = DEFAULT) -
     return out
 
 
+def _peers(video: dict, population: list[dict],
+           cfg: NormalizeConfig = DEFAULT) -> list[dict]:
+    """비교군 고르기 — 같은 길이 축 · 같은 분기 · 라이브 제외 · 자기 자신 제외.
+
+    자기 자신을 빼는 것이 핵심이다. 넣으면 분모가 자기를 포함해 배수가
+    1 쪽으로 눌린다. 조회 배수와 댓글율 배수가 같은 비교군을 써야
+    둘을 나란히 읽을 수 있으므로 한 곳에 둔다.
+    """
+    return [
+        v for v in population
+        if v["video_id"] != video["video_id"]
+        and not v.get("is_live")
+        and v.get("length_axis") == video.get("length_axis")
+        and quarter_of(v["published_at"]) == quarter_of(video["published_at"])
+    ]
+
+
 def view_multiple(
     video: dict,
     population: list[dict],
@@ -98,14 +122,7 @@ def view_multiple(
     라이브가 아닌 것만 골라 비교군으로 쓴다. 자기 자신은 뺀다 — 넣으면
     분모가 자기를 포함해 배수가 1 쪽으로 눌린다.
     """
-    peers = [
-        v for v in population
-        if v["video_id"] != video["video_id"]
-        and not v.get("is_live")
-        and v.get("length_axis") == video.get("length_axis")
-        and quarter_of(v["published_at"]) == quarter_of(video["published_at"])
-        and v.get("view_count")
-    ]
+    peers = [v for v in _peers(video, population, cfg) if v.get("view_count")]
     if len(peers) < cfg.view_multiple_min_pop:
         return None, (
             f"비교군 부족: 같은 길이 축({video.get('length_axis')}) · "
@@ -120,6 +137,52 @@ def view_multiple(
     return video["view_count"] / med, basis
 
 
+def comment_rate_of(video: dict) -> float | None:
+    """댓글 ÷ 조회. 조회가 0이면 비율이 없다 (0 이 아니다)."""
+    views = video.get("view_count") or 0
+    comments = video.get("comment_count")
+    if not views or comments is None:
+        return None
+    return comments / views
+
+
+def comment_rate_multiple(
+    video: dict,
+    population: list[dict],
+    cfg: NormalizeConfig = DEFAULT,
+) -> tuple[float | None, str]:
+    """댓글율 배수와 그 근거.
+
+    분모 잡는 법은 `view_multiple` 과 똑같다 — 같은 길이 축·같은 분기·
+    라이브 제외·자기 자신 제외. 다른 것은 중앙값을 조회수가 아니라
+    댓글율로 낸다는 점뿐이다. 조회수 배수와 나란히 놓아야 "이 영상은
+    조회 대비 댓글이 유난히 많다"를 말할 수 있다.
+
+    같은 이유로 표본이 모자라면 값을 내지 않는다. 영상 두 개로 낸 배수는
+    자기 자신이 분모라 항상 1 근처가 나오고, 그 1은 착시다.
+    """
+    mine = comment_rate_of(video)
+    if mine is None:
+        return None, "이 영상의 댓글율이 없다 (조회 0 또는 댓글 수 비공개)"
+
+    peers = [
+        v for v in _peers(video, population, cfg)
+        if comment_rate_of(v) is not None
+    ]
+    if len(peers) < cfg.view_multiple_min_pop:
+        return None, (
+            f"비교군 부족: 같은 길이 축({video.get('length_axis')}) · "
+            f"{quarter_of(video['published_at'])} 영상이 {len(peers)}개 "
+            f"(최소 {cfg.view_multiple_min_pop}개 필요)"
+        )
+    med = statistics.median(comment_rate_of(v) for v in peers)
+    if not med:
+        return None, "비교군 댓글율 중앙값이 0"
+    basis = (f"같은 길이 축·분기 {len(peers)}개의 댓글율 중앙값 {med * 100:.3f}% "
+             f"(분모 정의는 미결 — 아키텍처 6.2)")
+    return mine / med, basis
+
+
 def compute(video: dict, population: list[dict],
             cfg: NormalizeConfig = DEFAULT) -> dict:
     """영상 하나의 정규화 지표. 순수 함수 — DB 를 모른다."""
@@ -128,6 +191,7 @@ def compute(video: dict, population: list[dict],
     comments = video.get("comment_count") or 0
 
     mult, basis = view_multiple(video, population, cfg)
+    cmult, cbasis = comment_rate_multiple(video, population, cfg)
     return {
         "video_id": video["video_id"],
         "length_axis": video.get("length_axis"),
@@ -138,6 +202,10 @@ def compute(video: dict, population: list[dict],
         "views_per_day": views / days_since(video["published_at"]) if views else None,
         "view_multiple": mult,
         "view_multiple_basis": basis,
+        # 댓글율 배수. "댓글이 많다"까지만 말한다 — 그 댓글이 호응인지
+        # 논쟁인지는 engagement 단계가 라벨을 보고 가른다
+        "comment_rate_multiple": cmult,
+        "comment_rate_multiple_basis": cbasis,
     }
 
 
@@ -183,18 +251,22 @@ def run(conn, channel_id: str, run_id: str, cfg: NormalizeConfig = DEFAULT) -> l
         conn.execute(
             """INSERT INTO video_metrics (video_id, run_id, length_axis, view_count,
                    like_rate, comment_rate, views_per_day, view_multiple,
-                   view_multiple_basis, computed_at)
-               VALUES (?,?,?,?,?,?,?,?,?,?)
+                   view_multiple_basis, comment_rate_multiple,
+                   comment_rate_multiple_basis, computed_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
                ON CONFLICT(video_id, run_id) DO UPDATE SET
                    length_axis=excluded.length_axis, view_count=excluded.view_count,
                    like_rate=excluded.like_rate, comment_rate=excluded.comment_rate,
                    views_per_day=excluded.views_per_day,
                    view_multiple=excluded.view_multiple,
                    view_multiple_basis=excluded.view_multiple_basis,
+                   comment_rate_multiple=excluded.comment_rate_multiple,
+                   comment_rate_multiple_basis=excluded.comment_rate_multiple_basis,
                    computed_at=excluded.computed_at""",
             (m["video_id"], run_id, m["length_axis"], m["view_count"],
              m["like_rate"], m["comment_rate"], m["views_per_day"],
-             m["view_multiple"], m["view_multiple_basis"], now),
+             m["view_multiple"], m["view_multiple_basis"],
+             m["comment_rate_multiple"], m["comment_rate_multiple_basis"], now),
         )
         m["title"] = r["title"]
         out.append(m)
