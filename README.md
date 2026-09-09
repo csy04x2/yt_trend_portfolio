@@ -9,6 +9,7 @@
 | [youtube-trend-pipeline-concept.md](youtube-trend-pipeline-concept.md) | 구상안 초안 v0.1. 문제 정의, 데이터 소스와 제약, 파이프라인 8단계, 한계 |
 | [youtube-trend-decisions.md](youtube-trend-decisions.md) | 아키텍처 설계 전 확정한 결정 사항, 기본값, 실패·재개 정책, 미결 사항 |
 | [youtube-trend-architecture.md](youtube-trend-architecture.md) | 아키텍처 v0.1. 모듈 구성, SQLite 스키마, 작업 상태 흐름, API 명세, Claude 호출 설계, 구현 순서 |
+| [ideas.md](ideas.md) | 아직 결정이 아닌 아이디어. 채택되면 결정·아키텍처 문서로 옮긴다 |
 
 읽는 순서는 위 표 순서와 같다.
 
