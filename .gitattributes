@@ -1,0 +1,24 @@
+# 줄바꿈 정규화.
+#
+# 셸 스크립트가 CRLF 로 체크아웃되면 실행이 실패한다. 윈도우에서 클론한
+# 팀원이 `.claude/hooks/record-session.sh` 를 돌릴 때 바로 겪는 문제라
+# 확장자별로 못박아 둔다.
+
+* text=auto
+
+*.sh   text eol=lf
+*.py   text eol=lf
+*.sql  text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.html text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 바이너리
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.db   binary

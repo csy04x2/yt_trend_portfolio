@@ -109,6 +109,9 @@ def score(comments: list[dict]) -> dict:
 
 
 def main() -> int:
+    from app import config
+    config.setup_console()      # cp949 콘솔에서 출력이 깨져 죽는 것을 막는다
+
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--json", action="store_true", help="JSON 한 줄로 출력")
     args = p.parse_args()

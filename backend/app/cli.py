@@ -1,13 +1,16 @@
 """프로토타입 CLI.
 
-세 명령이 있고, 앞의 둘은 Claude를 부르지 않아 비용이 0이다.
+Anthropic API 를 부르는 명령은 아직 없다. 전부 금전 비용 0이다.
 
-    collect  채널 URL → SQLite (YouTube 키 필요, 금전 비용 0)
-    rules    쌓인 댓글에 규칙을 적용하고 무엇이 걸렸는지 보여준다 (비용 0)
-    stats    수집 현황
+    collect        채널 URL → SQLite (YouTube 키 필요)
+    collect-video  영상 URL 하나만 → SQLite (약 5유닛)
+    rules          쌓인 댓글에 규칙을 적용하고 무엇이 걸렸는지 본다
+    export-batch   댓글 묶음을 판정용 파일로 (Claude Code 가 판정)
+    import-batch   판정 결과를 검증하고 저장
+    stats          수집 현황과 설정 상태
 
 지금 답이 필요한 질문 — 규칙이 무엇을 잘못 버리는가 — 은 `rules`만으로
-답할 수 있다. Claude 호출은 아직 붙지 않았다.
+답할 수 있다.
 """
 
 from __future__ import annotations
@@ -15,7 +18,6 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
-import os
 import pathlib
 import sys
 import uuid
@@ -27,9 +29,9 @@ from app.clients.youtube import (  # noqa: E402
     ChannelNotFound,
     QuotaExhausted,
     YouTubeClient,
-    classify_live,
 )
 from app.db.connection import connect  # noqa: E402
+from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
 from app.pipeline.offline_llm import (  # noqa: E402
     ValidationError,
     export_batch,
@@ -50,121 +52,53 @@ def now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
 
 
-def parse_duration(iso: str) -> int:
-    """PT1H2M3S → 초."""
-    import re
-    m = re.fullmatch(r"P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", iso or "")
-    if not m:
-        return 0
-    d, h, mi, s = (int(x) if x else 0 for x in m.groups())
-    return d * 86400 + h * 3600 + mi * 60 + s
-
-
 # --------------------------------------------------------------------------
-# collect
+# collect / collect-video
 # --------------------------------------------------------------------------
 
-def cmd_collect(args) -> int:
+def _client(args) -> tuple:
     key = config.require(
         "YOUTUBE_API_KEY",
         "Google Cloud Console에서 YouTube Data API v3를 켜고 API 키를 발급받는다.",
     )
     conn = connect(args.db)
-    yt = YouTubeClient(
-        api_key=key, daily_quota=int(config.get("YOUTUBE_DAILY_QUOTA"))
-    )
-    run_id = uuid.uuid4().hex[:12]
+    yt = YouTubeClient(api_key=key, daily_quota=int(config.get("YOUTUBE_DAILY_QUOTA")))
+    return conn, yt, uuid.uuid4().hex[:12]
 
+
+def _report(yt, db) -> None:
+    print(f"\n할당량 {yt.units_used}유닛 사용 (한도 {yt.daily_quota}) · 금전 비용 0")
+    print(f"DB: {db}")
+
+
+def cmd_collect(args) -> int:
+    conn, yt, run_id = _client(args)
     try:
-        ch = yt.resolve_channel(args.url)
+        collect_channel(conn, yt, args.url, run_id, args.max_videos, args.max_comments)
     except ChannelNotFound as e:
         print(f"채널을 찾을 수 없다: {e}", file=sys.stderr)
         return 1
-    print(f"[채널] {ch['title']}  ({ch['channel_id']})")
+    _report(yt, args.db)
+    return 0
 
-    conn.execute(
-        """INSERT INTO channels (channel_id, input_url, handle, title,
-               uploads_playlist, subscriber_count, first_analyzed_at, last_analyzed_at)
-           VALUES (?,?,?,?,?,?,?,?)
-           ON CONFLICT(channel_id) DO UPDATE SET last_analyzed_at=excluded.last_analyzed_at""",
-        (ch["channel_id"], args.url, ch["handle"], ch["title"],
-         ch["uploads_playlist"], ch["subscriber_count"], now(), now()),
-    )
 
-    ids = yt.list_upload_ids(ch["uploads_playlist"], args.max_videos)
-    print(f"[영상] {len(ids)}개")
-
-    for item in yt.fetch_videos(ids):
-        sn, cd, st = item["snippet"], item["contentDetails"], item.get("statistics", {})
-        is_live, evidence = classify_live(item)
-        conn.execute(
-            """INSERT INTO videos (video_id, channel_id, title, description, tags_json,
-                   duration_sec, published_at, thumbnail_url, is_live, live_evidence,
-                   first_seen_at)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?)
-               ON CONFLICT(video_id) DO NOTHING""",
-            (item["id"], ch["channel_id"], sn["title"], sn.get("description"),
-             json.dumps(sn.get("tags") or [], ensure_ascii=False),
-             parse_duration(cd.get("duration")), sn["publishedAt"],
-             (sn.get("thumbnails", {}).get("high") or {}).get("url"),
-             is_live, evidence, now()),
-        )
-        conn.execute(
-            """INSERT INTO video_stats_snapshots
-                   (video_id, run_id, captured_at, view_count, like_count, comment_count)
-               VALUES (?,?,?,?,?,?) ON CONFLICT(video_id, run_id) DO NOTHING""",
-            (item["id"], run_id, now(),
-             int(st.get("viewCount") or 0),
-             int(st["likeCount"]) if "likeCount" in st else None,
-             int(st.get("commentCount") or 0)),
-        )
-
-    # ---- 댓글: 페이지마다 커서를 커밋한다 ----
-    total = 0
-    rows = conn.execute(
-        "SELECT video_id, title, comments_newest_at FROM videos WHERE channel_id=?"
-        " ORDER BY published_at DESC", (ch["channel_id"],)
-    ).fetchall()
-
+def cmd_collect_video(args) -> int:
+    """영상 하나만 받는다. 실험할 때 채널 전체를 받을 이유가 없다."""
+    conn, yt, run_id = _client(args)
     try:
-        for v in rows:
-            newest_seen = v["comments_newest_at"]
-            got, page_newest, stop = 0, None, False
-            for page in yt.iter_comment_pages(v["video_id"]):
-                if not page:
-                    break
-                for c in page:
-                    if newest_seen and c["published_at"] <= newest_seen:
-                        stop = True
-                        break
-                    conn.execute(
-                        """INSERT INTO comments (comment_id, video_id, author_channel_id,
-                               author_name, text, published_at, like_count, fetched_at)
-                           VALUES (?,?,?,?,?,?,?,?)
-                           ON CONFLICT(comment_id) DO NOTHING""",
-                        (c["comment_id"], c["video_id"], c["author_channel_id"],
-                         c["author_name"], c["text"], c["published_at"],
-                         c["like_count"], now()),
-                    )
-                    page_newest = page_newest or c["published_at"]
-                    got += 1
-                    total += 1
-                # 페이지를 저장한 직후에 커서를 옮긴다
-                if page_newest:
-                    conn.execute(
-                        "UPDATE videos SET comments_newest_at=? WHERE video_id=?",
-                        (page_newest, v["video_id"]),
-                    )
-                if stop or got >= args.max_comments:
-                    break
-            if got:
-                print(f"  {v['title'][:38]:<40} 댓글 {got}")
+        collect_video(conn, yt, args.url, run_id, args.max_comments)
+    except ValueError as e:
+        print(f"{e}", file=sys.stderr)
+        return 1
+    except ChannelNotFound as e:
+        print(f"채널을 찾을 수 없다: {e}", file=sys.stderr)
+        return 1
     except QuotaExhausted as e:
-        print(f"\n[중단] 할당량 소진 — {e}", file=sys.stderr)
-        print("여기까지 저장한 것은 그대로 남는다. 내일 다시 실행하면 이어받는다.")
-
-    print(f"\n댓글 {total}개 · 할당량 {yt.units_used}유닛 사용 (한도 {yt.daily_quota})")
-    print(f"DB: {args.db}")
+        print(f"[중단] 할당량 소진 — {e}", file=sys.stderr)
+        print("여기까지 저장한 것은 그대로 남는다. 다시 실행하면 이어받는다.")
+        _report(yt, args.db)
+        return 1
+    _report(yt, args.db)
     return 0
 
 
@@ -353,6 +287,7 @@ def cmd_stats(args) -> int:
 
 
 def main() -> int:
+    config.setup_console()
     p = argparse.ArgumentParser(prog="yt-trend", description=__doc__)
     config.load_env()
     p.add_argument("--db", default=config.get("DB_PATH", DEFAULT_DB))
@@ -363,6 +298,11 @@ def main() -> int:
     c.add_argument("--max-videos", type=int, default=50)
     c.add_argument("--max-comments", type=int, default=2000)
     c.set_defaults(fn=cmd_collect)
+
+    v = sub.add_parser("collect-video", help="영상 URL 하나만 → SQLite (약 5유닛)")
+    v.add_argument("url", help="watch?v=… / youtu.be/… / shorts/… / 맨 영상 ID")
+    v.add_argument("--max-comments", type=int, default=2000)
+    v.set_defaults(fn=cmd_collect_video)
 
     r = sub.add_parser("rules", help="규칙 필터를 돌려보고 무엇이 걸렸는지 본다 (비용 0)")
     r.add_argument("--fixture", help="DB 대신 표본 JSON 을 쓴다")

@@ -10,9 +10,28 @@ from __future__ import annotations
 
 import os
 import pathlib
+import sys
 
 BACKEND_ROOT = pathlib.Path(__file__).resolve().parents[1]
 ENV_FILE = BACKEND_ROOT / ".env"
+
+
+def setup_console() -> None:
+    """윈도우 콘솔에서 출력이 깨지지 않게 한다.
+
+    한국어 윈도우의 기본 콘솔 코드페이지는 cp949라, 리포트에 쓰는 em-dash(—)나
+    일부 기호를 못 찍고 UnicodeEncodeError로 프로그램이 죽는다. 계산은 멀쩡한데
+    출력에서 죽는 것이라 원인을 찾기 어렵다.
+
+    stdout/stderr를 UTF-8로 바꾸고, 그래도 못 찍는 글자는 errors='replace'로
+    넘긴다 — 글자 하나 때문에 실행이 실패하는 것보다 낫다. 터미널이 UTF-8을
+    지원하지 않으면 재설정 자체가 실패할 수 있으므로 조용히 넘어간다.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass
 
 DEFAULTS = {
     "DB_PATH": "./data/yt_trend.db",
