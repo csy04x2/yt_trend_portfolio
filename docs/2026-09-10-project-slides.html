@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YT Trend — 프로젝트 소개</title>
+<style>
+/* ================================================================
+   BANKWARE COMPANY SLIDES — design-tokens.css(웹 정본 v1.1)를
+   1920×1080 고정 px 슬라이드 캔버스로 환산한 토큰.
+   색·잉크·라인·폰트 패밀리는 웹 정본과 동일. clamp()/vw 토큰만
+   1920px 뷰포트 기준 고정 px로 해석 (Figma 임포트 호환).
+   italic 전면 금지 (웹 정본 v1.1 규칙 유지).
+
+   웹 정본 → 슬라이드 환산표:
+     --fs-h-section  clamp(34,3.6vw,52) → 52px
+     --fs-h-sub      clamp(24,2.2vw,30) → 30px
+     --fs-lead       clamp(20,1.7vw,24) → 26px (슬라이드 가독 보정 +2)
+     --fs-stat-num   clamp(44,4.4vw,60) → 84px (슬라이드 스케일 상향)
+     --fs-eyebrow    14 → 18px (투사 거리 보정, 하한 14 준수)
+     --gutter        clamp(20,2.6vw,40) → 캔버스 패딩 96/120/144 고정
+   ================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+/* 한글: Figma의 Google Fonts 라이브러리에 있는 폰트로 측정·렌더를
+   일치시킨다 (Apple SD Gothic Neo는 Figma에 없음) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap');
+
+:root{
+  /* ---- 브랜드 색 (웹 정본 그대로) ---- */
+  --bw-blue:#1877F2;
+  --bw-navy:#003087;
+  --bw-deep:#0A1F5C;
+  --bw-light:#EEF5FF;
+  --bw-mid:#4DA3F5;
+  --bw-cyan:#00B8CC;
+  --bw-amber:#E8900A;
+  --bw-amber-soft:#FFB547;
+  --bw-amber-light:#FFF4DC;
+
+  /* ---- 상태 색 ---- */
+  --green:#10B981;  --green-light:#D1FAE5;
+  --red:#DC2626;    --red-light:#FEE2E2;
+  --ref-green:#1B8A4C;            /* ref-card Active 뱃지 */
+
+  /* ---- 잉크(텍스트) ---- */
+  --ink:#0A0E1A;
+  --ink-2:#1A2238;
+  --ink-3:#3D4663;
+  --gray:#6B7388;
+  --gray-2:#9098AB;
+
+  /* ---- 라인 / 배경 ---- */
+  --line:#E4E9F2;
+  --line-2:#F0F3F8;
+  --bg:#FFFFFF;
+  --bg-2:#FAFBFD;
+  --bg-3:#F4F7FB;
+
+  /* ---- 네이비 슬라이드 (장 전환·클로징) ---- */
+  --navy-text:#FFFFFF;
+  --navy-soft:rgba(255,255,255,0.66);
+  --navy-faint:rgba(255,255,255,0.45);
+  --navy-line:rgba(255,255,255,0.18);
+
+  /* ---- bx-card 행 변형 (웹 components.md의 행 색을 토큰화) ---- */
+  --bx-app:#003087;
+  --bx-infra:#0066CC;
+  --bx-saas:#C4CEDB;
+
+  /* ---- 타이포 패밀리 ----
+     Aptos는 맥·Figma 모두 부재 → Inter를 측정·렌더 공통 폴백으로 명시.
+     한글은 Noto Sans/Serif KR (Figma 보유). */
+  --display:'IBM Plex Serif','Noto Serif KR',Georgia,serif;
+  --sans:'Aptos','Segoe UI','InterVariable','Inter','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'Noto Sans KR',monospace;
+
+  /* ---- 폰트 스케일 (고정 px · 하한 14px) ---- */
+  --fs-min:14px;
+  --fs-hero:88px;
+  --fs-h-section:52px;
+  --fs-h-sub:30px;
+  --fs-lead:26px;
+  --fs-body:22px;
+  --fs-eyebrow:18px;
+  --fs-label:16px;
+  --fs-card-name:26px;
+  --fs-card-desc:20px;
+  --fs-stat-num:84px;
+  --fs-stat-label:18px;
+
+  /* spacing scale — 모든 간격은 이 스텝만: 8/16/24/32/48/64/88 (px) */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  background: #2A2A2C; /* stage behind slides (presentation mode) */
+  font-family: var(--sans);
+  color: var(--ink);
+}
+
+/* ---- italic 금지 (전역 강제 · 웹 정본 v1.1) ---- */
+em, i, cite, dfn, var, address { font-style: normal; }
+
+/* ================================================================
+   SLIDE SHELL — fixed 1920×1080 canvas
+   ================================================================ */
+.slide {
+  width: 1920px;
+  height: 1080px;
+  background: var(--bg);
+  /* bottom padding 144px = safe zone: content always ends ≥48px
+     above the slide-foot (which sits 56px from the bottom edge) */
+  padding: 96px 120px 144px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  font-style: normal;
+}
+
+.slide.slide-soft { background: var(--bg-2); }
+.slide.slide-tint { background: var(--bg-3); }
+.slide.slide-navy { background: var(--bw-deep); color: var(--navy-text); }
+.slide.slide-center { justify-content: center; }
+
+/* slide footer: mono meta pinned to bottom */
+.slide-foot {
+  position: absolute;
+  left: 120px;
+  right: 120px;
+  bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--gray-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.slide-navy .slide-foot { color: var(--navy-faint); }
+
+/* ================================================================
+   TYPOGRAPHY — display는 IBM Plex Serif, 본문은 sans.
+   강조는 italic이 아니라 weight 600/700과 색(브랜드 1색)으로.
+   ================================================================ */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bw-blue);
+  margin-bottom: 32px;
+}
+.slide-navy .eyebrow { color: var(--bw-mid); }
+
+.h-hero {  /* 커버/클로징 전용 */
+  font-family: var(--display);
+  font-size: var(--fs-hero);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 40px;
+  text-wrap: balance;
+  font-style: normal;
+}
+.h-section {  /* 콘텐츠 슬라이드 제목 */
+  font-family: var(--display);
+  font-size: var(--fs-h-section);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  text-wrap: balance;
+  font-style: normal;
+}
+.h-sub {
+  font-family: var(--display);
+  font-size: var(--fs-h-sub);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  font-style: normal;
+}
+.dim { color: var(--gray-2); }                 /* 제목 일부 가라앉히기 */
+.slide-navy .dim { color: var(--navy-faint); }
+.accent { color: var(--bw-blue); }             /* 브랜드 강조 (1색) */
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  max-width: 62ch;
+}
+.slide-navy .lead { color: var(--navy-soft); }
+
+/* slide header block — 3 density tiers. NEVER inline-override. */
+.slide-header { margin-bottom: 88px; }
+.slide-header.tight { margin-bottom: 64px; }
+.slide-header.dense { margin-bottom: 40px; }
+
+strong { font-weight: 700; color: var(--ink); }
+.slide-navy strong { color: var(--navy-text); }
+
+/* ================================================================
+   COMPONENTS — 웹 components.md를 슬라이드 캔버스로 이식
+   ================================================================ */
+
+/* ---- context strip (커버 메타) ---- */
+.context-strip { display: flex; width: fit-content; }
+.context-strip > div {
+  padding: 4px 56px 4px 0;
+  margin-right: 56px;
+  border-right: 1px solid var(--line);
+}
+.context-strip > div:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.slide-navy .context-strip > div { border-right-color: var(--navy-line); }
+.ctx-label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gray-2);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.slide-navy .ctx-label { color: var(--navy-faint); }
+.ctx-value { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+
+/* ---- stat: serif 숫자 (웹 정본 stat 이식, 슬라이드 스케일) ---- */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.stat-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.stat { border-left: 1px solid var(--line); padding: 8px 48px 8px 40px; }
+.stat:first-child { border-left: none; padding-left: 0; }
+.slide-navy .stat { border-left-color: var(--navy-line); }
+.stat-num {
+  font-family: var(--display);
+  font-size: var(--fs-stat-num);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 24px;
+  font-style: normal;
+}
+.slide-navy .stat-num { color: var(--navy-text); }
+.stat-label {
+  font-size: var(--fs-stat-label);
+  line-height: 1.5;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+  max-width: 36ch;
+}
+.stat-label strong { font-weight: 600; color: var(--ink-2); }
+.slide-navy .stat-label { color: var(--navy-soft); }
+
+/* ---- bx-card: 제품/항목 카드 (웹 정본 그대로, 폭만 그리드로) ---- */
+.bx-row-label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.bx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.bx-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.bx-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+.bx-row { margin-bottom: 32px; }
+.bx-row:last-child { margin-bottom: 0; }
+.bx-card {
+  border: 1.5px solid var(--bw-blue);
+  border-radius: 10px;
+  padding: 20px 24px 18px;
+  position: relative;
+  background: rgba(0,102,204,0.02);
+}
+.bx-card-name {
+  font-size: var(--fs-card-name);
+  font-weight: 700;
+  color: var(--bw-blue);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 48px;
+}
+.bx-card-desc {
+  font-size: var(--fs-card-desc);
+  color: var(--ink-3);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.bx-card-count {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 0;
+  font-size: var(--fs-label);
+  min-width: 44px;
+  text-align: center;
+  color: var(--gray);
+  font-family: var(--mono);
+}
+.bx-row-app   .bx-card { border-color: var(--bx-app); background: rgba(0,48,135,0.04); }
+.bx-row-app   .bx-card-name { color: var(--bx-app); }
+.bx-row-infra .bx-card { border-color: var(--bx-infra); background: rgba(0,102,204,0.05); }
+.bx-row-saas  .bx-card { border-color: var(--bx-saas); background: rgba(160,175,195,0.06); }
+.bx-row-saas  .bx-card-name { color: var(--ink-2); }
+
+/* ---- ref-card: 클라이언트 레퍼런스 (웹 정본 이식, 정적·호버 제거) ---- */
+.ref-grid { display: grid; gap: 20px; }
+.ref-grid[data-cols="2"] { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.ref-grid[data-cols="3"] { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.ref-card {
+  background: var(--bg);
+  border: 1.5px solid #B8D4EF;
+  border-radius: 16px;
+  padding: 26px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ref-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 58px;
+  flex-shrink: 0;
+}
+.ref-card-head img { height: 44px; width: auto; max-width: 280px; object-fit: contain; }
+.ref-wordmark { font-family: var(--sans); font-size: 26px; font-weight: 700; color: var(--ink); }
+.ref-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--sans);
+  font-size: var(--fs-min);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ref-green);
+  background: rgba(27,138,76,0.08);
+  border: 1px solid rgba(27,138,76,0.25);
+  border-radius: 999px;
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+.ref-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ref-green); }
+.ref-meta {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.ref-solution {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--bw-blue);
+  line-height: 1.3;
+  min-height: 74px;
+  font-style: normal;
+}
+.ref-solution-sub { font-family: var(--sans); font-size: 20px; font-weight: 600; color: var(--ink-2); }
+.ref-scope {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ref-scope li {
+  font-size: 19px;
+  color: var(--ink-3);
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+.ref-scope li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 2px;
+  background: var(--bw-mid);
+}
+
+/* ---- divided grid: 헤어라인 분할 항목 (가치제안·원칙) ---- */
+.divided-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+.divided-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.divided-grid .cell {
+  padding: 44px 48px 44px 40px;
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+.divided-grid:not(.cols-3) .cell:nth-child(-n+2) { border-top: none; padding-top: 8px; }
+.divided-grid:not(.cols-3) .cell:nth-child(odd) { border-left: none; padding-left: 0; }
+.divided-grid.cols-3 .cell:nth-child(-n+3) { border-top: none; padding-top: 8px; }
+.divided-grid.cols-3 .cell:nth-child(3n+1) { border-left: none; padding-left: 0; }
+.cell-num {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bw-blue);
+  margin-bottom: 20px;
+}
+.cell-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+.cell-body {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 44ch;
+}
+.cell-body strong { font-weight: 600; }
+
+/* ---- timeline: 연혁·로드맵 ---- */
+.timeline { display: flex; flex-direction: column; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  padding: 30px 0;
+  align-items: start;
+  border-top: 1px solid var(--line);
+}
+.tl-row:first-child { border-top: none; padding-top: 0; }
+.tl-week {
+  font-family: var(--mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bw-blue);
+  padding-top: 6px;
+}
+.tl-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.tl-desc {
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 60ch;
+}
+
+/* ---- callout: 결론 스트립 (브랜드 좌측 바) ---- */
+.callout {
+  border-left: 3px solid var(--bw-blue);
+  padding: 10px 0 10px 44px;
+  font-size: 24px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 64ch;
+}
+.callout strong { font-weight: 700; }
+
+/* ---- quote: 네이비 장 전환 슬라이드. 강조는 흰색 weight ---- */
+.quote {
+  font-family: var(--display);
+  font-size: 58px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  max-width: 1480px;
+  color: var(--navy-soft);
+  text-wrap: balance;
+  font-style: normal;
+}
+.quote strong { color: var(--navy-text); font-weight: 600; }
+
+/* ---- arrow list ---- */
+.arrow-list { list-style: none; }
+.arrow-list li {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  font-size: 24px;
+  line-height: 1.5;
+  display: flex;
+  gap: 28px;
+  color: var(--ink-3);
+}
+.arrow-list li:first-child { border-top: none; padding-top: 0; }
+.arrow-list li::before { content: "→"; color: var(--bw-mid); flex-shrink: 0; }
+.arrow-list strong { font-weight: 700; }
+.slide-navy .arrow-list li { border-top-color: var(--navy-line); color: var(--navy-soft); }
+.slide-navy .arrow-list li::before { color: var(--bw-mid); }
+
+/* ---- pills: 키워드 칩 ---- */
+.pills { display: flex; flex-wrap: wrap; gap: 14px; }
+.pill {
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--bg);
+}
+.pill-primary { background: var(--bw-navy); border-color: var(--bw-navy); color: #fff; }
+
+/* ---- two-column / spacer ---- */
+.cols-2-balanced { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
+.spacer { flex: 1; }
+
+/* ---- media / logos (실제 자산이 있을 때만 — 경로 검증 필수) ---- */
+.media-well { background: var(--bg-3); border-radius: 16px; padding: 20px; }
+.media-well img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.media-well.fit { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+.media-well.fit img { width: auto; max-width: 100%; }
+.logo-row { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; }
+.logo-row img { max-height: 44px; max-width: 180px; object-fit: contain; }
+.logo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 32px; align-items: center; }
+.logo-grid img { max-height: 40px; max-width: 100%; object-fit: contain; justify-self: start; }
+
+/* ================================================================
+   VIEWER — presentation mode (default) & export mode (?export)
+   Viewer chrome lives outside .slide so Figma import stays clean.
+   ================================================================ */
+.deck { position: relative; }
+
+body.mode-present { overflow: hidden; height: 100vh; }
+body.mode-present .deck { width: 100vw; height: 100vh; position: relative; }
+body.mode-present .slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  display: none;
+}
+body.mode-present .slide.active { display: flex; }
+
+.hud {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  background: rgba(0,0,0,0.4);
+  padding: 6px 14px;
+  border-radius: 980px;
+  z-index: 10;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+.hud .warn { color: #FF6961; font-weight: 600; }
+
+body.mode-export { overflow: auto; background: #2A2A2C; }
+body.mode-export .deck {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+  width: fit-content;
+}
+body.mode-export .slide { flex-shrink: 0; }
+
+/* figma mode (key F) — every element frozen to absolute px, no flex/grid,
+   so html.to.design imports free-form frames instead of auto-layout */
+body.mode-figma { overflow: auto; background: #2A2A2C; }
+body.mode-figma .hud { display: none; }
+
+/* ================================================================
+   DECK-SPECIFIC — YT Trend
+   슬라이드 번호로 네임스페이스(sNN-). 색은 :root 토큰만,
+   크기는 고정 px, 간격은 8px 스케일(8/16/24/32/40/48/64/88).
+   토큰·컴포넌트 CSS와 뷰어 스크립트는 건드리지 않는다.
+   ================================================================ */
+
+/* ---- 01 cover ---- */
+.s01-sub { display: block; font-size: 40px; line-height: 1.4; margin-top: 24px; letter-spacing: -0.01em; }
+
+/* ---- 02 problem ---- */
+.s02-grid .cell { padding-bottom: 56px; }
+.s02-grid .cell:nth-child(n+3) { padding-top: 56px; }
+.s02-grid .cell-title { font-size: 32px; }
+.s02-grid .cell-body { font-size: 24px; max-width: 48ch; }
+
+/* ---- 03 at a glance ---- */
+.s03-stats { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 64px; }
+.s03-stats .stat-num { font-size: 176px; margin-bottom: 32px; }
+.s03-stats .stat-label { font-size: 24px; line-height: 1.5; }
+/* ₩는 IBM Plex Serif에서 advance가 0에 가까워 다음 글자와 겹친다 →
+   한글 세리프(웹폰트 스택의 2순위)로 이 숫자만 렌더한다. */
+.s03-won { font-family: 'Noto Serif KR', Georgia, serif; letter-spacing: 0.06em; }
+
+/* ---- 04 pipeline ---- */
+.s04-rows .bx-row { margin-bottom: 24px; }
+.s04-rows .bx-row-label { margin-bottom: 16px; }
+.s04-rows .bx-card { padding: 16px 20px 14px; }
+.s04-rows .bx-card-name { font-size: 24px; }
+.s04-rows .bx-card-desc { font-size: 19px; line-height: 1.4; }
+.s04-stage { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--gray); }
+.s04-note { max-width: 1560px; font-size: 22px; margin-top: 32px; }
+
+/* ---- 05 두 축 ---- */
+.s05-list li { padding: 32px 0; font-size: 26px; }
+.s05-note { max-width: 1560px; font-size: 22px; margin-top: 48px; }
+
+/* ---- 06 principle ---- */
+.s06-quote { font-size: 64px; }
+
+/* ---- 07 finding 01 ---- */
+.s07-stats .stat-num { font-size: 140px; margin-bottom: 32px; }
+.s07-stats .stat-label { font-size: 24px; line-height: 1.5; }
+.s07-note { max-width: 1560px; font-size: 22px; margin-top: 64px; }
+
+/* ---- 08 finding 02 ---- */
+.s08-grid .ref-card { padding: 40px 40px 36px; gap: 16px; }
+.s08-grid .ref-solution { font-size: 34px; min-height: 88px; }
+.s08-grid .ref-scope li { font-size: 21px; }
+.s08-note { max-width: 1560px; font-size: 22px; margin-top: 40px; }
+
+/* ---- 09 finding 03 · 비교표 ---- */
+.s09-table { width: 1680px; border-collapse: collapse; margin-top: 8px; }
+.s09-table th {
+  font-family: var(--mono); font-size: 16px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray);
+  text-align: left; padding: 0 24px 16px 0; border-bottom: 1px solid var(--line);
+}
+.s09-table td {
+  font-size: 24px; line-height: 1.5; color: var(--ink-2);
+  padding: 20px 24px 20px 0; border-bottom: 1px solid var(--line);
+}
+.s09-table th.s09-num { text-align: right; padding-right: 32px; }
+.s09-table td.s09-num {
+  font-family: var(--mono); font-variant-numeric: tabular-nums;
+  text-align: right; font-size: 26px; font-weight: 500;
+  color: var(--ink); padding-right: 32px;
+}
+.s09-table tr.s09-hi td { background: var(--bg-3); font-weight: 700; color: var(--ink); }
+.s09-note { max-width: 1560px; font-size: 22px; margin-top: 40px; }
+
+/* ---- 10 output · 터미널 블록 ---- */
+.s10-term {
+  font-family: var(--mono); font-size: 20px; line-height: 1.7;
+  background: var(--ink); color: var(--navy-text);
+  border-radius: 8px; padding: 48px; margin-top: 24px;
+}
+.s10-cmd { color: var(--navy-faint); }
+.s10-head { color: var(--bw-mid); }
+.s10-meta { color: var(--navy-soft); }
+.s10-blank { height: 34px; }
+.s10-note { max-width: 1560px; font-size: 22px; margin-top: 40px; }
+
+/* ---- 11 open ---- */
+.s11-tl .tl-row { padding: 20px 0; }
+.s11-tl .tl-row:first-child { padding-top: 0; }
+.s11-tl .tl-desc { max-width: 1180px; }
+
+/* ---- 12 closing ---- */
+.s12-list li { padding: 28px 0; font-size: 30px; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ============================================================
+     SLIDE 01 — COVER
+     ============================================================ -->
+<section class="slide slide-center">
+  <div class="eyebrow">프로젝트 소개 · 2026.09</div>
+  <h1 class="h-hero">YT Trend<span class="dim s01-sub">유튜브 채널을 콘텐츠 유형으로 나눠, 유형별 성과와 시청자 반응을 한 장으로.</span></h1>
+  <p class="lead">채널 주소 하나를 넣으면 영상을 종류별로 가르고, 종류마다 얼마나 도달했는지와 댓글이 무엇을 말하는지를 묶어서 돌려주는 도구. 2인 팀이 만들고 있는 프로토타입이다.</p>
+  <div class="spacer"></div>
+  <div class="context-strip">
+    <div><div class="ctx-label">팀</div><div class="ctx-value">2인</div></div>
+    <div><div class="ctx-label">단계</div><div class="ctx-value">프로토타입</div></div>
+    <div><div class="ctx-label">저장소</div><div class="ctx-value">bbamindol-dev/yt-trend</div></div>
+  </div>
+  <div class="slide-foot"><span>YT Trend</span><span>01</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 02 — PROBLEM (divided-grid 2×2)
+     ============================================================ -->
+<section class="slide slide-soft">
+  <div class="slide-header tight">
+    <div class="eyebrow">01 — Problem</div>
+    <h2 class="h-section">조회수 하나로는 답이 안 나온다</h2>
+    <p class="lead">실제로 같은 채널의 두 영상을 재보니 지표가 정확히 반대를 가리켰다.</p>
+  </div>
+  <div class="divided-grid s02-grid">
+    <div class="cell">
+      <div class="cell-num">01 · 도달</div>
+      <div class="cell-title">조회수는 "몇 명이 봤나"만 답한다.</div>
+      <div class="cell-body">그 사람들이 만족했는지, 무엇을 좋아했는지는 조회수 안에 없다.</div>
+    </div>
+    <div class="cell">
+      <div class="cell-num">02 · 반응</div>
+      <div class="cell-title">좋아요와 댓글은 흩어져 있다.</div>
+      <div class="cell-body">한 영상에 댓글이 <strong>수백에서 수천 건</strong>이다. 사람이 다 읽고 무엇이 반복되는지 세는 것은 현실적이지 않다.</div>
+    </div>
+    <div class="cell">
+      <div class="cell-num">03 · 종류</div>
+      <div class="cell-title">채널은 종류마다 다르게 움직인다.</div>
+      <div class="cell-body">같은 채널 안에서도 어떤 종류는 도달이 강하고 어떤 종류는 반응이 강하다. 채널 평균은 그 차이를 지운다.</div>
+    </div>
+    <div class="cell">
+      <div class="cell-num">04 · 한 편</div>
+      <div class="cell-title">영상 한 편으로는 우연과 성격을 못 가른다.</div>
+      <div class="cell-body">잘 된 영상 한 편이 그 종류의 성격인지, 그냥 운이었는지 알 방법이 필요하다.</div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>YT Trend</span><span>02</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 03 — AT A GLANCE (stat-row)
+     ============================================================ -->
+<section class="slide">
+  <div class="slide-header">
+    <div class="eyebrow">02 — At a Glance</div>
+    <h2 class="h-section">지금까지 만든 것</h2>
+    <p class="lead">MBC 14F 일사에프 채널을 대상으로 실제로 돌린 결과다. 아래 수치는 전부 실행으로 확인했다.</p>
+  </div>
+  <div class="stat-row s03-stats">
+    <div class="stat"><div class="stat-num">300</div><div class="stat-label"><strong>분석한 영상.</strong> 채널의 최근 300편 (2026-05-07 ~ 09-09)</div></div>
+    <div class="stat"><div class="stat-num">284</div><div class="stat-label"><strong>수집한 댓글.</strong> 이 중 282건에 감성·주제 라벨을 붙였다</div></div>
+    <div class="stat"><div class="stat-num">93</div><div class="stat-label"><strong>테스트.</strong> 전부 통과. 순수 함수 단위로 검증한다</div></div>
+    <div class="stat"><div class="stat-num s03-won">₩0</div><div class="stat-label"><strong>지출.</strong> YouTube 105유닛 (하루 한도 10,000) · 유료 API 호출 0회</div></div>
+  </div>
+  <div class="slide-foot"><span>YT Trend</span><span>03</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 04 — PIPELINE (bx-card rows)
+     ============================================================ -->
+<section class="slide slide-tint">
+  <div class="slide-header dense">
+    <div class="eyebrow">03 — Pipeline</div>
+    <h2 class="h-section">열 단계 중 여섯 단계가 돈다</h2>
+  </div>
+  <div class="s04-rows">
+    <div class="bx-row bx-row-app">
+      <div class="bx-row-label">동작한다</div>
+      <div class="bx-grid cols-5">
+        <div class="bx-card"><div class="bx-card-name">수집</div><span class="bx-card-count">03</span><div class="bx-card-desc">채널 주소 → 영상·통계·댓글</div></div>
+        <div class="bx-card"><div class="bx-card-name">정규화</div><span class="bx-card-count">04</span><div class="bx-card-desc">길이 축, 조회 배수, 좋아요율</div></div>
+        <div class="bx-card"><div class="bx-card-name">영상 유형</div><span class="bx-card-count">05</span><div class="bx-card-desc">주제 축과 코너 축, 두 갈래</div></div>
+        <div class="bx-card"><div class="bx-card-name">댓글 라벨</div><span class="bx-card-count">07</span><div class="bx-card-desc">감성 세 값과 주제 아홉 갈래</div></div>
+        <div class="bx-card"><div class="bx-card-name">집계</div><span class="bx-card-count">08</span><div class="bx-card-desc">유형별로 접고 결론 문장까지</div></div>
+      </div>
+    </div>
+    <div class="bx-row bx-row-infra">
+      <div class="bx-row-label">절반만</div>
+      <div class="bx-grid">
+        <div class="bx-card"><div class="bx-card-name">댓글 선별</div><span class="bx-card-count">06</span><div class="bx-card-desc">규칙 필터만 있다. 맥락 판단은 아직</div></div>
+      </div>
+    </div>
+    <div class="bx-row bx-row-saas">
+      <div class="bx-row-label">아직 없다</div>
+      <div class="bx-grid cols-4">
+        <div class="bx-card"><div class="bx-card-name"><span class="s04-stage">01</span><span>분석 요청</span></div><div class="bx-card-desc">웹에서 채널 주소를 받는 입구</div></div>
+        <div class="bx-card"><div class="bx-card-name"><span class="s04-stage">02</span><span>작업 등록</span></div><div class="bx-card-desc">백그라운드 작업 큐와 재개</div></div>
+        <div class="bx-card"><div class="bx-card-name"><span class="s04-stage">09</span><span>리포트 조회</span></div><div class="bx-card-desc">집계 결과를 JSON으로 내주는 API</div></div>
+        <div class="bx-card"><div class="bx-card-name"><span class="s04-stage">10</span><span>리포트 화면</span></div><div class="bx-card-desc">사람이 보는 최종 화면</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout s04-note"><strong>05번과 07번은 판정을 Claude Code가 한다.</strong> 유료 API를 부르는 코드는 배선까지 끝났지만 아직 한 번도 호출하지 않았다 — 프롬프트가 검증되기 전에 붙이면 고칠 때마다 돈이 나간다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>04</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 05 — METHOD (cols-2-balanced + arrow-list)
+     ============================================================ -->
+<section class="slide">
+  <div class="slide-header">
+    <div class="eyebrow">04 — Method</div>
+    <h2 class="h-section">유형을 두 축으로 나눈다</h2>
+    <p class="lead">하나는 판단이 필요하고 하나는 사실이다. 섞으면 둘 다 나빠진다.</p>
+  </div>
+  <div class="cols-2-balanced">
+    <div>
+      <h3 class="h-sub">주제 — 무엇을 다루는가</h3>
+      <ul class="arrow-list s05-list">
+        <li><span>음식·식품, 경제·기업, 역사·인문 등 일곱 갈래</span></li>
+        <li><span>제목을 보고 언어 모델이 판정한다</span></li>
+        <li><span>판단이 필요한 일이라 규칙으로 못 박지 않는다</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="h-sub">코너 — 채널이 스스로 붙인 이름</h3>
+      <ul class="arrow-list s05-list">
+        <li><span>돈슐랭, 10분 토론, 주락이월드 등 여섯 개</span></li>
+        <li><span>채널의 재생목록에서 그대로 읽는다</span></li>
+        <li><span>추측하지 않는다 — 채널이 선언한 사실이다</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout s05-note"><strong>제목에서 뽑으려던 첫 시도는 코너 5개를 찾았다.</strong> 재생목록에는 20개가 넘게 있었고 이름도 달랐다 — 제목에서 "경제 이슈"로 보이던 것을 채널은 「경제한쌈」이라 부른다. 규칙으로 확실히 알 수 있는 것을 모델에 묻지 않는다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>05</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 06 — PRINCIPLE (navy chapter break)
+     ============================================================ -->
+<section class="slide slide-navy slide-center">
+  <div class="eyebrow">Principle</div>
+  <p class="quote s06-quote">규칙은 <strong>명백히 버릴 것만</strong> 정한다.<br>판단이 필요한 것은 언어 모델이 한다.<br><strong>계산할 수 없으면 숫자 대신 이유를 저장한다.</strong></p>
+  <div class="slide-foot"><span>YT Trend</span><span>06</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 07 — FINDING 01 (stat-row cols-3)
+     ============================================================ -->
+<section class="slide slide-soft">
+  <div class="slide-header">
+    <div class="eyebrow">05 — Finding 01</div>
+    <h2 class="h-section">쇼츠와 롱폼은 순위가 뒤집힌다</h2>
+    <p class="lead">조회 배수는 그 영상의 조회수를 같은 길이·같은 분기 또래 영상의 중앙값으로 나눈 값이다. 1.00이면 또래 평균 수준이다. 길이 축은 쇼츠(3분 이하)와 롱폼(3분 초과)으로 나눈다.</p>
+  </div>
+  <div class="stat-row cols-3 s07-stats">
+    <div class="stat"><div class="stat-num">0.59</div><div class="stat-label"><strong>쇼츠에서.</strong> 일곱 갈래 중 꼴찌</div></div>
+    <div class="stat"><div class="stat-num">1.61</div><div class="stat-label"><strong>롱폼에서.</strong> 일곱 갈래 중 1위</div></div>
+    <div class="stat"><div class="stat-num">0.88</div><div class="stat-label"><strong>합치면.</strong> 어느 쪽도 설명하지 못하는 숫자</div></div>
+  </div>
+  <div class="callout s07-note"><strong>그래서 성과를 쇼츠 · 롱폼 · 합침 세 판으로 낸다.</strong> 합침을 남기는 것은 채널 전체를 볼 자리가 필요해서고, 두 판이 크게 갈리는 유형은 리포트가 "이 줄은 믿지 말라"고 스스로 표시한다. 14F에서는 생활·정책, 역사·인문, 경제·기업 세 갈래가 걸렸다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>07</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 08 — FINDING 02 (ref-grid)
+     ============================================================ -->
+<section class="slide">
+  <div class="slide-header tight">
+    <div class="eyebrow">06 — Finding 02</div>
+    <h2 class="h-section">코너마다 잘하는 것이 다르다</h2>
+  </div>
+  <div class="ref-grid s08-grid" data-cols="3">
+    <div class="ref-card">
+      <div class="ref-card-head"><span class="ref-wordmark">돈슐랭</span><span class="ref-status">도달 1위</span></div>
+      <div class="ref-meta">롱폼 18편 · 맛집·가격</div>
+      <div class="ref-solution">조회 배수 1.76</div>
+      <ul class="ref-scope"><li>조회 중앙값 226,448회</li><li>가장 많은 사람에게 닿는 코너</li></ul>
+    </div>
+    <div class="ref-card">
+      <div class="ref-card-head"><span class="ref-wordmark">주락이월드</span><span class="ref-status">반응 1위</span></div>
+      <div class="ref-meta">롱폼 10편 · 술 리뷰</div>
+      <div class="ref-solution">조회 배수 0.53</div>
+      <ul class="ref-scope"><li>좋아요율 1.92% — 코너 중 1위</li><li>댓글 배수 1.79 — 코너 중 1위</li></ul>
+    </div>
+    <div class="ref-card">
+      <div class="ref-card-head"><span class="ref-wordmark">선발대</span><span class="ref-status">가장 아프다</span></div>
+      <div class="ref-meta">롱폼 13편 · 현장 취재</div>
+      <div class="ref-solution">조회 배수 0.40</div>
+      <ul class="ref-scope"><li>좋아요율 1.40% — 코너 중 2위</li><li>본 사람은 만족했는데 볼 사람에게 닿지 않는다</li></ul>
+    </div>
+  </div>
+  <div class="callout s08-note"><strong>선발대는 현장에 사람이 나가는 형식이라 제작비가 가장 클 텐데 도달이 가장 낮다.</strong> 다만 이 도구가 답하는 것은 "닿지 않는다"까지다. 왜인지는 그 코너의 댓글을 돌려야 보인다 — 아직 하지 않았다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>08</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 09 — FINDING 03 (비교표)
+     ============================================================ -->
+<section class="slide slide-soft">
+  <div class="slide-header tight">
+    <div class="eyebrow">07 — Finding 03</div>
+    <h2 class="h-section">한 편에서 본 것이 코너 전체의 성격이었다</h2>
+    <p class="lead">처음엔 손으로 고른 두 편을 깊게 팠다. 나중에 그 두 편이 각각 다른 코너의 한 편이었음을 알고 코너 전체를 집계해 봤다.</p>
+  </div>
+  <table class="s09-table">
+    <thead>
+      <tr>
+        <th style="width: 720px;">비교</th>
+        <th class="s09-num" style="width: 320px;">조회 배수</th>
+        <th class="s09-num" style="width: 320px;">좋아요율</th>
+        <th class="s09-num" style="width: 320px;">댓글 배수</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>술 리뷰 한 편</td><td class="s09-num">0.20</td><td class="s09-num">2.40%</td><td class="s09-num">1.95</td></tr>
+      <tr class="s09-hi"><td>주락이월드 10편 전체</td><td class="s09-num">0.53</td><td class="s09-num">1.92%</td><td class="s09-num">1.79</td></tr>
+      <tr><td>토론 한 편</td><td class="s09-num">1.61</td><td class="s09-num">0.99%</td><td class="s09-num">0.78</td></tr>
+      <tr class="s09-hi"><td>10분 토론 17편 전체</td><td class="s09-num">1.48</td><td class="s09-num">0.89%</td><td class="s09-num">0.63</td></tr>
+    </tbody>
+  </table>
+  <div class="callout s09-note"><strong>표본이 하나에서 열로 늘었는데 방향이 그대로다.</strong> "도달은 낮고 반응은 최고"는 그 술 리뷰 한 편의 우연이 아니라 주락이월드라는 코너의 성격이었다. 유형 단계를 만든 이유가 정확히 이것이다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>09</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 — OUTPUT (터미널 블록)
+     ============================================================ -->
+<section class="slide slide-tint">
+  <div class="slide-header dense">
+    <div class="eyebrow">08 — Output</div>
+    <h2 class="h-section">도구가 스스로 쓴 문장</h2>
+    <p class="lead">아래는 사람이 쓴 것이 아니라 집계 단계가 규칙으로 채운 결론이다. 명령 한 줄로 나온다.</p>
+  </div>
+  <div class="s10-term">
+    <div class="s10-cmd">$ yt-trend report</div>
+    <div class="s10-blank"></div>
+    <div class="s10-head">[롱폼]&nbsp; 코너 축 · partial · 문장 출처 draft</div>
+    <div class="s10-meta">롱폼 영상의 72%가 채널 재생목록의 코너에 속한다 — 채널이 스스로 나눈 단위라 코너로 읽는다</div>
+    <div class="s10-blank"></div>
+    <div>롱폼 기준 조회 배수가 가장 높은 코너는 돈슐랭으로 1.76배다(18편). 가장 낮은 것은 선발대로 0.40배다(13편). 댓글이 있는 코너 2개 중 부정 댓글 비율이 가장 높은 코너는 10분 토론으로 17.8%이며, 그 지적은 주로 정보·내용에 몰려 있다(22건). 나머지 코너 4개는 댓글을 받지 않아 피드백을 비교하지 못했다.</div>
+  </div>
+  <div class="callout s10-note"><strong>수치와 내용은 규칙이 채우고, 언어 모델은 문장만 다듬는다.</strong> 다듬은 문장의 숫자가 초안과 하나라도 다르면 초안을 쓴다 — 1.76을 "약 1.8"로 고치는 반올림도 위반이다. 어느 쪽이 나갔는지는 결과에 함께 기록된다.</div>
+  <div class="slide-foot"><span>YT Trend</span><span>10</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 11 — OPEN (timeline)
+     ============================================================ -->
+<section class="slide">
+  <div class="slide-header dense">
+    <div class="eyebrow">09 — Open</div>
+    <h2 class="h-section">아직 못 한 것</h2>
+    <p class="lead">지금 상태를 정확히 말하는 것이 이 프로젝트의 방식이다.</p>
+  </div>
+  <div class="timeline s11-tl">
+    <div class="tl-row"><div class="tl-week">검수</div><div><div class="tl-title">주제 라벨 300편을 사람이 본 적이 없다</div><div class="tl-desc">이 발표의 유형별 수치가 전부 그 라벨 위에 서 있다. 지금 가장 약한 고리다.</div></div></div>
+    <div class="tl-row"><div class="tl-week">표본</div><div><div class="tl-title">댓글을 받은 영상이 2편뿐이다</div><div class="tl-desc">호응·논쟁 값이 높은지 낮은지 판단할 절대 기준이 아직 없다.</div></div></div>
+    <div class="tl-row"><div class="tl-week">채널</div><div><div class="tl-title">모든 결론이 14F 하나에서 나왔다</div><div class="tl-desc">코너가 없는 채널, 스팸이 있는 채널에서 같은 파이프라인이 무엇을 내놓는지 봐야 한다.</div></div></div>
+    <div class="tl-row"><div class="tl-week">필터</div><div><div class="tl-title">홍보·스팸 표본이 없다</div><div class="tl-desc">수집한 284건에 홍보가 하나도 없어 규칙이 무엇을 놓치는지 재지 못했다.</div></div></div>
+    <div class="tl-row"><div class="tl-week">연결</div><div><div class="tl-title">유료 API를 아직 부르지 않았다</div><div class="tl-desc">배선은 끝났다. 키를 넣고 패키지를 깔면 바로 돈다.</div></div></div>
+  </div>
+  <div class="slide-foot"><span>YT Trend</span><span>11</span></div>
+</section>
+
+<!-- ============================================================
+     SLIDE 12 — CLOSING (navy)
+     ============================================================ -->
+<section class="slide slide-navy slide-center">
+  <div class="eyebrow">Next</div>
+  <h2 class="h-hero">다음 세 가지.</h2>
+  <ul class="arrow-list s12-list">
+    <li><span>주제 라벨 300편을 사람이 검수한다</span></li>
+    <li><span>선발대·주락이월드의 댓글을 돌려 "왜 안 닿는지"를 본다</span></li>
+    <li><span>작업 큐와 리포트 화면을 붙여 도구를 완성한다</span></li>
+  </ul>
+  <div class="spacer"></div>
+  <div class="context-strip">
+    <div><div class="ctx-label">저장소</div><div class="ctx-value">bbamindol-dev/yt-trend</div></div>
+    <div><div class="ctx-label">대상 채널</div><div class="ctx-value">MBC 14F 일사에프</div></div>
+    <div><div class="ctx-label">기준일</div><div class="ctx-value">2026.09.10</div></div>
+  </div>
+  <div class="slide-foot"><span>YT Trend · 2026</span><span>12</span></div>
+</section>
+
+</div><!-- /.deck -->
+
+<div class="hud" id="hud"></div>
+
+<script>
+/* ================================================================
+   VIEWER — keep this script as-is when generating decks.
+   Modes:
+     default            → presentation (one slide, scaled to fit)
+     ?export or #export → all slides stacked at natural 1920×1080
+     F key              → flatten for Figma: freezes every element to
+                          absolute px (kills flex/grid → no auto-layout)
+                          and downloads a static <deck>-figma.html.
+                          Import THAT file with html.to.design.
+                          Flatten mutates the live DOM — reload to restore.
+   Keys: ←/→/Space/PgUp/PgDn navigate · Home/End jump · E toggle export
+   URL hash #N deep-links to slide N in presentation mode.
+   ================================================================ */
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var hud = document.getElementById('hud');
+  var current = 0;
+  var W = 1920, H = 1080;
+
+  function isExport() {
+    return location.search.indexOf('export') !== -1 || location.hash === '#export';
+  }
+
+  function applyMode() {
+    document.body.className = isExport() ? 'mode-export' : 'mode-present';
+    if (!isExport()) {
+      var n = parseInt((location.hash || '').replace('#', ''), 10);
+      if (n >= 1 && n <= slides.length) current = n - 1;
+      show(current);
+    } else {
+      slides.forEach(function (s) { s.classList.remove('active'); s.style.transform = ''; });
+      updateHud();
+    }
+  }
+
+  function scale() {
+    return Math.min(window.innerWidth / W, window.innerHeight / H);
+  }
+
+  function show(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, idx) {
+      s.classList.toggle('active', idx === current);
+      if (idx === current) {
+        s.style.transform = 'translate(-50%, -50%) scale(' + scale() + ')';
+      }
+    });
+    if (location.hash !== '#' + (current + 1)) {
+      history.replaceState(null, '', '#' + (current + 1));
+    }
+    updateHud();
+  }
+
+  /* overflow check: warns when slide content exceeds the 1920×1080 canvas */
+  function overflowCount() {
+    var count = 0;
+    slides.forEach(function (s, idx) {
+      if (s.scrollWidth > W + 1 || s.scrollHeight > H + 1) {
+        count++;
+        console.warn('[slide-deck] slide ' + (idx + 1) + ' overflows: ' +
+          s.scrollWidth + '×' + s.scrollHeight + ' (canvas ' + W + '×' + H + ')');
+      }
+    });
+    return count;
+  }
+
+  function updateHud() {
+    var ofl = overflowCount();
+    var label = isExport()
+      ? 'export · ' + slides.length + ' slides'
+      : (current + 1) + ' / ' + slides.length;
+    hud.innerHTML = label + (ofl ? ' · <span class="warn">⚠ ' + ofl + ' overflow</span>' : '');
+  }
+
+  /* ---- Figma flatten (key F) ----------------------------------
+     html.to.design converts flex/grid into Figma auto-layout (locks
+     editing) and doesn't run JS (so the viewer modes never apply).
+     Fix: measure every element's rendered box, pin it to absolute px
+     relative to its parent, neutralize flex/grid, lay slides out in
+     a grid, then download the frozen DOM as a static -figma.html. */
+  function flattenForFigma() {
+    var COLS = 4, GAP = 80;
+    document.body.className = 'mode-figma';
+
+    /* pass -1 — 요소·텍스트 혼합 박스 보호. 플래튼은 '요소'만 절대좌표로
+       핀하므로, 아이콘 같은 요소 자식과 맨 텍스트 노드가 섞인 박스는
+       요소가 absolute로 빠지는 순간 텍스트가 박스 시작점으로 흘러내려
+       겹친다 → 맨 텍스트 노드를 span으로 감싸 함께 핀되게 한다. */
+    Array.prototype.forEach.call(document.querySelectorAll('.slide, .slide *'), function (el) {
+      if (!el.children.length) return;
+      if (el.namespaceURI && el.namespaceURI.indexOf('svg') !== -1) return;
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        if (n.nodeType === 3 && n.textContent.trim()) {
+          var sp = document.createElement('span');
+          el.replaceChild(sp, n);
+          sp.appendChild(n);
+        }
+      });
+    });
+
+    /* 텍스트 박스 판정: 텍스트가 있고 자식이 전부 inline 레벨인 요소.
+       (pass -1 래핑 후엔 셀·문단 같은 블록이 여기에 해당한다) */
+    function isTextBox(el) {
+      if (el.namespaceURI && el.namespaceURI.indexOf('svg') !== -1) return false;
+      if (!el.textContent || !el.textContent.trim()) return false;
+      for (var i = 0; i < el.children.length; i++) {
+        if (getComputedStyle(el.children[i]).display.indexOf('inline') !== 0) return false;
+      }
+      return true;
+    }
+
+    /* pass 0 — pin fonts. Figma can't map "InterVariable" or macOS system
+       fonts; give every text-bearing element an explicit family that
+       exists in Figma (Hangul → Noto Sans KR, else Inter) BEFORE
+       measuring, so measured widths match Figma's rendering. */
+    var HANGUL = /[가-힯]/;
+    Array.prototype.forEach.call(document.querySelectorAll('.slide, .slide *'), function (el) {
+      var hasText = Array.prototype.some.call(el.childNodes, function (n) {
+        return n.nodeType === 3 && n.textContent.trim();
+      });
+      if (!hasText && !isTextBox(el)) return;
+      var cs0 = getComputedStyle(el);
+      var fam = cs0.fontFamily, fs0 = cs0.fontSize,
+          ls0 = cs0.letterSpacing, lh0 = cs0.lineHeight;
+      var ko = HANGUL.test(el.textContent);
+      el.style.fontFamily =
+        fam.indexOf('IBM Plex Serif') !== -1
+          ? (ko ? "'Noto Serif KR', serif" : "'IBM Plex Serif', serif")
+        : fam.indexOf('JetBrains Mono') !== -1
+          ? (ko ? "'Noto Sans KR', sans-serif" : "'JetBrains Mono', monospace")
+        : (ko ? "'Noto Sans KR', sans-serif" : "'Inter', sans-serif");
+      /* 텍스트 메트릭을 px로 고정: Figma는 line-height:normal과
+         text-wrap:balance를 브라우저와 다르게 해석해 줄바꿈이 어긋나고,
+         절대좌표로 핀 된 다음 요소와 겹친다. 측정 전에 명시 px로 못 박아
+         측정·임포트가 같은 기준을 쓰게 한다. */
+      el.style.fontSize = fs0;
+      el.style.letterSpacing = ls0 === 'normal' ? '0px' : ls0;
+      el.style.lineHeight = lh0 === 'normal'
+        ? Math.round(parseFloat(fs0) * 1.3) + 'px' : lh0;
+      if (cs0.textWrap === 'balance' || cs0.textWrap === 'pretty') {
+        /* balance 해제 — 임포터와 줄바꿈 기준 통일. 단 무조건 'wrap'을 깔면
+           text-wrap-mode 롱핸드가 white-space:nowrap까지 풀어버리므로
+           balance/pretty일 때만 건드린다. */
+        el.style.textWrap = 'wrap';
+      }
+    });
+    var deck = document.querySelector('.deck');
+    var rows = Math.ceil(slides.length / COLS);
+    deck.style.cssText = 'position:relative;display:block;padding:0;width:' +
+      (Math.min(COLS, slides.length) * (W + GAP) - GAP) + 'px;height:' +
+      (rows * (H + GAP) - GAP) + 'px;';
+    slides.forEach(function (s, i) {
+      s.classList.remove('active');
+      s.style.transform = '';
+      s.style.position = 'absolute';
+      s.style.left = (i % COLS) * (W + GAP) + 'px';
+      s.style.top = Math.floor(i / COLS) * (H + GAP) + 'px';
+    });
+
+    /* pass 1 — measure everything before mutating anything */
+    var jobs = [];
+    slides.forEach(function (slide) {
+      Array.prototype.forEach.call(slide.querySelectorAll('*'), function (el) {
+        var p = el.parentElement;
+        if (!p) return;
+        var cs = getComputedStyle(el);
+        var pd = getComputedStyle(p).display;
+        var flexItem = pd.indexOf('flex') !== -1 || pd.indexOf('grid') !== -1;
+        var blockLevel = /^(block|flex|grid|table|list-item)/.test(cs.display) ||
+          el.tagName === 'IMG';
+        if (!flexItem && !blockLevel && cs.position !== 'absolute') return;
+        var r = el.getBoundingClientRect();
+        var pr = p.getBoundingClientRect();
+        var pcs = getComputedStyle(p);
+        /* 텍스트 박스 슬랙 v2: 브라우저↔Figma 텍스트 폭 차이를 흡수하되
+           **보더는 넘지 않는다** — ①자기 padding-right를 줄여 안쪽에서
+           여유를 만들고, ②모자라면 부모/조부모 '보더 안쪽' 여유만큼만
+           폭을 늘린다. 한 줄짜리는 nowrap으로 재줄바꿈을 봉쇄한다. */
+        var textEl = isTextBox(el);
+        var lhPx = textEl ? (parseFloat(cs.lineHeight) || 24) : 0;
+        var padV = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        var single = textEl && (r.height - padV) < lhPx * 1.5;
+        var padGive = 0, widthGive = 0, padR = 0;
+        if (textEl) {
+          var slackBase = single ? 12 : Math.ceil(r.width * 0.025) + 6;
+          padR = parseFloat(cs.paddingRight) || 0;
+          padGive = Math.min(slackBase, Math.max(0, padR - 4));
+          var rem = slackBase - padGive;
+          var avail = pr.right - parseFloat(pcs.borderRightWidth) - r.right;
+          if (avail < rem && p.parentElement) {
+            var gp = p.parentElement;
+            var gr = gp.getBoundingClientRect();
+            var gb = parseFloat(getComputedStyle(gp).borderRightWidth) || 0;
+            avail = Math.max(avail, gr.right - gb - r.right);
+          }
+          widthGive = Math.max(0, Math.min(rem, Math.floor(avail)));
+        }
+        jobs.push({
+          el: el,
+          left: r.left - pr.left - parseFloat(pcs.borderLeftWidth),
+          top: r.top - pr.top - parseFloat(pcs.borderTopWidth),
+          w: r.width + widthGive,
+          h: r.height,
+          nowrap: single,
+          padRight: padGive > 0 ? (padR - padGive) : null,
+          display: (cs.display.indexOf('flex') !== -1 || cs.display.indexOf('grid') !== -1)
+            ? 'block' : null
+        });
+      });
+    });
+
+    /* pass 2 — pin. transform/right/bottom must be cleared: the measured
+       rect already includes them, keeping them would double-apply. */
+    jobs.forEach(function (j) {
+      var st = j.el.style;
+      st.boxSizing = 'border-box';
+      st.position = 'absolute';
+      st.left = j.left + 'px';
+      st.top = j.top + 'px';
+      st.right = 'auto';
+      st.bottom = 'auto';
+      st.width = j.w + 'px';
+      st.height = j.h + 'px';
+      st.margin = '0';
+      st.transform = 'none';
+      if (j.nowrap) st.whiteSpace = 'nowrap';
+      if (j.padRight !== null && j.padRight !== undefined) st.paddingRight = j.padRight + 'px';
+      if (j.display) st.display = j.display;
+    });
+    slides.forEach(function (s) { s.style.display = 'block'; });
+  }
+
+  function downloadFlattened() {
+    var doc = document.documentElement.cloneNode(true);
+    Array.prototype.forEach.call(doc.querySelectorAll('script, .hud'),
+      function (n) { n.parentNode.removeChild(n); });
+    var name = (location.pathname.split('/').pop() || 'deck')
+      .replace(/\.html?$/i, '') + '-figma.html';
+    var blob = new Blob(['<!DOCTYPE html>\n' + doc.outerHTML], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    console.log('[slide-deck] saved ' + name +
+      ' — import this file with html.to.design, then ungroup the deck frame once.');
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'f' || e.key === 'F') {
+      if (!document.body.classList.contains('mode-figma')) flattenForFigma();
+      downloadFlattened();
+      return;
+    }
+    if (document.body.classList.contains('mode-figma')) return; /* frozen — reload to restore */
+    if (e.key === 'e' || e.key === 'E') {
+      if (isExport()) { location.hash = '#' + (current + 1); location.search = ''; }
+      else { location.hash = '#export'; }
+      applyMode();
+      return;
+    }
+    if (isExport()) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (isExport() || document.body.classList.contains('mode-figma')) return;
+    if (e.target.closest('a, button, .hud')) return;
+    var x = e.clientX / window.innerWidth;
+    if (x < 0.3) show(current - 1); else show(current + 1);
+  });
+
+  window.addEventListener('resize', function () { if (!isExport()) show(current); });
+  window.addEventListener('hashchange', applyMode);
+
+  applyMode();
+})();
+</script>
+</body>
+</html>

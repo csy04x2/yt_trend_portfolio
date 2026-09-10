@@ -261,3 +261,37 @@ CREATE TABLE IF NOT EXISTS reports (
     built_at          TEXT NOT NULL,
     PRIMARY KEY (channel_id, run_id, length_axis)
 );
+
+-- 규칙이 원문에서 **뽑아낸 사실**. 해석이 아니라 추출이다.
+--
+-- comment_screens·comment_labels 와 나란히 서지만 키가 다르다. 저 둘은
+-- (프롬프트 버전, 모델) 로 키를 잡는 해석 표라, 규칙을 v2 로 올리면 같은
+-- 댓글이 새 행으로 다시 쌓인다. 그게 판정에는 맞다 — 판정은 버전마다 달라질
+-- 수 있으니까. 하지만 "이 댓글에 11:52 가 있다"는 규칙 버전이 바뀌어도 같은
+-- 사실이다. 저 표에 넣으면 같은 값이 버전마다 복제된다.
+--
+-- 무엇을 여기 넣는가: **원문만 보고 세거나 뽑을 수 있는 것.** 모델이 없으므로
+-- 재현이 100% 다.
+--
+-- 무엇을 넣지 않는가: 임계값이 들어간 판정. 「저정보 댓글」 같은 플래그는
+-- 여기 두지 않고 char_count·emoji_ratio 라는 **측정값**만 둔다. 몇 글자
+-- 아래가 저정보인지는 바뀌지만 글자 수는 안 바뀐다. 플래그로 박아두면
+-- 임계값을 고칠 때마다 전부 다시 돌려야 한다 — 이 저장소가 view_multiple 에
+-- 값 대신 basis 를 남기는 것과 같은 이유다.
+--
+-- 「정정·반박 후보」처럼 맥락을 읽어야 아는 것도 여기가 아니다. 그건
+-- comment_labels 쪽이고, ideas.md 의 A-002(Reaction taxonomy)가 이미 묻고
+-- 있는 질문이라 답이 정해지기 전에 세 번째 집을 짓지 않는다.
+CREATE TABLE IF NOT EXISTS comment_features (
+    comment_id        TEXT NOT NULL REFERENCES comments(comment_id),
+    extractor_version TEXT NOT NULL,   -- 모델 칸이 없다. 규칙이라 재현 100%
+    char_count        INTEGER,         -- 자수. 저정보 판정의 재료지 판정이 아니다
+    emoji_ratio       REAL,            -- 이모지 문자 ÷ 전체 문자 (0~1)
+    url_count         INTEGER,
+    timestamps_json   TEXT NOT NULL DEFAULT '[]',  -- 초 단위 [705, 1520]
+    mentions_json     TEXT NOT NULL DEFAULT '[]',  -- @언급 대상
+    extracted_at      TEXT NOT NULL,
+    PRIMARY KEY (comment_id, extractor_version)
+);
+CREATE INDEX IF NOT EXISTS idx_comment_features_ver
+    ON comment_features(extractor_version);
