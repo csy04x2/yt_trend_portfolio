@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 파이프라인 현황</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root{
+  --ground:#F6F8FA;
+  --surface:#FFFFFF;
+  --sunk:#EDF1F5;
+  --ink:#111720;
+  --ink-2:#39445A;
+  --muted:#6B7789;
+  --line:#DDE4EC;
+  --line-2:#EAEFF4;
+  --slate:#3B4A66;
+  --run:#0F7355;      --run-bg:#E4F3EE;
+  --offline:#1F5FBF;  --offline-bg:#E6EEFB;
+  --unrun:#9A6208;    --unrun-bg:#FAF0DE;
+  --none:#8A94A4;     --none-bg:#EEF1F5;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1017; --surface:#141A24; --sunk:#101620;
+    --ink:#E9EEF5; --ink-2:#B3BECD; --muted:#7C8899;
+    --line:#242D3A; --line-2:#1A222D;
+    --slate:#9FB0CC;
+    --run:#4FBF97;      --run-bg:#0E241E;
+    --offline:#6BA3F5;  --offline-bg:#101E33;
+    --unrun:#D69A3C;    --unrun-bg:#241B0D;
+    --none:#7A8494;     --none-bg:#171D26;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1017; --surface:#141A24; --sunk:#101620;
+  --ink:#E9EEF5; --ink-2:#B3BECD; --muted:#7C8899;
+  --line:#242D3A; --line-2:#1A222D;
+  --slate:#9FB0CC;
+  --run:#4FBF97;      --run-bg:#0E241E;
+  --offline:#6BA3F5;  --offline-bg:#101E33;
+  --unrun:#D69A3C;    --unrun-bg:#241B0D;
+  --none:#7A8494;     --none-bg:#171D26;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  font-size:15px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1080px; margin:0 auto; padding-block:48px 80px; padding-left:20px; padding-right:20px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+header{border-bottom:2px solid var(--ink); padding-bottom:20px}
+.eyebrow{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--slate); font-weight:500}
+h1{font-size:clamp(26px,3.4vw,34px); font-weight:700; letter-spacing:-.02em; margin:10px 0 0; text-wrap:balance}
+.lede{margin:12px 0 0; color:var(--ink-2); max-width:62ch}
+.meta{margin-top:18px; display:flex; flex-wrap:wrap; gap:6px 24px;
+  font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--muted)}
+.meta b{color:var(--ink-2); font-weight:500}
+
+section{margin-top:52px}
+h2{font-size:19px; font-weight:700; letter-spacing:-.01em; margin:0}
+.sec-note{margin:6px 0 20px; font-size:14px; color:var(--muted); max-width:70ch}
+
+/* ---- 10단계 레일 ---- */
+.scroll{overflow-x:auto; padding-bottom:6px}
+.rail{display:grid; grid-template-columns:repeat(10,minmax(94px,1fr)); gap:6px; min-width:940px}
+.stg{background:var(--surface); border:1px solid var(--line); border-radius:7px;
+  padding:0 0 11px; overflow:hidden; display:flex; flex-direction:column}
+.stg .stripe{height:4px; background:var(--none)}
+.stg.run .stripe{background:var(--run)}
+.stg.off .stripe{background:var(--offline)}
+.stg.split .stripe{background:linear-gradient(90deg,var(--run) 0 50%,var(--unrun) 50% 100%)}
+.stg .num{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--muted);
+  padding:9px 10px 0; letter-spacing:.06em}
+.stg .nm{font-size:13px; font-weight:600; padding:2px 10px 0; line-height:1.3}
+.stg .sub{font-size:11.5px; color:var(--muted); padding:5px 10px 0; line-height:1.45; flex:1}
+.stg .tag{margin:8px 10px 0; font-size:10.5px; font-weight:600; align-self:flex-start;
+  padding:2px 7px; border-radius:20px; background:var(--none-bg); color:var(--none)}
+.stg.run .tag{background:var(--run-bg); color:var(--run)}
+.stg.off .tag{background:var(--offline-bg); color:var(--offline)}
+.stg.split .tag{background:var(--unrun-bg); color:var(--unrun)}
+.stg.dim{opacity:.66}
+
+.legend{display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:16px; font-size:12.5px; color:var(--muted)}
+.legend i{display:inline-block; width:20px; height:3px; border-radius:2px; vertical-align:middle; margin-right:7px}
+
+/* ---- 저장소 ---- */
+.stores{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:9px; overflow:hidden}
+.store{background:var(--surface); padding:13px 15px}
+.store .t{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--muted)}
+.store .n{font-size:21px; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums; margin-top:3px}
+.store .d{font-size:11.5px; color:var(--muted); margin-top:1px}
+.store.empty .n{color:var(--unrun)}
+
+/* ---- 6단계 ---- */
+.steps{display:grid; gap:1px; background:var(--line); border:1px solid var(--line);
+  border-radius:9px; overflow:hidden}
+.step{background:var(--surface); display:grid;
+  grid-template-columns:34px minmax(0,1.15fr) 92px minmax(0,1.5fr); gap:16px;
+  align-items:start; padding:14px 16px}
+.step .o{font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:500; color:var(--slate); padding-top:2px}
+.step .h{font-weight:600; font-size:14.5px}
+.step .h span{display:block; font-weight:400; font-size:12px; color:var(--muted);
+  font-family:"JetBrains Mono",monospace; margin-top:2px}
+.step .why{font-size:13.5px; color:var(--ink-2)}
+.pill{font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:20px;
+  background:var(--none-bg); color:var(--none); white-space:nowrap; justify-self:start}
+.pill.ok{background:var(--run-bg); color:var(--run)}
+.pill.warn{background:var(--unrun-bg); color:var(--unrun)}
+
+/* ---- 막힌 곳 ---- */
+.blocks{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px}
+.block{background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--unrun);
+  border-radius:0 8px 8px 0; padding:15px 18px}
+.block h3{margin:0 0 6px; font-size:15px; font-weight:700}
+.block p{margin:0; font-size:13.5px; color:var(--ink-2)}
+.block .fig{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--unrun);
+  font-weight:500; margin-top:9px}
+
+table{border-collapse:collapse; width:100%; font-size:13.5px}
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:9px; background:var(--surface)}
+th,td{padding:10px 15px; text-align:left; border-bottom:1px solid var(--line-2)}
+th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted); font-weight:500; background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right; font-variant-numeric:tabular-nums; font-family:"JetBrains Mono",monospace}
+
+footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:12.5px; color:var(--muted); max-width:76ch}
+
+@media (max-width:640px){
+  .step{grid-template-columns:28px 1fr; gap:6px 12px}
+  .step .pill{grid-column:2; justify-self:start}
+  .step .why{grid-column:2}
+}
+</style>
+
+<div class="page">
+
+<header>
+  <div class="eyebrow">YT Trend · 2026-09-10</div>
+  <h1>파이프라인 현황</h1>
+  <p class="lede">
+    채널 주소 하나로 영상을 유형별로 가르고, 유형마다 얼마나 도달했는지와 댓글이
+    무엇을 말하는지를 묶어 돌려주는 도구. 열 단계 중 여섯이 돌고, 막힌 곳은 두 군데다.
+  </p>
+  <div class="meta">
+    <span><b>채널</b> 4</span>
+    <span><b>영상</b> 1,007편</span>
+    <span><b>댓글 라벨</b> 1,482건</span>
+    <span><b>유료 API 호출</b> 0회</span>
+  </div>
+</header>
+
+<section>
+  <h2>구현 파이프라인</h2>
+  <p class="sec-note">번호는 실제 실행 순서다. 05·07은 판정을 Claude Code가 하는 오프라인
+    경로로만 돈다 — API를 부르는 코드는 배선까지 끝났지만 아직 한 번도 호출하지 않았다.</p>
+
+  <div class="scroll">
+    <div class="rail">
+      <div class="stg dim"><div class="stripe"></div><div class="num">01</div>
+        <div class="nm">분석 요청</div><div class="sub">채널 URL 입력</div>
+        <div class="tag">없음</div></div>
+      <div class="stg dim"><div class="stripe"></div><div class="num">02</div>
+        <div class="nm">작업 등록</div><div class="sub">큐 · 상태 저장</div>
+        <div class="tag">없음</div></div>
+      <div class="stg run"><div class="stripe"></div><div class="num">03</div>
+        <div class="nm">수집</div><div class="sub">300편에 13유닛<br>재생목록은 390</div>
+        <div class="tag">동작</div></div>
+      <div class="stg run"><div class="stripe"></div><div class="num">04</div>
+        <div class="nm">정규화</div><div class="sub">길이 축 · 배수 3종</div>
+        <div class="tag">동작</div></div>
+      <div class="stg off"><div class="stripe"></div><div class="num">05</div>
+        <div class="nm">영상 유형</div><div class="sub">체계 제안 → 라벨<br>주제 · 코너 두 축</div>
+        <div class="tag">오프라인</div></div>
+      <div class="stg split"><div class="stripe"></div><div class="num">06</div>
+        <div class="nm">댓글 선별</div><div class="sub">규칙은 돈다<br>Claude 절반 미실행</div>
+        <div class="tag">절반</div></div>
+      <div class="stg off"><div class="stripe"></div><div class="num">07</div>
+        <div class="nm">댓글 라벨</div><div class="sub">감성 3 · 주제 10<br>v2</div>
+        <div class="tag">오프라인</div></div>
+      <div class="stg run"><div class="stripe"></div><div class="num">08</div>
+        <div class="nm">집계</div><div class="sub">유형별 접기<br>결론 문장 초안</div>
+        <div class="tag">동작</div></div>
+      <div class="stg dim"><div class="stripe"></div><div class="num">09</div>
+        <div class="nm">리포트 조회</div><div class="sub">GET /report</div>
+        <div class="tag">없음</div></div>
+      <div class="stg split"><div class="stripe"></div><div class="num">10</div>
+        <div class="nm">리포트 화면</div><div class="sub">시제품 1장<br>파이프라인 미연결</div>
+        <div class="tag">시제품</div></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--run)"></i>동작 — 코드가 있고 실제로 돌았다</span>
+    <span><i style="background:var(--offline)"></i>오프라인 — Claude Code가 판정, 유료 API 미연결</span>
+    <span><i style="background:var(--unrun)"></i>절반 — 코드는 있으나 실행된 적 없다</span>
+    <span><i style="background:var(--none)"></i>없음</span>
+  </div>
+</section>
+
+<section>
+  <h2>저장소에 실제로 쌓인 것</h2>
+  <p class="sec-note">4개 채널 합계. 빈 표 둘은 자리만 만들어 두고 채우는 코드가 없다.</p>
+  <div class="stores">
+    <div class="store"><div class="t">videos</div><div class="n">1,007</div><div class="d">4채널</div></div>
+    <div class="store"><div class="t">comments</div><div class="n">1,484</div><div class="d">영상 8편에서</div></div>
+    <div class="store"><div class="t">comment_screens</div><div class="n">1,484</div><div class="d">규칙 판정 · 버린 것 0</div></div>
+    <div class="store"><div class="t">comment_labels</div><div class="n">1,482</div><div class="d">감성 · 주제</div></div>
+    <div class="store"><div class="t">video_type_labels</div><div class="n">1,283</div><div class="d">주제 · 코너</div></div>
+    <div class="store"><div class="t">type_metrics</div><div class="n">195</div><div class="d">유형 × 길이 축</div></div>
+    <div class="store"><div class="t">reports</div><div class="n">33</div><div class="d">채널 × 세 판</div></div>
+    <div class="store empty"><div class="t">comment_features</div><div class="n">0</div><div class="d">추출기 미배선</div></div>
+    <div class="store empty"><div class="t">quota_ledger</div><div class="n">0</div><div class="d">유닛 기록 안 됨</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Feature discovery — 여섯 단계</h2>
+  <p class="sec-note">특성을 찾고 검증하는 절차. 위 구현 단계와 다른 축이다 — 어느 구현
+    단계가 이 절차의 어느 자리를 맡는지를 오른쪽에 적었다.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="o">1</div>
+      <div class="h">Universal<span>객관 추출</span></div>
+      <div class="pill ok">작동</div>
+      <div class="why">조회·좋아요·댓글 배수 3종. 댓글에서 타임스탬프를 뽑아 영상의 어느
+        지점을 가리키는지 군집으로 낸다. 효과 추정에 부트스트랩 구간과 leave-one-out
+        범위가 붙어, 한 영상에 매달린 값인지를 스스로 밝힌다. <b>04 · observable</b></div>
+    </div>
+    <div class="step">
+      <div class="o">2</div>
+      <div class="h">Discovery<span>성과 blind</span></div>
+      <div class="pill warn">오염</div>
+      <div class="why">체계는 4채널에서 다 나왔다. 문제는 절차다 — 네 번 모두 성과표를
+        본 뒤에 유형을 갈랐다. 도구 자체는 이미 blind다(내보내는 파일에 조회수도 배수도
+        없다). 코드가 아니라 순서를 고쳐야 한다. <b>05</b></div>
+    </div>
+    <div class="step">
+      <div class="o">3</div>
+      <div class="h">Validation<span>인간 ↔ LLM</span></div>
+      <div class="pill">없음</div>
+      <div class="why">사람이 판정한 라벨이 저장소 전체에 0건. 그런데 확신도가 기록되기
+        시작하며 위태로움이 드러났다 — 침착맨 300편 중 183편이 검토선 아래다.
+        그 라벨 위에 4번이 서 있다.</div>
+    </div>
+    <div class="step">
+      <div class="o">4</div>
+      <div class="h">Feature × Outcome<span>여기서 성과 결합</span></div>
+      <div class="pill ok">작동</div>
+      <div class="why">유형 × 길이 축으로 접어 세 판(쇼츠·롱폼·합침)을 낸다. 두 판이
+        반대로 움직이면 합침 줄을 믿지 말라고 스스로 표시한다. <b>08</b></div>
+    </div>
+    <div class="step">
+      <div class="o">5</div>
+      <div class="h">Holdout<span>미사용 영상 재현</span></div>
+      <div class="pill">없음</div>
+      <div class="why">분할 코드가 0줄. 지금 표본으로는 넣어도 힘이 없다 — 300편의 30%를
+        떼면 90편, 유형 7 × 길이 축 2 = 14칸이면 칸당 6편이다. 수집이 싸서(2,000편에
+        90유닛) 표본을 늘리면 풀린다.</div>
+    </div>
+    <div class="step">
+      <div class="o">6</div>
+      <div class="h">Cross-channel<span>채널별 독립 실행</span></div>
+      <div class="pill ok">작동</div>
+      <div class="why">4채널을 같은 파이프라인으로 돌렸다. 다만 여기서 재현돼야 하는 것은
+        <b>방법이지 채널 고유 특성이 아니다</b> — 「돈슐랭」이 14F에만 있는 건 실패가 아니다.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>막힌 곳 둘</h2>
+  <div class="blocks">
+    <div class="block">
+      <h3>3번 — 믿을 근거가 없다</h3>
+      <p>영상 유형 1,283건, 댓글 1,482건이 전부 LLM 단독 판정이다. 사람이 한 건도 보지
+        않았고, 사람끼리 얼마나 맞는지도 모른다. 기준선이 없으면 일치율 90%가 좋은
+        수치인지 나쁜 수치인지 판정할 수 없다.</p>
+      <div class="fig">저확신 라벨 — 침착맨 183/300 · 카더가든 151/300</div>
+    </div>
+    <div class="block">
+      <h3>5번 — 표본이 모자란다</h3>
+      <p>탐색에 쓴 영상에서 나온 관계가 안 쓴 영상에서도 나오는지 확인할 방법이 없다.
+        코드도 없고, 지금 표본으로는 코드를 넣어도 칸이 비어 버린다.</p>
+      <div class="fig">칸당 6편 — 재현 확인 불가</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>4채널이 답한 것</h2>
+  <p class="sec-note">6번이 검증하는 것은 특성이 아니라 방법이다. 지금까지 나온 결과는 셋 다
+    방법에 대한 것이다.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>확인한 것</th><th>근거</th><th class="n">규칙 반영</th></tr></thead>
+      <tbody>
+        <tr><td>유형 체계는 채널마다 새로 세워야 한다</td>
+          <td>14F 체계를 원이 채널에 대니 107편이 「문화·엔터」 한 칸으로 뭉쳤다</td>
+          <td class="n">taxonomy-v1</td></tr>
+        <tr><td>채널이 크면 서랍 규칙이 새어 나간다</td>
+          <td>침착맨 7,698편 기준 서랍선이 1,925편이라 「침착맨 Shorts」가 코너로 통과, 300편 중 174편을 덮었다</td>
+          <td class="n">drop_broad()</td></tr>
+        <tr><td>채널을 건너뛰기 전에 길이 축에서 이미 뒤집힌다</td>
+          <td>역사·인문이 14F 쇼츠 0.59(꼴찌) · 롱폼 1.61(1위) · 합침 0.88</td>
+          <td class="n">세 판 + 경고</td></tr>
+        <tr><td>제목만으로는 분류되지 않는 채널이 있다</td>
+          <td>침착맨 쇼츠는 본편의 한 마디를 딴 제목이라 175편 중 150편이 확신도 0.5 미만</td>
+          <td class="n">미해결</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  수치는 2026-09-10 기준이며 모두 실행으로 확인했다 — 네 채널(MBC 14F · 안녕하세요원이입니다잘부탁드립니다 ·
+  침착맨 · 카더가든)의 SQLite 파일에서 직접 세었다. 댓글은 채널당 영상 두 편의 최신
+  200건씩이라 무작위 표본이 아니다. 유형·댓글 판정은 Anthropic API가 아니라 Claude Code가
+  제목만을 맥락으로 삼아 수행했으므로, 제목이 내용을 대표하지 않는 영상의 판정에는 한계가 있다.
+  코너는 판정이 아니라 채널의 재생목록에서 그대로 읽었다.
+</footer>
+
+</div>
+</body>
+</html>
