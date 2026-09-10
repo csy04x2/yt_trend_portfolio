@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 진행 보고 3판</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+  :root {
+    --ground: #FAFAFB;
+    --surface: #FFFFFF;
+    --sunk: #F2F4F7;
+    --ink: #0E1420;
+    --ink-2: #4A5462;
+    --muted: #79828F;
+    --line: #E2E6EC;
+    --line-strong: #CBD2DB;
+    --accent: #2E7CF6;
+    --accent-bg: #EDF4FF;
+    --accent-line: #B7D2FB;
+    --good: #2F8F5B;
+    --good-bg: #E8F5ED;
+    --warn: #B4761A;
+    --warn-bg: #FBF2E2;
+    --crit: #C0453C;
+    --crit-bg: #FBECEA;
+    --on-accent: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+      --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+      --line: #262E38; --line-strong: #3A4350;
+      --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+      --good: #5FBE87; --good-bg: #12231A;
+      --warn: #D79B45; --warn-bg: #241C0F;
+      --crit: #E0736A; --crit-bg: #26140F;
+      --on-accent: #0D1117;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+    --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+    --line: #262E38; --line-strong: #3A4350;
+    --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+    --good: #5FBE87; --good-bg: #12231A;
+    --warn: #D79B45; --warn-bg: #241C0F;
+    --crit: #E0736A; --crit-bg: #26140F;
+    --on-accent: #0D1117;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 940px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  /* ---------- type ---------- */
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+  h2 {
+    font-size: 19px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 6px; }
+  p { margin: 0 0 14px; max-width: 68ch; color: var(--ink-2); }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+  .lede { font-size: 16px; color: var(--ink-2); max-width: 62ch; margin: 12px 0 0; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.88em;
+  }
+  code { background: var(--sunk); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .meta {
+    margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px 26px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--muted);
+  }
+  .meta b { color: var(--ink-2); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 52px; }
+  .sec-head { margin-bottom: 18px; }
+  .sec-head p { margin: 0; font-size: 14px; }
+
+  /* ---------- status board ---------- */
+  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 16px 18px; }
+  .cell .k {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: 7px;
+  }
+  .cell .v { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .cell .n { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .v.ok { color: var(--good); }
+  .v.warn { color: var(--warn); }
+  .v.crit { color: var(--crit); }
+
+  /* ---------- pipeline strip ---------- */
+  .scroll { overflow-x: auto; padding-bottom: 6px; }
+  .strip { display: grid; grid-template-columns: repeat(10, 1fr); min-width: 880px; gap: 6px; }
+  .stg {
+    background: var(--surface); border: 1px solid var(--line);
+    border-top: 3px solid var(--line-strong);
+    border-radius: 6px; padding: 11px 9px 12px; text-align: center;
+  }
+  .stg .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; color: var(--muted); display: block;
+  }
+  .stg .nm { font-size: 12.5px; font-weight: 600; margin-top: 4px; line-height: 1.35; }
+  .stg .st { font-size: 10.5px; margin-top: 6px; color: var(--muted); }
+  .stg.done { border-top-color: var(--good); }
+  .stg.done .st { color: var(--good); }
+  .stg.part { border-top-color: var(--warn); background: var(--warn-bg); }
+  .stg.part .st { color: var(--warn); }
+  .stg.none { opacity: 0.62; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; font-size: 12.5px; color: var(--muted); }
+  .legend i { display: inline-block; width: 22px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 7px; }
+
+  /* ---------- tables ---------- */
+  .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; background: var(--sunk);
+  }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  th.num { text-align: right; }
+
+  /* ---------- finding blocks ---------- */
+  .find { border-left: 3px solid var(--line-strong); padding: 2px 0 2px 18px; margin: 0 0 22px; }
+  .find:last-child { margin-bottom: 0; }
+  .find.alert { border-left-color: var(--crit); }
+  .find.note { border-left-color: var(--accent); }
+  .find p:last-child { margin-bottom: 0; }
+
+  /* ---------- comment specimens ---------- */
+  .specimens { display: grid; gap: 8px; margin: 0 0 16px; }
+  .spec {
+    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 14px; align-items: baseline;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 7px; padding: 9px 14px;
+  }
+  .spec .txt { font-size: 14px; min-width: 0; overflow-wrap: anywhere; }
+  .spec .tag {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; color: var(--muted); white-space: nowrap;
+  }
+  .spec.miss { border-color: var(--crit); background: var(--crit-bg); }
+  .spec.miss .tag { color: var(--crit); }
+
+  /* ---------- lists ---------- */
+  ul.clean { margin: 0 0 14px; padding-left: 20px; max-width: 68ch; color: var(--ink-2); }
+  ul.clean li { margin-bottom: 7px; }
+
+  .next { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .step { background: var(--surface); padding: 14px 18px; display: grid; grid-template-columns: 30px 1fr; gap: 14px; }
+  .step .o {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; font-weight: 600; color: var(--accent); padding-top: 2px;
+  }
+  .step .b { min-width: 0; }
+  .step .b p { margin: 4px 0 0; font-size: 13.5px; }
+  .step.blocked .o { color: var(--crit); }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .board { grid-template-columns: repeat(2, 1fr); }
+    .page { padding: 40px 18px 72px; }
+    h1 { font-size: 25px; }
+  }
+
+  /* ---------- v3 additions ---------- */
+  .cap {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 22px 0 8px;
+  }
+  .cap:first-child { margin-top: 0; }
+  td.seg { border-left: 1px solid var(--line-strong); }
+  th.seg { border-left: 1px solid var(--line-strong); }
+  .up { color: var(--good); font-weight: 600; }
+  .dn { color: var(--crit); font-weight: 600; }
+  .flat { color: var(--ink-2); }
+  .note-line {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--muted); margin: 8px 0 0;
+  }
+  .stg.off { border-top-color: var(--accent); background: var(--accent-bg); }
+  .stg.off .st { color: var(--accent); }
+  del { color: var(--muted); text-decoration-thickness: 1px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="eyebrow">진행 보고 · 2026-09-10 · 3판</div>
+    <h1>YT Trend — 유튜브 채널 콘텐츠 트렌드 분석 파이프라인</h1>
+    <p class="lede">
+      채널 URL 하나를 넣으면 영상을 콘텐츠 유형으로 나누고, 유형별 성과와 댓글 피드백을
+      한 장의 리포트로 돌려주는 도구. 이번 판에서 <b>영상 유형 단계가 붙었다</b> —
+      2판까지는 손으로 고른 두 편을 비교한 것이 전부였고, 이제 300편을 유형별로 갈라
+      본다. 그리고 2판의 잘못된 수치 세 개를 정정한다.
+    </p>
+    <div class="meta">
+      <span><b>저장소</b> bbamindol-dev/yt-trend</span>
+      <span><b>브랜치</b> main · d94c182</span>
+      <span><b>단계</b> 프로토타입</span>
+      <span><b>팀</b> 2인</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>한눈에</h2>
+      <p>유형 단계가 붙어 "어떤 종류가 잘 되나"에 처음으로 답이 나왔다.</p>
+    </div>
+    <div class="board">
+      <div class="cell">
+        <span class="k">파이프라인</span>
+        <div class="v">6<span style="font-size:15px;color:var(--muted);font-weight:500;"> / 10</span></div>
+        <div class="n">4 동작 · 2 부분. 영상 300편 · 댓글 284건</div>
+      </div>
+      <div class="cell">
+        <span class="k">테스트</span>
+        <div class="v ok">47 / 47</div>
+        <div class="n">규칙 7 · 수집 3 · 정규화 13 · 참여 12 · 유형 12</div>
+      </div>
+      <div class="cell">
+        <span class="k">유형 라벨</span>
+        <div class="v ok">300<span style="font-size:15px;color:var(--muted);font-weight:500;"> + 76</span></div>
+        <div class="n">주제 300편 전량 · 코너 76편 (롱폼의 72%)</div>
+      </div>
+      <div class="cell">
+        <span class="k">지출</span>
+        <div class="v ok">₩0</div>
+        <div class="n">YouTube 105유닛 (하루 한도 10,000). Claude API 호출 0</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>2판에서 고친 수치</h2>
+      <p>먼저 정정한다. 아래 세 개는 2판 보고서에 잘못 실렸다.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>항목</th><th class="num">2판</th><th class="num">실제</th><th>무엇이 틀렸나</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>영상 편수</td>
+            <td class="num"><del>302편</del></td>
+            <td class="num" style="font-weight:600">300편</td>
+            <td>302는 <code>video_stats_snapshots</code>의 행 수였다. 두 편은 통계를 두 번 찍어 스냅샷이 두 줄이다. 실제 영상은 300편</td>
+          </tr>
+          <tr>
+            <td>비교군 크기</td>
+            <td class="num"><del>35편</del></td>
+            <td class="num" style="font-weight:600">15편</td>
+            <td>35는 2026Q2+Q3의 long 전체다. 조회 배수는 <b>같은 분기 안에서만</b> 계산하므로 2026Q3 long 15편(자기 제외 14편)이 맞다. 순위를 전부 다시 매겼다</td>
+          </tr>
+          <tr>
+            <td>300편의 성격</td>
+            <td class="num"><del>채널 전체</del></td>
+            <td class="num" style="font-weight:600">최근 300편</td>
+            <td>14F 채널에는 영상이 6,400편 넘게 있다. 우리가 받은 것은 최신순 300편(2026-05-07 ~ 09-09)이다</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="find note" style="margin-top:20px">
+      <h3>세 번째 정정은 결론을 흔들지 않는다</h3>
+      <p>
+        "최근 300편"이라는 사실을 알고 나면 비교군이 잘린 것 아닌가 하는 의심이 든다.
+        확인했다. <b>2026Q3(07-01 이후)는 통째로 덮여 있다</b> — 쇼츠 108 · standard 42 ·
+        long 15편. 배수 계산이 쓰는 창이 온전하므로 아래 수치는 그대로 유효하다.
+      </p>
+      <p>
+        대신 <b>2026Q2는 5월 7일부터만 있다.</b> Q2를 비교군으로 쓰는 영상의 배수는
+        표본이 잘려 있으니 이 채널에서 Q2 값을 인용할 때는 주의해야 한다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>파이프라인 구현 현황</h2>
+      <p>프론트에서 리포트까지 열 단계. 번호는 실제 실행 순서다.</p>
+    </div>
+    <div class="scroll">
+      <div class="strip">
+        <div class="stg none"><span class="num">01</span><div class="nm">분석 요청</div><div class="st">미착수</div></div>
+        <div class="stg none"><span class="num">02</span><div class="nm">작업 등록</div><div class="st">미착수</div></div>
+        <div class="stg done"><span class="num">03</span><div class="nm">수집</div><div class="st">완료</div></div>
+        <div class="stg done"><span class="num">04</span><div class="nm">정규화</div><div class="st">완료</div></div>
+        <div class="stg off"><span class="num">05</span><div class="nm">영상 유형</div><div class="st">오프라인 완료</div></div>
+        <div class="stg part"><span class="num">06</span><div class="nm">댓글 선별</div><div class="st">규칙만</div></div>
+        <div class="stg off"><span class="num">07</span><div class="nm">댓글 라벨</div><div class="st">오프라인 완료</div></div>
+        <div class="stg part"><span class="num">08</span><div class="nm">집계</div><div class="st">유형·참여만</div></div>
+        <div class="stg none"><span class="num">09</span><div class="nm">리포트 조회</div><div class="st">미착수</div></div>
+        <div class="stg none"><span class="num">10</span><div class="nm">리포트 화면</div><div class="st">미착수</div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--good)"></i>동작</span>
+      <span><i style="background:var(--accent)"></i>오프라인 — Claude Code가 판정, API 미연결</span>
+      <span><i style="background:var(--warn)"></i>부분 — 절반만 구현</span>
+      <span><i style="background:var(--line-strong)"></i>미착수</span>
+    </div>
+    <p style="margin-top:16px">
+      <b>Anthropic API를 부르는 코드는 여전히 한 줄도 없다</b> — 의도한 순서다.
+      05와 07은 판정할 내용을 번호 매긴 파일로 내보내고, Claude Code가 그 파일을 읽어
+      답을 쓰고, 검증기가 번호 누락·허용되지 않은 값을 잡아 DB에 넣는다. 프롬프트가
+      정해지기 전에 API를 붙이면 프롬프트를 고칠 때마다 돈이 나간다.
+      08은 유형별 집계(<code>type_metrics</code>)와 참여 집계(<code>comment_engagement</code>)만
+      있고, 이 둘을 리포트 한 장으로 묶는 부분은 없다.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>영상 유형 — 이번 판의 본론</h2>
+      <p>2판까지는 손으로 고른 두 편이었다. 이제 300편을 유형으로 갈라 본다.</p>
+    </div>
+    <p>
+      유형을 <b>두 축</b>으로 두었다. <b>주제</b>는 무엇을 다루는가(음식·경제·역사…)이고
+      Claude Code가 제목을 보고 판정했다. <b>코너</b>는 채널이 스스로 이름 붙인 시리즈
+      (돈슐랭, 10분 토론…)이고 <b>채널의 재생목록에서 읽었다 — 추측하지 않았다.</b>
+    </p>
+    <p>
+      코너를 제목 정규식으로 뽑아보려던 첫 시도는 5개를 찾았는데, 재생목록에는 20개가
+      넘게 있었다. 「월드클로즈업」·「아이돈케어」는 제목에 아예 나타나지 않고, 제목에서
+      "경제 이슈"로 보이는 것을 채널은 <b>「경제한쌈」</b>이라 부른다.
+      <b>규칙으로 확실히 알 수 있는 것을 LLM에 묻지 않는다</b>는 이 저장소의 원칙이
+      여기서도 맞았다.
+    </p>
+
+    <p class="cap">주제 축 — 조회 배수 중앙값</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">주제</th>
+            <th class="num" colspan="2">쇼츠</th>
+            <th class="num seg" colspan="2">롱폼</th>
+            <th class="num seg" colspan="2">합침</th>
+          </tr>
+          <tr>
+            <th class="num">편수</th><th class="num">배수</th>
+            <th class="num seg">편수</th><th class="num">배수</th>
+            <th class="num seg">편수</th><th class="num">배수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>생활·정책</td>
+            <td class="num">20</td><td class="num up">2.73</td>
+            <td class="num seg">4</td><td class="num flat">0.97</td>
+            <td class="num seg">24</td><td class="num up">2.43</td></tr>
+          <tr><td>경제·기업</td>
+            <td class="num">32</td><td class="num up">2.07</td>
+            <td class="num seg">20</td><td class="num flat">1.18</td>
+            <td class="num seg">52</td><td class="num up">1.54</td></tr>
+          <tr><td>국제·시사</td>
+            <td class="num">10</td><td class="num flat">1.10</td>
+            <td class="num seg">20</td><td class="num flat">0.77</td>
+            <td class="num seg">30</td><td class="num flat">0.83</td></tr>
+          <tr><td>문화·엔터</td>
+            <td class="num">30</td><td class="num flat">1.04</td>
+            <td class="num seg">10</td><td class="num dn">0.49</td>
+            <td class="num seg">40</td><td class="num flat">0.94</td></tr>
+          <tr><td>음식·식품</td>
+            <td class="num">73</td><td class="num flat">0.89</td>
+            <td class="num seg">36</td><td class="num flat">0.76</td>
+            <td class="num seg">109</td><td class="num flat">0.89</td></tr>
+          <tr><td>과학·건강</td>
+            <td class="num">14</td><td class="num flat">0.72</td>
+            <td class="num seg">9</td><td class="num flat">1.15</td>
+            <td class="num seg">23</td><td class="num flat">0.88</td></tr>
+          <tr><td>역사·인문</td>
+            <td class="num">15</td><td class="num dn">0.59</td>
+            <td class="num seg">7</td><td class="num up">1.61</td>
+            <td class="num seg">22</td><td class="num flat">0.88</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-line">배수 1.00 = 같은 길이 축·같은 분기 또래의 중앙값. 자기 자신은 분모에서 뺀다</p>
+
+    <div class="find alert" style="margin-top:22px">
+      <h3>쇼츠와 롱폼의 순위가 거의 뒤집힌다</h3>
+      <p>
+        <b>역사·인문을 보라.</b> 쇼츠에서 0.59로 <b>7개 중 꼴찌</b>인데, 롱폼에서는 1.61로
+        <b>1위</b>다. 합치면 0.88 — 그 숫자는 어느 쪽도 설명하지 못한다.
+        생활·정책은 반대로 쇼츠 2.73(1위)인데 롱폼 0.97(4위)이다.
+      </p>
+      <p>
+        그래서 성과를 <b>쇼츠 / 롱폼 / 합침 세 판</b>으로 낸다. 합침을 남기는 것은 채널
+        전체를 한눈에 볼 자리가 필요해서지만, 그 줄이 거짓말을 하고 있으면 리포트가
+        그렇다고 말해야 한다. 코드가 자동으로 찾아 표시한다.
+      </p>
+      <div class="tw" style="margin:12px 0 0">
+        <table>
+          <thead><tr><th>합침이 가리고 있는 주제</th><th class="num">쇼츠</th><th class="num">롱폼</th><th class="num">차이</th><th class="num">합침이 보여주는 값</th></tr></thead>
+          <tbody>
+            <tr><td>생활·정책</td><td class="num">2.73</td><td class="num">0.97</td><td class="num dn">1.76</td><td class="num">2.43</td></tr>
+            <tr><td>역사·인문</td><td class="num">0.59</td><td class="num">1.61</td><td class="num dn">1.02</td><td class="num">0.88</td></tr>
+            <tr><td>경제·기업</td><td class="num">2.07</td><td class="num">1.18</td><td class="num dn">0.89</td><td class="num">1.54</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note-line">차이 0.6 이상이면 표시. <code>masked_types()</code>가 계산한다</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>코너 축 — 채널이 스스로 이름 붙인 것</h2>
+      <p>재생목록 6개가 우리 영상 76편을 덮는다.</p>
+    </div>
+    <p>
+      재생목록이 전부 코너는 아니다. 「14F's PICKㅣDaily」는 1,943편, 「이슈픽!」은 1,725편을
+      담는데 이건 코너가 아니라 <b>보관함</b>이다. 채널 영상의 25% 이상을 담으면 서랍으로
+      보고 뺐다. 서랍을 건너뛰니 API 호출도 164유닛에서 <b>84유닛</b>으로 줄었다.
+    </p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>코너</th><th class="num">편수</th><th class="num">조회 중앙값</th>
+              <th class="num">조회 배수</th><th class="num">좋아요율</th><th class="num">댓글율 배수</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>돈슐랭</b><br><span class="mono" style="color:var(--muted)">맛집·가격</span></td>
+            <td class="num">18</td><td class="num">226,448</td>
+            <td class="num up">1.76</td><td class="num">0.99%</td><td class="num flat">0.85</td></tr>
+          <tr><td><b>10분 토론</b><br><span class="mono" style="color:var(--muted)">전문가 대담</span></td>
+            <td class="num">17</td><td class="num">181,902</td>
+            <td class="num up">1.48</td><td class="num">0.89%</td><td class="num dn">0.63</td></tr>
+          <tr><td><b>경제한쌈</b><br><span class="mono" style="color:var(--muted)">경제 이슈 해설</span></td>
+            <td class="num">6</td><td class="num">208,594</td>
+            <td class="num up">1.44</td><td class="num">0.72%</td><td class="num dn">0.32</td></tr>
+          <tr><td><b>월드클로즈업</b><br><span class="mono" style="color:var(--muted)">국제 심층</span></td>
+            <td class="num">12</td><td class="num">98,701</td>
+            <td class="num flat">0.68</td><td class="num">1.28%</td><td class="num flat">1.16</td></tr>
+          <tr><td><b>주락이월드</b><br><span class="mono" style="color:var(--muted)">술 리뷰</span></td>
+            <td class="num">10</td><td class="num">77,699</td>
+            <td class="num dn">0.53</td><td class="num up">1.92%</td><td class="num up">1.79</td></tr>
+          <tr><td><b>선발대</b><br><span class="mono" style="color:var(--muted)">현장 취재</span></td>
+            <td class="num">13</td><td class="num">46,700</td>
+            <td class="num dn">0.40</td><td class="num up">1.40%</td><td class="num flat">1.02</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="find alert" style="margin-top:22px">
+      <h3>한 편에서 본 것이 코너 전체의 성격이었다</h3>
+      <p>
+        2판에서 깊게 판 두 편이 <b>공교롭게도 서로 다른 코너의 한 편씩</b>이었다.
+        코너 전체를 집계해 보니 그 한 편의 모양이 코너 열 편, 열일곱 편에서 그대로
+        반복된다.
+      </p>
+      <div class="tw" style="margin:12px 0 0">
+        <table>
+          <thead><tr><th>비교</th><th class="num">조회 배수</th><th class="num">좋아요율</th><th class="num">댓글율 배수</th></tr></thead>
+          <tbody>
+            <tr><td>술 리뷰 <b>한 편</b></td><td class="num dn">0.20</td><td class="num up">2.40%</td><td class="num up">1.95</td></tr>
+            <tr style="background:var(--sunk)"><td>주락이월드 <b>10편 전체</b></td><td class="num dn">0.53</td><td class="num up">1.92%</td><td class="num up">1.79</td></tr>
+            <tr><td>토론 <b>한 편</b></td><td class="num up">1.61</td><td class="num flat">0.99%</td><td class="num dn">0.78</td></tr>
+            <tr style="background:var(--sunk)"><td>10분 토론 <b>17편 전체</b></td><td class="num up">1.48</td><td class="num flat">0.89%</td><td class="num dn">0.63</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px">
+        <b>표본이 하나에서 열로 늘었는데 방향이 그대로다.</b> "도달은 낮고 반응은 최고"는
+        그 술 리뷰 한 편의 우연이 아니라 주락이월드라는 코너의 성격이었고,
+        "많이 봤지만 또래보다 덜 반응했다"는 그 토론 한 편이 아니라 10분 토론의 성격이었다.
+        <b>유형 단계를 만든 이유가 정확히 이것이다</b> — 한 편으로는 우연과 성격을 가를 수 없다.
+      </p>
+    </div>
+
+    <div class="find alert">
+      <h3>선발대가 가장 아프다</h3>
+      <p>
+        조회 배수 <b>0.40으로 6개 코너 중 꼴찌</b>인데 좋아요율은 1.40%로 <b>2위</b>다.
+        본 사람은 만족했는데 볼 사람에게 닿지 않는다. 현장에 사람이 나가는 형식이라
+        <b>제작비는 가장 클 텐데 도달이 가장 낮다</b> — 채널 입장에서 가장 먼저 손대야 할
+        칸으로 보인다.
+      </p>
+      <p>
+        다만 이 도구가 답할 수 있는 데까지만 말해야 한다. 여기서 나오는 것은
+        "도달이 낮다"이지 "제목을 이렇게 바꿔라"가 아니다. 왜 안 닿는지는
+        댓글 라벨을 이 코너 영상들에 돌려야 보인다 — 아직 안 했다.
+      </p>
+    </div>
+
+    <div class="find note">
+      <h3>코너는 롱폼에만 있다</h3>
+      <div class="tw" style="margin:12px 0">
+        <table>
+          <thead><tr><th>길이</th><th class="num">편수</th><th class="num">코너 배정</th><th class="num">비율</th></tr></thead>
+          <tbody>
+            <tr><td>쇼츠</td><td class="num">194</td><td class="num dn">0</td><td class="num dn">0%</td></tr>
+            <tr><td>롱폼 (standard + long)</td><td class="num">106</td><td class="num up">76</td><td class="num up">72%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <b>쇼츠 194편 중 코너에 속한 것이 한 편도 없다.</b> 6개 코너 이름이 제목에
+        나타나는 쇼츠도 0편이다. 쇼츠는 롱폼 코너를 잘라 만든 클립이 아니라
+        <b>별도 제작물</b>이라는 뜻이다.
+      </p>
+      <p>
+        여기서 축의 쓰임이 갈린다. 이 채널의 쇼츠는 <b>주제 축으로만</b> 설명할 수 있고,
+        롱폼은 72%가 코너에 속하므로 <b>코너 축이 더 정확하다</b>.
+        채널마다 다를 것이므로, 리포트가 "이 채널은 무엇으로 보는 게 맞다"를
+        커버리지 숫자와 함께 밝히도록 결정 문서에 넣었다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>댓글 — 두 영상 284건</h2>
+      <p>유형 단계가 붙었어도 댓글을 판정한 영상은 아직 이 두 편뿐이다.</p>
+    </div>
+    <p>
+      두 편 모두 <b>long</b> 축 · 2026Q3이고, 같은 조건의 비교군은 <b>15편</b>이다
+      (자기 자신을 뺀 14편이 분모). 2판의 35편은 Q2를 섞은 잘못된 수였다.
+    </p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>영상</th><th class="num">조회</th>
+            <th class="num">조회 배수</th><th class="num">도달 순위</th>
+            <th class="num">좋아요율</th><th class="num">반응 순위</th>
+            <th class="num">댓글 수집</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>조선을 망친 간신배들의 최후는?<br><span class="mono" style="color:var(--muted)">10분 토론 · 역사·인문 · 52:17</span></td>
+            <td class="num">217,898</td>
+            <td class="num up">1.61</td>
+            <td class="num up">6 / 15</td>
+            <td class="num">0.99%</td>
+            <td class="num dn">11 / 15</td>
+            <td class="num">209 / 263</td>
+          </tr>
+          <tr>
+            <td>기상천외한 희귀 술 6종 리뷰<br><span class="mono" style="color:var(--muted)">주락이월드 · 음식·식품 · 20:31</span></td>
+            <td class="num">32,280</td>
+            <td class="num dn">0.20</td>
+            <td class="num dn">13 / 15</td>
+            <td class="num up">2.40%</td>
+            <td class="num up">1 / 15</td>
+            <td class="num">75 / 83</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="find note" style="margin-top:22px">
+      <h3>두 지표가 정확히 반대를 가리킨다</h3>
+      <p>
+        술 리뷰는 동시기 long 15편 중 <b>도달 13위, 반응 1위</b>다. 본 사람 수는 꼴찌급인데
+        본 사람의 만족도는 채널 최고다. 토론은 <b>도달 6위, 반응 11위</b>로 정반대다.
+        (순위 자체는 2판보다 덜 극적으로 보이지만, 비교군이 15편으로 줄었을 뿐
+        <b>방향과 배수는 그대로다</b>.)
+      </p>
+      <p>
+        조회수만 보면 "토론이 압승"이고, 좋아요율만 보면 "술 리뷰가 압승"이다.
+        둘 다 맞고 둘 다 반쪽이다. <b>이 도구가 존재하는 이유가 이 지점이다</b> —
+        "어떤 영상이 잘 됐나"가 아니라 "어떤 종류가 어떤 의미로 잘 됐나"를 갈라 보여주는 것.
+      </p>
+    </div>
+
+    <div class="find note">
+      <h3>댓글 282건을 판정하니 성격 차이가 수치로 나왔다</h3>
+      <p>
+        규칙을 통과한 282건을 15묶음으로 나눠 Claude Code가 감성·주제를 판정했다
+        (API 미사용, 비용 0). 검증기가 15묶음 전부 통과 — 번호 누락·중복·허용되지 않은 값 0건.
+      </p>
+      <div class="tw" style="margin:12px 0">
+        <table>
+          <thead><tr><th>영상</th><th class="num">긍정</th><th class="num">부정</th><th class="num">중립</th><th>최다 주제</th><th class="num">확신도 0.5 미만</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>10분 토론 (208건)</td>
+              <td class="num">26.0%</td><td class="num">17.8%</td>
+              <td class="num" style="font-weight:600">56.2%</td>
+              <td><b>T1 정보·내용</b> 121 · T9 기타 39 · T4 출연자 38</td>
+              <td class="num" style="color:var(--warn)">12%</td>
+            </tr>
+            <tr>
+              <td>술 리뷰 (74건)</td>
+              <td class="num up">64.9%</td>
+              <td class="num">9.5%</td><td class="num">25.7%</td>
+              <td><b>T8 감정·응원</b> 29 · T1 25 · T4 18</td>
+              <td class="num">4%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <b>주제 1위가 다르다.</b> 토론은 T1(정보·내용) — 시청자가 콘텐츠 주제를 놓고 의견을 낸다.
+        술 리뷰는 T8(감정·응원) — 진행자와 채널에 애정을 표한다. 조회 배수·좋아요율이 보여준
+        "도달 대 관계"의 차이가 댓글 주제에서도 같은 방향으로 나온다.
+      </p>
+      <p>
+        <b>토론의 중립 56%가 중요한 신호다.</b> "이완용은 간신이 아니라 매국노다" 같은 댓글은
+        영상을 칭찬하지도 비판하지도 않고 주제를 논한다. 감성 축에서는 중립인데 참여는 강하다.
+        중립 117건을 다시 살펴보니 <b>71%가 「의견·해석」</b>이었다 — 흩어진 잡음이 아니라
+        한 덩어리다. 이것이 <code>ideas.md</code> A-002(Reaction taxonomy) 제안의 근거가 됐다.
+      </p>
+    </div>
+
+    <div class="find note">
+      <h3>댓글이 많은 것과 갈리는 것은 다르다</h3>
+      <div class="tw" style="margin:12px 0">
+        <table>
+          <thead><tr><th>영상</th><th class="num">댓글율</th><th class="num">댓글율 배수</th><th class="num">호응</th><th class="num">논쟁</th><th class="num">긍/부/중</th></tr></thead>
+          <tbody>
+            <tr><td>10분 토론</td><td class="num">0.121%</td>
+              <td class="num dn">0.78</td><td class="num">0.59</td>
+              <td class="num dn">0.81</td><td class="num">54/37/117</td></tr>
+            <tr><td>술 리뷰</td><td class="num">0.257%</td>
+              <td class="num up">1.95</td><td class="num up">0.87</td>
+              <td class="num">0.25</td><td class="num">48/7/19</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note-line">호응 = 긍정 ÷ (긍정+부정) · 논쟁 = 2·min(긍정,부정) ÷ (긍정+부정) · 중립은 분모에서 제외</p>
+      <p style="margin-top:12px">
+        <b>논쟁이 0.81 대 0.25로 3.2배 갈린다.</b> 토론은 긍정 54 / 부정 37로 거의 반반이고,
+        술 리뷰는 48 / 7로 한쪽으로 쏠렸다. 라벨 비율이 둘 다 99% 이상이라 그대로 믿어도 된다.
+      </p>
+      <p>
+        그리고 <b>댓글율 배수가 첫 짐작을 뒤집는다.</b> 원 댓글율만 보면 술 리뷰가 2배지만,
+        같은 축·분기 비교군을 맞추면 토론은 0.78로 또래보다 오히려 <b>낮다.</b>
+        토론 영상의 댓글은 많아서 특이한 게 아니라 <b>갈려서</b> 특이한 것이다.
+      </p>
+    </div>
+
+    <div class="find">
+      <h3>길이 축을 나눈 것이 옳았다</h3>
+      <div class="tw" style="margin:12px 0">
+        <table>
+          <thead><tr><th>길이 축</th><th class="num">편수</th><th class="num">조회 중앙값</th><th class="num">좋아요율 중앙값</th><th class="num">댓글율 중앙값</th></tr></thead>
+          <tbody>
+            <tr><td>shorts (≤3분)</td><td class="num">194</td><td class="num">25,575</td><td class="num">0.74%</td><td class="num">0.084%</td></tr>
+            <tr><td>standard (≤20분)</td><td class="num">71</td><td class="num">126,851</td><td class="num">1.05%</td><td class="num">0.174%</td></tr>
+            <tr><td>long (20분 초과)</td><td class="num">35</td><td class="num">138,823</td><td class="num">1.23%</td><td class="num">0.164%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        조회 중앙값이 축마다 <b>5배 넘게</b> 차이 난다. 축을 섞어 배수를 계산했다면 쇼츠가
+        배수 20~40으로 표를 도배하고 롱폼은 전부 1 미만으로 눌렸을 것이다.
+        같은 이유로 유형별 성과도 쇼츠와 롱폼을 나눠 낸다.
+      </p>
+    </div>
+
+    <p style="margin-top:16px">
+      <b>수집 건수가 표기보다 적은 것은 답글 때문이다.</b> 유튜브 표기 댓글 수는 답글을
+      포함하는데 설계상 답글은 수집하지 않는다. 리포트에는 "263개 중 209개 분석"처럼
+      표시해야 독자가 오해하지 않는다.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>규칙 필터가 실제 댓글에서 한 일</h2>
+      <p>실제 284건에 적용. <b>하나도 버리지 않았다</b> — 오탐 0건.</p>
+    </div>
+
+    <div class="find note">
+      <h3>버리지 않은 것들 — 오탐 0의 내용</h3>
+      <p>규칙을 조금만 넓혔으면 사라졌을 실제 댓글들이다. 전부 통과해 다음 단계로 갔다.</p>
+      <div class="specimens">
+        <div class="spec"><span class="txt">오</span><span class="tag">한 글자</span></div>
+        <div class="spec"><span class="txt">유리구두는 유럽의 캪틴큐인갘ㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span><span class="tag">자음 반복</span></div>
+        <div class="spec"><span class="txt">쿠크리 우리니라에서 판매합니다. 쉽지는 않지만…</span><span class="tag">"판매" 포함</span></div>
+        <div class="spec"><span class="txt">두분의 팬이자 구독자로써 감사히 시청하겠습니다</span><span class="tag">"구독" 포함</span></div>
+        <div class="spec"><span class="txt">11:52 편집 댕웃기네욬ㅋㅋㅋㅋㅋ 담주가 마지막이라니 아쉽습니다 ㅠㅠ</span><span class="tag">타임스탬프</span></div>
+      </div>
+      <p>
+        특히 마지막 유형이 중요하다. 리포트가 잡아내야 할 진짜 피드백 —
+        <b>"조승원 기자님 목소리가 너무 작아요… 종종 시청에 불편함이 있습니다"</b>(음질 부정) —
+        같은 댓글을 규칙이 버리지 않는 것이 이 설계의 요점이다.
+      </p>
+    </div>
+
+    <div class="find">
+      <h3>2판이 보고한 미탐 1건 — 고쳐졌다</h3>
+      <div class="specimens">
+        <div class="spec"><span class="txt">4등!!</span><span class="tag" style="color:var(--good)">이제 잡힌다</span></div>
+      </div>
+      <p>
+        선점 댓글인데 패턴이 <code>^\d+\s*(등|빠|착)\s*$</code>라 뒤에 느낌표가 붙으면 놓쳤다.
+        <b>팀원이 패턴을 넓혀 고쳤다</b> — 이제 <code>4등!!</code> · <code>2빠ㅋㅋ</code> ·
+        <code>3착!</code>이 모두 잡히고, <code>선착순 4등입니다</code>처럼 문장이 붙은 것은
+        여전히 통과한다(선점 댓글이 아니므로 옳다).
+      </p>
+      <p>
+        <b>다만 이걸 고친 것은 <code>rule-tuner</code> 개선 루프가 아니다.</b> 하네스는
+        지어 놨지만 아직 한 바퀴도 돌지 않았다 — 검증되지 않은 상태다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>확정한 설계 판단</h2>
+      <p>논의를 거쳐 코드와 결정 문서에 반영한 것들. 굵은 표시가 이번 판에서 추가됐다.</p>
+    </div>
+    <ul class="clean">
+      <li><b>유형은 두 축 — 주제와 코너.</b> 주제는 판단이라 LLM이, 코너는 채널이 선언한 사실이라 재생목록이 정한다. 확실히 알 수 있는 것을 LLM에 묻지 않는다.</li>
+      <li><b>재생목록의 서랍은 비율로 거른다.</b> 채널 영상의 25% 이상을 담으면 코너가 아니라 보관함이다. 5편 미만도 뺀다.</li>
+      <li><b>성과는 쇼츠 / 롱폼 / 합침 세 판.</b> 합침 줄이 두 집단을 상쇄해 거짓말할 수 있으므로, 차이가 0.6 이상이면 리포트가 그 줄을 믿지 말라고 표시한다.</li>
+      <li><b>축별 주도권은 커버리지가 정한다.</b> 코너 커버리지가 낮으면 주제가 주 축이다. 리포트가 "이 채널은 무엇으로 보는 게 맞다"를 근거와 함께 밝힌다.</li>
+      <li>규칙은 버릴 것만 정하고 감성 판단은 하지 않는다. <code>👍👍👍</code>은 버리지도, 긍정으로 못 박지도 않고 그대로 LLM에 넘긴다.</li>
+      <li>자수는 판정 근거에서 뺐다. 한국어는 "유익함", "아쉽다"가 세 글자로 완결된 피드백이다.</li>
+      <li>URL 단독은 홍보 근거가 아니다. 언론사 채널에서는 출처를 제시하는 댓글이 가장 값진 피드백이다.</li>
+      <li>계산할 수 없으면 숫자 대신 <b>이유를 저장한다.</b> 비교군이 3편 미만이면 배수를 만들지 않고 "비교군 부족: …"을 남긴다. 좋아요를 숨긴 영상의 좋아요율은 0이 아니라 빈 값이다.</li>
+      <li>해석 테이블 키는 (대상, 프롬프트 버전, 모델). 모델이 키에 없으면 모델을 바꿔도 재분류가 일어나지 않는다.</li>
+      <li>댓글 커서는 두 개 — 최신 방향과 거슬러 받는 방향.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>막힌 것과 미결</h2>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>항목</th><th>상태</th><th>영향</th></tr></thead>
+        <tbody>
+          <tr><td><b>주제 라벨 300편을 사람이 본 적이 없다</b></td><td><span style="color:var(--crit)">미검증</span></td><td>이 보고서의 유형별 수치가 전부 그 라벨 위에 서 있다. <code>fixtures/labeled/video-types_14F_300.json</code>에 그대로 있으니 뒤집어 볼 수 있다</td></tr>
+          <tr><td>롱폼 유형별 표본</td><td><span style="color:var(--warn)">얇음</span></td><td>생활·정책 4편, 역사·인문 7편, 과학·건강 9편. 중앙값이 한두 편에 흔들린다 — 롱폼 배수는 방향만 읽고 값은 믿지 말 것</td></tr>
+          <tr><td>코너 커버리지</td><td>25%</td><td>300편 중 76편. 쇼츠에 코너가 없어서 생기는 구조적 한계라 더 올라가지 않는다. 롱폼만 보면 72%</td></tr>
+          <tr><td><code>rule-tuner</code> 개선 루프</td><td><span style="color:var(--crit)">한 번도 안 돌았다</span></td><td>하네스·훅·GOAL/HISTORY 파일은 있지만 실행 검증이 없다</td></tr>
+          <tr><td>홍보·스팸 표본</td><td>없음</td><td>수집한 284건에 홍보가 하나도 없어 미탐 검사가 안 됨. 관리가 덜 된 채널이 필요하다</td></tr>
+          <tr><td>호응·논쟁의 절대 기준</td><td>없음</td><td>댓글이 있는 영상이 2편뿐. 논쟁 0.81이 "논쟁적"이라는 기준이 아직 없고 상대 비교만 유효</td></tr>
+          <tr><td>조회 배수의 분모</td><td>미결</td><td>값은 나오지만 "같은 축·분기 중앙값"이 최종 정의인지 미정 — 연재형 채널에서 배수가 눌리는 문제가 남는다</td></tr>
+          <tr><td>라이브·프리미어 판정</td><td>미결</td><td>프리미어로 공개한 정규 영상이 통째로 빠질 위험</td></tr>
+          <tr><td>YouTube 약관의 데이터 보관 조항</td><td>미확인</td><td>댓글 원문 영구 보관 + 제3자 리포트 제공이 전제라 확인 필요</td></tr>
+          <tr><td>Claude API</td><td>미연결</td><td>의도한 순서. 프롬프트가 검증된 뒤에 붙인다</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>다음 단계</h2>
+    </div>
+    <div class="next">
+      <div class="step">
+        <span class="o">01</span>
+        <div class="b">
+          <b>주제 라벨 300편을 사람이 검수한다</b>
+          <p>이번 판의 모든 유형별 수치가 이 라벨 위에 서 있는데 아직 아무도 뒤집어 보지 않았다. 여기가 지금 가장 약한 고리다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">02</span>
+        <div class="b">
+          <b>선발대·주락이월드의 댓글을 판정한다</b>
+          <p>"도달이 낮다"까지는 나왔지만 왜인지는 댓글에 있다. 코너 단위로 댓글을 돌리면 호응·논쟁의 표본도 2편에서 20편대로 늘어 절대 기준을 잡을 수 있다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">03</span>
+        <div class="b">
+          <b>개선 루프를 실제로 한 바퀴 돌린다</b>
+          <p><code>4등!!</code>은 사람이 고쳤다. 하네스가 도는지는 아직 아무도 모른다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">04</span>
+        <div class="b">
+          <b>A-002 Reaction taxonomy 결정</b>
+          <p>중립 117건의 71%가 「의견·해석」이었다는 결과가 나왔다. 어느 축을 대체할지, 여러 라벨을 어떻게 셀지, 방향 없는 반응을 호응·논쟁에 어떻게 넣을지가 미결이다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">05</span>
+        <div class="b">
+          <b>다른 채널을 하나 넣는다</b>
+          <p>지금 모든 결론이 14F 하나에서 나왔다. 코너가 없는 채널, 스팸이 있는 채널에서 같은 파이프라인이 무엇을 내놓는지 봐야 한다.</p>
+        </div>
+      </div>
+      <div class="step blocked">
+        <span class="o">06</span>
+        <div class="b">
+          <b>Claude API 연결</b>
+          <p>프롬프트가 검증된 뒤에. 댓글 1,000건 1회 추정 약 $1.8 (Opus 5 기준, 캐시·배치 전).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    수치는 2026-09-10 기준이며 모두 실행으로 확인했다 — 영상 300편의 지표와 댓글 284건을
+    YouTube Data API로 수집해 SQLite에 저장했고(합계 105유닛), 조회 배수·좋아요율·댓글율·댓글율
+    배수는 <code>video_metrics</code>, 유형별 중앙값은 <code>type_metrics</code>,
+    감성·주제 라벨 282건은 <code>comment_labels</code>, 호응·논쟁은 <code>comment_engagement</code>에서
+    읽었다. 순위는 같은 길이 축·같은 분기의 15편 안에서 매긴 것이다.
+    영상 유형과 댓글 판정은 Anthropic API가 아니라 Claude Code가 <b>제목만을 맥락으로 삼아</b>
+    수행했으므로, 특정 장면을 가리키는 댓글이나 제목이 내용을 대표하지 않는 영상의 판정에는
+    한계가 있다. 코너는 판정이 아니라 채널의 재생목록에서 그대로 읽었다.
+  </footer>
+
+</div>
+</body>
+</html>

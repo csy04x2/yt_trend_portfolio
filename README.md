@@ -10,7 +10,8 @@
 | [youtube-trend-decisions.md](youtube-trend-decisions.md) | 아키텍처 설계 전 확정한 결정 사항, 기본값, 실패·재개 정책, 미결 사항 |
 | [youtube-trend-architecture.md](youtube-trend-architecture.md) | 아키텍처 v0.1. 모듈 구성, SQLite 스키마, 작업 상태 흐름, API 명세, Claude 호출 설계, 구현 순서 |
 | [ideas.md](ideas.md) | 아직 결정이 아닌 아이디어. 채택되면 결정·아키텍처 문서로 옮긴다 |
-| [docs/2026-09-09-progress-report_v2.html](docs/2026-09-09-progress-report_v2.html) | 진행 보고 (최신). 구현 현황·실험 결과·미결 사항 |
+| [docs/2026-09-10-progress-report_v3.html](docs/2026-09-10-progress-report_v3.html) | 진행 보고 (최신). 영상 유형 두 축, 쇼츠/롱폼 성과 역전, 2판 수치 정정 |
+| [docs/2026-09-09-progress-report_v2.html](docs/2026-09-09-progress-report_v2.html) | 진행 보고 2판. 댓글 판정 282건과 호응·논쟁 지표 |
 | [docs/2026-09-09-dev-summary.html](docs/2026-09-09-dev-summary.html) | 팀원 개발 정리. 선점 필터 PR, 감성 3분류의 한계, Reaction taxonomy 초안 |
 
 보고서는 크게 고칠 때마다 `_v2`, `_v3`으로 번호를 올리고 이전 판을 남긴다.
