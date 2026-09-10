@@ -64,7 +64,12 @@ def validate(payload: dict, video_ids: dict[str, str]) -> list[dict]:
         if code not in types:
             problems.append(f"{idx}: 정의되지 않은 유형 코드 {code!r}")
             continue
-        out.append({"index": idx, "video_id": video_ids[idx], "type_code": code})
+        conf = (payload.get("confidence") or {}).get(idx)
+        if conf is not None and (isinstance(conf, bool) or not isinstance(conf, (int, float)) or not 0 <= conf <= 1):
+            problems.append(f"{idx}: confidence must be between 0 and 1")
+            continue
+        out.append({"index": idx, "video_id": video_ids[idx], "type_code": code,
+                    "confidence": conf})
 
     missing = sorted(set(video_ids) - set(labels), key=lambda x: int(x))
     if missing:
@@ -116,11 +121,11 @@ def save_labels(conn, taxonomy_id: int, rows: list[dict],
     for r in rows:
         conn.execute(
             """INSERT INTO video_type_labels
-                   (video_id, taxonomy_id, prompt_version, model, type_code, labeled_at)
-               VALUES (?,?,?,?,?,?)
+                   (video_id, taxonomy_id, prompt_version, model, type_code, confidence, labeled_at)
+               VALUES (?,?,?,?,?,?,?)
                ON CONFLICT(video_id, taxonomy_id, prompt_version, model)
-               DO UPDATE SET type_code=excluded.type_code, labeled_at=excluded.labeled_at""",
-            (r["video_id"], taxonomy_id, prompt_version, model, r["type_code"], _now()))
+               DO UPDATE SET type_code=excluded.type_code, confidence=excluded.confidence, labeled_at=excluded.labeled_at""",
+            (r["video_id"], taxonomy_id, prompt_version, model, r["type_code"], r.get("confidence"), _now()))
     return len(rows)
 
 

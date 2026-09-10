@@ -354,6 +354,10 @@ def conclusion_draft(perf: list[dict], comments: list[dict],
          and (p.get("video_count") or 0) >= cfg.min_videos_headline),
         key=lambda p: -p["med_view_multiple"])
 
+    if not perf:
+        return f"{lab} {unit} 성과 집계가 없다. 정규화·유형 집계 상태를 확인해야 한다.", "empty"
+    if not ranked and any((p.get("video_count") or 0) >= cfg.min_videos_headline for p in perf):
+        return f"{lab} {unit} 영상 수는 충분하지만 조회 배수가 없어 성과를 비교할 수 없다.", "empty"
     if not ranked:
         return (f"{lab} 영상 중 {cfg.min_videos_headline}편 이상인 {unit}가 없어 "
                 f"성과를 비교할 수 없다."), "empty"
@@ -497,7 +501,8 @@ def _latest_metric_run(conn, taxonomy_id: int) -> str | None:
 
 def run(conn, channel_id: str, run_id: str, *,
         prompt_version: str | None = None, model: str | None = None,
-        client=None, cfg: AggregateConfig = DEFAULT) -> list[dict]:
+        client=None, cfg: AggregateConfig = DEFAULT,
+        label_sources: list[tuple[str, str]] | None = None) -> list[dict]:
     """영상·유형 댓글 집계를 만들고 길이 축마다 리포트를 하나씩 낸다.
 
     client 를 주면 결론 문장을 Claude 가 다듬는다. 안 주면 초안이 그대로
@@ -512,11 +517,27 @@ def run(conn, channel_id: str, run_id: str, *,
     pv, mdl = ver if ver else ("(없음)", "(없음)")
     labels_by_video = _read_labels(conn, pv, mdl) if ver else {}
 
+    if label_sources:
+        if len(set(label_sources)) != len(label_sources):
+            raise ValueError("duplicate label source")
+        labels_by_video = {}
+        seen = set()
+        for source_pv, source_model in label_sources:
+            for vid, rows in _read_labels(conn, source_pv, source_model).items():
+                for row in rows:
+                    if row["comment_id"] in seen:
+                        raise ValueError("overlapping comment labels across explicit sources")
+                    seen.add(row["comment_id"])
+                labels_by_video.setdefault(vid, []).extend(rows)
+        pv = "+".join(sorted({v for v, _ in label_sources}))
+        mdl = "mixed:" + "+".join(sorted({m for _, m in label_sources}))
+
     videos = {r["video_id"]: dict(r) for r in conn.execute(
         "SELECT video_id, length_axis, published_at FROM videos WHERE channel_id=?",
         (channel_id,))}
     if not videos:
         return []
+    labels_by_video = {vid: rows for vid, rows in labels_by_video.items() if vid in videos}
     collected = {r["video_id"]: r["n"] for r in conn.execute(
         "SELECT video_id, COUNT(*) AS n FROM comments GROUP BY video_id")}
     now = _now()
@@ -552,6 +573,12 @@ def run(conn, channel_id: str, run_id: str, *,
     length_of = {k: (x.get("length_axis") or "standard") for k, x in videos.items()}
     maps = {ax: _type_map(conn, channel_id, ax) for ax in ("topic", "segment")}
     reports = []
+    # Refresh both active axes for this report run, including previously unaggregated segments.
+    from app.pipeline import classify_videos as cv
+    for ax in maps:
+        tax = cv.active_taxonomy(conn, channel_id, ax)
+        if tax:
+            cv.aggregate(conn, channel_id, run_id, tax["taxonomy_id"], tax["prompt_version"], tax["source"])
 
     # -- (2) 유형별 + (3) 리포트. 길이 축마다 한 판씩 ----------------------
     for length_axis in (SHORTS, LONGFORM, ALL):
@@ -594,7 +621,7 @@ def run(conn, channel_id: str, run_id: str, *,
                  json.dumps(c["top_negative_topics"], ensure_ascii=False),
                  c["basis"], now))
 
-        mrun = _latest_metric_run(conn, tid)
+        mrun = run_id
         perf = [dict(r) for r in conn.execute(
             """SELECT * FROM type_metrics
                WHERE channel_id=? AND taxonomy_id=? AND length_axis=? AND run_id=?""",
@@ -609,8 +636,35 @@ def run(conn, channel_id: str, run_id: str, *,
                    FROM type_metrics WHERE channel_id=? AND taxonomy_id=? AND run_id=?""",
                 (channel_id, tid, mrun))])
 
+        quality = {}
+        if axis == "topic":
+            for row in conn.execute("SELECT video_id, type_code, confidence FROM video_type_labels WHERE taxonomy_id=?", (tid,)):
+                if row["video_id"] not in pool:
+                    continue
+                q = quality.setdefault(row["type_code"], {"total": 0, "low": 0, "unknown": 0})
+                q["total"] += 1
+                if row["confidence"] is None:
+                    q["unknown"] += 1
+                elif row["confidence"] < 0.5:
+                    q["low"] += 1
+        # Conservative prototype rule: majority low-confidence labels cannot headline a topic.
+        unreliable = {code for code, q in quality.items() if q["low"] > q["total"] / 2}
         draft, completeness = conclusion_draft(
-            perf, crows, names, TOPIC_NAMES, axis, length_axis, masked, cfg)
+            [p for p in perf if p["type_code"] not in unreliable],
+            [c for c in crows if c["type_code"] not in unreliable],
+            names, TOPIC_NAMES, axis, length_axis,
+            [m for m in masked if m["type_code"] not in unreliable], cfg)
+        if unreliable:
+            excluded = ", ".join(names.get(c, c) for c in sorted(unreliable))
+            draft = f"제목 라벨 과반의 확신도가 0.5 미만인 유형({excluded})은 성과 결론에서 제외했다. " + draft
+            if not any(p["type_code"] not in unreliable for p in perf):
+                draft = f"{LENGTH_LABEL[length_axis]} 제목 분류의 확신도가 낮아 모든 유형의 성과 결론을 보류한다. 집계 값은 있으나 검토가 필요하다."
+            if completeness == "full":
+                completeness = "partial"
+        if quality and any(q["unknown"] for q in quality.values()):
+            draft += " 제목 라벨 확신도가 없는 항목은 품질을 확인하지 못했다."
+        if label_sources and len(label_sources) > 1:
+            draft += " 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다."
         text, source = polish(client, draft) if client is not None else (draft, "draft")
 
         vm = {r["video_id"]: r["view_multiple"] for r in conn.execute(
@@ -623,7 +677,9 @@ def run(conn, channel_id: str, run_id: str, *,
               "view_multiple": vm.get(v)} for v in pool], cfg)
 
         versions = {"comment_label": pv, "model": mdl, "rules": "rules-v1",
-                    "axis": axis, "conclusion": source}
+                    "axis": axis, "conclusion": source,
+                    "label_sources": label_sources or ([ver] if ver else []),
+                    "title_label_quality": quality, "excluded_topics": sorted(unreliable)}
         conn.execute(
             """INSERT INTO reports
                    (channel_id, run_id, length_axis, taxonomy_id, axis, axis_reason,
@@ -652,5 +708,7 @@ def run(conn, channel_id: str, run_id: str, *,
             "conclusion": text, "conclusion_source": source,
             "completeness": completeness, "recent_vs_prior": rvp,
             "comment_rows": crows, "names": names,
+            "label_sources": label_sources or ([ver] if ver else []),
+            "title_label_quality": quality, "excluded_topics": sorted(unreliable),
         })
     return reports
