@@ -1,6 +1,6 @@
 """프로토타입 CLI.
 
-Anthropic API 를 부르는 명령은 아직 없다. 전부 금전 비용 0이다.
+돈이 나가는 명령은 `label` 하나뿐이다. 나머지는 전부 금전 비용 0이다.
 
     collect        채널 URL → SQLite (YouTube 키 필요)
     collect-video  영상 URL 하나만 → SQLite (약 5유닛)
@@ -8,6 +8,9 @@ Anthropic API 를 부르는 명령은 아직 없다. 전부 금전 비용 0이�
     rules          쌓인 댓글에 규칙을 적용하고 무엇이 걸렸는지 본다
     export-batch   댓글 묶음을 판정용 파일로 (Claude Code 가 판정)
     import-batch   판정 결과를 검증하고 저장
+    label          댓글 감성·주제를 API 로 판정 (유일하게 돈이 나간다)
+    report         6단계 집계와 결론 문장 — 쇼츠/롱폼/합침 세 판
+    prompts        프롬프트 파일과 DB 버전 대조
     stats          수집 현황과 설정 상태
 
 지금 답이 필요한 질문 — 규칙이 무엇을 잘못 버리는가 — 은 `rules`만으로
@@ -32,9 +35,13 @@ from app.clients.youtube import (  # noqa: E402
     YouTubeClient,
 )
 from app import exports  # noqa: E402
+from app.clients import claude  # noqa: E402
+from app.prompts import registry  # noqa: E402
 from app.db.connection import connect  # noqa: E402
 from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
 from app.pipeline import classify_videos as cv  # noqa: E402
+from app.pipeline import aggregate  # noqa: E402
+from app.pipeline import label_comments  # noqa: E402
 from app.pipeline import segments as sg  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
 from app.pipeline.normalize import run as normalize_run  # noqa: E402
@@ -588,6 +595,153 @@ def cmd_stats(args) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------
+# prompts — 프롬프트 파일과 DB 가 어긋나지 않았는지
+# --------------------------------------------------------------------------
+
+def cmd_prompts(args) -> int:
+    """저장소의 프롬프트와 DB 에 쌓인 버전을 대조한다.
+
+    라벨을 재현할 수 있는지를 보는 명령이다. DB 에 `topics-v1` 로 300건이
+    쌓여 있는데 그 v1 의 원문이 저장소에 없으면, 그 라벨은 아무도 다시
+    만들 수 없다.
+    """
+    prompts = registry.all_prompts()
+    if not prompts:
+        print("app/prompts/ 에 프롬프트 파일이 없다.", file=sys.stderr)
+        return 1
+
+    print(f"프롬프트 {len(prompts)}개\n")
+    for name, p in prompts.items():
+        mark = "스키마 O" if p.schema else "스키마 X"
+        print(f"  {name:<20} {p.version:<16} {mark:<9} {p.stage}")
+        if args.show:
+            head = p.system.strip().splitlines()[:args.show]
+            for line in head:
+                print(f"      | {line}")
+            print()
+
+    conn = connect(args.db)
+    problems = registry.check_against_db(conn)
+    print()
+    if problems:
+        print("DB 대조 — 재현할 수 없는 라벨이 있다:")
+        for m in problems:
+            print(f"  ! {m}")
+        return 1
+    print("DB 대조: 쌓인 라벨의 버전이 전부 저장소의 파일과 맞는다.")
+    return 0
+
+
+# --------------------------------------------------------------------------
+# label — 5단계를 API 로 (유일하게 돈이 나가는 명령)
+# --------------------------------------------------------------------------
+
+def cmd_label(args) -> int:
+    """규칙을 통과한 댓글을 Anthropic API 로 판정한다.
+
+    **이 저장소에서 금전 비용이 나가는 유일한 명령이다.** 기본은 --dry-run
+    이 아니지만, 대상 건수와 묶음 수를 먼저 찍고 시작한다.
+    """
+    conn = connect(args.db)
+    client = claude.from_config(config, model=args.model)
+    try:
+        p = label_comments.run(
+            conn, client, model=args.model, video_id=args.video_id,
+            limit=args.limit, size=args.size, dry_run=args.dry_run)
+    except claude.MissingPackage as e:
+        print(e, file=sys.stderr)
+        return 1
+    except claude.ClaudeError as e:
+        print(f"[중단] {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+    return 1 if p.failed else 0
+
+
+# --------------------------------------------------------------------------
+# report — 6단계 집계와 결론
+# --------------------------------------------------------------------------
+
+def _pct(x) -> str:
+    return "—" if x is None else f"{x * 100:.1f}%"
+
+
+def cmd_report(args) -> int:
+    conn = connect(args.db)
+    ch = conn.execute("SELECT channel_id, title FROM channels LIMIT 1").fetchone()
+    if not ch:
+        print("채널이 없다. 먼저 collect 를 돌려라.", file=sys.stderr)
+        return 1
+
+    client = None
+    if args.online:
+        try:
+            client = claude.from_config(config, model=args.model)
+        except claude.MissingPackage as e:
+            print(e, file=sys.stderr)
+            return 1
+
+    run_id = uuid.uuid4().hex[:12]
+    reports = aggregate.run(conn, ch["channel_id"], run_id, client=client)
+    if not reports:
+        print("리포트를 만들 재료가 없다. normalize · types 를 먼저 돌려라.",
+              file=sys.stderr)
+        return 1
+
+    print(f"\n{ch['title']} · run={run_id}")
+    for r in reports:
+        lab = aggregate.LENGTH_LABEL[r["length_axis"]]
+        ax = aggregate.AXIS_LABEL[r["axis"]]
+        print()
+        print("=" * 74)
+        print(f"[{lab}]  {ax} 축 · {r['completeness']} · 문장 출처 {r['conclusion_source']}")
+        print(f"  {r['axis_reason']}")
+        print()
+        for line in _wrap(r["conclusion"], 70):
+            print(f"  {line}")
+
+        if args.verbose:
+            cov = r["coverage"]
+            print()
+            print(f"  커버리지  주제 {cov['topic']:.0%} · 코너 {cov['segment']:.0%}")
+            rvp = r["recent_vs_prior"]
+            print(f"  전후 비교  {rvp['basis']}")
+            nm = r["names"]
+            for code, d in sorted(rvp["types"].items(),
+                                  key=lambda kv: -abs(kv[1]["delta"]))[:5]:
+                print(f"    {nm.get(code, code)[:20]:<22} {d['prior']:.2f} → "
+                      f"{d['recent']:.2f}  ({d['delta']:+.2f})")
+            rows = [c for c in r["comment_rows"] if c["valid_comment_count"]]
+            if rows:
+                print("  댓글이 있는 유형")
+                for c in rows:
+                    print(f"    {nm.get(c['type_code'], c['type_code'])[:20]:<22} "
+                          f"긍정 {_pct(c['positive_ratio'])} · "
+                          f"부정 {_pct(c['negative_ratio'])} · {c['basis']}")
+
+    if client is not None:
+        print()
+        print("  " + client.usage.describe(client.model))
+    print()
+    print(f"reports · type_comment_metrics · video_comment_metrics 에 저장했다 (run={run_id})")
+    return 0
+
+
+def _wrap(text: str, width: int) -> list[str]:
+    """한글 폭을 대충 맞춘 줄바꿈. 문장 단위로 끊는다."""
+    out: list[str] = []
+    line = ""
+    for sentence in text.split(". "):
+        s = sentence if sentence.endswith(".") else sentence + "."
+        if len(line) + len(s) > width and line:
+            out.append(line.strip())
+            line = ""
+        line += s + " "
+    if line.strip():
+        out.append(line.strip())
+    return out
+
+
 def main() -> int:
     config.setup_console()
     p = argparse.ArgumentParser(prog="yt-trend", description=__doc__)
@@ -665,6 +819,28 @@ def main() -> int:
     x.add_argument("--model")
     x.add_argument("--video-id")
     x.set_defaults(fn=cmd_export_labels)
+
+    rp = sub.add_parser("report", help="6단계 집계와 결론 문장 — 쇼츠/롱폼/합침 세 판")
+    rp.add_argument("--online", action="store_true",
+                    help="결론 문장을 Claude 가 다듬는다 (ANTHROPIC_API_KEY 필요)")
+    rp.add_argument("--model", help="--online 일 때 쓸 모델")
+    rp.add_argument("-v", "--verbose", action="store_true",
+                    help="커버리지·전후 비교·유형별 댓글까지")
+    rp.set_defaults(fn=cmd_report)
+
+    pr = sub.add_parser("prompts", help="프롬프트 파일과 DB 버전 대조 (비용 0)")
+    pr.add_argument("--show", type=int, default=0, help="각 프롬프트 앞 N줄도 본다")
+    pr.set_defaults(fn=cmd_prompts)
+
+    lb = sub.add_parser("label",
+                        help="댓글 감성·주제를 API 로 판정 — 돈이 나가는 유일한 명령")
+    lb.add_argument("--video-id")
+    lb.add_argument("--limit", type=int, help="이만큼만 (처음 붙일 때 쓴다)")
+    lb.add_argument("--size", type=int, default=20, help="묶음 크기")
+    lb.add_argument("--model", help="기본은 .env 의 ANTHROPIC_MODEL")
+    lb.add_argument("--dry-run", action="store_true",
+                    help="대상 건수와 묶음 수만 세고 호출하지 않는다")
+    lb.set_defaults(fn=cmd_label)
 
     s = sub.add_parser("stats", help="수집 현황과 설정 상태")
     s.set_defaults(fn=cmd_stats)

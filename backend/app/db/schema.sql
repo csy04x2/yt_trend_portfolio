@@ -195,3 +195,69 @@ CREATE TABLE IF NOT EXISTS quota_ledger (
     day_pt     TEXT PRIMARY KEY,
     units_used INTEGER NOT NULL DEFAULT 0
 );
+
+-- 6단계 결과 ①. 5단계 라벨을 영상 단위로 접은 것.
+-- comment_engagement 와 나란히 서지만 묻는 질문이 다르다:
+--   comment_engagement.approval  긍정 ÷ (긍정+부정)   — 편을 든 사람 중 몇이 찬성인가
+--   video_comment_metrics.positive_ratio  긍정 ÷ 라벨 전체 — 댓글 중 칭찬이 얼마나 되나
+-- 같은 영상에서 0.59 와 0.26 이 나온다. 둘 다 맞고, 리포트는 이름을 붙여 구분해야 한다.
+CREATE TABLE IF NOT EXISTS video_comment_metrics (
+    video_id            TEXT NOT NULL REFERENCES videos(video_id),
+    run_id              TEXT NOT NULL,
+    prompt_version      TEXT NOT NULL,
+    model               TEXT NOT NULL,
+    valid_comment_count INTEGER NOT NULL DEFAULT 0,
+    positive            INTEGER NOT NULL DEFAULT 0,
+    negative            INTEGER NOT NULL DEFAULT 0,
+    neutral             INTEGER NOT NULL DEFAULT 0,
+    positive_ratio      REAL,          -- 표본이 모자라면 NULL, 이유는 basis 에
+    negative_ratio      REAL,
+    neutral_ratio       REAL,
+    topic_counts_json   TEXT NOT NULL, -- {"T1": 121, ...}
+    top_positive_json   TEXT NOT NULL, -- 대표 댓글 3건. 반어 의심은 뺀다
+    top_negative_json   TEXT NOT NULL,
+    basis               TEXT NOT NULL,
+    computed_at         TEXT NOT NULL,
+    PRIMARY KEY (video_id, run_id, prompt_version, model)
+);
+
+-- 6단계 결과 ②. 유형 × 길이 축(shorts|longform|all)별 댓글 집계.
+-- 성과 쪽 type_metrics 와 같은 키 모양이라 리포트가 둘을 나란히 붙일 수 있다.
+CREATE TABLE IF NOT EXISTS type_comment_metrics (
+    channel_id          TEXT NOT NULL REFERENCES channels(channel_id),
+    run_id              TEXT NOT NULL,
+    taxonomy_id         INTEGER NOT NULL REFERENCES video_taxonomies(taxonomy_id),
+    type_code           TEXT NOT NULL,
+    length_axis         TEXT NOT NULL,
+    labeled_video_count INTEGER NOT NULL DEFAULT 0,
+    valid_comment_count INTEGER NOT NULL DEFAULT 0,
+    positive_ratio      REAL,
+    negative_ratio      REAL,
+    top_positive_topics_json TEXT NOT NULL,
+    top_negative_topics_json TEXT NOT NULL,
+    basis               TEXT NOT NULL,
+    computed_at         TEXT NOT NULL,
+    PRIMARY KEY (channel_id, run_id, taxonomy_id, type_code, length_axis)
+);
+
+-- 6단계 결과 ③. 한 판(길이 축 하나)의 리포트.
+-- conclusion_source 가 'draft' 면 Claude 가 다듬은 문장이 수치를 바꿔서 버려진
+-- 것이거나 애초에 호출하지 않은 것이다. 어느 쪽이든 초안이 나갔다는 뜻이고,
+-- 그 사실이 기록되지 않으면 나중에 "이 문장은 누가 썼나"를 알 수 없다.
+CREATE TABLE IF NOT EXISTS reports (
+    channel_id        TEXT NOT NULL REFERENCES channels(channel_id),
+    run_id            TEXT NOT NULL,
+    length_axis       TEXT NOT NULL,
+    taxonomy_id       INTEGER NOT NULL,
+    axis              TEXT NOT NULL,   -- topic | segment. 커버리지가 정한다
+    axis_reason       TEXT NOT NULL,   -- 왜 그 축으로 읽는지
+    prompt_version_set_json TEXT NOT NULL,
+    masked_types_json TEXT NOT NULL,   -- 합침이 가리고 있는 유형들
+    conclusion_draft  TEXT NOT NULL,
+    conclusion_text   TEXT,
+    conclusion_source TEXT NOT NULL,   -- draft | claude
+    recent_vs_prior_json TEXT NOT NULL,
+    completeness      TEXT NOT NULL,   -- full | performance_only | empty
+    built_at          TEXT NOT NULL,
+    PRIMARY KEY (channel_id, run_id, length_axis)
+);

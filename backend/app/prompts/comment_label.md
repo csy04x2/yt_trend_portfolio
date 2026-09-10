@@ -64,3 +64,31 @@
   ]
 }
 ```
+
+## 출력 스키마
+
+```json
+{
+  "type": "object",
+  "required": ["results"],
+  "properties": {
+    "batch": {"type": "string"},
+    "prompt_version": {"type": "string"},
+    "model": {"type": "string"},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["idx", "sentiment", "topics"],
+        "properties": {
+          "idx": {"type": "integer"},
+          "sentiment": {"enum": ["positive", "negative", "neutral"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "sarcasm_suspect": {"type": "boolean"},
+          "topics": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}
+```

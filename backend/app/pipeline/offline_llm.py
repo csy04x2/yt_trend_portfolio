@@ -42,40 +42,12 @@ def export_batch(
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     prompt = (PROMPTS / "comment_label.md").read_text(encoding="utf-8")
-
-    mapping = {str(i): c["comment_id"] for i, c in enumerate(comments, 1)}
-    lines = [
-        prompt,
-        "",
-        "---",
-        "",
-        "# 이 묶음",
-        "",
-        f"- batch: `{batch_id}`",
-        f"- 영상 제목: **{video_title}**",
-        f"- 댓글 {len(comments)}건",
-        f"- 내보낸 시각: {_now()}",
-        "",
-        "## 판정할 댓글",
-        "",
-    ]
-    for i, c in enumerate(comments, 1):
-        text = (c.get("text") or "").replace("\n", " ⏎ ")
-        likes = c.get("like_count", 0)
-        lines.append(f"{i}. (좋아요 {likes}) {text}")
-    lines += [
-        "",
-        "---",
-        "",
-        "## 번호 ↔ comment_id (판정에 쓰지 말 것. 되돌릴 때만 쓴다)",
-        "",
-        "```json",
-        json.dumps(mapping, ensure_ascii=False, indent=2),
-        "```",
-    ]
+    body, mapping = batch_body(comments, video_title, batch_id)
+    sep = "\n\n---\n\n"
+    text = prompt + sep + body + sep + _mapping_block(mapping)
 
     path = out_dir / f"{batch_id}.md"
-    path.write_text("\n".join(lines), encoding="utf-8")
+    path.write_text(text, encoding="utf-8")
 
     # 대응표를 별도 파일로도 남긴다 — import가 읽는다
     (out_dir / f"{batch_id}.map.json").write_text(
@@ -142,3 +114,70 @@ def validate_result(result: dict, mapping: dict[str, str]) -> list[dict]:
     if problems:
         raise ValidationError("\n  - ".join(["판정 결과가 입력과 맞지 않는다:"] + problems))
     return out
+
+
+def batch_body(comments: list[dict], video_title: str,
+               batch_id: str) -> tuple[str, dict[str, str]]:
+    """판정할 묶음 본문과 번호↔ID 대응표.
+
+    **오프라인 경로와 API 경로가 이 함수를 함께 쓴다.** 두 경로가 서로 다른
+    본문을 만들면, 오프라인에서 잰 정확도가 API 결과를 보장하지 못한다.
+    """
+    mapping = {str(i): c["comment_id"] for i, c in enumerate(comments, 1)}
+    lines = [
+        "# 이 묶음",
+        "",
+        f"- batch: `{batch_id}`",
+        f"- 영상 제목: **{video_title}**",
+        f"- 댓글 {len(comments)}건",
+        "",
+        "## 판정할 댓글",
+        "",
+    ]
+    for i, c in enumerate(comments, 1):
+        # 댓글 안의 줄바꿈은 기호로 바꾼다. 그대로 두면 번호 매긴 목록이
+        # 끊겨 모델이 한 댓글을 둘로 읽는다.
+        text = (c.get("text") or "").replace("\n", " ⏎ ")
+        lines.append(f"{i}. (좋아요 {c.get('like_count', 0)}) {text}")
+    return "\n".join(lines), mapping
+
+
+def _mapping_block(mapping: dict[str, str]) -> str:
+    return "\n".join([
+        "## 번호 ↔ comment_id (판정에 쓰지 말 것. 되돌릴 때만 쓴다)",
+        "",
+        "```json",
+        json.dumps(mapping, ensure_ascii=False, indent=2),
+        "```",
+    ])
+
+
+def save_labels(conn, rows: list[dict], prompt_version: str, model: str,
+                log=None) -> int:
+    """검증을 통과한 판정을 comment_labels 에 넣는다.
+
+    오프라인 import 와 API 경로가 함께 쓴다. (comment_id, 버전, 모델) 이
+    PK 라 같은 묶음을 다시 돌려도 덮어쓰기만 된다.
+    """
+    written = 0
+    for r in rows:
+        try:
+            conn.execute(
+                """INSERT INTO comment_labels (comment_id, prompt_version, model,
+                       sentiment, sentiment_confidence, is_sarcasm_suspect,
+                       topics_json, labeled_at)
+                   VALUES (?,?,?,?,?,?,?,?)
+                   ON CONFLICT(comment_id, prompt_version, model) DO UPDATE SET
+                       sentiment=excluded.sentiment,
+                       sentiment_confidence=excluded.sentiment_confidence,
+                       is_sarcasm_suspect=excluded.is_sarcasm_suspect,
+                       topics_json=excluded.topics_json,
+                       labeled_at=excluded.labeled_at""",
+                (r["comment_id"], prompt_version, model, r["sentiment"],
+                 r["confidence"], int(r["sarcasm_suspect"]),
+                 json.dumps(r["topics"], ensure_ascii=False), _now()))
+            written += 1
+        except Exception as e:   # 표본에서 온 comment_id 는 DB 에 없을 수 있다
+            if log:
+                log(f"  건너뜀 {r['comment_id']}: {e}")
+    return written
