@@ -19,7 +19,8 @@ from dataclasses import dataclass, field
 API = "https://www.googleapis.com/youtube/v3/"
 
 # 엔드포인트별 할당량 비용
-COST = {"channels": 1, "playlistItems": 1, "videos": 1, "commentThreads": 1, "search": 100}
+COST = {"channels": 1, "playlists": 1, "playlistItems": 1, "videos": 1,
+        "commentThreads": 1, "search": 100}
 
 
 class QuotaExhausted(RuntimeError):
@@ -103,6 +104,8 @@ class YouTubeClient:
             "handle": it["snippet"].get("customUrl"),
             "uploads_playlist": it["contentDetails"]["relatedPlaylists"]["uploads"],
             "subscriber_count": int(it["statistics"].get("subscriberCount") or 0) or None,
+            # 서랍 판별에 쓴다 — 재생목록이 채널의 몇 %를 담는지
+            "video_count": int(it["statistics"].get("videoCount") or 0) or None,
         }
 
     # ---------------- 영상 목록 ----------------
@@ -131,6 +134,38 @@ class YouTubeClient:
             )
             out.extend(body.get("items", []))
         return out
+
+    # ---------------- 재생목록 (코너) ----------------
+
+    def list_playlists(self, channel_id: str) -> list[dict]:
+        """채널이 만든 재생목록 전부. 코너 축의 원천이다."""
+        out, token = [], None
+        while True:
+            body = self._get("playlists", part="snippet,contentDetails",
+                             channelId=channel_id, maxResults=50,
+                             **({"pageToken": token} if token else {}))
+            for it in body.get("items", []):
+                out.append({"id": it["id"],
+                            "title": it["snippet"]["title"],
+                            "item_count": it["contentDetails"]["itemCount"]})
+            token = body.get("nextPageToken")
+            if not token:
+                return out
+
+    def iter_playlist_video_ids(self, playlist_id: str):
+        token = None
+        while True:
+            try:
+                body = self._get("playlistItems", part="contentDetails",
+                                 playlistId=playlist_id, maxResults=50,
+                                 **({"pageToken": token} if token else {}))
+            except Exception:
+                return          # 비공개·삭제된 재생목록은 건너뛴다
+            for it in body.get("items", []):
+                yield it["contentDetails"]["videoId"]
+            token = body.get("nextPageToken")
+            if not token:
+                return
 
     # ---------------- 댓글 ----------------
 

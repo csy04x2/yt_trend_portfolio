@@ -40,6 +40,10 @@ LATE_COLUMNS = {
     "videos": {
         "description_clean": "TEXT",     # 2단계 정규화가 채운다
     },
+    "video_taxonomies": {
+        # 유형 축. topic(판단) 과 segment(채널 재생목록) 를 나란히 둔다
+        "axis": "TEXT NOT NULL DEFAULT 'topic'",
+    },
     "video_metrics": {
         # 댓글율 배수. view_multiple 과 같은 비교군을 쓴다.
         # 비교군이 모자라면 NULL 이고 이유는 _basis 에 남는다

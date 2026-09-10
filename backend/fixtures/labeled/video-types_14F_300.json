@@ -1,0 +1,2435 @@
+{
+ "_note": "14F 최근 300편의 유형(주제)·코너 라벨. 주제는 Claude Code 판정, 코너는 채널 재생목록에서 읽은 사실.",
+ "_channel": "14F 일사에프",
+ "_range": "2026-05-07 ~ 2026-09-09",
+ "_dated": "2026-09-10",
+ "taxonomies": {
+  "topic": {
+   "version": 1,
+   "source": "claude-code-offline",
+   "types": {
+    "T_FOOD": "음식·식품",
+    "T_BIZ": "경제·기업",
+    "T_WORLD": "국제·시사",
+    "T_HIST": "역사·인문",
+    "T_SCI": "과학·건강",
+    "T_CULT": "문화·엔터",
+    "T_LIFE": "생활·정책"
+   }
+  },
+  "segment": {
+   "version": 2,
+   "source": "playlist",
+   "types": {
+    "PLWBWffnXix-8": "경제한쌈",
+    "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk": "10분 토론",
+    "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx": "선발대",
+    "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh": "월드클로즈업",
+    "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s": "주락이월드",
+    "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA": "돈슐랭"
+   }
+  }
+ },
+ "videos": [
+  {
+   "video_id": "TdHHtPTFbKE",
+   "title": "2026 리뉴얼 하겐다즈 맛이... #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-09-09",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "1vFGplnc4IQ",
+   "title": "나오기만 하면 유행 ‘한정선’을 집 앞에서?... GS25 ‘한정선 요거트 찹쌀떡’  / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-09-08",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "X3cmzHBN_kI",
+   "title": "고대 이집트와 크메르 제국의 놀라운 평행이론 (장준영X곽민수) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-09-08",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "Mvm5wweMnjg",
+   "title": "데뷔와 동시에 화제성 1위… 효리수 ‘Skibidi’ 차트 1위 기록 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-09-07",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "UhEyw0HM-4Y",
+   "title": "[기프티콘 이벤트] 드립의 성지가 된 하겐다즈 케이크 후기🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-09-07",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "lNAeiv7f4Vg",
+   "title": "스타벅스 첫 적자ㅣ쿠팡VS네이버 배송 경쟁ㅣ넥스트 위고비 탈모치료? 등 4가지 🥬경제 이슈🥬",
+   "length_axis": "standard",
+   "published_at": "2026-09-06",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "jGLI4R8zzS8",
+   "title": "불고기가 안 팔리는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-09-05",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "1Rb5qYVGRNQ",
+   "title": "리센느 원이의 ‘언밸런스 암스’... 이선민과 7개월 만에 지킨 약속 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-09-04",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "X6CoduUj64o",
+   "title": "세계의 화물이 한국으로? 세계 2위 환적항된 부산항 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-09-04",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "RjRoW4284cs",
+   "title": "네팔 터널 수색이 진짜 난관인 이유…허리 높이 진흙, 폐소공포증 공간, 위치조차 모르는 실종자 위치 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-09-04",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "NrWDbw3o9os",
+   "title": "치폴레 아시아 1호점이 강남에!... 한국에서도 통할까? / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-09-03",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "QJxVIcXIWAs",
+   "title": "90년대생이 엘리베이터를 무서워하는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-09-02",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "EErlqejybJ8",
+   "title": "매달 198만 원 → 176만 원…2027년 확 달라지는 실업급여",
+   "length_axis": "shorts",
+   "published_at": "2026-09-02",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "P8eomU4ro_E",
+   "title": "한일관 VS 우래옥 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-09-02",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "KxZU-1yl-Us",
+   "title": "서양 괴담과 동양 괴담의 차이 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-09-01",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "LgYcZvUJCSs",
+   "title": "곳곳에서 폐업하는 버스터미널… 증가하는 기차표 경쟁률 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-09-01",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "O_tu5YwUzpA",
+   "title": "괴담이 만들어진 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-31",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "C2LTGlerXb8",
+   "title": "한일관 VS 우래옥, 한국 소불고기 근본집🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-31",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "P-ZykdxdWCg",
+   "title": "대기 번호만 500번?... 수도권 진출한 창억떡 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-31",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "wqho35PxJMA",
+   "title": "비트코인 폭등 이유ㅣ이랜드 호카 총판 선정ㅣ카카오 인적분할 등 4가지 🥬 경제 이슈 🥬",
+   "length_axis": "standard",
+   "published_at": "2026-08-30",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "eYoQ1oT3WSk",
+   "title": "한국말 하는 브루노 마스 (2026.ver) #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-29",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "9bFjWLpbKz0",
+   "title": "영국식 중식의 정체 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-29",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "cUYF4qUUaLk",
+   "title": "꽃받침 귀신부터 콩콩 귀신까지… 학교괴담이 많은 이유 (곽재식X전혜정) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-08-28",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "tSei0D2J3nk",
+   "title": "까먹고 안했다간 내년부터 과태료 최대 1,000만원? 위험성평가가 뭐길래 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-28",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "ZhJLKPIOJJE",
+   "title": "브루노 마스가 알려주는 자신감 기르는 방법 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-28",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "g885KRzkeh8",
+   "title": "360톤 건물을 손으로?... 상상초월 일본의 성 옮기기 프로젝트 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-27",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "U5gk3lYDgJM",
+   "title": "브루노 마스 [The Romantic] 투어 갔다가, 2027 내한 소식 가져왔습니다 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-27",
+   "topic": "T_CULT",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "R7z6vqlAsuE",
+   "title": "대만에서 만난 한국의 맛🧄 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-27",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "azuy4ZHr184",
+   "title": "아들 죽이고 제때 밥 먹은 아버지 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-26",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "HHxtrzQu-q8",
+   "title": "‘나 아직 못 봤는데’… 용아맥이 고민하는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-26",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "HMiyMrl-9U0",
+   "title": "한국 갈릭 버거 맛 본 대만의 솔직 후기 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-26",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "v_F5FAy25yI",
+   "title": "그러니까 이게 왜 중식이냐고 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-26",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "bo6B9cC5ag4",
+   "title": "사도세자는 영조의 감정 쓰레기통이었다? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-25",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "uhl_DsN9xnI",
+   "title": "‘편의점 다 돌아도 못 구한다’... 요즘 알고리즘 점령한 ‘민음사 빵’ / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-25",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "hwq9OsrPcZU",
+   "title": "맥도날드 ‘한국 갈릭 버거' 대만에서 첫 런칭! 대만 현지 반응은 어떨까? | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-25",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "R_wD0Nr1cgU",
+   "title": "사도세자는 언제부터 미치기 시작했을까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-24",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "JkXqrTCNIps",
+   "title": "[EN] “이게 왜 중식..?” 영국식 탕수육과 짜장면🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-24",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "wMlfvdHKRvI",
+   "title": "미국, 중동에도?... 해외로 날아가는 미용실 프랜차이즈들 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-24",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "z_pSZcIXwus",
+   "title": "나이키 주가 폭락ㅣ기후동행패스 총정리ㅣ청년주거정책 요약 등 5가지 🥬 경제 이슈🥬",
+   "length_axis": "standard",
+   "published_at": "2026-08-23",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "kVUxIslFfEQ",
+   "title": "단백질을 왜 이렇게 좋아할까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-22",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "l6xWcAAVekI",
+   "title": "다 같은 때수건이 아니다?... 2030이 남대문으로 모이는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-21",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "zxHLt6nIIM4",
+   "title": "영화에는 나오지 않았던 사도세자 죽음의 진실 (김경일X한민) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-08-21",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "iWEMwuZMBtw",
+   "title": "일본 한정판 '농심 삼계탕 사발면' 드디어 한국 상륙… 근데 못 구한다고? / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-20",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "0k28U-4x6U8",
+   "title": "ADHD, 직장해 고백할까 말까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-19",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "CV1o7zLq7DE",
+   "title": "‘김가네’ 이어 ‘고봉민’, ‘김선생도’?... 요즘 잘 안 보이는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-19",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "yEo51ybXYRw",
+   "title": "펩시가 3조에 산 기업 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-19",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "fesM-PZd2ac",
+   "title": "ADHD의 원인은 유전? 스마트폰? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-18",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "H9OJsrvv39I",
+   "title": "\"여름 한 철 비가 3일 만에\"... 거제 덮친 기록적 폭우 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-18",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "GzmoR95A-Mg",
+   "title": "ADHD 직장생활 꿀팁 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-17",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "-dYQEjluGGk",
+   "title": "[EN] 처음 들어보는데... 미국에선 흥하는 사업🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-17",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "XQQgFe2pb5A",
+   "title": "놀부 회생 신청ㅣ달라지는 '퇴직연금' 투자ㅣ중고차 환불 등 5가지 모음 🥬경제 이슈🥬 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-16",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "8jDKBG7eJ48",
+   "title": "홈플러스 재개장 현장 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-16",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "wVRv8F1nTow",
+   "title": "혹시 나도 ADHD일까? 당신이 직장에서 힘든 이유 (나해란X노현재) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-08-15",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "-jNx9j2-5ug",
+   "title": "아포칼립스 아님 주의🚨 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-15",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "mj9HjZxfc-s",
+   "title": "우체국이 맛집 가이드를 만든 진짜 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-15",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "ieo3tVR0M4s",
+   "title": "특이하다는 콜라 유통 방법 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-15",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "691ulwKW7WM",
+   "title": "오디세이, 스파이더맨 4 잡을까?… 박 터지는 추석 극장가 자리싸움 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-14",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "Kjn5rf2XTe8",
+   "title": "병원, 박물관, 항공센터까지… 한국은 왜 외국까지 가서 건물을 지어주는 걸까? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-14",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "iSJlpHO-lJI",
+   "title": "“홈플러스 이번엔 꼭 살리길…” 재개장 첫날 직접 다녀왔습니다 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-14",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "BOAelK7yZvI",
+   "title": "부산 집배원이 점심시간에 가는 식당은? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-14",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "zC4aRaHI-yw",
+   "title": "마일리지 전환은 어떻게?... 대한항공-아시아나 합병 총정리 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-13",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "tOKJaH778Yk",
+   "title": "우체국이 이름 걸고 보증하는 부산 맛집은 뭐가 다를까? (ft.우슐랭 가이드) | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-13",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "pCeDo-nu2uE",
+   "title": "제미나이, 챗지피티에 이리저리 치이는 네이버 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-12",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "1Z1ffL52sgs",
+   "title": "션, 이봉주, 홍지민도 뛰었다! 토종AI가 만든 '독립운동가 러닝코스' / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-12",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "bZfGmR6d0jg",
+   "title": "의외로 점유율 2위 탄산음료 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-12",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "6oKuaBK7uvs",
+   "title": "'맥모닝 긴장해라'... 국밥 마케팅으로 매출 5배 뛴 버거킹 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-11",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "_8xgD6Z70Kk",
+   "title": "\"우리는 콜라가 아닙니다ㅠ\" 닥터페퍼가 절규한 이유🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-10",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "4lcA2Cy2RT0",
+   "title": "'인천공항, 지하철에도'... 외국인들이 180만 개 샀다는 쇼핑백 정체는? / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-10",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "eFV3ZpI34jU",
+   "title": "가짜 올리브유 판별법? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-08",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "Skek8_hQ-Kg",
+   "title": "2026 세제개편 ISA, 부동산 핵심만 요약｜미국 엔화 개입 등 5가지 모음 🥬경제 이슈🥬 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-08",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "ZSaYeJ3pY-Q",
+   "title": "'기쁜데 슬프다'...  ‘오디세이’, ‘스파이더맨 4’ 흥행에도 영화관이 못 웃는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-07",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "deOvVHGx78E",
+   "title": "“돔구장 좀 지어주세요”... 프로야구도 못 피해 간 역대급 폭염 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-06",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "UE_gJ08KwVw",
+   "title": "이주민 난입 사태…모로코에서 7만 명 몰려오자, 스페인은 손쓸 수 없었다 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-06",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "InVElM4mWj8",
+   "title": "비행기표 포함해도 더 싸다?… 미국에서도 온다는 K-건강검진 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-05",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "tURzhOc0p1Y",
+   "title": "전쟁 길어지는데 체첸까지… 러시아 총선 앞둔 푸틴의 속내 (w.일리야) / 14F",
+   "length_axis": "long",
+   "published_at": "2026-08-05",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "DufQHp4F4gk",
+   "title": "올리브유 등급 40초 정리 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-05",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "R1-hVKN6i2w",
+   "title": "《오디세이》의 시작, 트로이 전쟁의 원인은? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-04",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "AfC_58UGr7s",
+   "title": "뿌링클에 밥을?… 필리핀 국룰 조합 들고나온 bhc 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-04",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "EDrllyuK-Cw",
+   "title": "말차 인기 이 정도였어? 다도 장인의 하소연 “말차 구하기 힘들어요” / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-04",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "_gKbjCesBBA",
+   "title": "엎드려 자면 야한 꿈을 꾼다? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-03",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "nqkMZVRR5JI",
+   "title": "코카인 수입의 세 배? 유럽을 뒤집은 올리브유 사기극🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-03",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "vct47tnLAwA",
+   "title": "KTX 요금 내린다고? KTX·SRT 9월 통합으로 바뀌는 것들 총정리 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-08-03",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "71x0CuIXzcU",
+   "title": "꿈에서 죽으면 생기는 일 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-02",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "QaYpcJ0icI0",
+   "title": "단일 레버리지 규제｜창신메모리｜키미｜엔화 최저 등 7가지 모음 🥬경제 이슈🥬 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-08-02",
+   "topic": "T_BIZ",
+   "segment": "PLWBWffnXix-8"
+  },
+  {
+   "video_id": "MLayDe5fAL4",
+   "title": "동해에서 참치가 떼로 잡히는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-08-01",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "ZEWeVWa28UA",
+   "title": "《인셉션》은 가능하다? 꿈을 조작하는 방법 (우충완X박준화) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-08-01",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "VCXdJRSYyyM",
+   "title": "‘구글맵에도 등장’... 팬들 과몰입하게 만든 구글 X ‘스파이더맨 4’ 이스터에그 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-31",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "3crMnc7CMBA",
+   "title": "‘절반이 2030’...  출시 10개월 만에 처방 150만 건 돌파한 마운자로 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-30",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "1hEsN57s5Yw",
+   "title": "두 사람을 동시에 사랑할 수 있을까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-29",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "pKv2fjZn_Nc",
+   "title": "합계출산율 1.2 일본 vs 0.8 한국... \"그래도 한국은 다르다\" / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-29",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "gk1ljtM834Y",
+   "title": "원조는 못 이긴다?... ‘42년째 1위’ 팔도 그리고 2위는? / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-29",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "odKdfFp1Uq0",
+   "title": "국산 참치 많이 잡혀도 못 파는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-29",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "rqzFcIYF7Hw",
+   "title": "인간이 일부일처제를 선택한 이유? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-28",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "oCxs-geaTyk",
+   "title": "‘있어도 안 잡는’ 노르웨이 고등어... ‘수출 247% 늘어난’ 한국산 고등어 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-28",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "rUZgduEV1dw",
+   "title": "주가 폭락, 기름값 32% 인상…투자자 탈출 중이라는 인니 근황 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-28",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "uAMFuwVa04A",
+   "title": "육체적 바람 VS 정서적 바람 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-27",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "duER88bx5sg",
+   "title": "[EN] 참치는 왜 비쌀까?🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-27",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "guKDISvnfzc",
+   "title": "폭염 이어 이번엔 산불? 국가비상사태까지 선포된 유럽 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-27",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "QuunWDh0PwQ",
+   "title": "내일 지구가 멸망한다면 마실 위스키 한 잔은? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-27",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "dF6xnVObJgM",
+   "title": "[Q&A] 내일 지구가 멸망한다면 마실 위스키는? 엔트리부터 고숙성까지 맞춤형 위스키 추천 | 주락이월드 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-26",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "pGCqY0jy7YM",
+   "title": "초대받지 않은 손님 등장🐦 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-25",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "y-n8awtnAkA",
+   "title": "3만 원 스무디에는 뭐가 들어있을까 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-25",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "SzEgZOvWilM",
+   "title": "두사람을 동시에 사랑하는게 가능할까? (나해란X양나래X정창권X엑소쌤) | 10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-25",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "o4AKrdaxWZM",
+   "title": "인도 의대 입시에서 벌어진 일…’문제 유출, 그리고 재시험’ 거리로 쏟아진 Z세대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-24",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "K8yeSIuR5C4",
+   "title": "문이 열려 있는데 왜? 나도 모르게 정신 잃는다는 질식재해 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-24",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "opJ8t5qqIsA",
+   "title": "컵묵밥 먹으러 오픈런까지 하는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-24",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "_-aYYSC0Ks4",
+   "title": "'영국에서 베일 벗었다’... 업그레이드된 갤럭시 Z8 시리즈 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-23",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "O6TROTGtTl8",
+   "title": "컵묵밥부터 컵만두, 컵냉면까지… 요즘 대세 '컵푸드' 직접 먹어보고 비교해 봤습니다 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-23",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "oF6aqjlKusk",
+   "title": "이완용은 어떻게 죽었을까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-22",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "fkq6qfXd8r8",
+   "title": "‘왕사남’, ‘군체’보다 빠르다… 극과 극 반응에도 ‘호프’ 240만 뚫었다 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-22",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "4dVEhjqU0pc",
+   "title": "마트에서 소개팅 한다는 LA근황 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-22",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "mGfUYyV3pRs",
+   "title": "조선시대 춤신춤왕 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-21",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "QNJMXbDlqKY",
+   "title": "‘메모리 부족’ 다음은 ‘엔화 하락’? 애플이 일본 아이폰 가격 올린 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-21",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "FD_aD6kk8vQ",
+   "title": "간신도 사랑을 할 수 있다 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-20",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "w1pKU9ZYNc4",
+   "title": "[EN] 망하기 직전의 마트, 미국 상류층의 최애가 됐다🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-20",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "h21x-Y2Dg6U",
+   "title": "스페인 웃고 아르헨티나 울었다... 막 내린 2026 북중미 월드컵 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-20",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "9ygNOckhcf8",
+   "title": "삼전닉스가 주식은 물론 취업과 결혼 시장까지 바꿨다 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-20",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "8UceIGtYax0",
+   "title": "듣도 보도 못한 술, 영국산 와사비 보드카 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-20",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "hwZSXe3VaN8",
+   "title": "우유로 만든 보드카?? 와사비 넣은 술?? 와인킹도 깜놀한 ‘기상천외한 희귀 술’ 6종 리뷰 | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-19",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "gA87B1eTrPY",
+   "title": "위급한 순간, 주차장에서 '이 색' 찾으세요 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-18",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "1WqnZnqhNFQ",
+   "title": "의외로 피자헛 많이 먹는 나라 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-18",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "EorZZyZ2d0s",
+   "title": "조선을 망친 간신배들의 최후는 어땠을까? (김재원X곽재식)ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-18",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "EMZzYDP47e8",
+   "title": "“태양광, 풍력만으론 감당 안돼요” AI 시대, 에너지 전문가들이 말하는 에너지위기 대처법 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-17",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "OFiYzx-pEAQ",
+   "title": "입자마자 시원해지는 냉조끼? ❄️#shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-17",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "tKu_kVh6oIg",
+   "title": "주차장에서 본 이 색, 알고보니 안전장치? / 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-16",
+   "topic": "T_LIFE",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "HcBBrKBRQNg",
+   "title": "당근, 번개장터도 ‘상품권 거래 금지’... 홈플러스 사태 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-16",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "vHYjt4ofyI4",
+   "title": "이스라엘이 처한 진짜 위기? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-15",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "P7TblauaCxw",
+   "title": "폭염이 바꾼 유럽… 에어컨도, 물가도, 정치도 흔들렸다 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-15",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "rLrQtQjBiSc",
+   "title": "가는 곳마다 오픈런... 일본 찍고 몽골, 태국까지 간 마뗑킴 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-15",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "7AcfNXxkwII",
+   "title": "월드컵 22분에 등장한 낯선 풍경… 하이드레이션 브레이크 등장, 그 이유는? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-15",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "fmctzl0d9Ew",
+   "title": "치즈 크러스트 꼬다리 탄생 비화 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-15",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "Up_eRh2szO4",
+   "title": "레바논 국민들은 헤즈볼라를 어떻게 볼까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-14",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "_xOyoUc2ptI",
+   "title": "‘전자담배, 보조배터리, 액체류’… 올여름 해외여행 주의 사항 총정리 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-14",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "jvT_bwFZ2zM",
+   "title": "중동에서 가장 복잡한 나라? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-13",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "eGiB0aCIous",
+   "title": "[EN] 치즈 크러스트 꼬다리로 업계 신화 쓴 피자헛🍕 왜 이렇게 됐을까🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-13",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "RxD6kWqhDQE",
+   "title": "상장 폐지 위기에 모나미 구출 작전…  모나미 송재화 사장의 자필 편지 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-13",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "QRjYDd5dmoU",
+   "title": "맛없는 하이볼 맛있게 살리기 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-13",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "iN6_Wp6W22g",
+   "title": "“이게 고작 1만 원짜리??” 초저가 위스키로 고급진 맛 폭발하는 하이볼 만드는 법 | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-12",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "4n9xpV6COCs",
+   "title": "파리 바게트는 차원이 달라 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-11",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "Q3UFvK-fY2U",
+   "title": "이스라엘이 아무리 폭격해도 헤즈볼라가 망하지 않는 이유 (박현도X윤영휘)ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-11",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "aLuUzZAqzDw",
+   "title": "미국에서 유행한다는 새로운 맛(?) #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-11",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "R0_FLOCkfKw",
+   "title": "독일 vs 한국, K-방산에 과제 남긴 캐나다 잠수함 수주... 나토의 벽 어떻게 넘나 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-10",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "qIyysSGkSJU",
+   "title": "‘1억 병 팔렸다’... 쌀 음료에 빠진 베트남 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-10",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "f2UjcsBFMNQ",
+   "title": "파리 가면 진짜 '파코' 만날 수 있을까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-10",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "TqTlcEr8gIY",
+   "title": "너무 더우면 술맛도 ‘뚝’? 32.2도부터 술 소비 꺾인다 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-10",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "K46I9q_ReXw",
+   "title": "우산을 왜 그렇게 들어요?… 불붙은 장마철 우산 매너 논쟁 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-09",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "zDZztCsVmsQ",
+   "title": "프랑스 대통령도 먹는다는 파리 1등 바게트, 직접 먹어봤습니다 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-09",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "Mk4NjkMQlnU",
+   "title": "‘농심, 서울우유도 방 뺐다’... 생필품도 사라진 홈플러스 매대 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-08",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "y-ncdO52DkY",
+   "title": "미국인 냉장고에서 나온 이것 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-08",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "zeraH8xmWhc",
+   "title": "홀란부터 국회의원까지 다 함께 노 젓는 노르웨이 응원 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-08",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "qyCOLtEHV3w",
+   "title": "SMR은 수출효자가 될 수 있을까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-07",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "fY9HCIzVaXE",
+   "title": "기후동행카드랑 K-패스를 합친다고?... '기후동행카드 플러스' 어디까지 왔나 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-07",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "zn0L7KwwR08",
+   "title": "한국의 SMR 기술 수준? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-06",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "3yT6WxEw7Gc",
+   "title": "[EN] “매일 떠먹어요ㅋ” 기어코 미국인 손에 들어간 고추장 근황🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-06",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "I6XD4ONYaUk",
+   "title": "'볼하트 부처', '이순신 와인 마개'... 상반기 매출 최고 찍은 '뮷즈' 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-06",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "ZUjxNOmKePI",
+   "title": "프랑스 사람들이 K-POP에 열광하는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-04",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "wX_0D7M2NJo",
+   "title": "대체육 맛있다 vs 맛없다 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-04",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "dXAGUS9xXqE",
+   "title": "AI가 쏘아올린 전력 대란…글로벌 빅테크들이 소형 원전에 투자하는 이유 (김학주X조윤제)ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-04",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "Ovkn7Pl4B_U",
+   "title": "생성형 AI 확산속도, 인터넷 확산속도 8배… 한국이 가야할 방향은? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-03",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "4mz7H1VikW4",
+   "title": "프랑스 사람들, 한국 드라마 여기까지 안다고? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-03",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "TMHJm0qXQmE",
+   "title": "'CGV 따라잡을 수 있었는데'... 2년 만에 합병 중단된 메가박스 X 롯데시네마 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-02",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "gXtQlOVAqpI",
+   "title": "3만 5천 명이 몰린 K-엑스포 근황, 프랑스에서도 먹힐까? | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-07-02",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "dTqok0IEo-k",
+   "title": "관광객 밀려올 때 노 젓는다? 일본이 출국세, 숙박세 올리는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-07-01",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "jgu6VEu3-Ho",
+   "title": "이민 막겠다더니 역대급 이민자… 브렉시트 10년 영국, 무엇이 문제였나? / 14F",
+   "length_axis": "long",
+   "published_at": "2026-07-01",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "rBlPUfwkzEA",
+   "title": "대체육의 인식이 나빠진 이유? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-07-01",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "d_6RcPecAVk",
+   "title": "한국 축구는 맥락이 없다 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-30",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "oGdDWp-0fho",
+   "title": "이탈리아인들이 이런 기분이었겠구나… / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-30",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "tpkFD9Dwk-Y",
+   "title": "파리, 6월인데 46도? 진짜 여름엔 어쩌라고…",
+   "length_axis": "standard",
+   "published_at": "2026-06-30",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "zT3BeKoMIfo",
+   "title": "한국 축구는 죽었다? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-29",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "T3b3lJT_8Pc",
+   "title": "[EN] 사람들이 대체육을 안 먹게 된 이유🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-29",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "fcRw0AMH-bk",
+   "title": "'34위 탈락'에 '홍명보 감독 사퇴'... 한국 축구 이대로 괜찮을까? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-29",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "eaS3MRkxEE0",
+   "title": "명령어 단 두줄로 할리우드 스타 소환! 이거 괜찮을까? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-29",
+   "topic": "T_SCI",
+   "segment": null
+  },
+  {
+   "video_id": "_UTs1D2tHOw",
+   "title": "나마비루 장인의 생맥 따르는 기막힌 비결 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-29",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "K-a4NPf2Qds",
+   "title": "아사히 회장님도 감탄했다!! 일본보다 더 맛있게 생맥주 따라주는 서울의 술집 | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-28",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "HSotq0KXLR4",
+   "title": "남아공 선제골에 얼어붙은 여의도 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-27",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "UWBkwz55jrs",
+   "title": "1.5도 상승, 폭염은 어디까지 위험해질까? (김해동X이은수) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-27",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "EGZuCFDDYdU",
+   "title": "'국내 팬 먼저 받을게요'... 달라진 K팝 공연 예매 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-26",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "kwvr6eYYhsg",
+   "title": "여의도 거리 응원 현장에서 남아공 전 후기 들어봤습니다. #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-26",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "eA5FhK3rGRQ",
+   "title": "호주 음주 폭동ㄷㄷ  #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-26",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "JAOjh_6bkfg",
+   "title": "슬슬 밀려오는 불안감… 북중미 월드컵 남아공 전 결국 0:1 패배 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-25",
+   "topic": "T_CULT",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "skXjNl0ALeI",
+   "title": "‘많아도 너무 많다’… 첫날부터 인파 몰린 2026 서울국제도서전 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-25",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "H3uugnTy2oo",
+   "title": "K-후식 국룰 볶음밥 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-24",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "C1jYk0ECcwA",
+   "title": "씻으러 부산까지 간다고? MZ, 외국인 몰리는 이곳 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-24",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "vozlj9SAtxk",
+   "title": "미국 술집 위장 방법 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-24",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "xVppcJXuZKo",
+   "title": "한국인 특: 독초까지 다 먹음 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-23",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "cohM1YIaamY",
+   "title": "'한국에선 못 구한다'... 일본에서만 파는 농심 사발면 시리즈 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-23",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "ElcO2ILmAh4",
+   "title": "짜장면 먹을 때 왜 단무지를 줄까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-22",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "DrVhUHhyBxs",
+   "title": "[EN] 미국의 술쟁이들을 위한 시간🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-22",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "SGns-9gbh1s",
+   "title": "‘이번 주가 절정이라고?’... 수도권 출몰 시동 거는 러브버그 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-22",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "MhUFNmSuxiM",
+   "title": "‘카보베르데’ 검색하셨죠? 팔로워만 5만에서 1500만으로 증가한 보지냐 선수 근황 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-22",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "6JtG4EEelyY",
+   "title": "위스키에 다녀간 천사와 악마? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-22",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "SqEL65De3qI",
+   "title": "위스키 라벨, 아직도 제대로 못 읽으시나요? 고수들도 99% 헷갈리는 위스키 용어 총정리!!  | 주락이월드 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-21",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "U6ERL6s9WpU",
+   "title": "“안 먹으면 한국인 아님” K-후식 국룰이 볶음밥인 이유 (강현영X박찬일) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-20",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "Cc7O47wlFs4",
+   "title": "'괴물' 스페이스X 상장, 美 AI 빅테크 상장이 코스피에 끼칠 영향은? / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-19",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "DT8zU_845IU",
+   "title": "'아침 9시부터 치킨'... 월드컵 효과 제대로 누리는 치킨집 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-19",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "sKdJc7kILwQ",
+   "title": "”식당, 술집에서 단체 응원하시려면 돈 내세요”, 북중미 월드컵 멕시코 근황 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-19",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "9ieX84e_bbA",
+   "title": "2026 월드컵, 대한민국 16강 갈까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-19",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "-OrzcNRrZT0",
+   "title": "'도미노에 밀렸다'... '4조 원'에 매각된 피자헛 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-18",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "Z3h11g_LxTo",
+   "title": "전쟁의 양상이 달라졌다? 드론이 바꾼 전쟁의 룰, 우크라이나 전쟁 현황 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-17",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "85HRfHkB9iw",
+   "title": "‘무도키즈도 이제 직장인’... 품절 대란 난 맘스터치 '무한상사 세트' / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-17",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "M0cRnRXI2Pw",
+   "title": "우리나라 vs 일본 우유 소비 차이 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-17",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "yYDNRzUJ-tQ",
+   "title": "한국 축구는 앞으로 어떡해야 할까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-16",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "oV40uR1N-H0",
+   "title": "“빵집, 맛집 20% 이상 할인?”... 배달앱도 뛰어든 ‘마감 할인’ / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-16",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "tLJBnvVC2Rg",
+   "title": "일본 역대 최다 곰의 습격.. 창문 열고, 수도꼭지 틀고, 철조망도 넘는다! / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-16",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "TZmjA5D4sok",
+   "title": "한국 축구가 일본에 밀리는 이유? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-15",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "ntRiZywYogg",
+   "title": "[EN] 우리나라 우유는 왜 이렇게 비쌀까🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-15",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "2y_NW5FlO5o",
+   "title": "\"원래 일본 과일이었는데\"... 참외가 '코리안 멜론'된 사연 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-15",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "3f_78jhV8Os",
+   "title": "왼손엔 하이볼 오른손엔 가라아게 #Shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-15",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "Vq8yw1QyqbY",
+   "title": "1초에 1.6병 팔린다!! 일본 국민 위스키 가쿠빈은 왜 하이볼의 상징이 됐을까?  | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-14",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "GE1A7Dtzwdg",
+   "title": "‘또 품절 대란’… 5천 원으로 텀블러 생태계 파괴하러 온 다이소 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-13",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "9f39QsEYwoo",
+   "title": "본격 귀 호강 TIME #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-13",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "B9fdHAmzPrM",
+   "title": "한국은 어디까지 올라갈까? 북중미 월드컵 16강 시나리오 (박문성X페노) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-12",
+   "topic": "T_CULT",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "CMp_Ag1jWaU",
+   "title": "한국인들의 못말리는 얼음 사랑♥️ 업그레이드된 LG 얼음정수기 근황 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-12",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "I2A92Tdd388",
+   "title": "지금 문구거리는 말랑이 열풍🔥 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-12",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "JiObuQdORUI",
+   "title": "유독 한국에서 잘 나가는 파파존스? #Shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-12",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "vf6On661nkw",
+   "title": "북중미 맛집 정리해봤습니다… 푸틴, 필리 샌드위치, 치킨윙, 캔자스시티 바비큐 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-12",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "YNa-9LUzoGA",
+   "title": "외계인 발견하면 삼전·닉스 사라고? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-11",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "QF0zwLLXP0Q",
+   "title": "‘세계 최고 높이의 십자가’... 짓는 데만 144년 걸린 사그라다 파밀리아 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-11",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "a4AzMzYAfRs",
+   "title": "주말이면 발 디딜 틈도 없다! 어른들이 문방구에 몰리는 이유 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-11",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "3z77Pv-8lBo",
+   "title": "나사가 제작 반대한 SF 영화 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-10",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "w7YpHZ6JB_w",
+   "title": "오늘부터 신청 시작! 기후동행카드 환급 신청 방법 싹 다 알려드립니다 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-10",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "KSnbMyPmFz8",
+   "title": "해저케이블이 끊어지면 무슨 일이 벌어질까? 바닷속 미중 인프라 전쟁 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-10",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "XBEkxYLAafA",
+   "title": "외국인 관광객 1894만명 와도 적자? 놀유니버스가 주목한 관광 트렌드 변화 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-10",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "3fqm6ptoTKY",
+   "title": "파파존스 광고에 나온 피자헛 창업자 레전드 기싸움 #Shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-10",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "TjzfrPa-QJU",
+   "title": "‘오마카세’ 지고 ‘뷔페’ 뜬다... 고물가에 울고 웃는 외식업계 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-09",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "8UVFsff9M_k",
+   "title": "피자천재 파파존스🍕한국은 잘나가는데 미국은 힘든 이유🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-09",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "5sbglcebEj4",
+   "title": "‘호치’ 가고 ‘페포’ 온다…삼양이 마스코트 바꾼 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-08",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "z0B5dCfbxxs",
+   "title": "논알코올 맥주 16캔 음주 운전 안 걸릴까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-08",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "Em77bwcj14E",
+   "title": "논알코올도 취할까?? 논알코올 맥주 20잔 먹고 음주측정기 불어봤습니다!! (결과 충격)  | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-07",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "ae59jTN9IR8",
+   "title": "평양냉면 입문의 현장 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-06",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "pBCs0C2eUYU",
+   "title": "옛날 엽기떡볶이 가격 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-06",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "j1zf5tN1PHs",
+   "title": "폭로의 날이 다가왔다? 외계인 미스터리 (곽재식X항성) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-06",
+   "topic": "T_SCI",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "Mri3KwayiEI",
+   "title": "실업자 200만 이란, 3년만에 최고 물가 상승률 미국... 회복 가능할까? / 14F",
+   "length_axis": "long",
+   "published_at": "2026-06-05",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "IZYFaRzqGoE",
+   "title": "절규하는 피카츄가 2천만 원… 어디까지 올라가는 거예요? 포켓몬 카드깡 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-05",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "2LmQAa0f1Ng",
+   "title": "서울에서 제일 오래된 평양냉면집 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-05",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "XVQMQHKnyPg",
+   "title": "요즘은 이거 때문에 한국 온다며? 올영, 피부과 찾는 외국인들 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-05",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "mJELQO0Uclk",
+   "title": "우래옥 vs 서령 vs 옥돌현옥, 평냉 입문은 어디가 좋을까? | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-04",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "ZPGavYLY3aI",
+   "title": "\"2030에 이어 5060도 안 마신다\"... 매출 감소한 주류 업계 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-04",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "jsqqylMAMgk",
+   "title": "엽떡 가격 동결 비결? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-03",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "JHwFkvt2jDU",
+   "title": "젠슨황이 극찬한 ‘PC방’… 외국인 몰리는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-02",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "-tWfcFPNdg8",
+   "title": "대박난 '미국 1호점' 이어 2호점까지... 열심히 노 젓는 올리브영 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-06-01",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "ZfJL8qSULIs",
+   "title": "[EN] 떡볶이 생태계를 뒤바꾼 괴물 프랜차이즈 엽떡🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-06-01",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "UbKOR4EW7Do",
+   "title": "싱클톤이 밍밍톤이 된 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-06-01",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "cqCtxQntAsM",
+   "title": "영국과 대만에서는 1등?? 유독 한국에서만 멸시당하는 ‘불호 위스키 3대장’ 마셔봤습니다!!  | 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-31",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "GhZtfD9lud8",
+   "title": "차 명인이 알려주는 말차🍵 타는 법 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-30",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "-rJhfuAn-X0",
+   "title": "삼전닉스가 증명했다… 대한민국이 R&D에 투자하는 이유 (김현정X이준만) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-30",
+   "topic": "T_BIZ",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "qFjf5-z3HNc",
+   "title": "쇼박스의 안목… ‘왕사남’, ‘살목지’에 이어 ‘군체’ 개봉 5일 만에 200만 돌파 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-29",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "M_VuxT87ND4",
+   "title": "“1m도 위험하다고?” 아무리 조심해도 추락 사고가 나는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-29",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "kFBnGmhMy5c",
+   "title": "남영돈 항정살이 특별한 이유 #Shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-29",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "TtYLBLZbu3Q",
+   "title": "옛 선비들이 걷던 과거길 '문경새재' #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-28",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "MvY3YQUUu9w",
+   "title": "나이키, 아디다스 말고 다이소? 스포츠판 흔드는 다이소 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-28",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "YPRz3F8hBGo",
+   "title": "올해만 100만명 다녀간 문경, 8,900원으로 싹 돌아봤습니다 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-28",
+   "topic": "T_LIFE",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "hEQV20t53BY",
+   "title": "“유행은 돌아오는 거야~”... 동대문 북적이게 한 ‘젤리슈즈’ 꾸미기 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-27",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "8aJrXJvc3Bo",
+   "title": "볼리비아에 등장한 역대급 길막…”제발 집에 가고 싶어요” / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-27",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "uFexytSdqvA",
+   "title": "금돼지식당이 쓰는 고기 #Shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-27",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "zJQoszWry7E",
+   "title": "고대인들이 본 곰의 미친(?) 능력 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-26",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "TgGFXcfbdrM",
+   "title": "'미국도 제쳤다'... 세계 수출 2위 찍은 K-뷰티 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-26",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "OcoFCOALs_o",
+   "title": "고조선의 수도는 어디일까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-25",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "ohrQPGop-rU",
+   "title": "[EN] “삼겹살이 다 똑같지 뭐” 3대 고깃집 어떻게 다를까🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-25",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "CuktQC7bbw4",
+   "title": "문화재에도 빨간 딱지 붙여라?? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-25",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "XB2eQSLUoq8",
+   "title": "11월부터 술병에 붙게 될 경고 딱지 직접 만들어봤습니다.. 진짜 이래도 되는 건가요??  | 주락이월드 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-24",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "bzTp-4SkgKU",
+   "title": "인스타 도배 된 우베, 무슨 맛일까?",
+   "length_axis": "shorts",
+   "published_at": "2026-05-24",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "3Pg-9gGTGw8",
+   "title": "요즘 난리라는 우베는 어디에서 왔을까 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-23",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "0AAjH7TwfiY",
+   "title": "말차 소주의 맛은? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-23",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "D7Efrohet4s",
+   "title": "단군 할아버지가 터잡으신 곳은 어디일까? 고조선 영역 미스터리 (조법종X임용한) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-23",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "CEv6V2dWK7M",
+   "title": "'오픈 30분 만에 북적북적' ... 일본인들이 '요아정'에 줄 서는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-22",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "XDsyTtkqCqs",
+   "title": "최대 변수가 된 대만, 미중정상회담 총정리 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-22",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "XXIlfplbo-Q",
+   "title": "\"세계에서 가장 위험한 국물 요리\"... CNN이 주목한 부산 복어국 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-21",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "jx8WSmfpTTs",
+   "title": "살상 무기 수출 빗장 풀었다! 일본은 왜 지금 '전쟁할 수 있는 나라'가 되려하나 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-20",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "4ww1YxdXMwg",
+   "title": "“이번엔 불닭 냉면이다”... 맛잘알들이 추천하는 불닭 냉면 레시피 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-20",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "lpIczOZi8Cg",
+   "title": "아이유랑 경쟁하는 소주 회사 사장님 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-20",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "94RRRKWFsbU",
+   "title": "트로이 전쟁은 아직 끝나지 않았다? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-19",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "N9kxvt7sT-U",
+   "title": "치폴레, 호프만이 찾는 서울… 글로벌 맛집이 서울을 1호점으로 택하는 이유 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-19",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "fa-jxUY3UsI",
+   "title": "블랙아웃에 거리 불 지른 쿠바 주민들…”비축분 없어” 두 손 든 쿠바 정부 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-19",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "lI3F6Jm93Mw",
+   "title": "트로이 전쟁은 역사일까 신화일까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-18",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "m0w8BuC1z9g",
+   "title": "[EN] 아이돌 모델 때보다 더 친한 것은 선양소주 근황 (ft.말차소주)🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-18",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "miFALFPzfkA",
+   "title": "‘작년 364만 명, 올해만 100만 명’… 외국인 몰리는 부산 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-18",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "r3ukezItoiI",
+   "title": "대학교랑 콜라보한 그 시절 소주 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-18",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "heZ4lxURENE",
+   "title": "이거 한 병에 1500만 원?? .. 아파트 한 채 털어 넣은 13년 덕후의 미친 술장| 주락이월드 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-17",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXsxaUgqk9DZLUvjHsWh3SA9s"
+  },
+  {
+   "video_id": "4ATptVBVgqo",
+   "title": "중생들이여... 절로 오라... #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-16",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "zIfHoRwSfWY",
+   "title": "《일리아스》와 《오디세이》 사이, 트로이 전쟁의 모든 것 (김헌X곽재식) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-16",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "Lu8bvUheKK0",
+   "title": "OTT 구독권에 포토카드까지? 내년부터 달라지는 헌혈 제도 핵심 요약 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-15",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "kWTyfHviPtw",
+   "title": "요즘 MZ들이 '절'로 가는 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-15",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "8S2_UPXMdoc",
+   "title": "하루에만 600만 봉지?... CNN이 찾아간 국내 최대 신라면·짜파게티 공장 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-14",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "_v9EYoCwi4A",
+   "title": "이란 전쟁과 물가 상승에도 MAGA 지지율 90%, 미국 중간선거 미리보기 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-14",
+   "topic": "T_WORLD",
+   "segment": "PL0NUN1E_oXswnrNTIXYEW1Fjsr5bgNkfh"
+  },
+  {
+   "video_id": "oCVdZ5zrBtw",
+   "title": "\"한국 오면 약국부터\"... 외국인 관광객 필수 코스 된 대형 약국 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-13",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "Y2I2ymZmDpU",
+   "title": "칼국수 한 그릇이 만 원 훌쩍! 대학생들이 절로 몰리는 진짜 이유 🍚 | 선발대 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-13",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXszQJ9ZTHXzMn05D33wNaCEx"
+  },
+  {
+   "video_id": "egvliNWhn5Y",
+   "title": "멕시코, K팝 스트리밍 성장률 500%... 그들은 왜 K팝을 듣는가? / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-13",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "CxomDVsez3U",
+   "title": "제3차 세계대전은 일어날까? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-12",
+   "topic": "T_WORLD",
+   "segment": null
+  },
+  {
+   "video_id": "fQIpagqyU1g",
+   "title": "버거 2세트에 1만 원… 가성비로 고물가에 살아남은 햄버거 근황 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-12",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "nsaQjyeuZHU",
+   "title": "1차 대전 병사들이 미쳤던 이유 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-11",
+   "topic": "T_HIST",
+   "segment": null
+  },
+  {
+   "video_id": "x2fthIBw9Iw",
+   "title": "[EN] 해외에서 난리라는 우베💜 대체 우베가 뭔데🥄ㅣ돈슐랭 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-11",
+   "topic": "T_FOOD",
+   "segment": "PL0NUN1E_oXswX2Vd9a9ecqyCCUWx-UWKA"
+  },
+  {
+   "video_id": "uy94YO4BrfI",
+   "title": "일본인이 알아버린 한국의 맛… 들기름 사러 모인다는 ‘충북제유소’ / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-11",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "2Buot8i5VFI",
+   "title": "하루만에 주가 75% 폭락한 중국 기업 #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-09",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "gQzrNe2xxl4",
+   "title": "5분만에 1개 대대 전멸…제1차 세계대전에서 일어난 일들 (윤영휘X샤를세환) ㅣ10분 토론 / 14F",
+   "length_axis": "long",
+   "published_at": "2026-05-09",
+   "topic": "T_HIST",
+   "segment": "PL0NUN1E_oXszBUIfGKh3T67PAHayhYiSk"
+  },
+  {
+   "video_id": "2MUAR1NHdYM",
+   "title": "너가 왜 거기서 나와...?",
+   "length_axis": "shorts",
+   "published_at": "2026-05-08",
+   "topic": "T_CULT",
+   "segment": null
+  },
+  {
+   "video_id": "2lQov8TIfuk",
+   "title": "암표상들이 단속을 빠져나가는 방법… 선예매권부터 매크로까지 프로야구 점령한 암표상 / 14F",
+   "length_axis": "shorts",
+   "published_at": "2026-05-08",
+   "topic": "T_LIFE",
+   "segment": null
+  },
+  {
+   "video_id": "v_ohmr5YSPk",
+   "title": "“너가 왜 거기서 나와…?” 필리핀·캄보디아에서 K-스타트업이 하는 일 / 14F",
+   "length_axis": "standard",
+   "published_at": "2026-05-08",
+   "topic": "T_BIZ",
+   "segment": null
+  },
+  {
+   "video_id": "cp1KTDWbeZY",
+   "title": "스타벅스 누른 중국 1위 카페의 맛은? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-08",
+   "topic": "T_FOOD",
+   "segment": null
+  },
+  {
+   "video_id": "M7pOmFd1l-I",
+   "title": "미국 VS 중국, 로봇 분야 승자는? #shorts",
+   "length_axis": "shorts",
+   "published_at": "2026-05-07",
+   "topic": "T_BIZ",
+   "segment": null
+  }
+ ]
+}

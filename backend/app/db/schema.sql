@@ -98,6 +98,62 @@ CREATE TABLE IF NOT EXISTS video_metrics (
     PRIMARY KEY (video_id, run_id)
 );
 
+-- 3단계 결과 — 영상 유형 체계와 라벨.
+-- 체계는 채널마다 다르다. 종합 채널은 주제로 갈리고 단일 주제 채널은
+-- 다른 축이 필요하다. 그래서 채널별로 제안받고 버전을 붙인다.
+CREATE TABLE IF NOT EXISTS video_taxonomies (
+    taxonomy_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel_id     TEXT NOT NULL REFERENCES channels(channel_id),
+    -- 축이 둘이다. topic 은 판단(LLM)이고 segment 는 사실(채널 재생목록)이다.
+    -- 채널마다 축별로 하나씩 활성 체계를 둔다.
+    axis           TEXT NOT NULL DEFAULT 'topic',   -- topic | segment
+    version        INTEGER NOT NULL,
+    source         TEXT NOT NULL,          -- claude | claude-code-offline | user
+    prompt_version TEXT,
+    types_json     TEXT NOT NULL,          -- {code: name}
+    created_at     TEXT NOT NULL,
+    is_active      INTEGER NOT NULL DEFAULT 1,
+    UNIQUE (channel_id, version)
+);
+
+CREATE TABLE IF NOT EXISTS video_type_labels (
+    video_id       TEXT NOT NULL REFERENCES videos(video_id),
+    taxonomy_id    INTEGER NOT NULL REFERENCES video_taxonomies(taxonomy_id),
+    prompt_version TEXT NOT NULL,
+    model          TEXT NOT NULL,
+    type_code      TEXT NOT NULL,
+    confidence     REAL,
+    rationale      TEXT,
+    labeled_at     TEXT NOT NULL,
+    PRIMARY KEY (video_id, taxonomy_id, prompt_version, model)
+);
+
+-- 유형별 성과. length_axis 로 세 판을 만든다 — 'shorts' / 'longform' / 'all'.
+--
+-- 세 판이 필요한 이유가 데이터로 확인됐다. 14F 에서 역사·인문은 쇼츠 조회
+-- 배수 0.59(최하위)인데 롱폼은 1.61(1위)다. 합쳐서 나온 0.88 은 양쪽 어느
+-- 쪽도 설명하지 못하는 숫자였다. 그래도 합침을 남기는 것은 채널 전체를
+-- 한눈에 볼 자리가 필요해서다 — 대신 리포트가 가려진다는 사실을 함께 적는다.
+--
+-- 합침을 NULL 이 아니라 'all' 로 두는 이유: SQLite 는 PK 열의 NULL 을 서로
+-- 다른 값으로 취급해 중복을 막지 못한다. 아키텍처 4.3 은 NULL 로 적었지만
+-- 그대로 두면 합침 행이 ON CONFLICT 로 갱신되지 않고 실행마다 쌓인다.
+CREATE TABLE IF NOT EXISTS type_metrics (
+    channel_id            TEXT NOT NULL REFERENCES channels(channel_id),
+    run_id                TEXT NOT NULL,
+    taxonomy_id           INTEGER NOT NULL,
+    type_code             TEXT NOT NULL,
+    length_axis           TEXT NOT NULL,  -- shorts | longform | all
+    video_count           INTEGER NOT NULL,
+    med_view_count        REAL,
+    med_like_rate         REAL,
+    med_comment_rate      REAL,
+    med_view_multiple     REAL,
+    med_comment_rate_multiple REAL,
+    computed_at           TEXT NOT NULL,
+    PRIMARY KEY (channel_id, run_id, taxonomy_id, type_code, length_axis)
+);
+
 -- 5단계 결과. model='claude-code-offline' 이면 API가 아니라 Claude Code가 판정한 것.
 CREATE TABLE IF NOT EXISTS comment_labels (
     comment_id           TEXT NOT NULL REFERENCES comments(comment_id),

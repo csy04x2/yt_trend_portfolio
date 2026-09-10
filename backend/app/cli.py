@@ -34,6 +34,8 @@ from app.clients.youtube import (  # noqa: E402
 from app import exports  # noqa: E402
 from app.db.connection import connect  # noqa: E402
 from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
+from app.pipeline import classify_videos as cv  # noqa: E402
+from app.pipeline import segments as sg  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
 from app.pipeline.normalize import run as normalize_run  # noqa: E402
 from app.pipeline.offline_llm import (  # noqa: E402
@@ -219,6 +221,124 @@ def cmd_engagement(args) -> int:
     print("  논쟁(contention) = 2·min(긍정,부정) ÷ (긍정+부정).  0 쏠림 ~ 1 반반")
     print("  neutral 은 두 값의 분모에서 뺀다. 라벨비율이 낮으면 그만큼만 믿는다.")
     print(f"\ncomment_engagement 갱신 (run_id={run_id})")
+    return 0
+
+
+
+# --------------------------------------------------------------------------
+# types  (3단계 영상 유형)
+# --------------------------------------------------------------------------
+
+AXIS_LABEL = {"shorts": "쇼츠", "longform": "롱폼", "all": "합침"}
+
+
+def cmd_segments(args) -> int:
+    """채널 재생목록에서 코너를 읽어 두 번째 유형 축으로 넣는다.
+
+    주제(topic)는 LLM 판단이지만 코너는 채널이 선언한 사실이다.
+    추측할 이유가 없으므로 규칙으로만 뽑는다.
+    """
+    conn, yt, _ = _client(args)
+    ch = conn.execute("SELECT channel_id, title FROM channels LIMIT 1").fetchone()
+    if not ch:
+        print("채널이 없다. 먼저 collect 를 돌려라.", file=sys.stderr)
+        return 1
+
+    playlists, membership = sg.fetch(yt, ch["channel_id"])
+    total = yt.resolve_channel(
+        f"https://www.youtube.com/channel/{ch['channel_id']}").get("video_count") or 0
+    segs = sg.pick_segments(playlists, total)
+    sizes = {p["id"]: p["item_count"] for p in playlists}
+    picked = sg.assign(membership, segs, sizes)
+
+    ours = {r["video_id"] for r in conn.execute(
+        "SELECT video_id FROM videos WHERE channel_id=?", (ch["channel_id"],))}
+    rows = [{"video_id": v, "type_code": p} for v, p in picked.items() if v in ours]
+    used = {r["type_code"] for r in rows}
+    types = {pid: name for pid, name in segs.items() if pid in used}
+
+    tid = cv.save_taxonomy(conn, ch["channel_id"], types, "playlist", "seg-v1",
+                           axis="segment")
+    cv.save_labels(conn, tid, rows, "seg-v1", "playlist")
+    print()
+    print(f"코너 {len(types)}개 · 우리 영상 {len(rows)}/{len(ours)}편에 배정 "
+          f"({len(rows)/max(len(ours),1)*100:.0f}%)")
+    print(f"코너 없음 {len(ours)-len(rows)}편 — 이 채널은 쇼츠를 재생목록으로 관리하지 않는다")
+    _report(yt, args.db)
+    return 0
+
+
+def cmd_types(args) -> int:
+    conn = connect(args.db)
+    ch = conn.execute("SELECT channel_id, title FROM channels LIMIT 1").fetchone()
+    if not ch:
+        print("채널이 없다. 먼저 collect 를 돌려라.", file=sys.stderr)
+        return 1
+
+    if args.load:
+        payload = json.loads(pathlib.Path(args.load).read_text(encoding="utf-8"))
+        idx = json.loads(pathlib.Path(args.map).read_text(encoding="utf-8"))["map"]
+        try:
+            rows = cv.validate(payload, idx)
+        except cv.ValidationError as e:
+            print("검증 실패 — 저장하지 않았다.", file=sys.stderr)
+            print(f"  {e}", file=sys.stderr)
+            return 1
+        tid = cv.save_taxonomy(conn, ch["channel_id"], payload["types"],
+                               args.model, payload.get("taxonomy_version", "v1"),
+                               axis="topic")
+        n = cv.save_labels(conn, tid, rows, payload.get("taxonomy_version", "v1"), args.model)
+        print(f"검증 통과: 유형 {len(payload['types'])}종 · 라벨 {n}건 저장 (taxonomy_id={tid})")
+
+    tax = cv.active_taxonomy(conn, ch["channel_id"], getattr(args, "axis", "topic"))
+    if not tax:
+        print("유형 체계가 없다. --load 로 먼저 넣어라.", file=sys.stderr)
+        return 1
+    names = json.loads(tax["types_json"])
+    run_id = uuid.uuid4().hex[:12]
+    # 라벨을 넣을 때 쓴 모델 이름은 체계의 source 와 같다 (topic 은
+    # claude-code-offline, segment 는 playlist). args.model 을 그대로 쓰면
+    # 축을 바꿨을 때 아무것도 못 찾는다.
+    mets = cv.aggregate(conn, ch["channel_id"], run_id, tax["taxonomy_id"],
+                        tax["prompt_version"], tax["source"])
+    if not mets:
+        print("집계할 것이 없다. normalize 를 먼저 돌렸는지 확인해라.", file=sys.stderr)
+        return 1
+
+    print()
+    print(f"[{ch['title']}] 유형별 성과 · taxonomy v{tax['version']}")
+    for axis in ("shorts", "longform", "all"):
+        g = sorted([m for m in mets if m["length_axis"] == axis],
+                   key=lambda m: -(m["med_view_multiple"] or 0))
+        if not g:
+            continue
+        print()
+        print(f"── {AXIS_LABEL[axis]} ──")
+        print(f"  {'유형':<12}{'편수':>5}{'조회중앙':>11}{'좋아요율':>9}"
+              f"{'댓글율':>9}{'조회배수':>9}{'댓글배수':>9}")
+        print("  " + "-" * 66)
+        for m in g:
+            def f(k, p=2, pc=False):
+                v = m.get(k)
+                if v is None:
+                    return "—"
+                return f"{v*100:.{p}f}%" if pc else f"{v:.{p}f}"
+            print(f"  {names.get(m['type_code'], m['type_code']):<12}{m['video_count']:>5}"
+                  f"{(m['med_view_count'] or 0):>11,.0f}{f('med_like_rate',2,True):>9}"
+                  f"{f('med_comment_rate',3,True):>9}"
+                  f"{f('med_view_multiple'):>9}{f('med_comment_rate_multiple'):>9}")
+
+    masked = cv.masked_types(mets)
+    if masked:
+        print()
+        print(f"  [주의] 합침이 가리고 있는 유형 {len(masked)}개 — "
+              "쇼츠와 롱폼이 반대로 움직인다")
+        for m in masked:
+            print(f"    {names.get(m['type_code'], m['type_code']):<12}"
+                  f"쇼츠 {m['shorts']:.2f}  vs  롱폼 {m['longform']:.2f}")
+        print("    이 유형은 합침 줄을 믿지 말고 위 두 판을 봐라.")
+    print()
+    print(f"type_metrics 갱신 (run_id={run_id})")
     return 0
 
 
@@ -526,6 +646,16 @@ def main() -> int:
     i.add_argument("--dry-run", action="store_true", help="검증만 하고 DB에 안 씀")
     i.add_argument("--show", type=int, default=20)
     i.set_defaults(fn=cmd_import_batch)
+
+    sg_p = sub.add_parser("segments", help="재생목록에서 코너를 읽어 유형 축으로 (YouTube 키 필요)")
+    sg_p.set_defaults(fn=cmd_segments)
+
+    ty = sub.add_parser("types", help="영상 유형별 성과 — 쇼츠/롱폼/합침 세 판")
+    ty.add_argument("--axis", choices=("topic", "segment"), default="topic")
+    ty.add_argument("--load", help="유형 라벨 JSON 을 검증해 넣는다")
+    ty.add_argument("--map", help="번호→video_id 대응표 JSON")
+    ty.add_argument("--model", default="claude-code-offline")
+    ty.set_defaults(fn=cmd_types)
 
     x = sub.add_parser("export-labels", help="라벨 결과를 CSV/JSON 으로 (검수·공유용)")
     x.add_argument("--out", default="./exports/comment-labels",
