@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 개발 정리 · 2026-09-09</title>
+<style>
+:root{
+  --bg:#f6f8fb; --card:#fff; --ink:#111827; --muted:#667085; --line:#e5e7eb;
+  --accent:#2563eb; --good:#15803d; --warn:#b45309; --soft:#eef4ff; --soft2:#f8fafc;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;line-height:1.65}
+.page{max-width:1040px;margin:0 auto;padding:54px 24px 90px}
+header{background:linear-gradient(180deg,#ffffff,#fbfdff);border:1px solid var(--line);border-radius:18px;padding:34px 34px 28px;box-shadow:0 8px 30px rgba(15,23,42,.05)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:31px;line-height:1.25;margin:8px 0 10px;letter-spacing:-.03em}
+.lede{font-size:16px;color:#475467;max-width:760px;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.badge{font-size:12px;border:1px solid #dbe4f0;background:#fff;border-radius:999px;padding:6px 10px;color:#475467}
+section{margin-top:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+h2{font-size:20px;margin:0 0 14px;letter-spacing:-.02em}
+h3{font-size:15px;margin:0 0 8px}
+p{margin:0 0 12px;color:#475467}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.stat .v{font-size:23px;font-weight:800;margin-top:5px}
+.stat .n{font-size:12px;color:var(--muted);margin-top:4px}
+.good{color:var(--good)}
+.warn{color:var(--warn)}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
+.step{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 10px;text-align:center}
+.step b{display:block;font-size:13px}
+.step span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+.step.done{border-top:3px solid var(--good)}
+.step.now{border-top:3px solid var(--accent);background:var(--soft)}
+.step.todo{border-top:3px solid #cbd5e1}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:var(--soft2)}
+tr:last-child td{border-bottom:0}
+code{background:#f2f4f7;padding:2px 5px;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em}
+.note{border-left:4px solid var(--accent);background:#f8fbff;padding:14px 16px;border-radius:8px}
+.checks{display:grid;gap:9px}
+.check{display:flex;gap:10px;align-items:flex-start}
+.dot{width:20px;height:20px;border-radius:50%;background:#e8f5ed;color:var(--good);font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto;margin-top:2px}
+.small{font-size:12px;color:var(--muted)}
+.footer{margin-top:34px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:820px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="eyebrow">Development Summary · 2026-09-09</div>
+  <h1>YT Trend — 오늘의 개발·분석 진행 정리</h1>
+  <p class="lede">
+    팀원의 최신 구현을 main에 반영하고, 선점 댓글 필터 개선을 실제 PR로 병합한 뒤,
+    오프라인 댓글 라벨링 결과를 검수하면서 기존 감성 3분류의 한계를 발견하고
+    대체 Reaction taxonomy 초안을 설계했다.
+  </p>
+  <div class="meta">
+    <span class="badge">저장소 bbamindol-dev/yt-trend</span>
+    <span class="badge">현재 작업 브랜치 feat/offline-comment-labeling</span>
+    <span class="badge">2인 협업</span>
+    <span class="badge">Codex + GitHub 협업 흐름 정착</span>
+  </div>
+</header>
+
+<section class="grid">
+  <div class="stat"><div class="k">팀 최신 구현</div><div class="v">5 / 10</div><div class="n">수집·정규화·오프라인 댓글 라벨 동작</div></div>
+  <div class="stat"><div class="k">수집 영상</div><div class="v good">302</div><div class="n">채널 비교군 포함</div></div>
+  <div class="stat"><div class="k">수집 댓글</div><div class="v good">284</div><div class="n">오프라인 라벨 282건</div></div>
+  <div class="stat"><div class="k">내 코드 기여</div><div class="v good">1 PR</div><div class="n">선점 댓글 필터 보완 → main 병합</div></div>
+</section>
+
+<section class="card">
+  <h2>1. 오늘 마무리한 Git·협업 흐름</h2>
+  <div class="flow">
+    <div class="step done"><b>최신 main 확인</b><span>fetch / fast-forward</span></div>
+    <div class="step done"><b>작업 브랜치 분리</b><span>fix/first-comment-filter</span></div>
+    <div class="step done"><b>수정·테스트</b><span>규칙 + 회귀 테스트</span></div>
+    <div class="step done"><b>commit / push</b><span>be5fb6a</span></div>
+    <div class="step done"><b>PR 병합</b><span>main 반영 완료</span></div>
+    <div class="step now"><b>새 작업 브랜치</b><span>feat/offline-comment-labeling</span></div>
+  </div>
+  <p style="margin-top:16px">
+    현재는 팀원의 최신 <code>main</code>을 로컬에 반영한 뒤,
+    댓글 라벨링 개선 전용 브랜치에서 새 작업을 시작할 수 있는 깨끗한 상태다.
+  </p>
+</section>
+
+<section class="card">
+  <h2>2. 직접 반영한 코드 개선</h2>
+  <table>
+    <thead><tr><th>항목</th><th>변경 내용</th><th>검증</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>선점 댓글 규칙</td>
+        <td><code>1등</code> 중심 규칙을 숫자 전체로 확장해 <code>4등!!</code>, <code>10빠</code>, <code>3착</code>, <code>2등ㅋㅋㅋ</code> 등을 인식</td>
+        <td>기존 테스트 7/7 통과</td>
+      </tr>
+      <tr>
+        <td>오탐 방지</td>
+        <td><code>4등이라니 대단하네요</code>, <code>3착으로 들어왔지만 재밌게 봤어요</code>처럼 문장 속 표현은 정상 댓글로 유지</td>
+        <td>회귀 테스트 추가</td>
+      </tr>
+      <tr>
+        <td>협업 반영</td>
+        <td><code>fix/first-comment-filter</code> 브랜치에서 commit → push → PR → main 병합</td>
+        <td>작업 트리 깨끗함</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>3. 팀원 최신 구현에서 확인된 성과</h2>
+  <div class="checks">
+    <div class="check"><div class="dot">✓</div><div><b>수집</b><div class="small">YouTube Data API로 영상 302편, 댓글 284건 수집</div></div></div>
+    <div class="check"><div class="dot">✓</div><div><b>정규화</b><div class="small">길이 축·분기 기준으로 조회 배수, 좋아요율, 댓글율 배수 산출</div></div></div>
+    <div class="check"><div class="dot">✓</div><div><b>오프라인 댓글 판정</b><div class="small">댓글 282건에 감성·주제 라벨 적용, 15묶음 형식 검증 통과</div></div></div>
+    <div class="check"><div class="dot">✓</div><div><b>댓글 참여 성격 분리</b><div class="small">단순 댓글율과 별개로 호응·논쟁 지표를 분리해 토론형 댓글창과 커뮤니티형 댓글창을 구분</div></div></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>4. 오늘 발견한 핵심 분석 문제</h2>
+  <div class="note">
+    기존 <b>positive / negative / neutral</b> 3분류는 실제 한국어 댓글의 참여 맥락을 지나치게 압축한다.
+    특히 표면 정서는 부정적이어도 실제로는 출연자에 대한 애착을 표현하는 댓글,
+    농담·의견·정보 공유처럼 평가 방향 자체가 핵심이 아닌 댓글을 제대로 설명하기 어렵다.
+  </div>
+  <table style="margin-top:16px">
+    <thead><tr><th>댓글 사례</th><th>기존 감성 판정</th><th>문제</th><th>새 해석</th></tr></thead>
+    <tbody>
+      <tr><td>“병에 너무 힘을주면 술은 쓰레기일 확률 99% ㅋㅋㅋ”</td><td>negative</td><td>영상 자체 비판이 아님</td><td>의견/해석 + 농담/놀이</td></tr>
+      <tr><td>“유리구두는 유럽의 캪틴큐인갘ㅋㅋㅋ”</td><td>neutral</td><td>참여 방식 정보가 사라짐</td><td>농담/놀이</td></tr>
+      <tr><td>“아… 승원이형 가지마요”</td><td>negative</td><td>슬픔을 부정 평가로 오인</td><td>애착/응원</td></tr>
+      <tr><td>“세상에… 또 ‘그 국가’ 입니까”</td><td>neutral</td><td>비꼬는 의견 반응이 뭉개짐</td><td>의견/해석</td></tr>
+      <tr><td>“와인킹님이 오시니 조승원기자님이 훨씬 작아보이네요”</td><td>neutral</td><td>출연자 관심·팬 반응이 사라짐</td><td>애착/응원</td></tr>
+      <tr><td>“와인킹으로 짬처리 하는… 주류탐험가 당신은 대체…ㅋㅋ”</td><td>neutral</td><td>친근한 농담의 맥락 소실</td><td>애착/응원 + 농담/놀이</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>5. Reaction taxonomy 초안 v0.1</h2>
+  <table>
+    <thead><tr><th>Reaction</th><th>정의</th><th>예시</th></tr></thead>
+    <tbody>
+      <tr><td><b>평가/칭찬</b></td><td>콘텐츠의 구체적 요소·품질을 긍정적으로 평가</td><td>“편집 댕웃기네”</td></tr>
+      <tr><td><b>비판/불만</b></td><td>콘텐츠의 구체적 요소·품질에 문제나 불만 제기</td><td>음질·편집·진행 불만 등</td></tr>
+      <tr><td><b>애착/응원</b></td><td>콘텐츠·출연자에 대한 호감, 친밀감, 지속적 관심, 지지</td><td>“승원이형 가지마요”</td></tr>
+      <tr><td><b>농담/놀이</b></td><td>영상 맥락·소재·출연자를 활용한 유희적 참여</td><td>“유럽의 캪틴큐인갘ㅋㅋ”</td></tr>
+      <tr><td><b>의견/해석</b></td><td>영상에서 다룬 내용·소재에 자기 견해나 해석을 덧붙임</td><td>“또 ‘그 국가’입니까”</td></tr>
+      <tr><td><b>정보/경험 공유</b></td><td>관련 정보나 개인 경험을 추가로 제공</td><td>아락 관련 인도네시아 경험 설명</td></tr>
+      <tr><td><b>질문</b></td><td>정보나 답변을 구함</td><td>추가 설명·사실 확인 질문</td></tr>
+      <tr><td><b>요청/제안</b></td><td>향후 콘텐츠·제작에 반영 가능한 구체적 요구</td><td>“다음에 맛있는 술편 출연 부탁”</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:14px"><b>운영 원칙:</b> 복수 라벨 허용. 단, 서로 독립적으로 의미 있는 반응이 동시에 있을 때만 복수 부여한다.</p>
+</section>
+
+<section class="card">
+  <h2>6. 추가 인사이트</h2>
+  <div class="note">
+    <b>댓글 참여율이 높다는 사실만으로 호응이라고 해석하면 안 된다.</b>
+    논쟁적 소재 때문에 이용자 간 논쟁이 붙어 댓글이 폭증할 수 있으므로,
+    댓글량과 함께 ‘호응’과 ‘논쟁성’을 분리해서 봐야 한다.
+  </div>
+  <p style="margin-top:14px">
+    팀원 구현에서는 이미 댓글율 배수와 별개로 호응·논쟁 지표가 추가되어,
+    토론형 영상과 커뮤니티형 영상의 반응 성격 차이를 구분할 수 있게 됐다.
+  </p>
+</section>
+
+<section class="card">
+  <h2>7. 다음 작업</h2>
+  <div class="checks">
+    <div class="check"><div class="dot">1</div><div><b>기존 282건 라벨 결과 확보</b><div class="small">댓글 원문 + sentiment + topic + confidence를 공유 가능한 형태로 export</div></div></div>
+    <div class="check"><div class="dot">2</div><div><b>Reaction taxonomy 2차 검증</b><div class="small">특히 기존 neutral 댓글이 실제로 어떤 반응 유형으로 갈리는지 확인</div></div></div>
+    <div class="check"><div class="dot">3</div><div><b>분류체계 보완</b><div class="small">비판/불만·질문·논쟁성 댓글 등 현재 표본에 부족한 사례 검증</div></div></div>
+    <div class="check"><div class="dot">4</div><div><b>프롬프트 재설계</b><div class="small">taxonomy가 안정되면 Codex에 최소 지시로 오프라인 판정 프롬프트 수정·재검증</div></div></div>
+  </div>
+</section>
+
+<div class="footer">YT Trend · 2026-09-09 개발 및 분석 작업 정리</div>
+</div>
+</body>
+</html>
