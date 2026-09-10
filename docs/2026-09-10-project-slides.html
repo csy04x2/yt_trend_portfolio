@@ -71,7 +71,13 @@
   /* ---- 타이포 패밀리 ----
      Aptos는 맥·Figma 모두 부재 → Inter를 측정·렌더 공통 폴백으로 명시.
      한글은 Noto Sans/Serif KR (Figma 보유). */
-  --display:'IBM Plex Serif','Noto Serif KR',Georgia,serif;
+  /* 한국어 슬라이드에서는 serif 를 쓰지 않는다. 본문·제목·숫자 전부
+     산세리프다. 웹 정본의 --display 가 IBM Plex Serif 였던 자리를
+     Inter + Noto Sans KR 로 바꿨다 — 둘 다 Figma 가 가진 폰트라
+     플래튼 임포트도 그대로 따라온다 (F 스크립트의 폰트 매핑이
+     'IBM Plex Serif' 분기를 못 찾고 산세리프 분기로 떨어진다).
+     serif 는 획 대비가 커서 한글 큰 제목에서 굵기가 고르지 않다. */
+  --display:'Inter','Noto Sans KR','Segoe UI',-apple-system,sans-serif;
   --sans:'Aptos','Segoe UI','InterVariable','Inter','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,'Noto Sans KR',monospace;
 
@@ -163,7 +169,7 @@ em, i, cite, dfn, var, address { font-style: normal; }
 .h-hero {  /* 커버/클로징 전용 */
   font-family: var(--display);
   font-size: var(--fs-hero);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.12;
   margin-bottom: 40px;
@@ -173,7 +179,7 @@ em, i, cite, dfn, var, address { font-style: normal; }
 .h-section {  /* 콘텐츠 슬라이드 제목 */
   font-family: var(--display);
   font-size: var(--fs-h-section);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 24px;
@@ -183,7 +189,7 @@ em, i, cite, dfn, var, address { font-style: normal; }
 .h-sub {
   font-family: var(--display);
   font-size: var(--fs-h-sub);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
   margin-bottom: 16px;
@@ -235,7 +241,7 @@ strong { font-weight: 700; color: var(--ink); }
 .slide-navy .ctx-label { color: var(--navy-faint); }
 .ctx-value { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
 
-/* ---- stat: serif 숫자 (웹 정본 stat 이식, 슬라이드 스케일) ---- */
+/* ---- stat: 큰 숫자 (웹 정본 stat 이식, 슬라이드 스케일) ---- */
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .stat-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -245,7 +251,7 @@ strong { font-weight: 700; color: var(--ink); }
 .stat-num {
   font-family: var(--display);
   font-size: var(--fs-stat-num);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1;
   color: var(--ink);
@@ -374,7 +380,7 @@ strong { font-weight: 700; color: var(--ink); }
 .ref-solution {
   font-family: var(--display);
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--bw-blue);
   line-height: 1.3;
   min-height: 74px;
@@ -494,7 +500,7 @@ strong { font-weight: 700; color: var(--ink); }
 .quote {
   font-family: var(--display);
   font-size: 58px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.35;
   max-width: 1480px;
@@ -618,7 +624,7 @@ body.mode-figma .hud { display: none; }
 .s03-stats .stat-label { font-size: 24px; line-height: 1.5; }
 /* ₩는 IBM Plex Serif에서 advance가 0에 가까워 다음 글자와 겹친다 →
    한글 세리프(웹폰트 스택의 2순위)로 이 숫자만 렌더한다. */
-.s03-won { font-family: 'Noto Serif KR', Georgia, serif; letter-spacing: 0.06em; }
+.s03-won { font-family: 'Noto Sans KR', sans-serif; letter-spacing: 0.06em; }
 
 /* ---- 04 pipeline ---- */
 .s04-rows .bx-row { margin-bottom: 24px; }
