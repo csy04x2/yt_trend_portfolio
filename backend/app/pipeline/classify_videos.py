@@ -76,11 +76,18 @@ def validate(payload: dict, video_ids: dict[str, str]) -> list[dict]:
 
 
 def save_taxonomy(conn, channel_id: str, types: dict[str, str],
-                  source: str, prompt_version: str, axis: str = "topic") -> int:
+                  source: str, prompt_version: str, axis: str = "topic",
+                  label: str = "") -> int:
     """새 버전으로 저장하고 **같은 축의** 이전 버전만 비활성화한다.
 
     축이 둘(topic, segment)이라 채널마다 활성 체계도 둘이다. 축을 구분하지
     않고 끄면 코너를 넣는 순간 주제가 꺼진다.
+
+    `prompt_version` 은 **이 체계를 만든 프롬프트의 버전**이지 체계의 이름이
+    아니다. 둘을 한 칸에 섞었더니 원이 채널 라벨 107건이 prompt_version=
+    'woni-topics-v1' 로 쌓였고, 대조기가 "그 버전의 프롬프트 파일이 없다 —
+    재현할 수 없다"고 잡았다. 옳은 경고였다. 체계의 이름은 `label` 에 둔다.
+    체계 자체는 (channel_id, axis, version) 으로 이미 식별된다.
     """
     row = conn.execute(
         "SELECT MAX(version) FROM video_taxonomies WHERE channel_id=?",
@@ -91,10 +98,10 @@ def save_taxonomy(conn, channel_id: str, types: dict[str, str],
     cur = conn.execute(
         """INSERT INTO video_taxonomies
                (channel_id, axis, version, source, prompt_version, types_json,
-                created_at, is_active)
-           VALUES (?,?,?,?,?,?,?,1)""",
+                created_at, is_active, label)
+           VALUES (?,?,?,?,?,?,?,1,?)""",
         (channel_id, axis, version, source, prompt_version,
-         json.dumps(types, ensure_ascii=False), _now()))
+         json.dumps(types, ensure_ascii=False), _now(), label))
     return cur.lastrowid
 
 

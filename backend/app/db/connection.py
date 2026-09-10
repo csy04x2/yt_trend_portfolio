@@ -43,6 +43,15 @@ LATE_COLUMNS = {
     "video_taxonomies": {
         # 유형 축. topic(판단) 과 segment(채널 재생목록) 를 나란히 둔다
         "axis": "TEXT NOT NULL DEFAULT 'topic'",
+        # 체계의 사람이 부르는 이름 ("woni-topics-v1" 같은 것).
+        # prompt_version 과 다르다 — 저건 이 체계를 만든 프롬프트의 버전이다.
+        # 둘을 한 칸에 섞었더니 대조기가 재현 불가로 잡았고, 그게 옳았다.
+        "label": "TEXT NOT NULL DEFAULT ''",
+    },
+    "comment_screens": {
+        # 모델이 왜 버렸는지 한 줄. rule_flags_json 은 규칙 표시의 자리라
+        # 문장을 넣을 수 없다 — 규칙 행은 이 열을 NULL 로 둔다
+        "reason": "TEXT",
     },
     "video_metrics": {
         # 댓글율 배수. view_multiple 과 같은 비교군을 쓴다.

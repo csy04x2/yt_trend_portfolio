@@ -1,6 +1,6 @@
 """프로토타입 CLI.
 
-돈이 나가는 명령은 `label` 하나뿐이다. 나머지는 전부 금전 비용 0이다.
+돈이 나가는 명령은 `label` 과 `screen` 둘뿐이다. 나머지는 전부 금전 비용 0이다.
 
     collect        채널 URL → SQLite (YouTube 키 필요)
     collect-video  영상 URL 하나만 → SQLite (약 5유닛)
@@ -8,13 +8,20 @@
     rules          쌓인 댓글에 규칙을 적용하고 무엇이 걸렸는지 본다
     export-batch   댓글 묶음을 판정용 파일로 (Claude Code 가 판정)
     import-batch   판정 결과를 검증하고 저장
-    label          댓글 감성·주제를 API 로 판정 (유일하게 돈이 나간다)
+    label          댓글 감성·주제를 API 로 판정 (돈이 나간다)
+    export-titles  영상 제목 묶음을 유형 판정용 파일로 (Claude Code 가 판정)
+    import-titles  유형 라벨 결과를 검증하고 체계와 함께 저장
+    import-taxonomy  제안된 유형 체계를 보고 --confirm 일 때만 저장
+    export-screen-batch  댓글 묶음을 선별용 파일로 (Claude Code 가 판정)
+    import-screen-batch  선별 결과를 검증하고 저장
+    screen         규칙을 통과한 댓글을 API 로 다시 선별 (돈이 나간다)
     report         6단계 집계와 결론 문장 — 쇼츠/롱폼/합침 세 판
     prompts        프롬프트 파일과 DB 버전 대조
     stats          수집 현황과 설정 상태
 
 지금 답이 필요한 질문 — 규칙이 무엇을 잘못 버리는가 — 은 `rules`만으로
-답할 수 있다.
+답할 수 있다. 그 답을 모델과 대조하려면 `export-screen-batch` 로 비용 없이
+먼저 재 보고, 프롬프트가 쓸 만해진 뒤에 `screen` 을 켠다.
 """
 
 from __future__ import annotations
@@ -42,6 +49,8 @@ from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
 from app.pipeline import classify_videos as cv  # noqa: E402
 from app.pipeline import aggregate  # noqa: E402
 from app.pipeline import label_comments  # noqa: E402
+from app.pipeline import label_videos as lv  # noqa: E402
+from app.pipeline import screen_comments as sc  # noqa: E402
 from app.pipeline import segments as sg  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
 from app.pipeline.normalize import run as normalize_run  # noqa: E402
@@ -286,15 +295,13 @@ def cmd_types(args) -> int:
         payload = json.loads(pathlib.Path(args.load).read_text(encoding="utf-8"))
         idx = json.loads(pathlib.Path(args.map).read_text(encoding="utf-8"))["map"]
         try:
-            rows = cv.validate(payload, idx)
+            # import-titles 와 같은 함수를 쓴다. 검증·체계·라벨을 한 자리에
+            # 두지 않으면 두 명령이 조금씩 다르게 저장하게 된다.
+            tid, n, _ = lv.save_result(conn, ch["channel_id"], payload, idx, args.model)
         except cv.ValidationError as e:
             print("검증 실패 — 저장하지 않았다.", file=sys.stderr)
             print(f"  {e}", file=sys.stderr)
             return 1
-        tid = cv.save_taxonomy(conn, ch["channel_id"], payload["types"],
-                               args.model, payload.get("taxonomy_version", "v1"),
-                               axis="topic")
-        n = cv.save_labels(conn, tid, rows, payload.get("taxonomy_version", "v1"), args.model)
         print(f"검증 통과: 유형 {len(payload['types'])}종 · 라벨 {n}건 저장 (taxonomy_id={tid})")
 
     tax = cv.active_taxonomy(conn, ch["channel_id"], getattr(args, "axis", "topic"))
@@ -531,6 +538,267 @@ def cmd_import_batch(args) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------
+# export-titles / import-titles / import-taxonomy
+#   3단계를 API 없이 도는 경로. 댓글의 export-batch·import-batch 와 같은 모양이다.
+# --------------------------------------------------------------------------
+
+def _first_channel(conn):
+    ch = conn.execute("SELECT channel_id, title FROM channels LIMIT 1").fetchone()
+    if not ch:
+        print("채널이 없다. 먼저 collect 를 돌려라.", file=sys.stderr)
+    return ch
+
+
+def cmd_export_titles(args) -> int:
+    """영상 제목을 유형 판정용 파일 하나로 내보낸다.
+
+    `--for taxonomy` 는 체계를 제안받는 자리(라벨은 아직 붙이지 않는다),
+    `--for types` 는 그 체계로 라벨을 붙이는 자리다. 순서가 중요하다 —
+    자를 먼저 만들고 그 자로 잰다.
+    """
+    conn = connect(args.db)
+    ch = _first_channel(conn)
+    if not ch:
+        return 1
+
+    name = lv.PROMPT_TAXONOMY if args.target == "taxonomy" else lv.PROMPT_TYPES
+    prompt = registry.get(name)
+    if args.target == "taxonomy":
+        # 체계는 채널의 모양에서 나온다. 이미 라벨된 편도 그 모양의 일부라
+        # 라벨 유무로 거르지 않는다.
+        rows = lv.titles(conn, ch["channel_id"], args.limit)
+    else:
+        rows = lv.pending(conn, ch["channel_id"], prompt.version, args.model,
+                          args.limit)
+    if not rows:
+        print(f"내보낼 제목이 없다 (프롬프트 {prompt.version} · 모델 {args.model} "
+              f"로 이미 전부 라벨돼 있다). 다시 붙이려면 --model 에 다른 이름을 준다.",
+              file=sys.stderr)
+        return 1
+
+    out_dir = pathlib.Path(args.out)
+    path = lv.export(conn, ch["channel_id"], name, args.batch_id, out_dir,
+                     rows=rows, channel_title=ch["title"])
+    est = lv.estimate(rows)
+    print(f"[{ch['title']}] 제목 {est['videos']}편 · {est['chars']:,}자")
+    print(f"내보냈다: {path}   (프롬프트 {prompt.name} {prompt.version})")
+    nxt = "import-taxonomy" if args.target == "taxonomy" else "import-titles"
+    print()
+    print("다음: 이 파일을 Claude Code 에 읽히고, 판정 결과를")
+    print(f"      {out_dir / (args.batch_id + '.result.json')} 로 저장한 뒤")
+    print(f"      python -m app.cli {nxt} {args.batch_id} --out {args.out}")
+    print("금전 비용 0.")
+    return 0
+
+
+def _batch_files(out_dir: pathlib.Path, batch_id: str, need_map: bool):
+    """(대응표, 결과) 를 읽는다. 없으면 무엇이 없는지 말하고 None."""
+    res_path = out_dir / f"{batch_id}.result.json"
+    map_path = out_dir / f"{batch_id}.map.json"
+    for p in ([map_path, res_path] if need_map else [res_path]):
+        if not p.exists():
+            print(f"없다: {p}", file=sys.stderr)
+            return None
+    mapping = (json.loads(map_path.read_text(encoding="utf-8"))["map"]
+               if need_map else {})
+    return mapping, json.loads(res_path.read_text(encoding="utf-8"))
+
+
+def cmd_import_titles(args) -> int:
+    """`video_label` 결과를 검증해 체계와 라벨을 함께 저장한다.
+
+    `types --load` 도 같은 일을 하지만 그쪽은 집계까지 이어 달리므로,
+    normalize 를 아직 안 돌린 상태에서는 저장에 성공하고도 1 로 끝난다.
+    저장만 하고 싶을 때가 이 명령의 자리다. 저장 함수는 하나를 공유한다.
+    """
+    conn = connect(args.db)
+    ch = _first_channel(conn)
+    if not ch:
+        return 1
+    got = _batch_files(pathlib.Path(args.out), args.batch_id, need_map=True)
+    if not got:
+        return 1
+    mapping, payload = got
+
+    prompt = registry.get(lv.PROMPT_TYPES)
+    problems = registry.check(prompt, payload)
+    if problems:
+        print("스키마 검증 실패 — 저장하지 않았다.", file=sys.stderr)
+        for m in problems:
+            print(f"  - {m}", file=sys.stderr)
+        return 1
+    try:
+        tid, n, rows = lv.save_result(conn, ch["channel_id"], payload, mapping,
+                                      args.model)
+    except cv.ValidationError as e:
+        print("검증 실패 — 저장하지 않았다.", file=sys.stderr)
+        print(f"  {e}", file=sys.stderr)
+        return 1
+
+    from collections import Counter
+    counts = Counter(r["type_code"] for r in rows)
+    names = payload["types"]
+    print(f"검증 통과: 유형 {len(names)}종 · 라벨 {n}편 저장 "
+          f"(taxonomy_id={tid}, model={args.model})")
+    for code, c in counts.most_common():
+        print(f"  {code:<10} {names.get(code, code):<18} {c:>5}편")
+    print("\n다음: python -m app.cli types  — 유형별 성과를 세 판으로 본다")
+    return 0
+
+
+def cmd_import_taxonomy(args) -> int:
+    """제안된 유형 체계를 사람이 보고 확정한다.
+
+    **`--confirm` 없이는 저장하지 않는다.** 제안은 제안일 뿐이라, 아무도
+    보지 않은 자에 영상 300편이 매달리면 그 위의 리포트까지 전부 그 자를
+    믿게 된다. 확정은 사람이 하는 일이다.
+    """
+    conn = connect(args.db)
+    ch = _first_channel(conn)
+    if not ch:
+        return 1
+    got = _batch_files(pathlib.Path(args.out), args.batch_id, need_map=False)
+    if not got:
+        return 1
+    _, payload = got
+
+    prompt = registry.get(lv.PROMPT_TAXONOMY)
+    problems = registry.check(prompt, payload)
+    if problems:
+        print("스키마 검증 실패 — 저장하지 않았다.", file=sys.stderr)
+        for m in problems:
+            print(f"  - {m}", file=sys.stderr)
+        return 1
+
+    # 편수는 라벨이 있어야 셀 수 있다. 제안 단계에는 없으므로 0 을 찍지
+    # 않고 비워 둔다 — 0 은 "이 유형은 비었다"는 다른 말이다.
+    counts = None
+    if isinstance(payload.get("labels"), dict):
+        from collections import Counter
+        counts = Counter(payload["labels"].values())
+    lv.describe(payload, counts)
+
+    if not args.confirm:
+        print("\n--confirm 이 없어 저장하지 않았다.")
+        print("  체계를 받아들이려면 같은 명령에 --confirm 을 붙인다.")
+        print("  받아들이면 이 채널의 topic 축 이전 체계는 비활성이 된다.")
+        return 0
+
+    tid = cv.save_taxonomy(conn, ch["channel_id"], payload["types"], args.model,
+                           payload["taxonomy_version"], axis="topic")
+    print(f"\n체계를 확정했다 (taxonomy_id={tid}, "
+          f"taxonomy_version={payload['taxonomy_version']})")
+    print("  라벨은 아직 없다. export-titles --for types 로 제목을 내보내 붙인다.")
+    return 0
+
+
+# --------------------------------------------------------------------------
+# export-screen-batch / import-screen-batch / screen
+#   4단계의 Claude 절반. 규칙 행 옆에 모델 행이 나란히 앉는다.
+# --------------------------------------------------------------------------
+
+def cmd_export_screen_batch(args) -> int:
+    """규칙을 통과한 댓글을 선별용 파일로 내보낸다. 금전 비용 0.
+
+    `screen` 이 API 로 보낼 것과 **같은 대상, 같은 본문**이다. 라벨링이
+    그랬듯 선별도 돈을 쓰기 전에 오프라인에서 정확도를 재고 프롬프트를
+    고칠 수 있어야 한다.
+    """
+    conn = connect(args.db)
+    prompt = registry.get(sc.PROMPT_NAME)
+    rows = sc.pending(conn, prompt.version, args.model, args.video_id, args.limit)
+    if not rows:
+        print(f"내보낼 댓글이 없다 (규칙을 통과한 것이 없거나 {prompt.version} · "
+              f"{args.model} 로 이미 전부 판정됐다).", file=sys.stderr)
+        return 1
+
+    batches = sc.chunk(rows, args.size)
+    out_dir = pathlib.Path(args.out)
+    ids = []
+    for i, group in enumerate(batches, 1):
+        bid = args.batch_id if len(batches) == 1 else f"{args.batch_id}_{i:03d}"
+        sc.export(group, group[0]["video_title"], bid, out_dir)
+        ids.append(bid)
+    est = sc.estimate(rows, args.size)
+    print(f"댓글 {est['comments']}건을 {len(batches)}묶음으로 내보냈다 → {out_dir}")
+    print(f"  프롬프트 {prompt.name} {prompt.version} · 모델 칸에 적을 이름 {args.model}")
+    print()
+    print("다음: 각 묶음의 .md 를 읽고 판정해 <batch>.result.json 으로 저장한 뒤")
+    print(f"      python -m app.cli import-screen-batch {ids[0]} --out {args.out}")
+    print("금전 비용 0.")
+    return 0
+
+
+def cmd_import_screen_batch(args) -> int:
+    """선별 결과를 검증하고 comment_screens 에 넣는다.
+
+    규칙 행은 그대로 둔다 — model 이 달라 다른 행이다.
+    """
+    got = _batch_files(pathlib.Path(args.out), args.batch_id, need_map=True)
+    if not got:
+        return 1
+    mapping, result = got
+
+    try:
+        # 결과가 버전을 적어 왔으면 파일의 버전과 대조한다. 다른 버전으로
+        # 판정한 것을 이 버전으로 저장하면 재현할 수 없는 행이 생긴다.
+        prompt = registry.get(sc.PROMPT_NAME, version=result.get("prompt_version"))
+    except registry.PromptError as e:
+        print(f"{e}", file=sys.stderr)
+        return 1
+
+    try:
+        rows = sc.validate_screens(result, mapping)
+    except sc.ValidationError as e:
+        print(f"검증 실패 — 저장하지 않았다.\n  {e}", file=sys.stderr)
+        return 1
+
+    model = result.get("model", "claude-code-offline")
+    kept = sum(1 for r in rows if r["verdict"] == "keep")
+    print(f"검증 통과: {len(rows)}건 (통과 {kept} · 버림 {len(rows) - kept}) "
+          f"(prompt_version={prompt.version}, model={model})")
+    for r in [x for x in rows if x["verdict"] == "drop"][: args.show]:
+        print(f"  {r['idx']:>3}. drop  {r['reason'] or '(이유 없음)'}")
+
+    if args.dry_run:
+        print("\n--dry-run 이라 DB에 쓰지 않았다.")
+        return 0
+
+    conn = connect(args.db)
+    n = sc.save_screens(conn, rows, prompt.version, model,
+                        log=lambda m: print(m, file=sys.stderr))
+    print(f"comment_screens 에 {n}건 저장했다 (규칙 행은 그대로 남는다).")
+    return 0
+
+
+def cmd_screen(args) -> int:
+    """규칙을 통과한 댓글을 Anthropic API 로 다시 선별한다.
+
+    **`label` 과 함께 금전 비용이 나가는 명령이다.** 대상 건수와 묶음 수를
+    먼저 찍고 시작한다. 비용 없이 먼저 재 보려면 export-screen-batch 를 쓴다.
+    """
+    conn = connect(args.db)
+    if args.dry_run:
+        # 건수를 세는 데 API 키가 필요하지 않다. 키를 요구하면 "얼마나
+        # 나갈지 먼저 보자"는 것을 키 받아온 다음에야 할 수 있게 된다.
+        client = claude.ClaudeClient(
+            api_key="", model=args.model or config.get("ANTHROPIC_MODEL",
+                                                       claude.DEFAULT_MODEL))
+    else:
+        client = claude.from_config(config, model=args.model)
+    try:
+        p = sc.run(conn, client, model=args.model, video_id=args.video_id,
+                   limit=args.limit, size=args.size, dry_run=args.dry_run)
+    except claude.MissingPackage as e:
+        print(e, file=sys.stderr)
+        return 1
+    except claude.ClaudeError as e:
+        print(f"[중단] {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+    return 1 if p.failed else 0
+
+
 def cmd_export_labels(args) -> int:
     """라벨 결과를 사람이 검수할 수 있는 표로 내보낸다.
 
@@ -640,7 +908,7 @@ def cmd_prompts(args) -> int:
 def cmd_label(args) -> int:
     """규칙을 통과한 댓글을 Anthropic API 로 판정한다.
 
-    **이 저장소에서 금전 비용이 나가는 유일한 명령이다.** 기본은 --dry-run
+    **`screen` 과 함께 금전 비용이 나가는 명령이다.** 기본은 --dry-run
     이 아니지만, 대상 건수와 묶음 수를 먼저 찍고 시작한다.
     """
     conn = connect(args.db)
@@ -811,6 +1079,63 @@ def main() -> int:
     ty.add_argument("--model", default="claude-code-offline")
     ty.set_defaults(fn=cmd_types)
 
+    et = sub.add_parser("export-titles",
+                        help="영상 제목을 유형 판정용 파일로 (API 불필요, 비용 0)")
+    et.add_argument("batch_id")
+    et.add_argument("--for", dest="target", choices=("types", "taxonomy"),
+                    default="types",
+                    help="types 는 라벨을 붙일 묶음, taxonomy 는 체계를 제안받을 묶음")
+    et.add_argument("--limit", type=int, help="이만큼만 (처음 볼 때 쓴다)")
+    et.add_argument("--model", default="claude-code-offline",
+                    help="types 일 때 '이 모델로 아직 라벨 안 된 것'을 고르는 기준")
+    et.add_argument("--out", default="./data/batches/titles")
+    et.set_defaults(fn=cmd_export_titles)
+
+    it = sub.add_parser("import-titles",
+                        help="유형 라벨 결과를 검증하고 체계와 함께 저장 (비용 0)")
+    it.add_argument("batch_id")
+    it.add_argument("--out", default="./data/batches/titles")
+    it.add_argument("--model", default="claude-code-offline")
+    it.set_defaults(fn=cmd_import_titles)
+
+    itx = sub.add_parser("import-taxonomy",
+                         help="제안된 유형 체계를 보고 --confirm 일 때만 저장 (비용 0)")
+    itx.add_argument("batch_id")
+    itx.add_argument("--out", default="./data/batches/titles")
+    itx.add_argument("--model", default="claude-code-offline",
+                     help="체계의 source 로 적을 이름")
+    itx.add_argument("--confirm", action="store_true",
+                     help="이것 없이는 저장하지 않는다. 체계는 사람이 확정한다")
+    itx.set_defaults(fn=cmd_import_taxonomy)
+
+    es = sub.add_parser("export-screen-batch",
+                        help="댓글 묶음을 선별용 파일로 (API 불필요, 비용 0)")
+    es.add_argument("batch_id")
+    es.add_argument("--video-id")
+    es.add_argument("--limit", type=int)
+    es.add_argument("--size", type=int, default=20, help="묶음 크기")
+    es.add_argument("--model", default="claude-code-offline",
+                    help="'이 모델로 아직 선별 안 된 것'을 고르는 기준")
+    es.add_argument("--out", default="./data/batches/screen")
+    es.set_defaults(fn=cmd_export_screen_batch)
+
+    isb = sub.add_parser("import-screen-batch", help="선별 결과를 검증하고 저장 (비용 0)")
+    isb.add_argument("batch_id")
+    isb.add_argument("--out", default="./data/batches/screen")
+    isb.add_argument("--dry-run", action="store_true", help="검증만 하고 DB에 안 씀")
+    isb.add_argument("--show", type=int, default=20, help="버린 것 중 보여줄 건수")
+    isb.set_defaults(fn=cmd_import_screen_batch)
+
+    sn = sub.add_parser("screen",
+                        help="규칙을 통과한 댓글을 API 로 다시 선별 — 돈이 나간다")
+    sn.add_argument("--video-id")
+    sn.add_argument("--limit", type=int, help="이만큼만 (처음 붙일 때 쓴다)")
+    sn.add_argument("--size", type=int, default=20, help="묶음 크기")
+    sn.add_argument("--model", help="기본은 .env 의 ANTHROPIC_MODEL")
+    sn.add_argument("--dry-run", action="store_true",
+                    help="대상 건수와 묶음 수만 세고 호출하지 않는다 (키 없이도 돈다)")
+    sn.set_defaults(fn=cmd_screen)
+
     x = sub.add_parser("export-labels", help="라벨 결과를 CSV/JSON 으로 (검수·공유용)")
     x.add_argument("--out", default="./exports/comment-labels",
                    help="확장자 없이. .csv / .json 이 붙는다")
@@ -833,7 +1158,7 @@ def main() -> int:
     pr.set_defaults(fn=cmd_prompts)
 
     lb = sub.add_parser("label",
-                        help="댓글 감성·주제를 API 로 판정 — 돈이 나가는 유일한 명령")
+                        help="댓글 감성·주제를 API 로 판정 — screen 과 함께 돈이 나간다")
     lb.add_argument("--video-id")
     lb.add_argument("--limit", type=int, help="이만큼만 (처음 붙일 때 쓴다)")
     lb.add_argument("--size", type=int, default=20, help="묶음 크기")

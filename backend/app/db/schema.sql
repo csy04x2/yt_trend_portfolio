@@ -65,12 +65,21 @@ CREATE INDEX IF NOT EXISTS idx_comments_video ON comments(video_id, published_at
 
 -- 4단계 결과. PK가 (대상, 프롬프트 버전, 모델)인 것은 아키텍처 4.2와 같다.
 -- 규칙만으로 정한 행은 model='rule'.
+--
+-- 같은 댓글에 규칙 행과 모델 행(model='claude-…', prompt_version='screen-v1')이
+-- 나란히 앉는다. 모델 행이 규칙 행을 덮어쓰지 않는 것이 설계다 — 덮어쓰면
+-- "규칙은 통과시켰는데 모델이 버렸다"는 사실이 사라진다. 그 차이를 세는 것이
+-- 4단계에 Claude 를 붙인 이유다.
 CREATE TABLE IF NOT EXISTS comment_screens (
     comment_id      TEXT NOT NULL REFERENCES comments(comment_id),
     prompt_version  TEXT NOT NULL,
     model           TEXT NOT NULL,
-    rule_flags_json TEXT,
+    rule_flags_json TEXT,          -- 규칙이 붙인 표시 ['url','repeat']. 모델 행은 NULL
     verdict         TEXT NOT NULL,
+    -- 모델이 왜 버렸는지 한 줄. 규칙 행은 NULL 이다 — 규칙은 이유를 문장이
+    -- 아니라 표시(rule_flags_json)로 남긴다. 문장을 그 열에 넣으면 리스트를
+    -- 기대하는 쪽이 조용히 틀린다
+    reason          TEXT,
     screened_at     TEXT NOT NULL,
     PRIMARY KEY (comment_id, prompt_version, model)
 );
@@ -113,6 +122,10 @@ CREATE TABLE IF NOT EXISTS video_taxonomies (
     types_json     TEXT NOT NULL,          -- {code: name}
     created_at     TEXT NOT NULL,
     is_active      INTEGER NOT NULL DEFAULT 1,
+    -- 체계의 사람이 부르는 이름. prompt_version 과 다르다 — 저건 이 체계를
+    -- 만든 프롬프트의 버전이다. 둘을 한 칸에 섞었더니 원이 채널 라벨 107건이
+    -- prompt_version='woni-topics-v1' 로 쌓여 대조기가 재현 불가로 잡았다.
+    label          TEXT NOT NULL DEFAULT '',
     UNIQUE (channel_id, version)
 );
 
