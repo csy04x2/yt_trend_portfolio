@@ -22,3 +22,8 @@
 *.gif  binary
 *.pdf  binary
 *.db   binary
+
+# 내보낸 데이터는 줄바꿈을 건드리지 않는다.
+# CSV 따옴표 안의 줄바꿈은 댓글 원문의 일부라, 정규화하면 데이터가 바뀐다.
+backend/exports/** -text
+*.csv -text

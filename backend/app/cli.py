@@ -31,6 +31,7 @@ from app.clients.youtube import (  # noqa: E402
     QuotaExhausted,
     YouTubeClient,
 )
+from app import exports  # noqa: E402
 from app.db.connection import connect  # noqa: E402
 from app.pipeline.collect import collect_channel, collect_video  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
@@ -403,6 +404,44 @@ def cmd_import_batch(args) -> int:
     return 0
 
 
+def cmd_export_labels(args) -> int:
+    """라벨 결과를 사람이 검수할 수 있는 표로 내보낸다.
+
+    DB 파일을 주고받는 대신 이걸 쓴다 — 검수자가 보려는 것은 표 하나다.
+    """
+    conn = connect(args.db)
+    rows = exports.fetch(conn, args.prompt_version, args.model, args.video_id)
+    if not rows:
+        print("내보낼 라벨이 없다. 먼저 import-batch 를 돌려라.", file=sys.stderr)
+        return 1
+
+    base = pathlib.Path(args.out)
+    meta = {
+        "_note": "댓글 원문 + 규칙 판정 + 감성·주제 라벨. 검수용이다.",
+        "_exported_at": now(),
+        "_source": "backend/data/yt_trend.db (comment_labels + comments + comment_screens)",
+    }
+    made = []
+    if args.format in ("csv", "both"):
+        made.append(exports.to_csv(rows, base.with_suffix(".csv")))
+    if args.format in ("json", "both"):
+        made.append(exports.to_json(rows, base.with_suffix(".json"), meta))
+
+    print(f"라벨 {len(rows)}건 내보냄")
+    for p in made:
+        print(f"  {p}  ({p.stat().st_size:,} bytes)")
+
+    from collections import Counter
+    sent = Counter(r["sentiment"] for r in rows)
+    vids = Counter(r["video_title"][:30] for r in rows)
+    print()
+    print("  감성  " + " · ".join(f"{k} {v}" for k, v in sent.most_common()))
+    print("  영상  " + " · ".join(f"{k}… {v}건" for k, v in vids.most_common()))
+    print()
+    print("  CSV 는 UTF-8 BOM 이라 엑셀에서 한글이 깨지지 않는다.")
+    return 0
+
+
 # --------------------------------------------------------------------------
 # stats
 # --------------------------------------------------------------------------
@@ -487,6 +526,15 @@ def main() -> int:
     i.add_argument("--dry-run", action="store_true", help="검증만 하고 DB에 안 씀")
     i.add_argument("--show", type=int, default=20)
     i.set_defaults(fn=cmd_import_batch)
+
+    x = sub.add_parser("export-labels", help="라벨 결과를 CSV/JSON 으로 (검수·공유용)")
+    x.add_argument("--out", default="./exports/comment-labels",
+                   help="확장자 없이. .csv / .json 이 붙는다")
+    x.add_argument("--format", choices=("csv", "json", "both"), default="both")
+    x.add_argument("--prompt-version")
+    x.add_argument("--model")
+    x.add_argument("--video-id")
+    x.set_defaults(fn=cmd_export_labels)
 
     s = sub.add_parser("stats", help="수집 현황과 설정 상태")
     s.set_defaults(fn=cmd_stats)
