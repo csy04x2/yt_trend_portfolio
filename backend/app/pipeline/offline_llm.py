@@ -21,7 +21,9 @@ import pathlib
 PROMPTS = pathlib.Path(__file__).resolve().parents[1] / "prompts"
 
 SENTIMENTS = {"positive", "negative", "neutral"}
-TOPICS = {f"T{i}" for i in range(1, 10)}
+# T1~T10. v2 에서 T10(조회수·성과 메타)이 늘었다. 옛 버전으로 만든
+# 결과에는 T10 이 없을 뿐이라 이 집합을 넓혀도 과거 검증이 깨지지 않는다.
+TOPICS = {f"T{i}" for i in range(1, 11)}
 BATCH_SIZE = 20
 
 

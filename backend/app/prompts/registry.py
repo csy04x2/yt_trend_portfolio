@@ -58,6 +58,10 @@ class Prompt:
     system: str          # 헤더 아래 전문. 오프라인·API 가 함께 쓴다
     schema: dict | None  # JSON Schema. 없으면 None
     path: pathlib.Path
+    # 이 파일이 지나온 옛 버전들. 프롬프트를 고치면 버전이 오르는데, 그 순간
+    # DB 에 쌓여 있던 옛 버전 라벨이 「원문 없는 라벨」로 잡히면 안 된다.
+    # 옛 원문은 git 이 갖고 있고, 이력 줄이 그 버전이 이 파일의 조상임을 밝힌다.
+    history: frozenset = frozenset()
 
     @property
     def full_text(self) -> str:
@@ -67,6 +71,15 @@ class Prompt:
 
 class PromptError(LookupError):
     pass
+
+
+VERSION_TOKEN = re.compile(r"\b(?:[a-z]+-)?v\d+\b")
+
+
+def _history(head: str) -> frozenset:
+    """이력 줄에 적힌 모든 버전 토큰. 현재 버전도 포함된다."""
+    m = re.search(r"^-\s*이력\s*:(.*?)(?=^-\s|\Z)", head, re.M | re.S)
+    return frozenset(t.group(0) for t in VERSION_TOKEN.finditer(m.group(1))) if m else frozenset()
 
 
 def _field(head: str, key: str) -> str:
@@ -108,6 +121,7 @@ def load(path: pathlib.Path) -> Prompt:
         system=body,
         schema=_fenced_json(body, "출력 스키마"),
         path=path,
+        history=_history(head),
     )
 
 
@@ -141,7 +155,12 @@ def check_against_db(conn) -> list[str]:
     재현 가능성을 지키는 마지막 방어선이라 CLI 가 이걸 보여준다.
     """
     files = all_prompts()
-    known = {p.version for p in files.values()}
+    # 현재 버전 + 이력에 적힌 옛 버전. 옛 버전으로 쌓인 라벨은 원문이
+    # git 에 있고 이력이 그 사실을 밝히므로 재현 가능한 것으로 본다.
+    known = set()
+    for p in files.values():
+        known.add(p.version)
+        known |= p.history
     problems: list[str] = []
 
     for table, col in (("comment_labels", "prompt_version"),

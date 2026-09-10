@@ -33,9 +33,14 @@ def test_prompt_used_for_live_labels_exists():
     실제로 없었다 — topics-v1 로 300편이 라벨돼 있는데 그 원문이 대화
     기록 안에만 있었다. 그 라벨은 아무도 재현할 수 없는 상태였다.
     """
-    versions = {p.version for p in R.all_prompts().values()}
-    for v in ("v1", "topics-v1"):
-        assert v in versions, f"'{v}' 로 쌓인 라벨의 프롬프트 파일이 없다"
+    known = set()
+    for p in R.all_prompts().values():
+        known.add(p.version)
+        known |= p.history
+    # v1 은 이제 comment_label 의 옛 버전이다. 파일은 v2 지만 이력에 남아
+    # 있으므로 682건은 여전히 재현 가능한 것으로 잡혀야 한다.
+    for v in ("v1", "v2", "topics-v1"):
+        assert v in known, f"'{v}' 로 쌓인 라벨의 프롬프트 파일이 없다"
 
 
 def test_get_rejects_version_mismatch():
