@@ -359,6 +359,10 @@ strong { font-weight: 700; color: var(--ink); }
   flex-shrink: 0;
 }
 .ref-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ref-green); }
+/* 08 — 「가장 아프다」는 좋은 소식이 아니다. 기본 뱃지가 초록 점이라
+   그대로 두면 성과 뱃지로 읽힌다. 색은 기존 토큰(--bw-amber)만 쓴다. */
+.s08-warn { color: var(--bw-amber); background: rgba(232,144,10,0.08); border-color: rgba(232,144,10,0.28); }
+.s08-warn::before { background: var(--bw-amber); }
 .ref-meta {
   font-family: var(--sans);
   font-size: 18px;
@@ -875,7 +879,7 @@ body.mode-figma .hud { display: none; }
       <ul class="ref-scope"><li>좋아요율 1.92% — 코너 중 1위</li><li>댓글 배수 1.79 — 코너 중 1위</li></ul>
     </div>
     <div class="ref-card">
-      <div class="ref-card-head"><span class="ref-wordmark">선발대</span><span class="ref-status">가장 아프다</span></div>
+      <div class="ref-card-head"><span class="ref-wordmark">선발대</span><span class="ref-status s08-warn">가장 아프다</span></div>
       <div class="ref-meta">롱폼 13편 · 현장 취재</div>
       <div class="ref-solution">조회 배수 0.40</div>
       <ul class="ref-scope"><li>좋아요율 1.40% — 코너 중 2위</li><li>본 사람은 만족했는데 볼 사람에게 닿지 않는다</li></ul>
