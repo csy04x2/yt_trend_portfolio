@@ -124,6 +124,33 @@ def test_pick_segments_without_channel_total():
     assert sg.pick_segments(pls, 0) == {"p1": "무엇"}
 
 
+def test_drop_broad_catches_what_ratio_missed():
+    """채널이 크면 서랍 기준선이 커져 새어 나간다 — 표본으로 한 번 더 본다."""
+    # 침착맨: 영상 7,698편이라 채널 기준 서랍선이 1,925편. 「침착맨 Shorts」는
+    # 그보다 작아 통과했지만 우리가 받은 300편 중 174편(58%)을 혼자 덮었다.
+    pls = [{"id": "shorts", "title": "침착맨 Shorts", "item_count": 1500},
+           {"id": "guest", "title": "침착맨 초대석", "item_count": 120}]
+    segs = sg.pick_segments(pls, 7698)
+    assert set(segs) == {"shorts", "guest"}, "비율 검사만으로는 안 걸러진다"
+
+    membership = {f"v{i}": ["shorts"] for i in range(58)}
+    membership.update({f"g{i}": ["shorts", "guest"] for i in range(5)})
+    got = sg.drop_broad(membership, segs, sample_size=100)
+    assert set(got) == {"guest"}, got
+
+
+def test_drop_broad_keeps_a_real_corner():
+    membership = {f"v{i}": ["guest"] for i in range(12)}
+    segs = {"guest": "초대석"}
+    assert sg.drop_broad(membership, segs, sample_size=100) == segs
+
+
+def test_drop_broad_without_sample_size_is_a_noop():
+    """표본 크기를 모르면 판단 근거가 없다 — 함부로 빼지 않는다."""
+    segs = {"a": "가"}
+    assert sg.drop_broad({"v1": ["a"]}, segs, sample_size=0) == segs
+
+
 def test_assign_picks_smallest():
     """여러 코너에 들면 작은 쪽이 더 구체적이다."""
     member = {"v1": ["big", "small"], "v2": ["big"], "v3": ["none"]}

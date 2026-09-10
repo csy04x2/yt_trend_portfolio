@@ -35,6 +35,10 @@ class SegmentConfig:
     drawer_ratio: float = 0.25
     # 이보다 적게 담은 재생목록은 코너로 치지 않는다 (일회성 묶음)
     min_items: int = 5
+    # **우리가 받은 영상** 중 이 비율 이상을 한 재생목록이 덮으면 서랍이다.
+    # drawer_ratio 는 채널 전체가 분모라 큰 채널에서 기준선이 커져 새어 나간다
+    # — drop_broad() 의 설명을 볼 것.
+    sample_ratio: float = 0.4
 
 
 DEFAULT = SegmentConfig()
@@ -64,6 +68,38 @@ def pick_segments(playlists: list[dict], channel_video_count: int,
             continue                      # 서랍
         out[p["id"]] = clean_name(p["title"])
     return out
+
+
+def drop_broad(membership: dict[str, list[str]], segments: dict[str, str],
+               sample_size: int, cfg: SegmentConfig = DEFAULT) -> dict[str, str]:
+    """우리가 받은 영상의 너무 많은 부분을 덮는 재생목록을 코너에서 뺀다.
+
+    `pick_segments` 의 비율 검사만으로는 큰 채널에서 새어 나간다. 그 검사는
+    **채널 전체 편수**를 기준으로 하는데, 침착맨은 영상이 7,698편이라 서랍
+    기준선이 1,925편이 된다. 「침착맨 Shorts」 는 그보다 작아서 코너로
+    통과했고, 우리가 받은 300편 중 174편(58%)을 혼자 덮었다. 「2026년 침착맨
+    정주행」 도 64편을 덮었다. 둘 다 코너가 아니라 형식 묶음과 연도 묶음이다.
+
+    채널이 클수록 기준선이 커지는 것이 문제의 뿌리다. 그래서 **우리 표본을
+    기준으로 한 번 더 본다** — 받은 영상의 절반 가까이를 한 재생목록이 덮으면
+    그것은 유형이 아니다. 무엇을 가르지도 못한다.
+
+    이 검사는 소속을 받아온 **뒤에만** 할 수 있다. 열거 비용은 이미 치른
+    다음이지만, 틀린 축으로 리포트를 내는 것보다는 낫다.
+
+    또 하나: 「침착맨 Shorts」 는 길이 축을, 「2026년 정주행」 은 시간 축을
+    다시 말한다. 우리가 이미 가진 축을 코너가 흉내내면 두 축이 같은 말을
+    두 번 하게 된다.
+    """
+    if not sample_size:
+        return segments
+    covered: dict[str, int] = {}
+    for pls in membership.values():
+        for pid in pls:
+            if pid in segments:
+                covered[pid] = covered.get(pid, 0) + 1
+    return {pid: name for pid, name in segments.items()
+            if covered.get(pid, 0) / sample_size < cfg.sample_ratio}
 
 
 def assign(membership: dict[str, list[str]], segments: dict[str, str],
