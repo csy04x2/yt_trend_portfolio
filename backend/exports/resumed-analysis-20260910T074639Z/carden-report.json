@@ -1,0 +1,573 @@
+{
+  "channel": "카더정원",
+  "video_count": 300,
+  "labeled_comments": 400,
+  "sampled_videos": 2,
+  "breakdown": [
+    {
+      "video_id": "V2C7gtMZ7qQ",
+      "title": "우린 기강 잡을 줄 몰라 (ft. YB)",
+      "length_axis": "long",
+      "sentiment": "negative",
+      "model": "claude-code-offline",
+      "n": 2
+    },
+    {
+      "video_id": "V2C7gtMZ7qQ",
+      "title": "우린 기강 잡을 줄 몰라 (ft. YB)",
+      "length_axis": "long",
+      "sentiment": "negative",
+      "model": "codex-offline",
+      "n": 17
+    },
+    {
+      "video_id": "V2C7gtMZ7qQ",
+      "title": "우린 기강 잡을 줄 몰라 (ft. YB)",
+      "length_axis": "long",
+      "sentiment": "neutral",
+      "model": "codex-offline",
+      "n": 34
+    },
+    {
+      "video_id": "V2C7gtMZ7qQ",
+      "title": "우린 기강 잡을 줄 몰라 (ft. YB)",
+      "length_axis": "long",
+      "sentiment": "positive",
+      "model": "claude-code-offline",
+      "n": 18
+    },
+    {
+      "video_id": "V2C7gtMZ7qQ",
+      "title": "우린 기강 잡을 줄 몰라 (ft. YB)",
+      "length_axis": "long",
+      "sentiment": "positive",
+      "model": "codex-offline",
+      "n": 129
+    },
+    {
+      "video_id": "W5SbSqtsRAk",
+      "title": "YB - Rebellion (선공개)",
+      "length_axis": "shorts",
+      "sentiment": "negative",
+      "model": "codex-offline",
+      "n": 7
+    },
+    {
+      "video_id": "W5SbSqtsRAk",
+      "title": "YB - Rebellion (선공개)",
+      "length_axis": "shorts",
+      "sentiment": "neutral",
+      "model": "codex-offline",
+      "n": 38
+    },
+    {
+      "video_id": "W5SbSqtsRAk",
+      "title": "YB - Rebellion (선공개)",
+      "length_axis": "shorts",
+      "sentiment": "positive",
+      "model": "codex-offline",
+      "n": 155
+    }
+  ],
+  "reports": [
+    {
+      "length_axis": "shorts",
+      "axis": "topic",
+      "axis_reason": "쇼츠 영상 중 코너에 속한 것이 0%뿐이라 (50% 미만) 주제로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 0.004405286343612335
+      },
+      "type_count": 8,
+      "masked": [],
+      "conclusion": "제목 라벨 과반의 확신도가 0.5 미만인 유형(상황극·부캐, 인물·티키타카, 놀이·나들이)은 성과 결론에서 제외했다. 쇼츠 기준 조회 배수가 가장 높은 주제는 먹고 마시기로 1.90배다(20편). 가장 낮은 것은 채널·팬 소통으로 0.50배다(10편). 댓글이 있는 주제 1개 중 부정 댓글 비율이 가장 높은 주제는 무대·연주로 3.5%이며, 그 지적은 주로 출연자·진행에 몰려 있다(6건). 나머지 주제 4개는 댓글을 받지 않아 피드백을 비교하지 못했다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "partial",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "CG_CREW": {
+            "recent_n": 9,
+            "prior_n": 19,
+            "recent": 0.7866452493775601,
+            "prior": 1.4972181127506363,
+            "delta": -0.7105728633730762
+          },
+          "CG_OUT": {
+            "recent_n": 5,
+            "prior_n": 3,
+            "recent": 0.5404802827082162,
+            "prior": 0.9289572970281957,
+            "delta": -0.3884770143199795
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "CG_STAGE",
+          "length_axis": "shorts",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.775,
+          "negative_ratio": 0.035,
+          "top_positive_topics": {
+            "T4": 118,
+            "T8": 86,
+            "T7": 7,
+            "T1": 2,
+            "T10": 1
+          },
+          "top_negative_topics": {
+            "T4": 6,
+            "T7": 1,
+            "T1": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        }
+      ],
+      "names": {
+        "CG_STAGE": "무대·연주",
+        "CG_WORK": "작품·창작 이야기",
+        "CG_EAT": "먹고 마시기",
+        "CG_OUT": "놀이·나들이",
+        "CG_BIT": "상황극·부캐",
+        "CG_LIFE": "연애·가족·반려",
+        "CG_CREW": "인물·티키타카",
+        "CG_META": "채널·팬 소통"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {
+        "CG_CREW": {
+          "total": 91,
+          "low": 70,
+          "unknown": 0
+        },
+        "CG_OUT": {
+          "total": 13,
+          "low": 10,
+          "unknown": 0
+        },
+        "CG_LIFE": {
+          "total": 31,
+          "low": 11,
+          "unknown": 0
+        },
+        "CG_BIT": {
+          "total": 16,
+          "low": 10,
+          "unknown": 0
+        },
+        "CG_EAT": {
+          "total": 20,
+          "low": 6,
+          "unknown": 0
+        },
+        "CG_WORK": {
+          "total": 24,
+          "low": 9,
+          "unknown": 0
+        },
+        "CG_META": {
+          "total": 10,
+          "low": 4,
+          "unknown": 0
+        },
+        "CG_STAGE": {
+          "total": 22,
+          "low": 1,
+          "unknown": 0
+        }
+      },
+      "excluded_topics": [
+        "CG_BIT",
+        "CG_CREW",
+        "CG_OUT"
+      ]
+    },
+    {
+      "length_axis": "longform",
+      "axis": "segment",
+      "axis_reason": "롱폼 영상의 93%가 채널 재생목록의 코너에 속한다 — 채널이 스스로 나눈 단위라 코너로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 0.9315068493150684
+      },
+      "type_count": 6,
+      "masked": [],
+      "conclusion": "롱폼 기준 조회 배수가 가장 높은 코너는 보드게임 동호회로 2.38배다(14편). 가장 낮은 것은 DEMO로 0.22배다(6편). 댓글이 있는 코너 1개 중 부정 댓글 비율이 가장 높은 코너는 스쿨오브락으로 9.5%이며, 그 지적은 주로 출연자·진행에 몰려 있다(16건). 나머지 코너 3개는 댓글을 받지 않아 피드백을 비교하지 못했다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "partial",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "PL8SYC1RvK4AyuL3dRwplH_mNlornWdHtE": {
+            "recent_n": 12,
+            "prior_n": 16,
+            "recent": 2.5107490498846294,
+            "prior": 1.015097334729305,
+            "delta": 1.4956517151553244
+          },
+          "PL8SYC1RvK4AzNaZ3uqThUCv2fgt6238Ut": {
+            "recent_n": 6,
+            "prior_n": 6,
+            "recent": 1.5350917217506803,
+            "prior": 3.0374909025253287,
+            "delta": -1.5023991807746484
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "PL8SYC1RvK4AwVymmn5AmQkgO9kakPCmoo",
+          "length_axis": "longform",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.735,
+          "negative_ratio": 0.095,
+          "top_positive_topics": {
+            "T4": 112,
+            "T8": 102,
+            "T7": 4,
+            "T10": 3,
+            "T1": 3
+          },
+          "top_negative_topics": {
+            "T4": 16,
+            "T2": 2,
+            "T3": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        }
+      ],
+      "names": {
+        "PLZ8SnboizbSM": "DEMO",
+        "PL8SYC1RvK4AzNaZ3uqThUCv2fgt6238Ut": "보드게임 동호회",
+        "PL8SYC1RvK4AwVymmn5AmQkgO9kakPCmoo": "스쿨오브락",
+        "PL8SYC1RvK4AyuL3dRwplH_mNlornWdHtE": "기타등등",
+        "PL8SYC1RvK4Aw7PP5bSQ9IRHXyJNY90SlS": "아바타시리즈",
+        "PL8SYC1RvK4AzqQqWKhZF4Wa8zJSlnhi1V": "안주방어전"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {},
+      "excluded_topics": []
+    },
+    {
+      "length_axis": "all",
+      "axis": "topic",
+      "axis_reason": "전체 영상 중 코너에 속한 것이 23%뿐이라 (50% 미만) 주제로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 0.23
+      },
+      "type_count": 8,
+      "masked": [
+        {
+          "type_code": "CG_EAT",
+          "shorts": 1.9007594405918673,
+          "longform": 2.9124607298363054,
+          "gap": 1.0117012892444381
+        },
+        {
+          "type_code": "CG_LIFE",
+          "shorts": 1.5159793409948565,
+          "longform": 0.6477702964769727,
+          "gap": 0.8682090445178838
+        },
+        {
+          "type_code": "CG_OUT",
+          "shorts": 0.7394503298535811,
+          "longform": 1.4990054502463441,
+          "gap": 0.7595551203927631
+        },
+        {
+          "type_code": "CG_BIT",
+          "shorts": 1.155289645572331,
+          "longform": 1.893000333000333,
+          "gap": 0.7377106874280022
+        }
+      ],
+      "conclusion": "제목 라벨 과반의 확신도가 0.5 미만인 유형(상황극·부캐, 인물·티키타카)은 성과 결론에서 제외했다. 전체 기준 조회 배수가 가장 높은 주제는 먹고 마시기로 2.04배다(26편). 가장 낮은 것은 작품·창작 이야기로 0.45배다(38편). 댓글이 있는 주제 2개 중 부정 댓글 비율이 가장 높은 주제는 작품·창작 이야기로 9.5%이며, 그 지적은 주로 출연자·진행에 몰려 있다(16건). 나머지 주제 4개는 댓글을 받지 않아 피드백을 비교하지 못했다. 먹고 마시기는 쇼츠 1.90배와 롱폼 2.91배가 갈리므로 합친 값으로 읽으면 안 된다. 연애·가족·반려는 쇼츠 1.52배와 롱폼 0.65배가 갈리므로 합친 값으로 읽으면 안 된다. 놀이·나들이는 쇼츠 0.74배와 롱폼 1.50배가 갈리므로 합친 값으로 읽으면 안 된다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "partial",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "CG_CREW": {
+            "recent_n": 6,
+            "prior_n": 14,
+            "recent": 1.162206518603832,
+            "prior": 1.1647169274945472,
+            "delta": -0.002510408890715299
+          },
+          "CG_LIFE": {
+            "recent_n": 4,
+            "prior_n": 5,
+            "recent": 1.6397217165768403,
+            "prior": 3.862666062247053,
+            "delta": -2.2229443456702125
+          },
+          "CG_OUT": {
+            "recent_n": 6,
+            "prior_n": 5,
+            "recent": 2.487684458448551,
+            "prior": 0.38327346935416845,
+            "delta": 2.1044109890943825
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "CG_STAGE",
+          "length_axis": "all",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.775,
+          "negative_ratio": 0.035,
+          "top_positive_topics": {
+            "T4": 118,
+            "T8": 86,
+            "T7": 7,
+            "T1": 2,
+            "T10": 1
+          },
+          "top_negative_topics": {
+            "T4": 6,
+            "T7": 1,
+            "T1": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        },
+        {
+          "type_code": "CG_WORK",
+          "length_axis": "all",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.735,
+          "negative_ratio": 0.095,
+          "top_positive_topics": {
+            "T4": 112,
+            "T8": 102,
+            "T7": 4,
+            "T10": 3,
+            "T1": 3
+          },
+          "top_negative_topics": {
+            "T4": 16,
+            "T2": 2,
+            "T3": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        }
+      ],
+      "names": {
+        "CG_STAGE": "무대·연주",
+        "CG_WORK": "작품·창작 이야기",
+        "CG_EAT": "먹고 마시기",
+        "CG_OUT": "놀이·나들이",
+        "CG_BIT": "상황극·부캐",
+        "CG_LIFE": "연애·가족·반려",
+        "CG_CREW": "인물·티키타카",
+        "CG_META": "채널·팬 소통"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {
+        "CG_CREW": {
+          "total": 101,
+          "low": 77,
+          "unknown": 0
+        },
+        "CG_OUT": {
+          "total": 33,
+          "low": 15,
+          "unknown": 0
+        },
+        "CG_LIFE": {
+          "total": 38,
+          "low": 12,
+          "unknown": 0
+        },
+        "CG_WORK": {
+          "total": 38,
+          "low": 14,
+          "unknown": 0
+        },
+        "CG_BIT": {
+          "total": 26,
+          "low": 19,
+          "unknown": 0
+        },
+        "CG_EAT": {
+          "total": 26,
+          "low": 8,
+          "unknown": 0
+        },
+        "CG_META": {
+          "total": 12,
+          "low": 4,
+          "unknown": 0
+        },
+        "CG_STAGE": {
+          "total": 26,
+          "low": 2,
+          "unknown": 0
+        }
+      },
+      "excluded_topics": [
+        "CG_BIT",
+        "CG_CREW"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "file": "data\\batches\\carden\\comments\\carden_001.result.json",
+      "sha256": "53c3036b9d7dac5a99fe031975079f58ac89cafc166da474c1dba8def26b7b9b",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_002.result.json",
+      "sha256": "046f8318a141e7eddc76b5201634e66f217a19bd7699fb5223c930d15b0f37f5",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_003.result.json",
+      "sha256": "340c6524076d5a86052b4ed41452299cffcc9f4f3aece20de970c1f7f2cf2a0b",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_004.result.json",
+      "sha256": "e951fd62d4116d1c8520905d0ae8240103433dd0e5f27e060e203cb6ddd88e66",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_005.result.json",
+      "sha256": "dc822435481811caf338f43517b3fd19e14ed24140862dd6e545baa1289320f0",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_006.result.json",
+      "sha256": "6994b0055d7677f1a54e335590db660ba530b6db4abb53ef7b9ba94bc618a41c",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_007.result.json",
+      "sha256": "64635f4405bfe72845c638df7819d805db1cb609d314fb60805afae8adc6873c",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_008.result.json",
+      "sha256": "5e55c0fe128ea77e0fcd8e09e20f083347ccdbdb6950f88d6313d9853c6ad0ec",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_009.result.json",
+      "sha256": "e314a529843adaf10af0f25753e8e0677f933ca978e8d7b0ad4ca53b1b5cec92",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_010.result.json",
+      "sha256": "2430c422d6ea203920484284d10641498849a303acc2e24fcaba75c89aa1014b",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_011.result.json",
+      "sha256": "7291e49413c1e35b274bcdf501046adcd7fbfc0365f01af02ad01691e6620485",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_012.result.json",
+      "sha256": "b72afc09bab388212c99244f44fa6ab18c1059be12f6fa200f91d5e8d715298e",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_013.result.json",
+      "sha256": "1a6ed359c3a9eb490a5d5c8b753c6c8fed04e8b9d9967de001479da7fa8ea663",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_014.result.json",
+      "sha256": "52e1584565bafca4983c817d5a18bf7a187b000b04fab08ff4edffe8935ef322",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_015.result.json",
+      "sha256": "819992301a33c9fddd6cda4c99ad50323196063d2d6048c76ba300b1e4b73552",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_016.result.json",
+      "sha256": "892b08ee7460c57253ded79befa67c8a8e0ea93252e767f38b17bcb89a4565de",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_017.result.json",
+      "sha256": "f91003adeae8dc5a04410e51ae5bd30edd3ba0478f2571d9e2a9078f78051410",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_018.result.json",
+      "sha256": "fb44ef18b735022d8e67957226eb94aff43b1528a44362ef655d6f883dbab0af",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_019.result.json",
+      "sha256": "3846143698499f1cc20872c13c75283fb811a0a006bbd345f6f682df096287a0",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\carden\\comments\\carden_020.result.json",
+      "sha256": "d24cf575b8ee61496f76b29bc1d01b5b5ef5f8b96bf0fcce9590129ef32c6bd7",
+      "model": "codex-offline",
+      "count": 20
+    }
+  ]
+}

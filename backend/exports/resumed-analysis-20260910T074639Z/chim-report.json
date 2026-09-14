@@ -1,0 +1,535 @@
+{
+  "channel": "침착맨",
+  "video_count": 300,
+  "labeled_comments": 400,
+  "sampled_videos": 2,
+  "breakdown": [
+    {
+      "video_id": "3nAjcgsig_A",
+      "title": "이선민 금연 공약",
+      "length_axis": "shorts",
+      "sentiment": "negative",
+      "model": "codex-offline",
+      "n": 12
+    },
+    {
+      "video_id": "3nAjcgsig_A",
+      "title": "이선민 금연 공약",
+      "length_axis": "shorts",
+      "sentiment": "neutral",
+      "model": "codex-offline",
+      "n": 167
+    },
+    {
+      "video_id": "3nAjcgsig_A",
+      "title": "이선민 금연 공약",
+      "length_axis": "shorts",
+      "sentiment": "positive",
+      "model": "codex-offline",
+      "n": 21
+    },
+    {
+      "video_id": "Yln0zfwJcZY",
+      "title": "퍼스트 펭귄 이선민 초대석",
+      "length_axis": "long",
+      "sentiment": "negative",
+      "model": "claude-code-offline",
+      "n": 4
+    },
+    {
+      "video_id": "Yln0zfwJcZY",
+      "title": "퍼스트 펭귄 이선민 초대석",
+      "length_axis": "long",
+      "sentiment": "neutral",
+      "model": "claude-code-offline",
+      "n": 77
+    },
+    {
+      "video_id": "Yln0zfwJcZY",
+      "title": "퍼스트 펭귄 이선민 초대석",
+      "length_axis": "long",
+      "sentiment": "positive",
+      "model": "claude-code-offline",
+      "n": 119
+    }
+  ],
+  "reports": [
+    {
+      "length_axis": "shorts",
+      "axis": "topic",
+      "axis_reason": "쇼츠 영상 중 코너에 속한 것이 0%뿐이라 (50% 미만) 주제로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 0.0
+      },
+      "type_count": 7,
+      "masked": [],
+      "conclusion": "제목 라벨 과반의 확신도가 0.5 미만인 유형(먹방·쿡방, 초대석·게스트, 특강·배움, 사건·이야기, 잡담·일상)은 성과 결론에서 제외했다. 쇼츠 기준 조회 배수가 가장 높은 주제는 게임·퀴즈로 0.71배다(12편). 가장 낮은 것은 작품 감상으로 0.40배다(6편). 댓글 라벨이 있는 주제가 없어 피드백은 넣지 못했다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "performance_only",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "K_GAME": {
+            "recent_n": 4,
+            "prior_n": 4,
+            "recent": 0.5079491143636958,
+            "prior": 0.8311059122251396,
+            "delta": -0.3231567978614438
+          },
+          "K_LECTURE": {
+            "recent_n": 3,
+            "prior_n": 3,
+            "recent": 1.1943087238539465,
+            "prior": 0.9757803733560194,
+            "delta": 0.21852835049792707
+          },
+          "K_TALK": {
+            "recent_n": 20,
+            "prior_n": 13,
+            "recent": 0.6545389789032074,
+            "prior": 1.1833678303330661,
+            "delta": -0.5288288514298587
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "K_GUEST",
+          "length_axis": "shorts",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.105,
+          "negative_ratio": 0.06,
+          "top_positive_topics": {
+            "T8": 17,
+            "T4": 9,
+            "T7": 3
+          },
+          "top_negative_topics": {
+            "T4": 9,
+            "T1": 3,
+            "T3": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        }
+      ],
+      "names": {
+        "K_GUEST": "초대석·게스트",
+        "K_LECTURE": "특강·배움",
+        "K_FOOD": "먹방·쿡방",
+        "K_GAME": "게임·퀴즈",
+        "K_WORK": "작품 감상",
+        "K_STORY": "사건·이야기",
+        "K_TALK": "잡담·일상"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {
+        "K_GUEST": {
+          "total": 13,
+          "low": 10,
+          "unknown": 0
+        },
+        "K_TALK": {
+          "total": 105,
+          "low": 105,
+          "unknown": 0
+        },
+        "K_LECTURE": {
+          "total": 14,
+          "low": 11,
+          "unknown": 0
+        },
+        "K_GAME": {
+          "total": 12,
+          "low": 6,
+          "unknown": 0
+        },
+        "K_WORK": {
+          "total": 6,
+          "low": 3,
+          "unknown": 0
+        },
+        "K_STORY": {
+          "total": 10,
+          "low": 7,
+          "unknown": 0
+        },
+        "K_FOOD": {
+          "total": 15,
+          "low": 8,
+          "unknown": 0
+        }
+      },
+      "excluded_topics": [
+        "K_FOOD",
+        "K_GUEST",
+        "K_LECTURE",
+        "K_STORY",
+        "K_TALK"
+      ]
+    },
+    {
+      "length_axis": "longform",
+      "axis": "segment",
+      "axis_reason": "롱폼 영상의 100%가 채널 재생목록의 코너에 속한다 — 채널이 스스로 나눈 단위라 코너로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 1.0
+      },
+      "type_count": 11,
+      "masked": [],
+      "conclusion": "롱폼 기준 조회 배수가 가장 높은 코너는 침착맨과 함께 듣는 특강으로 1.40배다(11편). 가장 낮은 것은 불만 피우면 쿡방으로 0.78배다(11편). 댓글이 있는 코너 1개 중 부정 댓글 비율이 가장 높은 코너는 침착맨 초대석으로 2.0%이며, 그 지적은 주로 출연자·진행에 몰려 있다(2건). 나머지 코너 5개는 댓글을 받지 않아 피드백을 비교하지 못했다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "partial",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "PLif_jr7pPZABN1VhdZ72LF8bYjI23rMJ2": {
+            "recent_n": 12,
+            "prior_n": 15,
+            "recent": 1.0027673338098593,
+            "prior": 0.8010619475402238,
+            "delta": 0.20170538626963552
+          },
+          "PLif_jr7pPZABqh9-M7tsgGhoJt36dpnkj": {
+            "recent_n": 4,
+            "prior_n": 5,
+            "recent": 0.8867985916670532,
+            "prior": 1.6102307294040215,
+            "delta": -0.7234321377369682
+          },
+          "PLif_jr7pPZACfoFhBRTYpuhGn9etcTS3n": {
+            "recent_n": 4,
+            "prior_n": 3,
+            "recent": 1.2215359604693028,
+            "prior": 0.9778995076304965,
+            "delta": 0.2436364528388063
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "PLif_jr7pPZABqh9-M7tsgGhoJt36dpnkj",
+          "length_axis": "longform",
+          "labeled_video_count": 1,
+          "valid_comment_count": 200,
+          "positive_ratio": 0.595,
+          "negative_ratio": 0.02,
+          "top_positive_topics": {
+            "T8": 65,
+            "T4": 59,
+            "T7": 7,
+            "T2": 7,
+            "T1": 5
+          },
+          "top_negative_topics": {
+            "T4": 2,
+            "T1": 1,
+            "T2": 1,
+            "T7": 1
+          },
+          "basis": "영상 1편 · 라벨 200건"
+        }
+      ],
+      "names": {
+        "PLif_jr7pPZACcqYCqznBLJHH1i6JVBeI3": "침착맨 여행기",
+        "PLif_jr7pPZABN1VhdZ72LF8bYjI23rMJ2": "2026년 침착맨 정주행",
+        "PLif_jr7pPZAAB4VpsUakDsSCjfDGOzfY2": "침착맨의 티어메이커",
+        "PLif_jr7pPZABqh9-M7tsgGhoJt36dpnkj": "침착맨 초대석",
+        "PLif_jr7pPZACqDgKQRDHeOIFoMI8WFPdq": "침착맨과 알아보자",
+        "PLif_jr7pPZABTSM_60nmpOd_fkVLss5Jo": "침착맨의 일상은 이렇다",
+        "PLif_jr7pPZACfoFhBRTYpuhGn9etcTS3n": "침착맨과 함께 듣는 특강",
+        "PLif_jr7pPZACEQ8CWYYcC2GDDqsJ2icOv": "불만 피우면 쿡방",
+        "PLif_jr7pPZACxsaghi1juPYbkM6UJMxXk": "궤도 선생님의 과학 특강",
+        "PLif_jr7pPZACNczCPv-JNMCfCgv5t6m8N": "쇼핑맨",
+        "PLif_jr7pPZAC321sWV6aG28aHj_XKVhwf": "침착맨의 (스포)감상회"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {},
+      "excluded_topics": []
+    },
+    {
+      "length_axis": "all",
+      "axis": "topic",
+      "axis_reason": "전체 영상 중 코너에 속한 것이 42%뿐이라 (50% 미만) 주제로 읽는다",
+      "coverage": {
+        "topic": 1.0,
+        "segment": 0.4166666666666667
+      },
+      "type_count": 7,
+      "masked": [
+        {
+          "type_code": "K_WORK",
+          "shorts": 0.4026711299630108,
+          "longform": 1.1405349548342418,
+          "gap": 0.737863824871231
+        },
+        {
+          "type_code": "K_FOOD",
+          "shorts": 1.5458971649296698,
+          "longform": 0.8792207594193318,
+          "gap": 0.666676405510338
+        }
+      ],
+      "conclusion": "제목 라벨 과반의 확신도가 0.5 미만인 유형(특강·배움, 사건·이야기, 잡담·일상)은 성과 결론에서 제외했다. 전체 기준 조회 배수가 가장 높은 주제는 초대석·게스트로 1.07배다(35편). 가장 낮은 것은 작품 감상으로 0.71배다(16편). 그 주제의 긍정 댓글에서 가장 많이 나온 주제는 감정·응원으로 82건이다. 댓글이 있는 주제 1개 중 부정 댓글 비율이 가장 높은 주제는 초대석·게스트로 4.0%이며, 그 지적은 주로 출연자·진행에 몰려 있다(11건). 나머지 주제 3개는 댓글을 받지 않아 피드백을 비교하지 못했다. 작품 감상은 쇼츠 0.40배와 롱폼 1.14배가 갈리므로 합친 값으로 읽으면 안 된다. 먹방·쿡방은 쇼츠 1.55배와 롱폼 0.88배가 갈리므로 합친 값으로 읽으면 안 된다. 댓글은 서로 다른 판정 출처를 명시적으로 합쳤으며 모델 차이가 비율에 영향을 줄 수 있다.",
+      "conclusion_source": "draft",
+      "completeness": "partial",
+      "recent_vs_prior": {
+        "basis": "최근 30편 vs 그 이전 30편 (양쪽 3편 이상인 유형만)",
+        "window": 30,
+        "types": {
+          "K_GAME": {
+            "recent_n": 6,
+            "prior_n": 5,
+            "recent": 1.118559489729901,
+            "prior": 0.5079491143636958,
+            "delta": 0.6106103753662051
+          },
+          "K_LECTURE": {
+            "recent_n": 3,
+            "prior_n": 4,
+            "recent": 0.5893656008616293,
+            "prior": 1.0260553438932678,
+            "delta": -0.43668974303163854
+          },
+          "K_TALK": {
+            "recent_n": 15,
+            "prior_n": 14,
+            "recent": 0.8433034892079919,
+            "prior": 0.6839662274505769,
+            "delta": 0.15933726175741503
+          }
+        }
+      },
+      "comment_rows": [
+        {
+          "type_code": "K_GUEST",
+          "length_axis": "all",
+          "labeled_video_count": 2,
+          "valid_comment_count": 400,
+          "positive_ratio": 0.35,
+          "negative_ratio": 0.04,
+          "top_positive_topics": {
+            "T8": 82,
+            "T4": 68,
+            "T7": 10,
+            "T2": 7,
+            "T1": 5
+          },
+          "top_negative_topics": {
+            "T4": 11,
+            "T1": 4,
+            "T2": 1,
+            "T7": 1,
+            "T3": 1
+          },
+          "basis": "영상 2편 · 라벨 400건"
+        }
+      ],
+      "names": {
+        "K_GUEST": "초대석·게스트",
+        "K_LECTURE": "특강·배움",
+        "K_FOOD": "먹방·쿡방",
+        "K_GAME": "게임·퀴즈",
+        "K_WORK": "작품 감상",
+        "K_STORY": "사건·이야기",
+        "K_TALK": "잡담·일상"
+      },
+      "label_sources": [
+        [
+          "v2",
+          "claude-code-offline"
+        ],
+        [
+          "v2",
+          "codex-offline"
+        ]
+      ],
+      "title_label_quality": {
+        "K_GUEST": {
+          "total": 35,
+          "low": 17,
+          "unknown": 0
+        },
+        "K_TALK": {
+          "total": 124,
+          "low": 119,
+          "unknown": 0
+        },
+        "K_STORY": {
+          "total": 17,
+          "low": 9,
+          "unknown": 0
+        },
+        "K_LECTURE": {
+          "total": 31,
+          "low": 16,
+          "unknown": 0
+        },
+        "K_GAME": {
+          "total": 38,
+          "low": 8,
+          "unknown": 0
+        },
+        "K_WORK": {
+          "total": 16,
+          "low": 4,
+          "unknown": 0
+        },
+        "K_FOOD": {
+          "total": 39,
+          "low": 10,
+          "unknown": 0
+        }
+      },
+      "excluded_topics": [
+        "K_LECTURE",
+        "K_STORY",
+        "K_TALK"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_001.result.json",
+      "sha256": "fe3a08e14ea566295bbb84d9ccd5c1237b02e7556ec03854de9df294c8c9747d",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_002.result.json",
+      "sha256": "dfcf77d1882a5c84acdbaa99307c88a0a4221720403af8706c226ec054190837",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_003.result.json",
+      "sha256": "8502e6578e29b521463ca35b1099103065c98a15dd1507668e6cfa4ee3086ebf",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_004.result.json",
+      "sha256": "e40201d02b301490a47795e4fcbd956941686e8532c035c36de5fbcb9910b6ef",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_005.result.json",
+      "sha256": "7a40a136f825c125e4818584edea3fbe062dabb518aa099330e2f0b361b73add",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_006.result.json",
+      "sha256": "b0bab139c32e18a9a47fa65cb9ef151ed87bb7e44e2ea968a9fa8a94ec35bdd9",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_007.result.json",
+      "sha256": "09b1886c787125cac78fafd0ad2bca4e88c0e33e4a2cb7c7601fc5f288718d84",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_008.result.json",
+      "sha256": "28ca7a89c8faf5ce4365ee41327f57f7940cfa73c2e3bea0fd2951c84dd67717",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_009.result.json",
+      "sha256": "3b740e735ac928b9d0b8105aa846d3c7202c39509e049f4794e4bc78e4d4cdb4",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_010.result.json",
+      "sha256": "4a253b9359a5abe073e82688f3ebe74fa55ecf2b14b9693f4a3726ff726e7757",
+      "model": "claude-code-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_011.result.json",
+      "sha256": "19545621793ffdef184de8075f83ec2c4d2fdebd212aa485d624e5f57634fd53",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_012.result.json",
+      "sha256": "13f73d1c9b956e32c72dd4d553ff7a301906f3ea693636f5f1bc00e8e0c78e9c",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_013.result.json",
+      "sha256": "550369a9157f64a4f74f9b7389a5850efa9a74c6647e6d429275a320c127ef78",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_014.result.json",
+      "sha256": "6d7468d94c37fb585d693209405c9c6cb84bf1925831d88443a574c9ee06040c",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_015.result.json",
+      "sha256": "47117d09b66196c4070e3ae8c11cf998048a167a72ea0baeddd65f309efa8336",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_016.result.json",
+      "sha256": "b4b3262b19b30e7d0e38df6bbb7f90c0b25d016af01b9d184ba9d886be91feb5",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_017.result.json",
+      "sha256": "11e5afccc82f42813e030a5550d8c4876c5db4cea140f99da0cf18fbe2d0c6d1",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_018.result.json",
+      "sha256": "23e3f792b385186053307424e9092bde26235b730c3347f619d8c7da7442163b",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_019.result.json",
+      "sha256": "55c80ab63ae16ff85d9c17b67c2b3e7932b04d751f4250a7ce59852cbe12e802",
+      "model": "codex-offline",
+      "count": 20
+    },
+    {
+      "file": "data\\batches\\chim\\comments\\chimc_020.result.json",
+      "sha256": "14ecb19c46c41310cdf9aba40c64dd141c3fbfb10c39848b3c142f6741cddc0a",
+      "model": "codex-offline",
+      "count": 20
+    }
+  ]
+}

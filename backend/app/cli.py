@@ -265,10 +265,17 @@ def cmd_segments(args) -> int:
         f"https://www.youtube.com/channel/{ch['channel_id']}").get("video_count") or 0
     segs = sg.pick_segments(playlists, total)
     sizes = {p["id"]: p["item_count"] for p in playlists}
-    picked = sg.assign(membership, segs, sizes)
-
     ours = {r["video_id"] for r in conn.execute(
         "SELECT video_id FROM videos WHERE channel_id=?", (ch["channel_id"],))}
+
+    # 채널 전체 기준 비율만으로는 큰 채널에서 서랍이 새어 나간다. 우리가
+    # 받은 영상을 기준으로 한 번 더 거른다 — segments.drop_broad 를 볼 것.
+    before, segs = segs, sg.drop_broad(
+        {v: pls for v, pls in membership.items() if v in ours}, segs, len(ours))
+    for pid in set(before) - set(segs):
+        print(f"[서랍] 「{before[pid]}」 — 받은 영상의 40% 이상을 덮어 코너에서 뺐다")
+
+    picked = sg.assign(membership, segs, sizes)
     rows = [{"video_id": v, "type_code": p} for v, p in picked.items() if v in ours]
     used = {r["type_code"] for r in rows}
     types = {pid: name for pid, name in segs.items() if pid in used}
