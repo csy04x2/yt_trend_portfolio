@@ -1,0 +1,17 @@
+{
+  "note": "자리표시자 판정 규칙. 제목만 본다. content형은 미검출=U(0 아님), form형은 미검출=0. 사람·LLM 판정 파일이 오면 이 파일은 쓰지 않는다.",
+  "features": {
+    "guest_external": {"kind": "content", "regex": "with |초대석|특별출연|강사|작가님|전무님|전문가|셰프|궤도|김신영|한로로|강민경|AKMU|키드밀리|주우재|정승제"},
+    "expert_knowledge": {"kind": "content", "regex": "특강|알아보자|알아보기|전문가|강사|과학|비밀|진실|방법"},
+    "tournament_ranking": {"kind": "content", "regex": "월드컵|최악의|TOP|순위"},
+    "food_eating": {"kind": "content", "regex": "먹방|먹어|쿡방|신메뉴|수박|망고|평냉|피자|통닭|맛집|음식|맘스터치|롯데리아|성심당|미쉐린|뿌먹"},
+    "media_review": {"kind": "content", "regex": "넷플릭스|인생작|천만 영화|추천|원피스|리뷰어"},
+    "pop_culture_ip": {"kind": "content", "regex": "포켓몬|코난|원피스|삼국지|셜록|리퍼|킹콩|King Kong|촉나라|대칭맨"},
+    "title_quote": {"kind": "form", "regex": "\\.\\.\\.|!$|요$|니까$|습니다$|예요$|바카나|홍금|조아조아|잘하자|말씀"},
+    "title_wordplay": {"kind": "form", "regex": "라카칠|실례카겔|파괴살|위고비|더더|먹잘알|대칭맨|잘알|막담|나침"},
+    "recurring_bit": {"kind": "form", "regex": "남매|매너|챌린지|킹콩|King Kong"},
+    "host_in_title": {"kind": "form", "regex": "침착맨|침풍뼈"},
+    "guest_in_title": {"kind": "form", "regex": "with |초대석|특별출연|\\(feat|ft\\."},
+    "one_hour_plus": {"kind": "duration", "gt_seconds": 3600}
+  }
+}

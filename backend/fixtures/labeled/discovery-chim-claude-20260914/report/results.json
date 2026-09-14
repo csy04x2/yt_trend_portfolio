@@ -1,0 +1,1364 @@
+{
+ "trend": [
+  {
+   "axis": "long",
+   "month": "2026-03",
+   "n_all": 9,
+   "n_ex": 9,
+   "views_all": 961255,
+   "views_ex": 961255,
+   "like_rate_all": 0.009027553298574183,
+   "like_rate_ex": 0.009027553298574183,
+   "comment_rate_all": 0.0006325064629052645,
+   "comment_rate_ex": 0.0006325064629052645,
+   "vpd_all": 5591.485947906516,
+   "vpd_ex": 5591.485947906516
+  },
+  {
+   "axis": "long",
+   "month": "2026-04",
+   "n_all": 22,
+   "n_ex": 21,
+   "views_all": 934181.0,
+   "views_ex": 925047,
+   "like_rate_all": 0.010221135471673762,
+   "like_rate_ex": 0.010248842777602973,
+   "comment_rate_all": 0.0008342851639466758,
+   "comment_rate_ex": 0.0008640971274216504,
+   "vpd_all": 6673.884543107138,
+   "vpd_ex": 6439.971502057427
+  },
+  {
+   "axis": "long",
+   "month": "2026-05",
+   "n_all": 18,
+   "n_ex": 18,
+   "views_all": 809560.5,
+   "views_ex": 809560.5,
+   "like_rate_all": 0.009257397662446584,
+   "like_rate_ex": 0.009257397662446584,
+   "comment_rate_all": 0.0008025604416679257,
+   "comment_rate_ex": 0.0008025604416679257,
+   "vpd_all": 7142.304478434516,
+   "vpd_ex": 7142.304478434516
+  },
+  {
+   "axis": "long",
+   "month": "2026-06",
+   "n_all": 21,
+   "n_ex": 19,
+   "views_all": 806964,
+   "views_ex": 706620,
+   "like_rate_all": 0.008346858920826487,
+   "like_rate_ex": 0.008155727265008067,
+   "comment_rate_all": 0.0006558938970798913,
+   "comment_rate_ex": 0.0006341375184956776,
+   "vpd_all": 9161.233510170501,
+   "vpd_ex": 8673.935358496057
+  },
+  {
+   "axis": "long",
+   "month": "2026-07",
+   "n_all": 22,
+   "n_ex": 21,
+   "views_all": 1176293.5,
+   "views_ex": 1158834,
+   "like_rate_all": 0.010348487994892385,
+   "like_rate_ex": 0.010301577306806316,
+   "comment_rate_all": 0.0008785101584510783,
+   "comment_rate_ex": 0.0009133947087992852,
+   "vpd_all": 21817.579452151775,
+   "vpd_ex": 21745.79665572015
+  },
+  {
+   "axis": "long",
+   "month": "2026-08",
+   "n_all": 20,
+   "n_ex": 19,
+   "views_all": 1173217.5,
+   "views_ex": 1122953,
+   "like_rate_all": 0.007622096076113469,
+   "like_rate_ex": 0.007677771537186699,
+   "comment_rate_all": 0.0007659267247906584,
+   "comment_rate_ex": 0.0007753719961176668,
+   "vpd_all": 39962.45522849982,
+   "vpd_ex": 39695.67542212672
+  },
+  {
+   "axis": "long",
+   "month": "2026-09",
+   "n_all": 7,
+   "n_ex": 7,
+   "views_all": 1167086,
+   "views_ex": 1167086,
+   "like_rate_all": 0.004450142659043807,
+   "like_rate_ex": 0.004450142659043807,
+   "comment_rate_all": 0.00041049625886355765,
+   "comment_rate_ex": 0.00041049625886355765,
+   "vpd_all": 281277.18595838995,
+   "vpd_ex": 281277.18595838995
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-03",
+   "n_all": 12,
+   "n_ex": 9,
+   "views_all": 2075011.5,
+   "views_ex": 1021042,
+   "like_rate_all": 0.009477158431717023,
+   "like_rate_ex": 0.008756282186511137,
+   "comment_rate_all": 0.00017940672997237607,
+   "comment_rate_ex": 0.00020061890412183492,
+   "vpd_all": 12396.898037527852,
+   "vpd_ex": 6041.783254846153
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-04",
+   "n_all": 30,
+   "n_ex": 28,
+   "views_all": 1762602.0,
+   "views_ex": 1676094.5,
+   "like_rate_all": 0.008795765041327924,
+   "like_rate_ex": 0.008795765041327924,
+   "comment_rate_all": 0.00017387140636614297,
+   "comment_rate_ex": 0.00017387140636614297,
+   "vpd_all": 12178.823036592159,
+   "vpd_ex": 11445.392502072144
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-05",
+   "n_all": 32,
+   "n_ex": 28,
+   "views_all": 2301793.0,
+   "views_ex": 1860233.5,
+   "like_rate_all": 0.008240881300033072,
+   "like_rate_ex": 0.008533937883339532,
+   "comment_rate_all": 0.00019216644993905914,
+   "comment_rate_ex": 0.00018469539222144596,
+   "vpd_all": 19080.087181533243,
+   "vpd_ex": 17647.908627913806
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-06",
+   "n_all": 30,
+   "n_ex": 23,
+   "views_all": 2344943.5,
+   "views_ex": 1566960,
+   "like_rate_all": 0.008315471266881319,
+   "like_rate_ex": 0.007998530735345939,
+   "comment_rate_all": 0.000123419859847232,
+   "comment_rate_ex": 0.00013357849471196725,
+   "vpd_all": 26115.491204764843,
+   "vpd_ex": 17559.61378382439
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-07",
+   "n_all": 31,
+   "n_ex": 29,
+   "views_all": 2978929,
+   "views_ex": 2927271,
+   "like_rate_all": 0.009653334380777022,
+   "like_rate_ex": 0.009853150664732198,
+   "comment_rate_all": 0.0001597365976104709,
+   "comment_rate_ex": 0.0001597365976104709,
+   "vpd_all": 66716.01653122844,
+   "vpd_ex": 55539.62153248322
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-08",
+   "n_all": 31,
+   "n_ex": 30,
+   "views_all": 1888415,
+   "views_ex": 1869264.0,
+   "like_rate_all": 0.01131775693995887,
+   "like_rate_ex": 0.011304403420348138,
+   "comment_rate_all": 0.00023233958429175826,
+   "comment_rate_ex": 0.00023577305104991461,
+   "vpd_all": 87675.30743756097,
+   "vpd_ex": 82277.8437313293
+  },
+  {
+   "axis": "shorts",
+   "month": "2026-09",
+   "n_all": 9,
+   "n_ex": 9,
+   "views_all": 2787048,
+   "views_ex": 2787048,
+   "like_rate_all": 0.010048950093064791,
+   "like_rate_ex": 0.010048950093064791,
+   "comment_rate_all": 0.00013356331664427892,
+   "comment_rate_ex": 0.00013356331664427892,
+   "vpd_all": 411165.54830870806,
+   "vpd_ex": 411165.54830870806
+  },
+  {
+   "axis": "standard",
+   "month": "2026-05",
+   "n_all": 3,
+   "n_ex": 3,
+   "views_all": 978949,
+   "views_ex": 978949,
+   "like_rate_all": 0.008845120229418931,
+   "like_rate_ex": 0.008845120229418931,
+   "comment_rate_all": 0.0006512387477097108,
+   "comment_rate_ex": 0.0006512387477097108,
+   "vpd_all": 7912.781903049236,
+   "vpd_ex": 7912.781903049236
+  },
+  {
+   "axis": "standard",
+   "month": "2026-06",
+   "n_all": 1,
+   "n_ex": 1,
+   "views_all": 625484,
+   "views_ex": 625484,
+   "like_rate_all": 0.00859014778955177,
+   "like_rate_ex": 0.00859014778955177,
+   "comment_rate_all": 0.0007865908640348914,
+   "comment_rate_ex": 0.0007865908640348914,
+   "vpd_all": 7826.9533305361565,
+   "vpd_ex": 7826.9533305361565
+  },
+  {
+   "axis": "standard",
+   "month": "2026-08",
+   "n_all": 2,
+   "n_ex": 2,
+   "views_all": 684365.5,
+   "views_ex": 684365.5,
+   "like_rate_all": 0.012002966160620281,
+   "like_rate_ex": 0.012002966160620281,
+   "comment_rate_all": 0.0011584936032783964,
+   "comment_rate_ex": 0.0011584936032783964,
+   "vpd_all": 23315.510428269255,
+   "vpd_ex": 23315.510428269255
+  }
+ ],
+ "outcome": [
+  {
+   "feature_id": "expert_knowledge",
+   "axis": "all",
+   "all": {
+    "n1": 6,
+    "n0": 75,
+    "med1": 0.6541718399488127,
+    "med0": 0.890421590658098,
+    "diff": -0.23624975070928533
+   },
+   "excluded": {
+    "n1": 6,
+    "n0": 69,
+    "med1": 0.6541718399488127,
+    "med0": 0.8409093390036075,
+    "diff": -0.18673749905479486
+   },
+   "loo_range": [
+    -0.2921409678359782,
+    -0.08133403027361152
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "food_eating",
+   "axis": "all",
+   "all": {
+    "n1": 6,
+    "n0": 75,
+    "med1": 1.2075830885359964,
+    "med0": 0.8562801332976646,
+    "diff": 0.35130295523833177
+   },
+   "excluded": {
+    "n1": 6,
+    "n0": 69,
+    "med1": 1.2075830885359964,
+    "med0": 0.8024862284719086,
+    "diff": 0.40509686006408774
+   },
+   "loo_range": [
+    0.3558977377455729,
+    0.4542959823826028
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_external",
+   "axis": "all",
+   "all": {
+    "n1": 11,
+    "n0": 70,
+    "med1": 1.267389804604167,
+    "med0": 0.8366708223778696,
+    "diff": 0.43071898222629734
+   },
+   "excluded": {
+    "n1": 10,
+    "n0": 65,
+    "med1": 1.1544336866653118,
+    "med0": 0.7938893662382775,
+    "diff": 0.3605443204270342
+   },
+   "loo_range": [
+    0.24758820248817903,
+    0.4735004383658894
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_in_title",
+   "axis": "all",
+   "all": {
+    "n1": 5,
+    "n0": 76,
+    "med1": 1.307438517873999,
+    "med0": 0.8485947361506361,
+    "diff": 0.4588437817233628
+   },
+   "excluded": {
+    "n1": 4,
+    "n0": 71,
+    "med1": 1.133806411088929,
+    "med0": 0.8024862284719086,
+    "diff": 0.33132018261702034
+   },
+   "loo_range": [
+    0.15768807583195033,
+    0.5049522894020902
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "host_in_title",
+   "axis": "all",
+   "all": {
+    "n1": 4,
+    "n0": 77,
+    "med1": 0.897908540509651,
+    "med0": 0.878600436578963,
+    "diff": 0.019308103930687937
+   },
+   "excluded": {
+    "n1": 4,
+    "n0": 71,
+    "med1": 0.897908540509651,
+    "med0": 0.8324323057521318,
+    "diff": 0.06547623475751918
+   },
+   "loo_range": [
+    -0.19499919095031149,
+    0.32595166046534974
+   ],
+   "verdict": [
+    "LOO가 0을 가로지름"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "media_review",
+   "axis": "all",
+   "all": {
+    "n1": 0,
+    "n0": 81,
+    "med1": null,
+    "med0": 0.878600436578963,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 75,
+    "med1": null,
+    "med0": 0.8324323057521318,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "one_hour_plus",
+   "axis": "all",
+   "all": {
+    "n1": 6,
+    "n0": 75,
+    "med1": 1.3349305670228913,
+    "med0": 0.8324323057521318,
+    "diff": 0.5024982612707595
+   },
+   "excluded": {
+    "n1": 5,
+    "n0": 70,
+    "med1": 1.268233353253596,
+    "med0": 0.7933039614431676,
+    "diff": 0.4749293918104285
+   },
+   "loo_range": [
+    0.33624495765788165,
+    0.5416266055797236
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "axis": "all",
+   "all": {
+    "n1": 1,
+    "n0": 80,
+    "med1": 0.878600436578963,
+    "med0": 0.8733508619778814,
+    "diff": 0.0052495746010816635
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 74,
+    "med1": 0.878600436578963,
+    "med0": 0.8174592671120202,
+    "diff": 0.06114116946694281
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "recurring_bit",
+   "axis": "all",
+   "all": {
+    "n1": 3,
+    "n0": 78,
+    "med1": 0.7927185566480576,
+    "med0": 0.9189793640541846,
+    "diff": -0.126260807406127
+   },
+   "excluded": {
+    "n1": 3,
+    "n0": 72,
+    "med1": 0.7927185566480576,
+    "med0": 0.8366708223778696,
+    "diff": -0.043952265729812035
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_quote",
+   "axis": "all",
+   "all": {
+    "n1": 1,
+    "n0": 80,
+    "med1": 2.30542708963572,
+    "med0": 0.8674402849383138,
+    "diff": 1.4379868046974063
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 74,
+    "med1": 2.30542708963572,
+    "med0": 0.8174592671120202,
+    "diff": 1.4879678225236999
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_wordplay",
+   "axis": "all",
+   "all": {
+    "n1": 0,
+    "n0": 81,
+    "med1": null,
+    "med0": 0.878600436578963,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 75,
+    "med1": null,
+    "med0": 0.8324323057521318,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "axis": "all",
+   "all": {
+    "n1": 4,
+    "n0": 77,
+    "med1": 1.343506129455085,
+    "med0": 0.8562801332976646,
+    "diff": 0.48722599615742035
+   },
+   "excluded": {
+    "n1": 4,
+    "n0": 71,
+    "med1": 1.343506129455085,
+    "med0": 0.8024862284719086,
+    "diff": 0.5410199009831763
+   },
+   "loo_range": [
+    0.4828982496460744,
+    0.599141552320278
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "axis": "long",
+   "all": {
+    "n1": 5,
+    "n0": 28,
+    "med1": 0.759575308729996,
+    "med0": 1.0000421135465665,
+    "diff": -0.24046680481657046
+   },
+   "excluded": {
+    "n1": 5,
+    "n0": 26,
+    "med1": 0.759575308729996,
+    "med0": 0.9755193946261806,
+    "diff": -0.21594408589618463
+   },
+   "loo_range": [
+    -0.321347554677368,
+    0.03265936516607315
+   ],
+   "verdict": [
+    "LOO가 0을 가로지름"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "food_eating",
+   "axis": "long",
+   "all": {
+    "n1": 6,
+    "n0": 27,
+    "med1": 1.2075830885359964,
+    "med0": 0.960174304303859,
+    "diff": 0.2474087842321374
+   },
+   "excluded": {
+    "n1": 6,
+    "n0": 25,
+    "med1": 1.2075830885359964,
+    "med0": 0.947537137450271,
+    "diff": 0.26004595108572537
+   },
+   "loo_range": [
+    0.2108468287672105,
+    0.30924507340424046
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_external",
+   "axis": "long",
+   "all": {
+    "n1": 9,
+    "n0": 24,
+    "med1": 1.0414775687264566,
+    "med0": 0.9692008111993866,
+    "diff": 0.07227675752706997
+   },
+   "excluded": {
+    "n1": 8,
+    "n0": 23,
+    "med1": 1.0008259365151577,
+    "med0": 0.947537137450271,
+    "diff": 0.053288799064886705
+   },
+   "loo_range": [
+    0.012637166853587956,
+    0.0989173011411899
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_in_title",
+   "axis": "long",
+   "all": {
+    "n1": 4,
+    "n0": 29,
+    "med1": 1.1809010425480229,
+    "med0": 0.9908644849485022,
+    "diff": 0.19003655759952065
+   },
+   "excluded": {
+    "n1": 3,
+    "n0": 28,
+    "med1": 0.960174304303859,
+    "med0": 0.9692008111993866,
+    "diff": -0.009026506895527642
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "host_in_title",
+   "axis": "long",
+   "all": {
+    "n1": 3,
+    "n0": 30,
+    "med1": 0.6374331148018203,
+    "med0": 1.0000421135465665,
+    "diff": -0.36260899874474617
+   },
+   "excluded": {
+    "n1": 3,
+    "n0": 28,
+    "med1": 0.6374331148018203,
+    "med0": 0.9755193946261806,
+    "diff": -0.33808627982436035
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "media_review",
+   "axis": "long",
+   "all": {
+    "n1": 0,
+    "n0": 33,
+    "med1": null,
+    "med0": 0.9908644849485022,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 31,
+    "med1": null,
+    "med0": 0.960174304303859,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "one_hour_plus",
+   "axis": "long",
+   "all": {
+    "n1": 6,
+    "n0": 27,
+    "med1": 1.3349305670228913,
+    "med0": 0.947537137450271,
+    "diff": 0.38739342957262024
+   },
+   "excluded": {
+    "n1": 5,
+    "n0": 26,
+    "med1": 1.268233353253596,
+    "med0": 0.8535562230901335,
+    "diff": 0.41467713016346264
+   },
+   "loo_range": [
+    0.2759926960109158,
+    0.5086580445236001
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "axis": "long",
+   "all": {
+    "n1": 0,
+    "n0": 33,
+    "med1": null,
+    "med0": 0.9908644849485022,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 31,
+    "med1": null,
+    "med0": 0.960174304303859,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "recurring_bit",
+   "axis": "long",
+   "all": {
+    "n1": 0,
+    "n0": 33,
+    "med1": null,
+    "med0": 0.9908644849485022,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 31,
+    "med1": null,
+    "med0": 0.960174304303859,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_quote",
+   "axis": "long",
+   "all": {
+    "n1": 0,
+    "n0": 33,
+    "med1": null,
+    "med0": 0.9908644849485022,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 31,
+    "med1": null,
+    "med0": 0.960174304303859,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_wordplay",
+   "axis": "long",
+   "all": {
+    "n1": 0,
+    "n0": 33,
+    "med1": null,
+    "med0": 0.9908644849485022,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 31,
+    "med1": null,
+    "med0": 0.960174304303859,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "axis": "long",
+   "all": {
+    "n1": 4,
+    "n0": 29,
+    "med1": 1.343506129455085,
+    "med0": 0.960174304303859,
+    "diff": 0.383331825151226
+   },
+   "excluded": {
+    "n1": 4,
+    "n0": 27,
+    "med1": 1.343506129455085,
+    "med0": 0.947537137450271,
+    "diff": 0.39596899200481395
+   },
+   "loo_range": [
+    0.33784734066771205,
+    0.4540906433419156
+   ],
+   "verdict": [],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "axis": "shorts",
+   "all": {
+    "n1": 1,
+    "n0": 47,
+    "med1": 0.23132943447432294,
+    "med0": 0.8324323057521318,
+    "diff": -0.6011028712778088
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 43,
+    "med1": 0.23132943447432294,
+    "med0": 0.7938893662382775,
+    "diff": -0.5625599317639546
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "food_eating",
+   "axis": "shorts",
+   "all": {
+    "n1": 0,
+    "n0": 48,
+    "med1": null,
+    "med0": 0.8174592671120202,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 44,
+    "med1": null,
+    "med0": 0.7933039614431676,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_external",
+   "axis": "shorts",
+   "all": {
+    "n1": 2,
+    "n0": 46,
+    "med1": 2.1827409767774406,
+    "med0": 0.798187797355093,
+    "diff": 1.3845531794223476
+   },
+   "excluded": {
+    "n1": 2,
+    "n0": 42,
+    "med1": 2.1827409767774406,
+    "med0": 0.7597683448292778,
+    "diff": 1.4229726319481628
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_in_title",
+   "axis": "shorts",
+   "all": {
+    "n1": 1,
+    "n0": 47,
+    "med1": 1.307438517873999,
+    "med0": 0.8024862284719086,
+    "diff": 0.5049522894020902
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 43,
+    "med1": 1.307438517873999,
+    "med0": 0.7927185566480576,
+    "diff": 0.5147199612259413
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "host_in_title",
+   "axis": "shorts",
+   "all": {
+    "n1": 1,
+    "n0": 47,
+    "med1": 2.30542708963572,
+    "med0": 0.8024862284719086,
+    "diff": 1.5029408611638115
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 43,
+    "med1": 2.30542708963572,
+    "med0": 0.7927185566480576,
+    "diff": 1.5127085329876624
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "media_review",
+   "axis": "shorts",
+   "all": {
+    "n1": 0,
+    "n0": 48,
+    "med1": null,
+    "med0": 0.8174592671120202,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 44,
+    "med1": null,
+    "med0": 0.7933039614431676,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "one_hour_plus",
+   "axis": "shorts",
+   "all": {
+    "n1": 0,
+    "n0": 48,
+    "med1": null,
+    "med0": 0.8174592671120202,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 44,
+    "med1": null,
+    "med0": 0.7933039614431676,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "axis": "shorts",
+   "all": {
+    "n1": 1,
+    "n0": 47,
+    "med1": 0.878600436578963,
+    "med0": 0.8024862284719086,
+    "diff": 0.07611420810705438
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 43,
+    "med1": 0.878600436578963,
+    "med0": 0.7927185566480576,
+    "diff": 0.08588187993090546
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "recurring_bit",
+   "axis": "shorts",
+   "all": {
+    "n1": 3,
+    "n0": 45,
+    "med1": 0.7927185566480576,
+    "med0": 0.8324323057521318,
+    "diff": -0.039713749104074214
+   },
+   "excluded": {
+    "n1": 3,
+    "n0": 41,
+    "med1": 0.7927185566480576,
+    "med0": 0.7938893662382775,
+    "diff": -0.0011708095902199789
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_quote",
+   "axis": "shorts",
+   "all": {
+    "n1": 1,
+    "n0": 47,
+    "med1": 2.30542708963572,
+    "med0": 0.8024862284719086,
+    "diff": 1.5029408611638115
+   },
+   "excluded": {
+    "n1": 1,
+    "n0": 43,
+    "med1": 2.30542708963572,
+    "med0": 0.7927185566480576,
+    "diff": 1.5127085329876624
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_wordplay",
+   "axis": "shorts",
+   "all": {
+    "n1": 0,
+    "n0": 48,
+    "med1": null,
+    "med0": 0.8174592671120202,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 44,
+    "med1": null,
+    "med0": 0.7933039614431676,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "axis": "shorts",
+   "all": {
+    "n1": 0,
+    "n0": 48,
+    "med1": null,
+    "med0": 0.8174592671120202,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 44,
+    "med1": null,
+    "med0": 0.7933039614431676,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "food_eating",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_external",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "guest_in_title",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "host_in_title",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "media_review",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "one_hour_plus",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "recurring_bit",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_quote",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "title_wordplay",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "axis": "standard",
+   "all": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "excluded": {
+    "n1": 0,
+    "n0": 0,
+    "med1": null,
+    "med0": null,
+    "diff": null
+   },
+   "loo_range": null,
+   "verdict": [
+    "셀 n<4, 판단 보류"
+   ],
+   "u_as_control": true
+  }
+ ]
+}

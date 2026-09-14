@@ -1,0 +1,263 @@
+{
+  "schema_version": "0.1",
+  "notice": "CLAUDE 재현 실험 2026-09-14. 침착맨 Discovery 90편(seed 42, 팀원 split 도구)을 제목·길이·게시일·코너만 보고 뽑은 후보 12개. 사람 후보 없음(source=llm). 검증된 특징이 아니다. 배수 상위 10편 제목을 사전에 본 상태라 완전 블라인드가 아님.",
+  "features": [
+    {
+      "feature_id": "guest_external",
+      "name": "외부 게스트 출연",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "진행자와 고정 크루가 아닌 인물이 초대되어 대화·활동에 참여한다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "싱어송라이터 한로로 초대석",
+        "국어 강사 정수아 '자주 쓰는 우리말' 특강",
+        "어렵게 모셔 온 수박 전문가 (강민경 특별출연)"
+      ],
+      "exclusion_examples": [
+        "술 한잔 했습니다 (with 은하, 맛피자, 카라미) — 고정 크루만 등장하면 0",
+        "게스트를 언급만 하고 출연하지 않으면 0"
+      ],
+      "required_evidence": [
+        "게스트가 실제로 발화·참여했다는 인용. 제목의 (with X)·초대석·특별출연은 1의 근거로 인정. 크루 명단은 별도 문서로 고정한다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "name": "전문 지식 전달 형식",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "특정 분야의 지식을 설명·강의하는 구간이 영상의 중심이다(특강·알아보자·알아보기 계열). 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "궤도 '감정의 과학' 특강",
+        "미쉐린이 몰래 평가하는 방법",
+        "독살 위협에서 살아남기"
+      ],
+      "exclusion_examples": [
+        "헌팅의 과학 — 제목이 '과학'이어도 농담 쇼츠면 0",
+        "잡담 중 지식 한마디는 0"
+      ],
+      "required_evidence": [
+        "제목·설명·자막 중 하나에서 해당 요소가 실제로 등장하는 인용. 제목에 없으면 자막 없이는 U — 0으로 바꾸지 않는다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "name": "월드컵·순위 매기기 형식",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "여러 후보를 대결·탈락·순위로 좁혀 가는 구조가 영상의 뼈대다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "현실에서 최강인 벌레 포켓몬 월드컵",
+        "코난 어이없는 범행 동기 월드컵",
+        "유부남들이 뽑은 최악의 고백"
+      ],
+      "exclusion_examples": [
+        "세계 최강의 검사 — '최강'이 있어도 순위 구조가 아니면 0",
+        "침착맨 추천작 — 추천 나열은 media_review"
+      ],
+      "required_evidence": [
+        "제목·설명·자막 중 하나에서 해당 요소가 실제로 등장하는 인용. 제목에 없으면 자막 없이는 U — 0으로 바꾸지 않는다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "food_eating",
+      "name": "음식·먹방·쿡방",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "음식을 먹거나 만들거나 평가하는 행위가 영상의 중심 활동이다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "전무님과 맘스터치 매직풍 먹어보기",
+        "충격적인 비주얼의 롯데리아 신메뉴",
+        "성심당 망고시루 안 먹어본 사람이 있어요?"
+      ],
+      "exclusion_examples": [
+        "평냉 먹으며 탈모 토크 — 먹는 것이 배경이고 토크가 중심이면 0 후보(자막으로 판정)"
+      ],
+      "required_evidence": [
+        "제목·설명·자막 중 하나에서 해당 요소가 실제로 등장하는 인용. 제목에 없으면 자막 없이는 U — 0으로 바꾸지 않는다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "media_review",
+      "name": "작품 리뷰·추천",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "영화·드라마·만화·책 등 특정 작품을 보고 평하거나 추천한다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "침풍뼈 재밌게 본 넷플릭스 추천",
+        "김풍 작가님과 시대별 천만 영화 알아보기",
+        "원피스의 진실을 마주한 침착맨"
+      ],
+      "exclusion_examples": [
+        "작품 제목을 비유로만 쓴 경우 0 (셜록 홈즈 쇼츠)"
+      ],
+      "required_evidence": [
+        "제목·설명·자막 중 하나에서 해당 요소가 실제로 등장하는 인용. 제목에 없으면 자막 없이는 U — 0으로 바꾸지 않는다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "name": "대중문화 IP·캐릭터 참조",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "포켓몬·코난·삼국지·킹콩처럼 기존 IP나 캐릭터를 소재·비유로 쓴다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "현실에서 최강인 벌레 포켓몬 월드컵",
+        "I punch like King Kong to 침착맨",
+        "추악한 촉나라의 진실"
+      ],
+      "exclusion_examples": [
+        "실존 인물·기업 언급은 0 (젠슨황, 저커버그)"
+      ],
+      "required_evidence": [
+        "제목·설명·자막 중 하나에서 해당 요소가 실제로 등장하는 인용. 제목에 없으면 자막 없이는 U — 0으로 바꾸지 않는다."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "title_quote",
+      "name": "제목이 영상 속 대사 인용",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "제목이 설명문이 아니라 영상 안에서 나온 말 한마디를 그대로 딴 구어체·감탄형이다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "그야... 재밌으니까",
+        "손나 바카나!",
+        "조아조아 예뻐예뻐",
+        "있을 때 잘하자"
+      ],
+      "exclusion_examples": [
+        "보이스피싱 알아보기 — 설명형 제목은 0",
+        "AI로 노래 만들기 — 활동 서술은 0"
+      ],
+      "required_evidence": [
+        "제목 문자열 자체가 근거. 제목만으로 0과 1 모두 판정 가능."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "title_wordplay",
+      "name": "제목 말장난·패러디",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "제목이 발음 유사·합성어·기존 표현 비틀기를 쓴다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "라카칠하다",
+        "실리카겔 실례카겔",
+        "잭 더더 리퍼",
+        "천연 위고비"
+      ],
+      "exclusion_examples": [
+        "단순 유행어 사용은 0",
+        "줄임말만 쓴 것은 0"
+      ],
+      "required_evidence": [
+        "제목 문자열 자체가 근거. 제목만으로 0과 1 모두 판정 가능."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "recurring_bit",
+      "name": "반복 시리즈 표식",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식(남매·매너·킹콩·챌린지)이 있다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "우애 좋은 남매",
+        "악수 매너",
+        "침착맨 REDRED 챌린지"
+      ],
+      "exclusion_examples": [
+        "재생목록 코너 배정만 있고 제목 표식이 없으면 0 — 이 특징은 제목 표식만 본다"
+      ],
+      "required_evidence": [
+        "제목 문자열 자체가 근거. 제목만으로 0과 1 모두 판정 가능."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "host_in_title",
+      "name": "제목에 진행자 이름",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "제목에 침착맨(또는 침풍뼈 등 진행자 별칭)이 명시된다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "침착맨 나와!",
+        "원피스의 진실을 마주한 침착맨",
+        "침풍뼈 재밌게 본 넷플릭스 추천"
+      ],
+      "exclusion_examples": [
+        "채널명만 있고 제목에 없으면 0"
+      ],
+      "required_evidence": [
+        "제목 문자열 자체가 근거. 제목만으로 0과 1 모두 판정 가능."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "guest_in_title",
+      "name": "제목에 게스트 표기",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "제목이 (with X)·초대석·특별출연·feat 형식으로 출연자를 명시한다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "술 한잔 했습니다 (with 은하, 맛피자, 카라미)",
+        "김신영이 알려주는 진짜 행복"
+      ],
+      "exclusion_examples": [
+        "게스트가 나와도 제목에 없으면 0 — guest_external과 달리 제목 표기 여부만 본다"
+      ],
+      "required_evidence": [
+        "제목 문자열 자체가 근거. 제목만으로 0과 1 모두 판정 가능."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "name": "60분 초과",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "영상 길이가 3,600초를 넘는다. 0=충분한 근거로 없음, 1=있음, U=자료 부족.",
+      "inclusion_examples": [
+        "궤도 '감정의 과학' 특강 (7173초)",
+        "개유치한 키워 보고 싶은 동물 월드컵 (4532초)"
+      ],
+      "exclusion_examples": [
+        "3,600초 이하 전부 0"
+      ],
+      "required_evidence": [
+        "duration_sec 값. 항상 판정 가능, U 없음."
+      ],
+      "source": "llm",
+      "status": "candidate"
+    }
+  ]
+}
