@@ -17,6 +17,7 @@ from .labels import label_by_title_regex, load_labels, load_registry
 from .outcome import HoldoutSealed, feature_outcome
 from .report import render
 from .trend import monthly_cohorts
+from .frozen import prepare
 
 
 def _videos(path):
@@ -34,10 +35,18 @@ def cmd_labels(a):
 
 
 def cmd_run(a):
-    videos, channel = _videos(a.evidence)
-    split = {r["video_id"]: r["split"] for r in csv.DictReader(open(a.split, encoding="utf-8"))}
     registry = load_registry(a.registry)
-    labels = load_labels(a.labels, registry)
+    frozen = bool(getattr(a, "frozen_experiment", False) or "_envelope" in registry)
+    if frozen:
+        try:
+            videos, channel, split, labels, provenance = prepare(a, registry)
+        except (HoldoutSealed, ValueError, FileExistsError) as e:
+            print(f"거부: {e}", file=sys.stderr)
+            return 2
+    else:
+        videos, channel = _videos(a.evidence)
+        split = {r["video_id"]: r["split"] for r in csv.DictReader(open(a.split, encoding="utf-8"))}
+        labels = load_labels(a.labels, registry)
     events = json.load(open(a.events, encoding="utf-8")) if a.events else None
     flags = flag_breakouts(videos, k_iqr=a.k_iqr, multiple_min=a.multiple_min, events=events)
     new_mult = recompute_multiples(videos, flags)
@@ -45,15 +54,17 @@ def cmd_run(a):
     trend_rows = monthly_cohorts(videos, flags)
     try:
         rows = feature_outcome(videos, labels, flags, split, a.split_name, min_cell=a.min_cell,
-                               unseal_holdout=a.unseal_holdout, u_as_control=a.u_as_control)
+                               unseal_holdout=a.unseal_holdout, u_as_control=a.u_as_control,
+                               frozen_experiment=frozen)
         for axis in sorted({v["length_axis"] for v in videos}):
             rows += feature_outcome(videos, labels, flags, split, a.split_name, min_cell=a.min_cell,
-                                    unseal_holdout=a.unseal_holdout, u_as_control=a.u_as_control, axis=axis)
+                                    unseal_holdout=a.unseal_holdout, u_as_control=a.u_as_control, axis=axis,
+                                    frozen_experiment=frozen)
     except HoldoutSealed as e:
         print(f"거부: {e}", file=sys.stderr)
         return 2
     out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=not frozen)
     with open(out / "breakout.csv", "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["video_id", "title", "axis", "published_at", "view_count", "view_multiple", "view_multiple_ex", "rule_iqr", "rule_multiple", "rule_event", "breakout", "split"])
@@ -66,7 +77,11 @@ def cmd_run(a):
             "inputs": {"evidence": Path(a.evidence).name, "split": Path(a.split).name, "registry": Path(a.registry).name,
                        "labels": Path(a.labels).name, "events": Path(a.events).name if a.events else "-"},
             "k_iqr": a.k_iqr, "multiple_min": a.multiple_min, "split_name": a.split_name, "outcome": "view_multiple", "min_cell": a.min_cell}
-    (out / "report.md").write_text(render(meta, videos, flags, breakouts_in_split(flags, split), trend_rows, old_mult, new_mult, rows), encoding="utf-8")
+    if frozen:
+        # Frozen results use JSON, including n_u, without altering the prototype UI.
+        (out / "manifest.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        (out / "report.md").write_text(render(meta, videos, flags, breakouts_in_split(flags, split), trend_rows, old_mult, new_mult, rows), encoding="utf-8")
     if a.evidence_out:
         byid = {v["video_id"]: v for v in videos}
         shifts = sorted(
@@ -85,11 +100,12 @@ def cmd_run(a):
                           for vid in sorted(flags, key=lambda x: -byid[x]["view_count"]) if flags[vid]["breakout"]],
             "trend": trend_rows, "outcome": rows, "multiple_shifts": shifts,
         }
-        d = json.load(open(a.evidence, encoding="utf-8"))
+        d = {"channel": channel, "videos": videos} if frozen else json.load(open(a.evidence, encoding="utf-8"))
         d["feature_outcome"] = payload
         json.dump(d, open(a.evidence_out, "w", encoding="utf-8"), ensure_ascii=False, indent=2, allow_nan=False)
         print(f"evidence + feature_outcome → {a.evidence_out}")
-    print(f"급등 영상 {sum(f['breakout'] for f in flags.values())}/{len(flags)}편, 특징 행 {len(rows)} → {out}/report.md")
+    result_file = "results.json" if frozen else "report.md"
+    print(f"급등 영상 {sum(f['breakout'] for f in flags.values())}/{len(flags)}편, 특징 행 {len(rows)} → {out}/{result_file}")
     return 0
 
 
@@ -103,6 +119,8 @@ def main(argv=None):
     r.add_argument("--labels", required=True)
     r.add_argument("--events")
     r.add_argument("--out", required=True)
+    r.add_argument("--frozen-experiment", action="store_true",
+                   help="선택 split만 집계, U 대조군 금지, 전용 새 출력 경로. Registry envelope는 자동 적용")
     r.add_argument("--split-name", default="development", choices=["discovery", "development", "holdout"])
     r.add_argument("--k-iqr", type=float, default=3.0)
     r.add_argument("--multiple-min", type=float, default=3.0)

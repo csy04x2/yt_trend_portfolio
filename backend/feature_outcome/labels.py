@@ -1,7 +1,7 @@
 """특징 판정 파일 — {video_id: {feature_id: 0 | 1 | "U"}}.
 
 이 파일이 분석의 유일한 판정 입력이다. 팀원이 자기 판정으로 바꾸면 나머지 코드는 그대로 돈다.
-U(자료 부족)는 0이 아니다. 어디서도 0으로 바꾸지 않는다.
+U(자료 부족)는 로딩할 때 그대로 보존한다. frozen 실험은 U 대조군 옵션을 금지한다.
 """
 import json
 import re
@@ -10,7 +10,25 @@ VALID = (0, 1, "U")
 
 
 def load_registry(path):
-    return json.load(open(path, encoding="utf-8"))
+    with open(path, encoding="utf-8") as stream:
+        data = json.load(stream)
+    if "registry" not in data:
+        return data
+    from feature_discovery.registry import validate_registry
+    validate_registry(data["registry"])
+    freeze = data.get("freeze_metadata", {})
+    features = data["registry"]["features"]
+    if (freeze.get("definitions_frozen_before_development") is not True
+            or freeze.get("freeze_status") != "frozen"
+            or not freeze.get("registry_version")
+            or not freeze.get("dataset")
+            or freeze.get("testing_feature_count") != len(features)):
+        raise ValueError("Invalid frozen registry metadata")
+    if any(f["value_type"] != "categorical" or f.get("categories") != ["0", "1", "U"]
+           for f in features):
+        raise ValueError("Frozen registry requires categorical string 0/1/U")
+    # A new in-memory projection; retain the entire envelope for provenance.
+    return {**data["registry"], "_envelope": data}
 
 
 def validate_labels(labels, registry):
@@ -20,18 +38,23 @@ def validate_labels(labels, registry):
         for fid, val in fs.items():
             if fid not in ids:
                 errs.append(f"{vid}: 레지스트리에 없는 특징 {fid}")
-            elif val not in VALID or isinstance(val, bool):
+            elif not ((type(val) is int and val in (0, 1))
+                      or (type(val) is str and val in ("0", "1", "U"))):
                 errs.append(f'{vid}/{fid}: 값 {val!r} — 0, 1, "U"만 허용')
     return errs
 
 
-def load_labels(path, registry):
-    d = json.load(open(path, encoding="utf-8"))
+def load_labels(path, registry, video_ids=None):
+    with open(path, encoding="utf-8") as stream:
+        d = json.load(stream)
     labels = d["labels"] if "labels" in d else d
+    if video_ids is not None:
+        labels = {vid: fs for vid, fs in labels.items() if vid in video_ids}
     errs = validate_labels(labels, registry)
     if errs:
         raise ValueError("\n".join(errs[:20]))
-    return labels
+    return {vid: {fid: int(value) if value in ("0", "1") else value
+                  for fid, value in fs.items()} for vid, fs in labels.items()}
 
 
 def label_by_title_regex(videos, config):
