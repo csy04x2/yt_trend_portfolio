@@ -1,0 +1,212 @@
+[
+  {
+    "video_id": "1rDCaM3LUoo",
+    "title": "돌고 도는 유행",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=1rDCaM3LUoo",
+    "stage_1_label": "U",
+    "stage_1_reason": "해시태그에 여러 인물명이 있으나 실제 콘텐츠 참여 여부를 metadata만으로 확정하기 어렵다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "7RCWN97TwM0",
+    "title": "그럼 인정",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=7RCWN97TwM0",
+    "stage_1_label": "U",
+    "stage_1_reason": "제목·설명에 비침착맨 출연자를 확인할 근거가 없다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "9cy3LlAa-4M",
+    "title": "속았지?",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=9cy3LlAa-4M",
+    "stage_1_label": "U",
+    "stage_1_reason": "여행 관련 해시태그만으로 다른 인물의 콘텐츠 참여를 판정할 수 없다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "A2FJQACZzoM",
+    "title": "침팬지 소혜",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=A2FJQACZzoM",
+    "stage_1_label": "U",
+    "stage_1_reason": "김세정·김소혜 해시태그가 있지만 Shorts 자체에 참여하는지는 metadata만으로 불명확하다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "JlWf25KigPo",
+    "title": "선생님의 농담",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=JlWf25KigPo",
+    "stage_1_label": "U",
+    "stage_1_reason": "정승제 해시태그가 있으나 Shorts 자체의 콘텐츠 참여 여부를 확정하기 어렵다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "N6gTqKGcrzw",
+    "title": "상속 가루",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=N6gTqKGcrzw",
+    "stage_1_label": "U",
+    "stage_1_reason": "다른 출연자를 확인할 metadata 근거가 없다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "Odl9lO4CKF4",
+    "title": "돈 안 쓰는 나쁜 새끼",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=Odl9lO4CKF4",
+    "stage_1_label": "U",
+    "stage_1_reason": "세미 관련 해시태그가 있으나 실제 비침착맨 참여자인지 metadata만으로 불명확하다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "PCdFGHom87E",
+    "title": "기안84 카운터",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=PCdFGHom87E",
+    "stage_1_label": "U",
+    "stage_1_reason": "카라미·기안84 해시태그는 있으나 실제 Shorts 참여 여부를 확정하기 어렵다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "RzycfhMgvd4",
+    "title": "중식마녀닭",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=RzycfhMgvd4",
+    "stage_1_label": "U",
+    "stage_1_reason": "중식마녀·윤주모 해시태그가 있으나 실제 참여 여부가 명시되지 않는다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "Y8z7JDL1BTk",
+    "title": "빠라바라바라밤~",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=Y8z7JDL1BTk",
+    "stage_1_label": "U",
+    "stage_1_reason": "세미 관련 해시태그만으로 실제 참여 여부를 확정하기 어렵다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "Yjoz2Jc9deY",
+    "title": "킹콩 펀치 트라우마",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=Yjoz2Jc9deY",
+    "stage_1_label": "U",
+    "stage_1_reason": "AKMU·궤도·이찬혁·이수현 해시태그가 있으나 Shorts 자체 출연 여부는 불명확하다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "b1dq_KQGREQ",
+    "title": "눈치 없는 서동재",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=b1dq_KQGREQ",
+    "stage_1_label": "U",
+    "stage_1_reason": "이준혁·서동재가 제목/해시태그에 있으나 실제 콘텐츠 참여자인지 외부 작품 언급인지 불명확하다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "d08X2gMNBpg",
+    "title": "늙음의 저주",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=d08X2gMNBpg",
+    "stage_1_label": "U",
+    "stage_1_reason": "통닭천사 등 인물/명칭 해시태그가 있으나 실제 참여 여부를 확정하기 어렵다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "dRXqaMmJHWM",
+    "title": "남사친 여사친",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=dRXqaMmJHWM",
+    "stage_1_label": "U",
+    "stage_1_reason": "제목과 해시태그만으로 비침착맨 참여자를 확인할 수 없다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  },
+  {
+    "video_id": "oEK13uJ77PU",
+    "title": "프로듀스 108",
+    "length_axis": "shorts",
+    "youtube_url": "https://www.youtube.com/watch?v=oEK13uJ77PU",
+    "stage_1_label": "U",
+    "stage_1_reason": "김헌 해시태그가 있으나 Shorts 자체의 실제 참여 여부가 명시되지 않는다.",
+    "stage_2_required_evidence": "transcript or direct video-derived evidence",
+    "requested_output": {
+      "guest_present": "0|1|U",
+      "confidence": "low|medium|high",
+      "evidence": "observable evidence"
+    }
+  }
+]

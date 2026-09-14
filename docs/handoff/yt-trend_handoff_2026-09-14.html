@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yt-trend Handoff — 2026-09-14</title>
+<style>
+  body{font-family:Arial,"Noto Sans KR",sans-serif;max-width:980px;margin:40px auto;padding:0 22px;line-height:1.65;color:#1f2328;background:#fff}
+  h1{font-size:30px;margin-bottom:6px}
+  h2{margin-top:34px;padding-bottom:8px;border-bottom:1px solid #d0d7de}
+  h3{margin-top:24px}
+  .meta,.muted{color:#57606a}
+  .card{border:1px solid #d0d7de;border-radius:10px;padding:16px 18px;margin:14px 0;background:#f6f8fa}
+  .ok{border-left:5px solid #1a7f37}
+  .warn{border-left:5px solid #bf8700}
+  .hold{border-left:5px solid #8250df}
+  code{background:#f6f8fa;padding:2px 5px;border-radius:4px}
+  pre{background:#0d1117;color:#e6edf3;padding:14px;border-radius:8px;overflow:auto}
+  table{border-collapse:collapse;width:100%;margin:14px 0}
+  th,td{border:1px solid #d0d7de;padding:8px 10px;vertical-align:top}
+  th{background:#f6f8fa;text-align:left}
+  .small{font-size:13px}
+</style>
+</head>
+<body>
+<h1>yt-trend 작업 인수인계</h1>
+<div class="meta">기준일: 2026-09-14 · 침착맨 Feature Extractor / Stage 2 evidence 수집</div>
+
+<div class="card ok">
+<b>오늘 결론</b><br>
+대규모 수동 라벨링 대신 <b>자동 Feature Extractor + 제한된 Human audit</b> 방향으로 전환했다.
+<code>guest_present</code>를 1차 벤치마크 feature로 사용하며,
+Stage 1 metadata가 명확한 경우에는 높은 정밀도로 자동 판정하고,
+U(불확실)만 Stage 2 caption + frame evidence로 escalation하는 cascade를 채택했다.
+</div>
+
+<h2>1. 현재 제품/분석 방향</h2>
+<p><b>제품 문장:</b> 유튜브 채널의 최근 영상들을 자동 분석해, 그 채널에서 어떤 콘텐츠 특성이 평소보다 높은 성과 및 시청자 반응과 반복적으로 연결되는지 찾아주는 도구.</p>
+<ul>
+<li>Content Feature → Audience Behavior → Performance → Time/Repeatability</li>
+<li>절대 조회수보다 <b>Observed vs Expected</b> 상대성과를 중시</li>
+<li>Feature discovery/정의와 performance 검증을 분리</li>
+<li>U는 0으로 취급하지 않음</li>
+<li>Holdout은 계속 sealed</li>
+<li>대규모 human full-labeling은 중단. Human은 자동 extractor audit/reference 역할</li>
+</ul>
+
+<h2>2. 침착맨 데이터 상태</h2>
+<table>
+<tr><th>항목</th><th>상태</th></tr>
+<tr><td>최근 영상</td><td>300개 고정</td></tr>
+<tr><td>Split</td><td>Discovery 90 / Development 90 / Holdout 120, seed 42</td></tr>
+<tr><td>Holdout</td><td>sealed</td></tr>
+<tr><td>Frozen features</td><td>12개</td></tr>
+<tr><td>현재 자동화 우선 feature</td><td><code>guest_present</code></td></tr>
+</table>
+
+<h2>3. guest_present 정의</h2>
+<div class="card">
+<b>guest_present</b>: 침착맨 외 인물이 콘텐츠 참여자로 등장.<br>
+제외: 스태프, 배달원, 단순 배경 인물, 외부 영상 속 인물만 등장하는 경우.
+</div>
+
+<h2>4. Human reference / benchmark</h2>
+<p>기존 56-cell pilot + partial guest family review를 Human reference로 활용한다. 이 Human 작업은 전체 90개를 끝까지 수동 라벨링하기 위한 것이 아니라, extractor 검증용 gold/reference다.</p>
+<p>중요 수정: <code>X_sZRLpRPTM</code> (“침착맨이 감사를 전하는 방법”)은 처음 Human 0으로 기록되었지만, 실제로 뒤쪽에 guest가 등장해 <b>Human label = 1</b>로 수정됨. 이 사례는 metadata false positive가 아니라 Human viewing error였다.</p>
+
+<h2>5. Stage 1 — Metadata-only 결과</h2>
+<table>
+<tr><th>Metric</th><th>Corrected result</th></tr>
+<tr><td>Eval videos</td><td>26</td></tr>
+<tr><td>Human distribution</td><td>1 = 18, 0 = 8</td></tr>
+<tr><td>Stage1 predictions</td><td>1 = 7, 0 = 4, U = 15</td></tr>
+<tr><td>Coverage</td><td>42.3% (11/26)</td></tr>
+<tr><td>Accuracy among non-U</td><td><b>100%</b></td></tr>
+<tr><td>Precision(label=1)</td><td><b>100%</b></td></tr>
+<tr><td>Recall over all human positives</td><td>38.9%</td></tr>
+<tr><td>Shorts coverage</td><td>6.25% (매우 낮음)</td></tr>
+<tr><td>Non-Shorts coverage</td><td>100%</td></tr>
+</table>
+<div class="card ok">
+<b>해석:</b> metadata는 명확한 경우 고정밀 Stage 1으로 쓸 수 있다. 다만 Shorts 대부분이 U이므로 metadata-only extractor로 끝내면 안 된다.
+</div>
+
+<h2>6. Stage 2 — Evidence escalation 설계</h2>
+<p>Stage 1에서 U인 영상만 자동 evidence 수집:</p>
+<ol>
+<li>caption/subtitle 수집</li>
+<li>저화질 임시 영상 다운로드</li>
+<li>Shorts: 10/30/50/70/90% 지점 frame 추출</li>
+<li>metadata + caption + frames + frozen definition으로 multimodal judge</li>
+<li>0/1/U + confidence + grounded evidence 출력</li>
+</ol>
+<p>성능/댓글/반응 데이터는 extractor 입력에서 금지.</p>
+
+<h2>7. 오늘 구현한 Stage 2 runner</h2>
+<p>로컬 Windows runner 패키지: <code>chim-stage2-runner-v0.2</code></p>
+<p>주요 파일:</p>
+<ul>
+<li><code>stage2_collect.py</code></li>
+<li><code>run_stage2.ps1</code></li>
+<li><code>stage2_escalation_15.json</code></li>
+<li><code>judge_prompt.md</code></li>
+<li><code>README.md</code></li>
+</ul>
+
+<h3>발견한 문제와 해결</h3>
+<div class="card warn">
+<b>문제 1 — yt-dlp PATH</b><br>
+<code>yt-dlp.exe</code>가 Python user Scripts 폴더에 설치되어 PATH에서 발견되지 않음.<br>
+<b>해결:</b> v0.2부터 <code>py -m yt_dlp</code> 방식 사용.
+</div>
+
+<div class="card warn">
+<b>문제 2 — Chrome cookie DB lock</b><br>
+<code>ERROR: Could not copy Chrome cookie database</code><br>
+Chrome 쿠키 사용 시 15개 모두 evidence_failed.
+</div>
+
+<div class="card ok">
+<b>해결 확인:</b> <code>--cookies-from-browser chrome</code>을 제거하고 1개를 재실행한 결과:<br>
+<code>evidence_ready = 1</code>, <code>frames = 5</code>, <code>caption = True</code>.<br>
+즉 runner 자체는 정상이고 cookie 옵션이 실패 원인이었음.
+</div>
+
+<h2>8. 다음 실행 명령</h2>
+<p>기존 실패 output 삭제:</p>
+<pre>Remove-Item ".\stage2_output" -Recurse -Force -ErrorAction SilentlyContinue</pre>
+
+<p>쿠키 없이 15개 전체 실행:</p>
+<pre>py .\stage2_collect.py `
+  --queue .\stage2_escalation_15.json `
+  --out .\stage2_output</pre>
+
+<p>목표 요약:</p>
+<pre>"videos": 15
+"evidence_ready": 15
+"evidence_failed": 0
+"with_frames": 15</pre>
+
+<p><code>with_caption</code>은 15보다 작아도 괜찮다. guest_present는 frame evidence가 핵심이다.</p>
+
+<h2>9. 아직 안 한 일</h2>
+<ul>
+<li>Stage 2 전체 15개 evidence 수집 완료</li>
+<li>15개 multimodal guest_present 자동 판정</li>
+<li>Human gold와 blind comparison</li>
+<li>최종 cascade coverage / accuracy / precision / recall 계산</li>
+<li>실패/남은 U의 error source 분류</li>
+<li>그 뒤에만 all-feature 확장 여부 판단</li>
+</ul>
+
+<h2>10. 확장 금지 / 보류</h2>
+<div class="card hold">
+현재 단계에서 아래는 구현하지 않는다:
+<ul>
+<li>speaker diarization</li>
+<li>face recognition / host-face clustering</li>
+<li>full-video embedding</li>
+<li>12개 feature 전체 자동화</li>
+<li>대규모 manual labeling</li>
+</ul>
+15-case Stage 2 평가가 먼저다.
+</div>
+
+<h2>11. 14F 상태</h2>
+<ul>
+<li>14F 300 videos / 90-90-120 split 완료</li>
+<li>친구 Human analyst B가 blind Feature Discovery 진행 중</li>
+<li>친구 결과 freeze 전에는 14F LLM 결과를 사용자에게 노출하지 않음</li>
+<li>14F는 대규모 2차 실험이 아니라 minimal cross-channel sanity check</li>
+</ul>
+
+<h2>12. 팀원이 바로 이어서 할 일</h2>
+<ol>
+<li>침착맨 Stage 2 15개를 <b>쿠키 없이</b> 실행</li>
+<li><code>stage2_output</code> 전체를 zip</li>
+<li>15개 frame/caption evidence로 <code>guest_present</code> 자동 판정</li>
+<li>판정 freeze 후 Human reference와 비교</li>
+<li>최종 cascade metric을 보고 all-feature 자동화로 확장할지 결정</li>
+</ol>
+
+<hr>
+<p class="small muted">주의: Stage 2 수집/판정은 Development benchmark 검증용. Holdout 120은 계속 sealed 상태를 유지한다.</p>
+</body>
+</html>
