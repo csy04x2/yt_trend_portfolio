@@ -18,6 +18,7 @@ from .outcome import HoldoutSealed, feature_outcome
 from .report import render
 from .trend import monthly_cohorts
 from .frozen import prepare
+from .finding import build_findings
 
 
 def _videos(path):
@@ -72,7 +73,10 @@ def cmd_run(a):
             f = flags[v["video_id"]]
             w.writerow([v["video_id"], v["title"], v["length_axis"], v["published_at"][:10], v["view_count"], v.get("view_multiple"),
                         new_mult[v["video_id"]], f["rule_iqr"], f["rule_multiple"], f["rule_event"], f["breakout"], split.get(v["video_id"], "")])
-    json.dump({"trend": trend_rows, "outcome": rows}, open(out / "results.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    results = {"trend": trend_rows, "outcome": rows}
+    if frozen and "_envelope" in registry and a.split_name == "development":
+        results["findings"] = build_findings(videos, labels, registry, split_name=a.split_name)
+    json.dump(results, open(out / "results.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     meta = {"channel": channel, "generated": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
             "inputs": {"evidence": Path(a.evidence).name, "split": Path(a.split).name, "registry": Path(a.registry).name,
                        "labels": Path(a.labels).name, "events": Path(a.events).name if a.events else "-"},
@@ -101,6 +105,8 @@ def cmd_run(a):
             "trend": trend_rows, "outcome": rows, "multiple_shifts": shifts,
         }
         d = {"channel": channel, "videos": videos} if frozen else json.load(open(a.evidence, encoding="utf-8"))
+        if "findings" in results:
+            payload["findings"] = results["findings"]
         d["feature_outcome"] = payload
         json.dump(d, open(a.evidence_out, "w", encoding="utf-8"), ensure_ascii=False, indent=2, allow_nan=False)
         print(f"evidence + feature_outcome → {a.evidence_out}")
