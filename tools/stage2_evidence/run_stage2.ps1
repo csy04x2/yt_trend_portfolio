@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 
 Write-Host "=== Chim Stage 2 evidence collector ==="
 
@@ -25,4 +25,5 @@ if (-not (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-py .\stage2_collect.py --queue .\stage2_escalation_15.json --out .\stage2_output --cookies-from-browser chrome
+py "$PSScriptRoot\stage2_collect.py" --queue "$PSScriptRoot\stage2_escalation_15.json" --out "$PSScriptRoot\stage2_output"
+

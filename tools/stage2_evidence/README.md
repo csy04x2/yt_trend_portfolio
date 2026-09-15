@@ -22,15 +22,14 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\run_stage2.ps1
 ```
 
-Chrome 쿠키 읽기가 실패하면 브라우저를 완전히 종료하고 다시 실행한다.
+기본 실행은 브라우저 쿠키를 읽지 않는다. 로컬 yt-dlp 설정도 무시한다.
 
-Edge를 쓰고 싶으면 직접:
+쿠키 없이 직접 실행:
 
 ```powershell
 py .\stage2_collect.py `
   --queue .\stage2_escalation_15.json `
-  --out .\stage2_output `
-  --cookies-from-browser edge
+  --out .\stage2_output
 ```
 
 ## 먼저 1개만 시험
@@ -39,7 +38,6 @@ py .\stage2_collect.py `
 py .\stage2_collect.py `
   --queue .\stage2_escalation_15.json `
   --out .\stage2_test `
-  --cookies-from-browser chrome `
   --limit 1
 ```
 
@@ -73,10 +71,12 @@ stage2_output/
 ## 주의
 
 YouTube가 자동 요청을 막으면 yt-dlp가 쿠키를 요구할 수 있다.
-그 경우 `--cookies-from-browser chrome` 또는 `edge`를 사용한다.
+자동으로 쿠키를 읽거나 다른 브라우저로 전환하지 않는다. 쿠키 사용은 사용자가 명시적으로 선택하는 별도 옵션이다.
 
 이 스크립트는 Human gold label을 포함하지 않으므로 Stage-2 blind evaluation을 깨지 않는다.
 
 
 ## v0.2 수정
-`yt-dlp.exe`가 PATH에 없어도 동작하도록 모든 호출을 `py -m yt_dlp` 방식으로 변경했다.
+`yt-dlp.exe`가 PATH에 없어도 동작하도록 현재 Python 인터프리터의 `-m yt_dlp`를 사용한다.
+
+Development cascade는 `tools.feature_extractor`를 사용한다. 해당 경로는 frozen 정의를 주입하고, Stage 1 U만 이 collector에 전달한다.

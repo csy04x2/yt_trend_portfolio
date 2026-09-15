@@ -43,7 +43,7 @@ def require(exe: str):
 
 def yt_base(cookie_browser: str | None) -> list[str]:
     # Use the Python module instead of relying on yt-dlp.exe being on PATH.
-    cmd = ["py", "-m", "yt_dlp", "--no-warnings", "--no-playlist"]
+    cmd = [sys.executable, "-m", "yt_dlp", "--ignore-config", "--no-warnings", "--no-playlist"]
     if cookie_browser:
         cmd += ["--cookies-from-browser", cookie_browser]
     return cmd
@@ -171,8 +171,15 @@ def extract_frames(video_path: Path, vdir: Path, length_axis: str) -> list[dict]
     return frames
 
 
-def collect_one(item: dict, outroot: Path, cookie_browser: str | None, keep_media: bool) -> dict:
+def collect_one(item: dict, outroot: Path, cookie_browser: str | None, keep_media: bool,
+                feature_definition: str | None = None) -> dict:
     vid = item["video_id"]
+    if not re.fullmatch(r"[A-Za-z0-9_-]{11}", vid):
+        raise ValueError("Invalid video ID")
+    if item.get("stage1_label", "U") != "U":
+        raise ValueError("Only Stage 1 U may be collected")
+    if item["youtube_url"] != f"https://www.youtube.com/watch?v={vid}":
+        raise ValueError("Expected canonical video URL")
     vdir = outroot / vid
     vdir.mkdir(parents=True, exist_ok=True)
 
@@ -185,7 +192,7 @@ def collect_one(item: dict, outroot: Path, cookie_browser: str | None, keep_medi
         "stage1_label": "U",
         "stage1_reason": item.get("stage_1_reason"),
         "feature": "guest_present",
-        "feature_definition": (
+        "feature_definition": feature_definition or (
             "A non-Chim person participates in the content. "
             "Exclude staff/delivery/background people and people only appearing inside external media."
         ),
@@ -268,7 +275,6 @@ def main():
 
     require("ffmpeg")
     require("ffprobe")
-    require("py")
 
     queue = json.loads(Path(args.queue).read_text(encoding="utf-8"))
     if args.limit:
