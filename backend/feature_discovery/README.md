@@ -2,7 +2,7 @@
 
 콘텐츠를 보고 특징을 정의하는 Content Feature Discovery와 성과를 확인하는
 Outcome Validation을 분리하는 **실험 전용 도구**다. 이번 버전은 split,
-blind content packet, feature registry 검증까지만 제공한다. 성과를 보고
+blind content packet, feature registry 검증 및 Discovery labeling worksheet를 제공한다. 성과를 보고
 특징 정의를 사후 조정하는 분석 흐름을 만들지 않는다.
 
 ## 저장소 조사와 독립 구조
@@ -157,7 +157,48 @@ Feasibility probe는 PASS 및 종료됐다. 재실행, 댓글 재분류·추가 
 binary 값은 정수 0=없음, 1=있음, 문자열 U=자료 부족이다. 자료 부족을 0으로
 바꾸지 않는다. `validate_value` 함수는 이 계약을 검사하며 numeric 유한 숫자,
 categorical categories 문자열로 확장할 수 있다. U는 모든 유형에서 판정 불가다.
-현재 label 생성·저장 기능은 없다.
+Discovery labeling worksheet로 외부에서 작성한 판정을 검증·저장할 수 있다. 자동 판정은 하지 않는다.
+
+## Discovery labeling worksheet (freeze 이전)
+
+사람 또는 외부 LLM이 **허용된 blind content만** 보고 label/notes를 작성하는
+long-form CSV다. 한 행은 Discovery video × registry feature이며 label은 빈칸으로
+시작한다. 1=존재, 0=충분한 근거로 부재, U=제공된 증거로 판정 불충분이다.
+빈칸은 U와 다르며 compile 시 거부한다. 댓글은 source가 comment-derived여도
+labeling evidence로 사용할 수 없다. 외부 outcome 조회 및 댓글 참조를 하지 않는다.
+
+저장소의 backend 폴더에서 실행한다. 출력은 매번 새 디렉터리를 사용한다.
+
+```powershell
+$fixture = "fixtures/labeled/discovery-chim-claude-20260914"
+python -m feature_discovery.labeling export --content "$fixture/chim-content.json" --split "$fixture/split.csv" --registry "$fixture/registry-claude-v0.1.json" --output-dir feature_discovery/outputs/discovery-labeling/worksheet-01
+# worksheet-01/worksheet.csv의 label과 notes만 직접 작성/검토한다.
+python -m feature_discovery.labeling compile --worksheet feature_discovery/outputs/discovery-labeling/worksheet-01/worksheet.csv --split "$fixture/split.csv" --registry "$fixture/registry-claude-v0.1.json" --output-dir feature_discovery/outputs/discovery-labeling/compiled-01
+```
+
+CSV 열은 `video_id,title,evidence_json,feature_id,feature_json,label,notes`다.
+`evidence_json`에는 기존 blind allowlist의 content만 들어가고 `feature_json`에는
+registry의 실제 정의·예시·required_evidence 등 판정 정보가 들어간다. CSV를
+스프레드시트로 열 때 모든 열을 텍스트로 가져와 제목을 수식으로 실행하지 않는다.
+다중 행 자막/쉼표는 표준 CSV quoting을 사용한다.
+
+입력은 blind JSON 배열만 지원한다. 공유 JSON은 파일 전체를 decode하므로
+Development/Holdout 바이트도 메모리에 들어갈 수 있으나 ID membership 선택 이후
+그 영상의 content 값은 검사·판정·출력하지 않는다. 금지 필드명은 입력에서 거부한다.
+Discovery-only blind JSON 배열을 입력해도 된다. DB 및 outcome 파일은 받지 않는다.
+
+Compile은 Discovery 전체 × feature 전체의 완전성, 중복, unknown/non-Discovery ID,
+0/1/U 값, evidence allowlist, registry 정의 일치를 검증한다. label 값/feature 검사는
+기존 feature_outcome.labels.validate_labels를 재사용한다. 주관적인 판정 정확도나
+본문/notes에 숨겨진 성과 언급까지 자동 검증하지는 않는다. title-only absence로
+0을 주지 말고 각 정의의 required_evidence를 따른다.
+
+출력 `labels.json`은 `{video_id: {feature_id: 0|1|"U"}}`, `notes.json`은 같은 키 구조의
+notes다. `summary.json`에는 feature별 n_total/n_0/n_1/n_u/judged_n/coverage/u_rate와
+입력 SHA-256을 저장한다. 임계값·상태 승격·freeze_metadata는 생성하지 않는다.
+Discovery 판정은 Development labels를 대신하지 않는다. freeze 여부는 별도 결정이다.
+`labels-title-regex-300.json` 및 `label_by_title_regex` placeholder는 이 workflow에서
+읽거나 호출하지 않는다. 기존 후보·registry·split·artifact를 덮어쓰지 않는다.
 
 ## 테스트
 
