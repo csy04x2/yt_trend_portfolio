@@ -81,3 +81,36 @@ def test_requires_valid_frozen_envelope(case, bad):
     with pytest.raises(ValueError, match="frozen"):
         runner.run(**kwargs(case))
     assert not case["out"].exists()
+
+
+def test_quality_evidence_preserved_but_excluded_in_serialized_findings(case, monkeypatch):
+    from feature_outcome.finding import AUDIENCE_METRICS, OBSERVATION_QUALITY_METRICS, SAMPLING_SENSITIVE_METRICS
+
+    evidence = json.loads(case["ev"].read_text(encoding="utf-8"))
+    expected = {}
+    for i, video in enumerate(evidence["videos"][:10]):
+        for metric in (*AUDIENCE_METRICS, *OBSERVATION_QUALITY_METRICS):
+            video[metric] = i + 1
+        expected[video["video_id"]] = dict(video)
+    case["ev"].write_text(json.dumps(evidence), encoding="utf-8")
+    before = case["ev"].read_bytes()
+    original = runner.build_findings
+
+    def checked(videos, *args, **kwargs):
+        assert {v["video_id"] for v in videos} == set(expected)
+        for video in videos:
+            assert "comparison_ids" not in video
+            for metric in (*AUDIENCE_METRICS, *OBSERVATION_QUALITY_METRICS, "view_multiple"):
+                assert video[metric] == expected[video["video_id"]][metric]
+        return original(videos, *args, **kwargs)
+
+    monkeypatch.setattr(runner, "build_findings", checked)
+    runner.run(**kwargs(case))
+    out = json.loads((case["out"] / "findings.json").read_text(encoding="utf-8"))
+    assert case["ev"].read_bytes() == before
+    assert set(out["observable_audience_metrics"]) == set(AUDIENCE_METRICS)
+    assert {c["behavior_metric"] for c in out["candidates"]} == set(AUDIENCE_METRICS)
+    for metric in SAMPLING_SENSITIVE_METRICS:
+        assert out["input_contract"]["metrics"][metric]["sampling_sensitive"] is True
+    assert out["scope"]["split"] == "development"
+    assert out["thresholds_applied"] == []

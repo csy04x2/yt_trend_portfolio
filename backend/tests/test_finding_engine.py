@@ -91,3 +91,65 @@ def test_uncalculable_leg_stays_in_calculations_but_not_candidate():
     assert fb["status"] == "insufficient_observed_groups"
     assert fb["effect"]["estimate"] is None
     assert out["candidates"] == []
+
+
+def test_quality_metrics_never_enter_associations_or_chains_and_inputs_survive():
+    import copy
+    from feature_outcome.finding import AUDIENCE_METRICS, OBSERVATION_QUALITY_METRICS
+
+    videos, labels = data()
+    for i, video in enumerate(videos):
+        for metric in AUDIENCE_METRICS:
+            video[metric] = i + 1
+    baseline = build_findings(videos, labels, frozen_registry())
+    for i, video in enumerate(videos):
+        for metric in OBSERVATION_QUALITY_METRICS:
+            video[metric] = i + 100  # Valid, varying numbers must still be excluded.
+    before = copy.deepcopy(videos)
+    out = build_findings(videos, labels, frozen_registry())
+    assert out == baseline
+    assert videos == before
+    assert set(out["observable_audience_metrics"]) == set(AUDIENCE_METRICS)
+    assert {x["metric"] for x in out["calculations"]["feature_to_behavior"]} == set(AUDIENCE_METRICS)
+    assert {x["behavior_metric"] for x in out["calculations"]["behavior_to_performance"]} == set(AUDIENCE_METRICS)
+    assert {x["behavior_metric"] for x in out["candidates"]} == set(AUDIENCE_METRICS)
+    for video in videos:
+        for metric in AUDIENCE_METRICS:
+            video.pop(metric)
+    quality_only = build_findings(videos, labels, frozen_registry())
+    assert quality_only["observable_audience_metrics"] == []
+    assert quality_only["calculations"]["feature_to_behavior"] == []
+    assert quality_only["calculations"]["behavior_to_performance"] == []
+    assert quality_only["candidates"] == []
+
+
+def test_serialized_metric_contract_tracks_sampling_and_expected_provenance():
+    from feature_outcome.finding import OBSERVATION_QUALITY_METRICS, SAMPLING_SENSITIVE_METRICS
+
+    videos, labels = data()
+    out = json.loads(json.dumps(build_findings(videos, labels, frozen_registry())))
+    contract = out["input_contract"]
+    assert set(SAMPLING_SENSITIVE_METRICS) == {
+        "unique_commenters", "participant_breadth", "threads", "replies_collected", "max_thread_size"
+    }
+    for metric in SAMPLING_SENSITIVE_METRICS:
+        assert contract["metrics"][metric] == {
+            "category": "audience_signal", "expected_source": "app.pipeline.observable.build",
+            "association_eligible": True, "sampling_sensitive": True,
+        }
+    for metric in OBSERVATION_QUALITY_METRICS:
+        assert contract["metrics"][metric]["category"] == "observation_quality"
+        assert contract["metrics"][metric]["association_eligible"] is False
+    assert contract["relative_performance"]["expected_source"] == "app.pipeline.observable.compare"
+    assert contract["relative_performance"]["provenance_verified"] is False
+    assert contract["metrics"]["like_rate"]["sampling_sensitive"] is None
+
+
+def test_zero_feature_effect_still_emits_chain_without_magnitude_cutoff():
+    videos = [dict(video_id=str(i), like_rate=x, view_multiple=x) for i, x in enumerate([1, 3, 1, 3])]
+    labels = {str(i): {"f": int(i < 2)} for i in range(4)}
+    out = build_findings(videos, labels, frozen_registry())
+    assert out["thresholds_applied"] == []
+    assert len(out["candidates"]) == 1
+    assert out["candidates"][0]["effect"]["feature_to_behavior"]["estimate"] == 0
+    assert out["candidates"][0]["effect"]["feature_to_performance"]["estimate"] == 0

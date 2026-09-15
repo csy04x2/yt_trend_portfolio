@@ -14,25 +14,65 @@ import statistics as st
 VERSION = "finding-engine-v0.1"
 OUTCOME = "view_multiple"
 
-# Scalar, video-level audience observations already produced by observable.py.
-# Collection/status strings and nested timestamp bins are intentionally not new
-# metrics and are therefore not analyzed here.
+# Finding consumes observable.py's supplied value without recomputing it.
+# Do not substitute normalize.py's quarter baseline or breakout.py's
+# quarter baseline with breakout peers excluded. This is an input contract,
+# not verification of the supplied artifact's upstream provenance.
+RELATIVE_PERFORMANCE_CONTRACT = {
+    "expected_source": "app.pipeline.observable.compare",
+    "definition": "current views / median current views of non-live, same-length-axis, similarly-aged peers; minimum 5 peers",
+    "age_tolerance": "max(2 days, 20% of target age_days)",
+    "self_excluded": True,
+    "missingness": "live target, fewer than 5 peers with non-null views, missing target views, or nonpositive median -> None",
+    "interpretation": "cross-sectional relative performance; not a predicted/expected view count",
+    "provenance_verified": False,
+}
+
+# Scalar audience observations eligible for exploratory associations.
+# Eligibility does not establish validity, representativeness or absence of bias.
 AUDIENCE_METRICS = (
     "like_rate",
     "comment_rate",
     "unique_commenters",
-    "author_missing_rate",
     "observed_repeat_share",
     "participant_breadth",
-    "collection_to_api_ratio",
     "threads",
     "replies_collected",
-    "api_replies_sampled_threads",
     "reply_rate",
-    "reply_incomplete_threads",
-    "reply_fetch_coverage",
     "max_thread_size",
 )
+
+
+# Retained in observable evidence and frozen projection, never behavior legs.
+OBSERVATION_QUALITY_METRICS = (
+    "author_missing_rate",
+    "collection_to_api_ratio",
+    "api_replies_sampled_threads",
+    "reply_incomplete_threads",
+    "reply_fetch_coverage",
+)
+
+# Explicit interpretation flags for the requested sample-sensitive counts/breadth.
+# This is not an exhaustive list: repeat share and reply rate also depend on
+# collected comments. Unflagged metrics are not certified sampling-independent.
+SAMPLING_SENSITIVE_METRICS = (
+    "unique_commenters", "participant_breadth", "threads",
+    "replies_collected", "max_thread_size",
+)
+
+
+def _metric_metadata():
+    # Shared lookup by metric/behavior_metric on calculations and candidates;
+    # no repeated per-leg payload and no selected/nonselected row values.
+    return {
+        metric: {
+            "category": "audience_signal" if metric in AUDIENCE_METRICS else "observation_quality",
+            "expected_source": "app.pipeline.observable.build",
+            "association_eligible": metric in AUDIENCE_METRICS,
+            "sampling_sensitive": True if metric in SAMPLING_SENSITIVE_METRICS else None,
+        }
+        for metric in (*AUDIENCE_METRICS, *OBSERVATION_QUALITY_METRICS)
+    }
 
 
 def _number(value):
@@ -309,6 +349,12 @@ def build_findings(videos, labels, registry, split_name="development"):
         "association_only": True,
         "thresholds_applied": [],
         "candidate_rule": "emit when all three association estimates are calculable; no magnitude/significance cutoff",
+        "input_contract": {
+            "version": "finding-input-v0.1",
+            "relative_performance": dict(RELATIVE_PERFORMANCE_CONTRACT),
+            "metrics": _metric_metadata(),
+            "sampling_note": "Flagged metrics depend on current comment sampling policy; not validated or unbiased audience behavior. Null means not explicitly flagged, not sampling-independent; observed_repeat_share and reply_rate also depend on collection.",
+        },
         "observable_audience_metrics": available_behaviors,
         "calculations": {
             "feature_to_performance": fp,

@@ -14,11 +14,14 @@ from pathlib import Path
 
 from .labels import load_labels
 from .outcome import HoldoutSealed
-from .finding import AUDIENCE_METRICS
+from .finding import AUDIENCE_METRICS, OBSERVATION_QUALITY_METRICS
 
 OUTPUT_ROOT = Path(__file__).resolve().parents[1] / "feature_discovery/outputs/experiment-analysis"
 ANALYSIS_FIELDS = ("video_id", "title", "length_axis", "duration_sec", "published_at",
-                   "view_count", "view_multiple", "age_days", *AUDIENCE_METRICS)
+                   "view_count", "view_multiple", "age_days", *AUDIENCE_METRICS,
+                   *OBSERVATION_QUALITY_METRICS)
+# Quality fields remain selected-row evidence metadata; Finding never uses them
+# as audience associations. No peer lists or cross-split summaries are added.
 
 
 def prepare(a, registry):
