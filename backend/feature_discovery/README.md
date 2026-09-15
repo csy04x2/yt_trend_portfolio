@@ -200,6 +200,84 @@ Discovery 판정은 Development labels를 대신하지 않는다. freeze 여부�
 `labels-title-regex-300.json` 및 `label_by_title_regex` placeholder는 이 workflow에서
 읽거나 호출하지 않는다. 기존 후보·registry·split·artifact를 덮어쓰지 않는다.
 
+## Human-approved freeze → Development → Finding
+
+의도한 순서는 **Discovery labeling → human review → explicit feature selection
+→ freeze → Development labeling → Finding Runner**다. Discovery compile은 계속
+labels/notes/summary만 생성한다. 통계로 testing feature를 자동 선택·승격·거절하지 않는다.
+
+1. 위 Discovery worksheet export/compile을 완료한다. 사람이 허용 evidence,
+   정의·0/1/U 경계 및 Discovery 판정을 검토하고 최종 정의를 plain registry에 확정한다.
+2. 사람이 Development를 보기 전에 testing으로 사용할 feature ID를 명시적으로
+   선택한다. 승인 대상 registry의 바이트를 보존하고 다음 JSON을 별도
+   `feature_discovery/outputs/freeze-01/human-approval.json`에 직접 작성한다.
+   아래 ID/이름/dataset/version은 형식 예시이며 실제 선택을 뜻하지 않는다.
+
+```json
+{
+  "selected_feature_ids": ["human_selected_feature_id"],
+  "approved_by": "human reviewer name",
+  "registry_version": "human-testing-v1",
+  "dataset": "experiment-dataset-id",
+  "definitions_frozen_before_development": true,
+  "source_registry_sha256": "lowercase SHA-256 of the exact reviewed registry bytes"
+}
+```
+
+3. backend 폴더에서 hash를 확인하고 승인 artifact에 기록한 뒤 freeze한다:
+
+```powershell
+(Get-FileHash -Algorithm SHA256 feature_discovery/outputs/reviewed-registry.json).Hash.ToLowerInvariant()
+python -m feature_discovery.freeze --registry feature_discovery/outputs/reviewed-registry.json --approval feature_discovery/outputs/freeze-01/human-approval.json --output feature_discovery/outputs/freeze-01/frozen-registry.json
+```
+
+command는 원본을 변경하지 않고 새 파일을 exclusive-create한다. 이미 존재하는 출력,
+빈/중복/unknown ID, 모호한 source ID(버전만 다른 중복 포함), 잘못된 registry,
+hash 불일치 및 추가 approval 필드는 거부한다. labels/summary/자동선택/holdout 옵션은 없다.
+선택 목록은 사람이 testing 상태를 승인한 결정이다. 선택된 feature만 새 registry에
+`status="testing"`으로 기록하며 미선택 feature는 원본에 그대로 남는다. 원본 status로
+자동 포함하지 않는다. video-level binary 또는 categorical `["0","1","U"]`만 허용한다.
+binary는 frozen loader가 요구하는 categorical 0/1/U 표현으로 바꾼다. 정의·예시·
+required_evidence·source·feature version은 그대로 보존하며 numeric/다른 category를
+자동 재해석하지 않는다. 이는 검증된 feature로의 승격이 아니다.
+
+출력은 다음 envelope이며 기존 `feature_outcome.labels.load_registry()`로 읽을 수 있다:
+
+```text
+registry: schema-valid registry containing only selected testing features
+freeze_metadata:
+  registry_version, dataset
+  freeze_status: "frozen"
+  definitions_frozen_before_development: true
+  testing_feature_count: len(registry.features)
+freeze_provenance:
+  selection_basis: "explicit human approval"
+  approved_by, selected_feature_ids
+  input_sha256: {absolute source registry path: SHA-256, absolute approval path: SHA-256}
+```
+
+추가 provenance는 registry schema 밖에 둔다. hash는 승인과 정확한 source를 연결하지만
+승인자의 신원이나 실제 freeze 시점을 인증하지 않는다. `true`는 사람이 확인한
+선행 동결 선언이며 command가 Development 접근 이력을 조사하는 것은 아니다.
+이 command는 schema와 두 명시적 입력 외에 split/content/outcome/DB를 열지 않는다.
+
+4. 같은 동결 split의 **Development 영상만** 허용 content evidence로 별도 판정한다.
+   frozen registry에 있는 모든 feature를 모든 Development 영상에 0/1/U로 기록한다.
+   파일 형식은 `{"labels":{"development_video_id":{"selected_feature_id":0}}}`다.
+   U는 문자열 `"U"`이며 자료 부족을 0으로 바꾸지 않는다. Discovery labels를
+   복사하거나 title-regex placeholder를 쓰지 않는다. 현재 worksheet CLI는
+   Discovery-only이므로 Development 판정은 사람이/외부 판정자가 별도로 작성한다.
+5. Development labels와 기존 호환 evidence를 준비한 뒤 backend에서 실행한다:
+
+```powershell
+python -m feature_outcome.runner --registry feature_discovery/outputs/freeze-01/frozen-registry.json --labels feature_discovery/outputs/development-labels.json --split feature_discovery/outputs/frozen-split.csv --evidence feature_discovery/outputs/development-evidence.json --out feature_discovery/outputs/experiment-analysis/development-01
+```
+
+경로는 준비한 해당 실험 artifact로 대체한다. 새 split을 만들거나 기존 파일을
+덮어쓰지 않는다. Runner는 Development-only이고 Holdout은 계속 봉인한다.
+이 작업은 실제 human approval/registry 또는 Development labels를 자동 생성하지 않는다.
+실제 분석 전 사람이 승인한 최종 registry/동결 선언과 완전한 Development 판정이 필요하다.
+
 ## 테스트
 
 pytest가 설치된 환경에서 저장소 최상위 기준:
