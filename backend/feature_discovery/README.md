@@ -100,9 +100,59 @@ items/local ref 부분집합을 표준 라이브러리로 검증한다. 범용 J
 
 `examples.json`의 guest_present와 first_person_past_experience는
 **production taxonomy가 아닌 schema/example fixture**다. 검증된 특징이 아니다.
-새 registry는 별도 JSON에 정의하고 위 CLI로 검증한다. source는 human/llm/both,
+새 registry는 별도 JSON에 정의하고 위 CLI로 검증한다. source는 human/llm/both/comment-derived,
 status는 candidate/testing/validated/rejected다. 이 status는 기록용 메타데이터이며
 validator 통과가 성과 관계의 validated 상태를 보증하지 않는다.
+
+`comment-derived`는 댓글을 discovery evidence로 사용하여 underlying video/content
+property 후보를 발견했다는 provenance다. 댓글 자체가 feature는 아니다. 댓글은
+후보 발견 단계에서만 사용할 수 있으며 operationalization 이후 video-level 0/1/U
+labeling 및 validation evidence로 사용할 수 없다. 다른 source와 동일한 Feature
+Registry / frozen validation / Finding Engine 계약을 따르며 source별 특별 처리는 없다.
+`human`과 `llm`의 기존 의미는 유지한다. `both`는 Human과 LLM 양쪽의 독립 발견만
+의미하며 comment-derived를 포함하지 않는다. 이 경계는 evidence 사용 계약이며
+source enum 검증만으로 실제 사용한 evidence까지 자동 검사하는 것은 아니다.
+
+### sponsored_product_integration — operationalization DRAFT
+
+- feature_id: `sponsored_product_integration`
+- source/provenance: `comment-derived`
+- 상태: **testing candidate / operationalization draft**. 최종 testing registry에
+  편입되지 않았고 validated/frozen feature도 아니다. 14F Human Registry가 아직
+  도착하지 않았으므로 최종 testing set/frozen registry를 만들지 않는다. 14F
+  Human/LLM/comment-derived 후보 비교 및 Step 3 freeze 이후 최종 채택 여부를 결정한다.
+
+개념: 특정 상업 제품·브랜드·서비스가 단순 노출을 넘어 영상의 실제 진행, 활동
+또는 실질적인 대화/소개 소재에 통합되어 있는가.
+
+- **1:** 특정 제품/브랜드/서비스의 사용, 시식, 시연, 소개 또는 이에 준하는 활동이
+  영상의 실질적인 진행/콘텐츠를 구성한다.
+- **0:** 그러한 content integration이 없다. 단순 배너, 짧은 sponsor mention,
+  일회성 제품 노출처럼 핵심 콘텐츠와 분리 가능한 광고 노출만 있는 경우도 0이다.
+- **U:** 허용된 content evidence만으로 integration 존재 여부를 판정할 수 없다.
+
+이는 “유료 광고인가”와 동일한 feature가 아니다. commercial disclosure 자체가
+아닌 content integration을 측정한다. title-only에서 제품/광고 언급이 없다는
+이유만으로 0을 부여하지 않는다. 0 판정에도 충분한 content evidence가 필요하다.
+댓글은 발견 provenance일 뿐 실제 0/1/U labeling evidence로 사용하지 않는다.
+
+required_evidence 초안: 영상 본문을 판단할 수 있는 transcript 또는 이에 준하는
+content evidence. 제목/메타데이터만으로 충분히 명시적인 positive case는 1 판정의
+보조 evidence가 될 수 있지만 title-only absence는 0의 근거가 될 수 없다.
+이 초안은 문서에만 존재하며 production registry JSON에는 추가하지 않는다.
+
+### 종료된 Step 3.5 결정 보존
+
+Feasibility probe는 PASS 및 종료됐다. 재실행, 댓글 재분류·추가 수집은 하지 않는다.
+
+- guest/collaboration: 기존 `guest_external`의 independent discovery corroboration.
+  신규 feature를 생성하지 않는다.
+- `repeated_in_video_catchphrase`: preserve 유지. `recurring_bit`과의 경계가
+  해결되지 않았으므로 지금 operationalize하지 않는다.
+- `promised_actual_runtime_mismatch`: preserve 유지. coverage 우려가 있으므로
+  지금 operationalize하지 않는다.
+- channel/campaign context: insufficient_support 유지.
+- generic reaction signals: content feature로 승격하지 않는다.
 
 binary 값은 정수 0=없음, 1=있음, 문자열 U=자료 부족이다. 자료 부족을 0으로
 바꾸지 않는다. `validate_value` 함수는 이 계약을 검사하며 numeric 유한 숫자,

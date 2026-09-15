@@ -154,6 +154,13 @@ def test_sqlite_projection_and_no_mutation(tmp_path):
     assert not missing.exists()
 
 
+@pytest.mark.parametrize("source", ["human", "llm", "both", "comment-derived"])
+def test_registry_valid_source(source):
+    reg = registry()
+    reg["features"][0]["source"] = source
+    validate_registry(reg)
+
+
 def test_valid_registry_and_value_contract():
     reg = registry()
     validate_registry(reg)

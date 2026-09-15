@@ -26,7 +26,7 @@
         "inclusion_examples": {"$ref": "#/$defs/examples"},
         "exclusion_examples": {"$ref": "#/$defs/examples"},
         "required_evidence": {"$ref": "#/$defs/examples"},
-        "source": {"type": "string", "enum": ["human", "llm", "both"]},
+        "source": {"type": "string", "enum": ["human", "llm", "both", "comment-derived"]},
         "status": {"type": "string", "enum": ["candidate", "testing", "validated", "rejected"]},
         "categories": {"$ref": "#/$defs/examples"}
       }
