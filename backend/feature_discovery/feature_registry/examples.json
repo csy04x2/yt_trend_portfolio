@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1",
+  "notice": "SCHEMA/EXAMPLE FIXTURE ONLY. Not production taxonomy; not validated features.",
+  "features": [
+    {
+      "feature_id": "guest_present",
+      "name": "Guest present (example)",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "A person explicitly introduced as a guest participates. 0=absent with sufficient evidence; 1=present; U=insufficient material.",
+      "inclusion_examples": ["Transcript: Today our guest is Mina; Mina then speaks."],
+      "exclusion_examples": ["Host only mentions a celebrity who does not participate."],
+      "required_evidence": ["Content quote identifying the guest and their participation; title alone may be insufficient."],
+      "source": "both",
+      "status": "candidate"
+    },
+    {
+      "feature_id": "first_person_past_experience",
+      "name": "First-person past experience (example)",
+      "version": "0.1",
+      "scope": "video",
+      "value_type": "binary",
+      "definition": "A speaker recounts their own past experience. 0=absent with sufficient evidence; 1=present; U=insufficient material.",
+      "inclusion_examples": ["I worked in a bakery when I was a student."],
+      "exclusion_examples": ["A hypothetical story or another person's experience."],
+      "required_evidence": ["Quote from available transcript with first-person subject and past event."],
+      "source": "human",
+      "status": "candidate"
+    }
+  ]
+}

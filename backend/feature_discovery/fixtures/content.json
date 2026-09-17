@@ -1,0 +1,12 @@
+[
+  {"video_id":"demo01","title":"Guest introduction","description":"Synthetic content fixture, not a real video.","transcript":"Today our guest is Mina. Mina: Hello.","duration_sec":60,"length_axis":"shorts","corner":"Conversation","playlist":"Demo series","published_at":"2026-01-01T00:00:00Z"},
+  {"video_id":"demo02","title":"My first job","description":"Synthetic content fixture.","transcript":"I worked in a bakery when I was a student.","duration_sec":70,"length_axis":"shorts","corner":null,"playlist":null,"published_at":"2026-01-02T00:00:00Z"},
+  {"video_id":"demo03","title":"Making tea","description":"Synthetic content fixture.","transcript":null,"duration_sec":80,"length_axis":"shorts","corner":null,"playlist":null,"published_at":"2026-01-03T00:00:00Z"},
+  {"video_id":"demo04","title":"A short walk","description":"Synthetic content fixture.","transcript":null,"duration_sec":90,"length_axis":"shorts","corner":null,"playlist":null,"published_at":"2026-01-04T00:00:00Z"},
+  {"video_id":"demo05","title":"A question","description":"Synthetic content fixture.","transcript":null,"duration_sec":100,"length_axis":"shorts","corner":null,"playlist":null,"published_at":"2026-01-05T00:00:00Z"},
+  {"video_id":"demo06","title":"Studio conversation","description":"Synthetic content fixture.","transcript":null,"duration_sec":1300,"length_axis":"long","corner":null,"playlist":null,"published_at":"2026-01-06T00:00:00Z"},
+  {"video_id":"demo07","title":"A travel memory","description":"Synthetic content fixture.","transcript":"I visited this village ten years ago.","duration_sec":1400,"length_axis":"long","corner":null,"playlist":null,"published_at":"2026-01-07T00:00:00Z"},
+  {"video_id":"demo08","title":"Cooking at home","description":"Synthetic content fixture.","transcript":null,"duration_sec":1500,"length_axis":"long","corner":null,"playlist":null,"published_at":"2026-01-08T00:00:00Z"},
+  {"video_id":"demo09","title":"An interview","description":"Synthetic content fixture.","transcript":null,"duration_sec":1600,"length_axis":"long","corner":null,"playlist":null,"published_at":"2026-01-09T00:00:00Z"},
+  {"video_id":"demo10","title":"Building a table","description":"Synthetic content fixture.","transcript":null,"duration_sec":1700,"length_axis":"long","corner":null,"playlist":null,"published_at":"2026-01-10T00:00:00Z"}
+]

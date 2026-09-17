@@ -9,6 +9,41 @@
 
 ---
 
+## 현재 canonical 경계 — Stage 08 / Stage 09
+
+2026-09-17 인간 확정 결정의 보존 복구. 현재 책임 경계의 정본은 이 절이다.
+
+인간 확정 원칙:
+
+**Stage 08까지 사실과 관계를 계산하고, Stage 09에서만 해석한다.**
+
+Stage 08:
+
+* 집계
+* 수치 계산
+* 관계/association 계산
+* evidence 생성
+
+여기까지다.
+
+Stage 08이 사용자에게 보여줄 결론을 스스로 확정하거나 인과적 해석을 만드는 단계가 아니다.
+
+Stage 09:
+
+* Stage 08의 evidence를 바탕으로 의미 있는 결과를 선택
+* 해석
+* 사용자에게 설명할 insight 구성
+
+Finding Engine의 기존 원칙인 association only / causal claim 금지를 유지한다.
+
+과거 문서의 Stage 08 `집계 / 결론 문장 초안`, Stage 09 `리포트 조회` 표현은 현재 방법론 경계로는 outdated다. 아래 v0.1의 `aggregate`에서 결론 초안/문장 다듬기를 수행하는 설명은 과거 구현 설계 기록이며 현재 Stage 08의 허용 범위가 아니다. 현재 해석 책임은 Stage 09에 있다. 이번 복구는 구현 변경이나 Stage 09 구현 완료를 뜻하지 않는다.
+
+현재 Reaction/Target 및 Phase 2 기준은 [Phase 1 checkpoint](../reaction-phase1-checkpoint.md), Feature 구조는 [Content Feature Structure](content-feature-structure.md)를 따른다. Relative Performance의 별도 고정 reference population 정책은 [Control Tower checkpoint](../reports/control-tower-checkpoint-2026-09-15.md)의 결정을 유지한다.
+
+## 이하 v0.1 설계의 역사적 범위
+
+이하 모듈·API·결론 생성 설명은 2026-09-09의 설계 기록이다. 위 현재 경계와 다르면 위 결정을 우선하며, 현재 방법론이나 구현 완료의 근거로 전용하지 않는다.
+
 ## 1. 설계 원칙
 
 1. **화면과 분석의 분리.** 백엔드는 JSON만 내주고 HTML을 모른다. 프론트는 API만 알고 SQLite를 모른다.

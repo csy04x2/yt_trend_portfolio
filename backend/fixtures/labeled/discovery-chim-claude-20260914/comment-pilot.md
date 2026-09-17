@@ -47,3 +47,30 @@
 - **예고 길이 대비 실제 길이 초과**(0/1): 「영상 길이·형식」 12%는 "10분 토론" 제목에 52분 영상. — "10분 토론이라면서요? 52분 너무 좋잖아 ㅠㅠ"
 - **채널 캠페인 대상 영상**(0/1, 단 판정은 채널 맥락 필요 → U 가능): 동물 TOP5의 72%는 영상 내용이 아니라 "전 영상 100만" 캠페인. 이 영상은 댓글로 콘텐츠 피처를 읽기 어려운 사례다.
 반면 「주제 자체」「출연자 매력」「특정 장면」은 장르(토론/뷰티/리뷰)에 따라 정도가 달라질 뿐 어느 영상에나 있는 반응 유형이라, 피처보다는 **장르 표지** 또는 **강도 척도**로 쓰는 편이 맞다.
+
+
+## Step 3.5 — Comment-derived Content Signal feasibility probe (2026-09-15)
+
+**PASS — comments are a viable supplementary source for content-feature discovery.**
+
+댓글 자체를 feature로 쓰는 것이 아니라, 댓글에서 반복적으로 언급되는 요소로부터
+underlying video property 후보를 발견할 수 있는지 확인한 것이다. 이후 각 후보는
+댓글 없이 영상·제목·메타데이터 등 허용된 evidence만으로 독립 판정 가능해야 한다.
+이 PASS는 개별 후보의 validated/frozen 판정이 아니다. comment-derived 후보도
+operationalization과 Development validation을 통과해야 한다.
+기존 14-tag vocabulary는 discovery observation 정리용이며 새로운 Reaction taxonomy가 아니다.
+
+### 후보 처리 — 이번 audit의 연구 기록
+
+| 후보 | 처리 | 의미 / 후속 경계 검토 |
+|---|---|---|
+| guest/collaboration | independent discovery corroboration | 기존 `guest_external`과 개념적으로 중복. 신규 feature로 추가하지 않는다. |
+| sponsored_product_integration | testing | 광고/PPL/제품이 영상 콘텐츠 자체에 통합되는지에 대한 comment-derived 신규 후보. 아직 validated/frozen 아님. |
+| repeated_in_video_catchphrase | preserve | 영상 내부에서 반복되는 말·구호·행동. `recurring_bit`과 부분적으로 겹치지만 동일하다고 확정하지 않으며 operationalization에서 경계를 검토한다. |
+| promised_actual_runtime_mismatch | preserve | 제목/명시적 포맷이 약속한 길이와 실제 runtime의 큰 불일치. `one_hour_plus`와 다르며 적용 coverage가 낮을 수 있어 testing으로 바로 승격하지 않는다. |
+| channel/campaign context | insufficient_support | 영상 content property보다 채널 외부 맥락에 의존할 가능성이 크다. |
+| 주제 자체 / 출연자 매력 / 특정 장면 등 generic reaction signals | feature 승격 안 함 | 반응 태그를 그대로 content feature로 사용하지 않는다. |
+
+위 status는 후보 처리에 관한 문서 기록이며 registry JSON을 변경하거나 동결하지 않는다.
+기존 관찰·집계는 그대로 보존한다. 추가 댓글 표본, 기존 282개 댓글 재분류, 실험 재실행 없이
+**Step 3.5는 이 문서화로 종료한다.**

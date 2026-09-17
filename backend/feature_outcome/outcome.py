@@ -22,6 +22,7 @@ def _cell(rows):
 def feature_outcome(
     videos, labels, flags, split, split_name="development", outcome=None,
     min_cell=4, unseal_holdout=False, axis=None, u_as_control=False,
+    frozen_experiment=False,
 ):
     """outcome: {video_id: 값} (없으면 videos[i]['view_multiple']).
 
@@ -30,7 +31,9 @@ def feature_outcome(
     """
     if split_name == "holdout" and not unseal_holdout:
         raise HoldoutSealed("holdout은 봉인되어 있다. 특징 정의를 동결한 뒤 --unseal-holdout 으로 한 번만 연다.")
-    byid = {v["video_id"]: v for v in videos}
+    if frozen_experiment and u_as_control:
+        raise ValueError("Frozen experiments never use U as control")
+    videos = [v for v in videos if split.get(v["video_id"]) == split_name]
     if outcome is None:
         outcome = {v["video_id"]: v.get("view_multiple") for v in videos}
     ids = [
@@ -57,6 +60,12 @@ def feature_outcome(
             return r
 
         all_c, ex_c = _cell(rows(False)), _cell(rows(True))
+        # U counts include unknown labels even when the outcome is missing.
+        # Missing labels are tracked separately from an explicit U.
+        for cell, exclude in ((all_c, False), (ex_c, True)):
+            eligible = [vid for vid in ids if not exclude or not flags[vid]["breakout"]]
+            cell["n_u"] = sum(labels.get(vid, {}).get(fid) == "U" for vid in eligible)
+            cell["n_missing_label"] = sum(labels.get(vid, {}).get(fid) is None for vid in eligible)
         ex_rows = rows(True)
         loo = []
         if ex_c["n1"] >= min_cell and ex_c["n0"] >= min_cell:

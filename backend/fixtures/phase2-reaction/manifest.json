@@ -1,0 +1,430 @@
+{
+  "phase": "reaction-phase2",
+  "artifact": "manifest",
+  "contains_raw_text": false,
+  "collection_started_at": "2026-09-17T02:43:49+00:00",
+  "collection_finished_at": "2026-09-17T02:43:58+00:00",
+  "design": {
+    "channels": [
+      "슈카월드",
+      "MBCNEWS"
+    ],
+    "videos_per_channel": 2,
+    "top_level_comments_per_video": 50,
+    "total": 200,
+    "excluded_channels": [
+      "14F",
+      "안원잘부 / Woni",
+      "침착맨",
+      "Carden / 카더정원"
+    ],
+    "taxonomy_reference": "docs/reaction-phase1-checkpoint.md (Phase 2 frozen, 수정하지 않음)",
+    "replacement": "없음 — 제외된 댓글을 51번째로 보충하지 않는다"
+  },
+  "api": {
+    "endpoint": "commentThreads.list",
+    "params": {
+      "part": "snippet",
+      "order": "relevance",
+      "textFormat": "plainText",
+      "maxResults": 50
+    },
+    "ordering_statement": "YouTube Data API v3 commentThreads.list order=relevance 기준. YouTube 웹 UI의 Top comments와 동일한 결과인지는 검증하지 않았다.",
+    "video_metadata": "channels.list · playlistItems.list(uploads) · videos.list part=snippet,contentDetails,statistics,liveStreamingDetails"
+  },
+  "video_selection": {
+    "rule": "수집 시점 기준 원댓글 50개 이상 확보 가능한 최근 적격 영상 2개",
+    "recency": "업로드 재생목록 최신 200편을 publishedAt 역순으로 정렬",
+    "skip_rules": [
+      "commentCount 통계 50 미만 또는 비공개 → 다음 영상",
+      "order=relevance 원댓글 50개 미만 → 다음 영상",
+      "댓글 사용 중지 → 다음 영상"
+    ],
+    "stop_rules": [
+      "댓글 50개 이상인데 live/upcoming",
+      "댓글 50개 이상인데 라이브 다시보기·프리미어",
+      "댓글 50개 이상인데 180초 이하(쇼츠 여부 불확정)"
+    ],
+    "content_used_for_selection": false,
+    "log": {
+      "A": [
+        {
+          "video_id": "tmYmdAykjuQ",
+          "published_at": "2026-09-16T10:50:18Z",
+          "duration_sec": 1566,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 397,
+          "top_level_available": 50,
+          "decision": "selected_A1"
+        },
+        {
+          "video_id": "q836AS_27GE",
+          "published_at": "2026-09-15T10:11:11Z",
+          "duration_sec": 2091,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 525,
+          "top_level_available": 50,
+          "decision": "selected_A2"
+        }
+      ],
+      "B": [
+        {
+          "video_id": "J_LSWu8ZP8k",
+          "published_at": "2026-09-17T02:43:31Z",
+          "duration_sec": 2349,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "x-yeIh1g0Cg",
+          "published_at": "2026-09-17T02:26:01Z",
+          "duration_sec": 0,
+          "live_broadcast_content": "upcoming",
+          "live_streaming_details": {
+            "actualStartTime": false,
+            "actualEndTime": false,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "Qgnmdldcm8E",
+          "published_at": "2026-09-17T02:17:48Z",
+          "duration_sec": 0,
+          "live_broadcast_content": "live",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": false,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "DLqHhsDNfdk",
+          "published_at": "2026-09-17T02:02:28Z",
+          "duration_sec": 2829,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "bM1KNajYwK0",
+          "published_at": "2026-09-17T01:50:38Z",
+          "duration_sec": 402,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 75,
+          "top_level_available": 50,
+          "decision": "selected_B1"
+        },
+        {
+          "video_id": "vrJ6UsIrb6g",
+          "published_at": "2026-09-17T01:47:04Z",
+          "duration_sec": 1821,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 1,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "1nbxEcoYvek",
+          "published_at": "2026-09-17T01:31:35Z",
+          "duration_sec": 113,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "bpBsq_N9dQU",
+          "published_at": "2026-09-17T01:30:17Z",
+          "duration_sec": 83,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 3,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "0Wi7THJM3-o",
+          "published_at": "2026-09-17T01:22:43Z",
+          "duration_sec": 128,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 5,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "4V_p5vQDqoU",
+          "published_at": "2026-09-17T01:21:30Z",
+          "duration_sec": 924,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 1,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "mz016X-S06U",
+          "published_at": "2026-09-17T01:21:28Z",
+          "duration_sec": 95,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "Y9TNt5X3kW8",
+          "published_at": "2026-09-17T01:19:30Z",
+          "duration_sec": 98,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "UJue7mXlwUQ",
+          "published_at": "2026-09-17T01:14:50Z",
+          "duration_sec": 128,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 8,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "ELUe-kV6MY8",
+          "published_at": "2026-09-17T01:04:37Z",
+          "duration_sec": 334,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 4,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "q0kbHogQ2S8",
+          "published_at": "2026-09-17T01:02:55Z",
+          "duration_sec": 1691,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 1,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "4h_xNCMcLHo",
+          "published_at": "2026-09-17T01:01:33Z",
+          "duration_sec": 3463,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 5,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "QDPjDwPZeRI",
+          "published_at": "2026-09-17T00:57:07Z",
+          "duration_sec": 96,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 3,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "-IovqJYX6rw",
+          "published_at": "2026-09-17T00:56:00Z",
+          "duration_sec": 1319,
+          "live_broadcast_content": "none",
+          "live_streaming_details": {
+            "actualStartTime": true,
+            "actualEndTime": true,
+            "scheduledStartTime": true
+          },
+          "comment_count_statistic": 0,
+          "top_level_available": null,
+          "decision": "skip_comment_count_below_50"
+        },
+        {
+          "video_id": "J2qqlnRZPFI",
+          "published_at": "2026-09-17T00:53:33Z",
+          "duration_sec": 351,
+          "live_broadcast_content": "none",
+          "live_streaming_details": null,
+          "comment_count_statistic": 83,
+          "top_level_available": 50,
+          "decision": "selected_B2"
+        }
+      ]
+    }
+  },
+  "channels": [
+    {
+      "channel_key": "A",
+      "handle": "@syukaworld",
+      "channel_id": "UCsJ6RuBiTVWRX156FVbeaGg",
+      "channel_name": "슈카월드",
+      "resolved_at": "2026-09-17T02:43:49+00:00"
+    },
+    {
+      "channel_key": "B",
+      "handle": "@MBCNEWS11",
+      "channel_id": "UCF4Wxdo3inmxP-Y59wXDsFw",
+      "channel_name": "MBCNEWS",
+      "resolved_at": "2026-09-17T02:43:54+00:00"
+    }
+  ],
+  "videos": [
+    {
+      "video_slot": "A1",
+      "channel_key": "A",
+      "video_id": "tmYmdAykjuQ",
+      "video_channel_id": "UCsJ6RuBiTVWRX156FVbeaGg",
+      "published_at": "2026-09-16T10:50:18Z",
+      "duration_sec": 1566,
+      "live_broadcast_content": "none",
+      "live_streaming_details_present": false,
+      "statistics_at_selection": {
+        "viewCount": "413620",
+        "likeCount": "2466",
+        "commentCount": "397"
+      },
+      "top_level_collected": 50
+    },
+    {
+      "video_slot": "A2",
+      "channel_key": "A",
+      "video_id": "q836AS_27GE",
+      "video_channel_id": "UCsJ6RuBiTVWRX156FVbeaGg",
+      "published_at": "2026-09-15T10:11:11Z",
+      "duration_sec": 2091,
+      "live_broadcast_content": "none",
+      "live_streaming_details_present": false,
+      "statistics_at_selection": {
+        "viewCount": "884979",
+        "likeCount": "3713",
+        "commentCount": "525"
+      },
+      "top_level_collected": 50
+    },
+    {
+      "video_slot": "B1",
+      "channel_key": "B",
+      "video_id": "bM1KNajYwK0",
+      "video_channel_id": "UCF4Wxdo3inmxP-Y59wXDsFw",
+      "published_at": "2026-09-17T01:50:38Z",
+      "duration_sec": 402,
+      "live_broadcast_content": "none",
+      "live_streaming_details_present": false,
+      "statistics_at_selection": {
+        "viewCount": "2102",
+        "likeCount": "110",
+        "commentCount": "75"
+      },
+      "top_level_collected": 50
+    },
+    {
+      "video_slot": "B2",
+      "channel_key": "B",
+      "video_id": "J2qqlnRZPFI",
+      "video_channel_id": "UCF4Wxdo3inmxP-Y59wXDsFw",
+      "published_at": "2026-09-17T00:53:33Z",
+      "duration_sec": 351,
+      "live_broadcast_content": "none",
+      "live_streaming_details_present": false,
+      "statistics_at_selection": {
+        "viewCount": "7653",
+        "likeCount": "226",
+        "commentCount": "83"
+      },
+      "top_level_collected": 50
+    }
+  ],
+  "counts": {
+    "channels": 2,
+    "videos": 4,
+    "raw_sample": 200,
+    "analysis_eligible": 200,
+    "excluded": 0,
+    "exclusion_reasons": {}
+  },
+  "field_completeness_of_200": {
+    "channel_id": 200,
+    "channel_name": 200,
+    "video_id": 200,
+    "video_title": 200,
+    "video_channel_id": 200,
+    "comment_id": 200,
+    "text": 200,
+    "published_at": 200,
+    "updated_at": 200,
+    "author_channel_id": 200,
+    "parent_id": 200,
+    "collected_at": 200,
+    "collection_method": 200,
+    "ordering_method": 200,
+    "provenance": 200,
+    "text_original_returned": 200
+  },
+  "files": {
+    "raw_collection": {
+      "path": "backend/data/phase2-reaction/2026-09-17/raw_collection.json",
+      "sha256": "a3f2d521d4db1ab647bea41b677b78aa7c2733cbe3128ef042c31349fae20202",
+      "contains_raw_text": true,
+      "git": "ignored (backend/data/)"
+    },
+    "sealed_sample": {
+      "path": "backend/fixtures/phase2-reaction/sealed_sample.jsonl",
+      "sha256": "197f9b07028ceb6daf4be7dde66c1642828535483dec4995c30347e1b6737910",
+      "contains_raw_text": false,
+      "rows": 200
+    }
+  },
+  "sealed_sample_sha256": "197f9b07028ceb6daf4be7dde66c1642828535483dec4995c30347e1b6737910",
+  "api_units_used": 22
+}
