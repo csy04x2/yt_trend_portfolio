@@ -76,6 +76,20 @@ SAMPLING_SENSITIVE_METRICS = (
 )
 
 
+# Reaction 판정 결과는 독립 fresh 표본 검증 전까지 "검증 전 AI 판정"이며 MVP Finding
+# 입력이 아니다 (docs/reaction-track-closeout-2026-09-17.md 「2026-09-17 재개 결정」).
+# Reaction 결합 분석(feature_outcome.reaction_join)의 필드는 전부 이 접두를 쓴다.
+REACTION_FIELD_PREFIX = "reaction_"
+
+
+def _reject_unvalidated_reaction_inputs(videos):
+    for video in videos:
+        if video.get("mvp_input_eligible") is False or any(
+                isinstance(key, str) and key.startswith(REACTION_FIELD_PREFIX) for key in video):
+            raise ValueError("검증 전 AI 판정(Reaction) 행은 MVP Finding 입력이 아니다 — "
+                             "feature_outcome.reaction_join 보고서로만 본다")
+
+
 def _metric_metadata():
     # Shared lookup by metric/behavior_metric on calculations and candidates;
     # no repeated per-leg payload and no selected/nonselected row values.
@@ -368,6 +382,7 @@ def build_findings(videos, labels, registry, split_name="development", reference
         raise ValueError("Finding Engine v0.1 only analyzes the Development split")
     if "_envelope" not in registry:
         raise ValueError("Finding Engine v0.1 requires a validated frozen registry envelope")
+    _reject_unvalidated_reaction_inputs(videos)
     feature_ids = [f["feature_id"] for f in registry["features"]]
     for video in videos:
         vid = video["video_id"]
