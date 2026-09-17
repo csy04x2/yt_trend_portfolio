@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 진행 보고 4판</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+  :root {
+    --ground: #FAFAFB;
+    --surface: #FFFFFF;
+    --sunk: #F2F4F7;
+    --ink: #0E1420;
+    --ink-2: #4A5462;
+    --muted: #79828F;
+    --line: #E2E6EC;
+    --line-strong: #CBD2DB;
+    --accent: #2E7CF6;
+    --accent-bg: #EDF4FF;
+    --accent-line: #B7D2FB;
+    --good: #2F8F5B;
+    --good-bg: #E8F5ED;
+    --warn: #B4761A;
+    --warn-bg: #FBF2E2;
+    --crit: #C0453C;
+    --crit-bg: #FBECEA;
+    --on-accent: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+      --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+      --line: #262E38; --line-strong: #3A4350;
+      --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+      --good: #5FBE87; --good-bg: #12231A;
+      --warn: #D79B45; --warn-bg: #241C0F;
+      --crit: #E0736A; --crit-bg: #26140F;
+      --on-accent: #0D1117;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+    --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+    --line: #262E38; --line-strong: #3A4350;
+    --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+    --good: #5FBE87; --good-bg: #12231A;
+    --warn: #D79B45; --warn-bg: #241C0F;
+    --crit: #E0736A; --crit-bg: #26140F;
+    --on-accent: #0D1117;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 940px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  /* ---------- type ---------- */
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+  h2 {
+    font-size: 19px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 6px; }
+  p { margin: 0 0 14px; max-width: 68ch; color: var(--ink-2); }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+  .lede { font-size: 16px; color: var(--ink-2); max-width: 62ch; margin: 12px 0 0; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.88em;
+  }
+  code { background: var(--sunk); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .meta {
+    margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px 26px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--muted);
+  }
+  .meta b { color: var(--ink-2); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 52px; }
+  .sec-head { margin-bottom: 18px; }
+  .sec-head p { margin: 0; font-size: 14px; }
+
+  /* ---------- status board ---------- */
+  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 16px 18px; }
+  .cell .k {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: 7px;
+  }
+  .cell .v { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .cell .n { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .v.ok { color: var(--good); }
+  .v.warn { color: var(--warn); }
+  .v.crit { color: var(--crit); }
+
+  /* ---------- pipeline strip ---------- */
+  .scroll { overflow-x: auto; padding-bottom: 6px; }
+  .strip { display: grid; grid-template-columns: repeat(10, 1fr); min-width: 880px; gap: 6px; }
+  .stg {
+    background: var(--surface); border: 1px solid var(--line);
+    border-top: 3px solid var(--line-strong);
+    border-radius: 6px; padding: 11px 9px 12px; text-align: center;
+  }
+  .stg .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; color: var(--muted); display: block;
+  }
+  .stg .nm { font-size: 12.5px; font-weight: 600; margin-top: 4px; line-height: 1.35; }
+  .stg .st { font-size: 10.5px; margin-top: 6px; color: var(--muted); }
+  .stg.done { border-top-color: var(--good); }
+  .stg.done .st { color: var(--good); }
+  .stg.part { border-top-color: var(--warn); background: var(--warn-bg); }
+  .stg.part .st { color: var(--warn); }
+  .stg.none { opacity: 0.62; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; font-size: 12.5px; color: var(--muted); }
+  .legend i { display: inline-block; width: 22px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 7px; }
+
+  /* ---------- tables ---------- */
+  .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; background: var(--sunk);
+  }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  th.num { text-align: right; }
+
+  /* ---------- finding blocks ---------- */
+  .find { border-left: 3px solid var(--line-strong); padding: 2px 0 2px 18px; margin: 0 0 22px; }
+  .find:last-child { margin-bottom: 0; }
+  .find.alert { border-left-color: var(--crit); }
+  .find.note { border-left-color: var(--accent); }
+  .find p:last-child { margin-bottom: 0; }
+
+  /* ---------- comment specimens ---------- */
+  .specimens { display: grid; gap: 8px; margin: 0 0 16px; }
+  .spec {
+    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 14px; align-items: baseline;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 7px; padding: 9px 14px;
+  }
+  .spec .txt { font-size: 14px; min-width: 0; overflow-wrap: anywhere; }
+  .spec .tag {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; color: var(--muted); white-space: nowrap;
+  }
+  .spec.miss { border-color: var(--crit); background: var(--crit-bg); }
+  .spec.miss .tag { color: var(--crit); }
+
+  /* ---------- lists ---------- */
+  ul.clean { margin: 0 0 14px; padding-left: 20px; max-width: 68ch; color: var(--ink-2); }
+  ul.clean li { margin-bottom: 7px; }
+
+  .next { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .step { background: var(--surface); padding: 14px 18px; display: grid; grid-template-columns: 30px 1fr; gap: 14px; }
+  .step .o {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; font-weight: 600; color: var(--accent); padding-top: 2px;
+  }
+  .step .b { min-width: 0; }
+  .step .b p { margin: 4px 0 0; font-size: 13.5px; }
+  .step.blocked .o { color: var(--crit); }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .board { grid-template-columns: repeat(2, 1fr); }
+    .page { padding: 40px 18px 72px; }
+    h1 { font-size: 25px; }
+  }
+
+  /* ---------- v3 additions ---------- */
+  .cap {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 22px 0 8px;
+  }
+  .cap:first-child { margin-top: 0; }
+  td.seg { border-left: 1px solid var(--line-strong); }
+  th.seg { border-left: 1px solid var(--line-strong); }
+  .up { color: var(--good); font-weight: 600; }
+  .dn { color: var(--crit); font-weight: 600; }
+  .flat { color: var(--ink-2); }
+  .note-line {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--muted); margin: 8px 0 0;
+  }
+  .stg.off { border-top-color: var(--accent); background: var(--accent-bg); }
+  .stg.off .st { color: var(--accent); }
+  del { color: var(--muted); text-decoration-thickness: 1px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">진행 보고 · 2026-09-17 · 4판</div>
+    <h1>YT Trend — 9월 10일 이후 활동과 다음 조치</h1>
+    <p class="lede">
+      지난 일주일 사이 방법론이 크게 바뀌었다. 09-17에 사람이 확정한 결정으로 댓글 반응 분류는
+      <b>Reaction 10 + Target 5</b> 체계로 교체되어 새 채널 검증(Phase 2)을 앞두고 동결됐고,
+      영상 특징 작업은 그 뒤로 일시 정지됐다. 지금 막힌 것은 기술이 아니라 <b>기록과 자료의 위치</b>다 —
+      정본 문서는 <code>main</code>에 없고, 원천 자료는 두 PC에 나뉘어 있다.
+    </p>
+    <div class="meta">
+      <span><b>기간</b> 09-10 ~ 09-17</span>
+      <span><b>기여</b> BBamindol · csy04x2</span>
+      <span><b>정본 브랜치</b> integration/feature-discovery-observable</span>
+      <span><b>조사</b> 읽기 전용</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>한눈에</h2>
+      <p>반응 분류가 앞으로 나섰고, 영상 특징과 성과 지표는 재개 조건을 기다린다.</p>
+    </div>
+    <div class="board">
+      <div class="cell">
+        <span class="k">현재 정본</span>
+        <div class="v">10 + 5</div>
+        <div class="n">Reaction 10 · Target 5. 09-17 사람이 확정, Phase 2 동안 고정</div>
+      </div>
+      <div class="cell">
+        <span class="k">진행 트랙</span>
+        <div class="v ok">Phase 2</div>
+        <div class="n">새 채널 2개 × 댓글 100개. 영상 특징은 일시 정지</div>
+      </div>
+      <div class="cell">
+        <span class="k">main 밖 커밋</span>
+        <div class="v warn">24</div>
+        <div class="n">브랜치 3개. 정본 브랜치는 main에 빨리감기로 합쳐짐</div>
+      </div>
+      <div class="cell">
+        <span class="k">결정 필요</span>
+        <div class="v crit">3</div>
+        <div class="n">Phase 2 채널 · 원천 자료 모으기 · 병합</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>무슨 일이 있었나</h2>
+      <p>지난 보고(09-10 파이프라인 현황 다이어그램) 이후의 커밋과, 같은 날 도착한 감사 프롬프트.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>시각</th><th>누가</th><th>어디</th><th>무엇</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">09-10</td><td>BBamindol</td><td class="mono">offline-comment-labeling</td>
+            <td>옛 반응 분류(R1~R8) 추론 규칙 점검 — 사람 정답 120건에서 77.50%</td></tr>
+          <tr><td class="mono">09-10</td><td>csy04x2</td><td class="mono">feature-discovery-experiment</td>
+            <td>성과를 가린 채 특징을 찾는 실험 도구</td></tr>
+          <tr><td class="mono">09-14</td><td>BBamindol</td><td class="mono">main</td>
+            <td>문서 폴더 정리 · 급등 영상을 빼고 보는 분석과 대시보드 토글</td></tr>
+          <tr><td class="mono">09-14</td><td>csy04x2</td><td class="mono">integration</td>
+            <td>관측 시제품 병합 · 동결 실험의 분할 격리 · Finding Engine v0.1</td></tr>
+          <tr><td class="mono">09-14 ~ 15</td><td>csy04x2</td><td class="mono">feature-discovery-experiment</td>
+            <td>자막·화면 증거 수집기(Stage 2) · 특징 자동 추출 단계 구조 · 인수인계 문서</td></tr>
+          <tr><td class="mono">09-15</td><td>csy04x2</td><td class="mono">integration</td>
+            <td>Finding 입력 계약 강화 · 판정·동결 절차 · 준비도 점검 2건 · 트랙 A/B/C/D 점검 기록</td></tr>
+          <tr><td class="mono">09-15</td><td>BBamindol</td><td class="mono">offline-comment-labeling</td>
+            <td>R1~R8 최종 평가(처음 보는 60건 78.33%)와 동결</td></tr>
+          <tr><td class="mono">09-16</td><td>csy04x2</td><td class="mono">integration</td>
+            <td>원이 채널 반응 독립 발견 자료 400건</td></tr>
+          <tr><td class="mono">09-17 09:39</td><td>—</td><td>카카오톡</td>
+            <td>Gemini 감사 프롬프트 — R1~R8을 침착맨 댓글에 시험 (커밋 아님)</td></tr>
+          <tr><td class="mono">09-17 10:16~10:57</td><td>csy04x2</td><td class="mono">integration</td>
+            <td><b>데이터 장부 · Reaction Phase 1 동결 · 사람이 확정한 방법론 정본 복구</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>지금의 정본</h2>
+      <p>09-17에 README가 "이 문서들을 먼저 읽는다"는 정본 표를 새로 세웠다. 이전 설계·보고서는 당시 기록으로만 읽는다.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>정본</th><th>무엇을 정하나</th></tr></thead>
+        <tbody>
+          <tr><td>Reaction Phase 1 Checkpoint</td><td>Reaction 10 · Target 5 정의, 경계 규칙 H1~H4, Phase 2 고정 절차</td></tr>
+          <tr><td>원이 독립 발견 기록</td><td>종료된 발견 트랙, 후보 27개 — 현재 체계를 대체하지 않음</td></tr>
+          <tr><td>Content Feature Structure</td><td>영상 특징의 세 층(A-1 · A-2 · A-3)</td></tr>
+          <tr><td>아키텍처 현재 경계</td><td>08단계는 사실·관계 계산까지, 해석은 09단계에서만</td></tr>
+          <tr><td>데이터 장부</td><td>자료의 출처·위치·사용 이력, Phase 2 입력 자격</td></tr>
+          <tr><td>Control Tower 점검 기록</td><td>성과 지표에 별도의 고정 기준 영상 집합을 둔다는 정책</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-line">여섯 문서 모두 integration 브랜치에만 있다. main에는 아직 없다.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>댓글 반응 분류 — R1~R8에서 Reaction 10 + Target 5로</h2>
+      <p>14F로 만든 R1~R8(09-15 동결) → 원이 채널 독립 발견 후보 27개 → 침착맨 댓글 300건으로 Phase 1 →
+        09-17 새 체계 확정. 옛 R1~R8은 이제 역사 기록이다.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>#</th><th>Reaction</th><th>뜻</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1</td><td>평가·칭찬</td><td>질·능력·완성도에 대한 긍정 평가</td></tr>
+          <tr><td class="mono">2</td><td>관계·정서</td><td>인물·채널을 향한 애정·응원·팬심</td></tr>
+          <tr><td class="mono">3</td><td>즐거움·놀이</td><td>웃음, 따라하기, 말장난, 댓글 놀이</td></tr>
+          <tr><td class="mono">4</td><td>비판·불만</td><td>콘텐츠·제작·진행에 대한 불만</td></tr>
+          <tr><td class="mono">5</td><td>시청 어려움·회피</td><td>계속 보기 힘듦, 스킵, 이탈</td></tr>
+          <tr><td class="mono">6</td><td>당혹·의문</td><td>이상함, 혼란, 이해 안 됨</td></tr>
+          <tr><td class="mono">7</td><td>내용 참여</td><td>의견·해석·정보 추가·실제 질문 — 단순 관찰은 제외</td></tr>
+          <tr><td class="mono">8</td><td>요청·제안</td><td>제작자의 다음 행동에 대한 요청</td></tr>
+          <tr><td class="mono">9</td><td>행동 유발</td><td>구매·방문·학습처럼 댓글 밖에서 일어나는 행동</td></tr>
+          <tr><td class="mono">10</td><td>성과 참여</td><td>조회·좋아요를 직접 올리려는 참여 — 성과를 관찰만 한 것은 제외</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px">
+      <b>Target</b>은 시청자가 무엇에 반응하는지다. 콘텐츠 전체 · 내용·소재 · 인물 · 제작·표현 · 채널·커뮤니티의
+      다섯에 판정 불가(UNKNOWN)를 더한다. 둘 다 여러 개를 동시에 붙일 수 있고, 어떤 반응도 성립하지 않으면
+      Reaction=None을 허용한다(판정 불가와 다르다).
+    </p>
+    <ul class="clean">
+      <li><b>H1</b> — 내용 참여는 실질적인 생각의 기여가 있어야 한다. 장면 포착·짧은 연상은 해당하지 않는다.</li>
+      <li><b>H2</b> — 댓글에 적힌 타임스탬프는 원본 정보로 보존한다. <b>AI가 영상을 보고 장면이나 시각을 추정하지 않는다.</b></li>
+      <li><b>H3</b> — 모든 댓글은 원본으로 남기고, 분석 포함 여부는 따로 둔다. 채널 본인 댓글은 집계 제외, 스팸은 제외 사유 기록.</li>
+      <li><b>H4</b> — 추가 250건에서 「시청 어려움」 3건, 「성과 참여」 0건이었지만 지우거나 합치지 않는다.</li>
+    </ul>
+    <div class="find note">
+      <h3>Phase 2 절차</h3>
+      <p>
+        체계 설계에 쓰지 않은 <b>새 채널 2개에서 댓글 100개씩, 총 200개</b>. 설계에 쓴 <b>14F · 원이 · 침착맨은 채널째 제외</b>한다.
+        드문 반응을 찾으려고 골라 넣지 않고 일반 표본으로 뽑는다. 200개가 끝날 때까지 Reaction·Target의 추가·삭제·병합과
+        경계 변경을 금지하고, 문제 사례는 따로 적어 두었다가 끝난 뒤 한꺼번에 검토한다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>영상 특징 — 일시 정지</h2>
+      <p>09-17 결정으로 반응 분류 뒤로 밀렸다. 그 전까지의 진척과 막힌 이유를 남긴다.</p>
+    </div>
+    <p>
+      09-14에 사람이 전부 라벨하는 대신 <b>자동 추출기 + 사람 검토</b>로 방향을 바꿨다. 첫 기준 특징인 게스트 출연은
+      제목·설명만으로 판정한 것은 모두 맞았지만, 사람이 찾은 게스트 중 39%만 잡았고 쇼츠는 거의 판정하지 못했다.
+      09-15에는 추출 단계 구조, Finding Engine, 판정·동결 절차가 코드로 들어갔다.
+    </p>
+    <p>
+      같은 날 점검 기록은 이 트랙을 <b>막힘(BLOCKED)</b>으로 판정했다. <b>승인된 사람 특징 목록이 없고</b>, 저장소의
+      특징 12개는 후보이며 90편 × 12개 판정은 제목 정규식 자리표시자라는 이유다. 09-17에는 특징을 세 층으로 나눈 구조가 확정됐다.
+    </p>
+    <div class="tw" style="margin-top:4px">
+      <table>
+        <thead><tr><th>층</th><th>어떻게 얻나</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td>A-1 직접 정보</td><td>영상을 이해하지 않고 바로</td><td>길이, 게시 시각, 업로드 간격, 제목의 원시 속성</td></tr>
+          <tr><td>A-2 미디어 측정</td><td>시청각 신호를 계산</td><td>분당 컷 수, 샷 길이 중앙값, 무음 비율, 말 비율 (시험 후보)</td></tr>
+          <tr><td>A-3 의미 이해</td><td>맥락을 이해해 판정</td><td>인터뷰, 토론, 먹방, 게스트, 순위, PPL, 분위기</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-line">조회수·좋아요·댓글 수 같은 성과값은 특징이 아니라 성과 쪽에 속한다고 명시했다.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>성과 지표 — 조회 배수가 세 가지다</h2>
+      <p>09-15 점검이 코드에 서로 다른 조회 배수 정의 세 개가 있음을 확인했다. 모두 조회수를 또래 중앙값으로 나누지만 바꿔 쓸 수 없다.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>구현</th><th>또래 조건</th><th class="num">최소 또래</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">normalize</td><td>같은 길이 축 · 같은 게시 분기</td><td class="num">3</td></tr>
+          <tr><td class="mono">observable.compare</td><td>같은 길이 축 · 게시 후 나이 ±20%</td><td class="num">5</td></tr>
+          <tr><td class="mono">breakout 재계산</td><td>같은 길이 축 · 같은 분기 · 급등 영상 제외</td><td class="num">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px">
+      게다가 지금 값은 발견·개발·봉인 분할을 가로질러 또래를 고른다. 그래서 팀은 이 값을 <b>임시값</b>으로만 두고,
+      실험 분할과 별개인 <b>고정 기준 영상 집합</b>을 두기로 정했다. 기준 집합을 확보해 결과를 보기 전에 선정 규칙을
+      고정한 뒤 정식 배수를 계산한다. 아직 구현 전이다.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>점검에서 찾은 문제</h2>
+      <p>저장소와 이 PC의 파일을 읽기만 해서 확인했다.</p>
+    </div>
+
+    <div class="find alert">
+      <h3>1. 원천 자료가 두 PC에 나뉘어 있고, 어느 쪽도 전체를 갖고 있지 않다</h3>
+      <p>
+        데이터 장부(09-17)에 적힌 작업 폴더와 산출물 폴더 다섯 곳이 <b>이 PC에는 하나도 없다.</b> 장부는 다른 PC에서
+        작성됐다. 반대로 장부가 "원천 위치 확인 필요" 또는 "원천 미복구"로 둔 자료 네 개의 DB가 <b>이 PC의
+        <code>Desktop/yt-trend/backend/data/</code>에 있다.</b> 장부가 가리키는 파일의 댓글 ID와 대조하니 한 건도 어긋나지 않았다.
+      </p>
+      <div class="tw" style="margin:12px 0">
+        <table>
+          <thead><tr><th>장부 자료</th><th>장부의 원천 상태</th><th class="num">장부 파일 ID</th><th class="num">이 PC의 DB와 일치</th></tr></thead>
+          <tbody>
+            <tr><td>A. 14F 댓글</td><td>raw DB 존재 확인 필요</td><td class="num">282</td><td class="num up">282 / 282</td></tr>
+            <tr><td>B. 원이 반응 댓글</td><td>raw 별도 보존 확인 필요</td><td class="num">400</td><td class="num up">400 / 400</td></tr>
+            <tr><td>D. 침착맨 감성·주제 댓글</td><td>raw 위치 확인 필요</td><td class="num">400</td><td class="num up">400 / 400</td></tr>
+            <tr><td>F. 카더가든 댓글</td><td><b>raw source 미복구</b></td><td class="num">400</td><td class="num up">400 / 400</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        거꾸로 이 PC에는 <b>침착맨 Phase 1 원천 300건</b>, 특징 발견 작업 폴더, 과거 반응 실험 산출물이 없다. GitHub에는 둘 다 없다
+        (원천 DB는 <code>.gitignore</code> 대상). 특히 카더가든은 Phase 2 조건부 후보인데, 조건 중 하나인 "원천 미복구"가 사실은 이 PC에서 풀려 있다.
+      </p>
+    </div>
+
+    <div class="find alert">
+      <h3>2. 정본이 main에 없다</h3>
+      <p>
+        정본 문서 여섯 개와 새 README가 전부 integration 브랜치에만 있다. main의 README는 여전히 옛 문서표이고, main을 보는 사람은
+        R1~R8을 현행 체계로 읽게 된다. integration은 main의 후손이라 <b>빨리감기로 충돌 없이 합쳐진다.</b>
+      </p>
+      <p class="note-line">main 밖 커밋: integration 15 · feature-discovery-experiment 8 · offline-comment-labeling 2 (중복 제외 24)</p>
+    </div>
+
+    <div class="find alert">
+      <h3>3. Gemini 감사 프롬프트는 쓸 수 없다</h3>
+      <p>
+        프롬프트는 09:39에 쓰였고, 한 시간 뒤 정본이 확정됐다. 프롬프트는 R1~R8을 침착맨에 시험하자는 내용인데
+        <b>체계는 10+5로 바뀌었고 침착맨은 Phase 2에서 제외</b>됐다. 프롬프트가 묻던 정의 위치·원천·중복 여부는
+        데이터 장부가 이미 대부분 답하고 있다.
+      </p>
+    </div>
+
+    <div class="find alert">
+      <h3>4. 특징 12개를 두 문서가 다르게 말한다</h3>
+      <p>
+        09-14 인수인계는 "특징 12개 동결"이라고 적었고, 09-15 점검 기록은 "승인된 사람 특징 목록이 없다, 현재 12개는 후보"라고
+        적었다. README가 점검 기록을 정본으로 지정했으므로 <b>뒤의 것이 맞다.</b> 저장소에 있는 12개는 Claude 재현본이다.
+      </p>
+    </div>
+
+    <div class="find alert">
+      <h3>5. 결론 문장 만들기가 새 단계 경계를 넘는다</h3>
+      <p>
+        09-17 경계는 "08단계까지는 사실과 관계만 계산하고, 해석은 09단계에서만 한다"이다. 그런데 main의
+        <code>aggregate.py</code>는 08단계에서 가장 높은·낮은 유형을 골라 결론 문장 초안을 쓰고 Claude로 다듬는다.
+        정본 문서도 이 설명을 "과거 설계, 현재 허용 범위 아님"으로 못박았다. <b>이 기능은 09단계로 옮겨야 한다.</b>
+      </p>
+    </div>
+
+    <div class="find">
+      <h3>6. 작은 것</h3>
+      <p>
+        영상 다운로드(특징 Stage 2)는 약관 확인이 아직 미결이지만, 특징 작업이 멈춰 급하지 않다. 침착맨 특징 재현
+        README가 언급하는 <code>discovery90-labels.json</code>은 커밋에 없다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>다음 조치</h2>
+      <p>순서가 곧 권고다. 이 보고에서는 병합·커밋·자료 이동을 하지 않았다.</p>
+    </div>
+    <div class="next">
+      <div class="step">
+        <span class="o">01</span>
+        <div class="b">
+          <b>Phase 2 채널 2개를 정하고, 선정 규칙을 자료를 보기 전에 적는다</b>
+          <p>14F·원이·침착맨은 제외. 카더가든은 조건부인데, 원천이 이 PC에 있으니 남은 조건은 반응 분류 노출 이력 확인이다.
+            기존 댓글 400건을 쓸지 새 영상에서 100건을 받을지도 이때 정한다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">02</span>
+        <div class="b">
+          <b>원천 자료의 위치를 한 장부로 합친다</b>
+          <p>이 PC의 <code>Desktop/yt-trend</code>와 DB 네 개를 데이터 장부의 작업 폴더 목록에 넣어 "확인 필요" 네 건을 닫고,
+            Phase 1 원천 300건이 있는 PC를 명시한다. 원문과 작성자 이름이 들어 있으니 GitHub가 아닌 경로로 옮긴다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">03</span>
+        <div class="b">
+          <b>정본 브랜치를 main으로 합친다</b>
+          <p>빨리감기로 된다. 이 PC에 커밋하지 않은 README 수정이 있으니 그것부터 정리한다. 나머지 두 브랜치(특징 추출기, 옛 R1~R8 산출물)는
+            그 뒤에 보존용으로 합친다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">04</span>
+        <div class="b">
+          <b>Phase 2 수집 전에 H3를 구현한다</b>
+          <p>원본 보존과 분석 포함 여부를 나누고, 채널 본인 댓글과 스팸의 제외 사유를 기록하는 칸을 만든다.
+            정본은 필드 이름을 "구현 단계에서 정한다"고 남겨 두었다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="o">05</span>
+        <div class="b">
+          <b>Gemini 프롬프트는 보내지 않는다</b>
+          <p>외부 감사가 필요하면 Phase 2 채널의 입력 자격 점검용으로 새로 쓴다.</p>
+        </div>
+      </div>
+      <div class="step blocked">
+        <span class="o">06</span>
+        <div class="b">
+          <b>보류 — 영상 특징·성과 지표의 재개 조건</b>
+          <p>승인된 사람 특징 목록(14F 사람 판정 포함), 별도 고정 기준 영상 집합, 영상 다운로드 약관 판단,
+            결론 문장 기능의 09단계 이전. 이 조건이 갖춰지기 전에는 최종 Finding과 봉인 분할 검증을 실행하지 않는다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    2026-09-17에 원격 브랜치 전부를 가져와 읽기만 해서 확인했다. 커밋과 브랜치 차이는 <code>git log</code>·<code>git rev-list</code>,
+    병합 가능성은 <code>git merge-base</code>로 봤다. 정본 수치와 결정은 integration 브랜치의 문서(Reaction Phase 1 Checkpoint,
+    데이터 장부, Control Tower 점검 기록, 두 준비도 점검, Content Feature Structure, 아키텍처 현재 경계)에서 옮겼다.
+    원천 자료 대조는 이 PC의 SQLite DB 네 개를 읽기 전용으로 열어, 장부가 가리키는 저장소 파일의 댓글 ID와 비교했다.
+    장부에 적힌 작업 폴더의 존재 여부는 이 PC에서만 확인했으므로 다른 PC의 상태는 확인하지 않았다.
+  </footer>
+
+</div>
+
+</body>
+</html>
