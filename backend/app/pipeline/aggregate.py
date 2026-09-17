@@ -158,7 +158,7 @@ def video_rollup(labels: list[dict], collected: int,
     }
 
     if n == 0:
-        out["basis"] = (f"라벨된 댓글이 없다 (수집 {collected}건) — "
+        out["basis"] = (f"라벨된 댓글이 없다 (분석 대상 {collected}건) — "
                         f"export-batch · import-batch 를 먼저 돌린다")
         return out
 
@@ -465,7 +465,8 @@ def _read_labels(conn, prompt_version: str, model: str) -> dict[str, list[dict]]
                   l.is_sarcasm_suspect, l.topics_json
            FROM comment_labels l
            JOIN comments c ON c.comment_id = l.comment_id
-           WHERE l.prompt_version = ? AND l.model = ?""",
+           WHERE l.prompt_version = ? AND l.model = ?
+             AND c.analysis_eligible = 1""",
         (prompt_version, model))
     out: dict[str, list[dict]] = defaultdict(list)
     for r in rows:
@@ -538,8 +539,9 @@ def run(conn, channel_id: str, run_id: str, *,
     if not videos:
         return []
     labels_by_video = {vid: rows for vid, rows in labels_by_video.items() if vid in videos}
+    # 분모는 분석 대상 댓글만 (analysis_eligible=1, docs/design/comment-eligibility.md)
     collected = {r["video_id"]: r["n"] for r in conn.execute(
-        "SELECT video_id, COUNT(*) AS n FROM comments GROUP BY video_id")}
+        "SELECT video_id, SUM(analysis_eligible = 1) AS n FROM comments GROUP BY video_id")}
     now = _now()
 
     # -- (1) 영상별 -----------------------------------------------------

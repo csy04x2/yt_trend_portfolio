@@ -27,7 +27,15 @@ def connect(db_path: str | pathlib.Path) -> sqlite3.Connection:
 
     # schema.sql은 IF NOT EXISTS라 매번 돌려도 안전하다
     conn.executescript(SCHEMA.read_text(encoding="utf-8"))
-    _add_missing_columns(conn)
+    added = _add_missing_columns(conn)
+    if ("comments", "analysis_eligible") in added:
+        # 옛 DB 에 분석 포함 여부 열을 막 붙였다. 알 수 있는 것만 채운다 —
+        # own_channel 은 channel_id 비교로 정해지고, misplaced_data 는 옛 행에
+        # 근거가 없어 eligible 로 남는다. 한 번만 돈다.
+        from app.pipeline.eligibility import backfill_comments
+
+        got = backfill_comments(conn)
+        print(f"[db] 댓글 분석 포함 여부 채움: {got}")
     if fresh:
         print(f"[db] 새 파일 생성: {path}")
     return conn
@@ -59,13 +67,27 @@ LATE_COLUMNS = {
         "comment_rate_multiple": "REAL",
         "comment_rate_multiple_basis": "TEXT",
     },
+    "comments": {
+        # 분석 포함 여부 (H2·H3). 기본값은 "포함·사유 없음"이다 — 옛 행을
+        # 근거 없이 빼지 않는다. 알 수 있는 것은 connect() 가 채운다
+        "parent_id": "TEXT",
+        "author_is_channel_owner": "INTEGER",
+        "analysis_eligible": "INTEGER NOT NULL DEFAULT 1",
+        "exclusion_reason": "TEXT",
+        "exclusion_source": "TEXT",
+        "timestamps_json": "TEXT NOT NULL DEFAULT '[]'",
+    },
 }
 
 
-def _add_missing_columns(conn: sqlite3.Connection) -> None:
+def _add_missing_columns(conn: sqlite3.Connection) -> set[tuple[str, str]]:
+    """없는 열을 붙이고, 붙인 (표, 열) 을 돌려준다."""
+    added: set[tuple[str, str]] = set()
     for table, cols in LATE_COLUMNS.items():
         have = {r[1] for r in conn.execute(f"PRAGMA table_info({table})")}
         for name, decl in cols.items():
             if name not in have:
                 conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
                 print(f"[db] 열 추가: {table}.{name}")
+                added.add((table, name))
+    return added

@@ -196,6 +196,11 @@ class YouTubeClient:
                     "text": s.get("textOriginal") or s.get("textDisplay") or "",
                     "published_at": s.get("publishedAt"),
                     "like_count": int(s.get("likeCount") or 0),
+                    # API 가 말한 이 댓글의 영상. video_id(요청한 영상)와 다르면
+                    # 잘못 들어온 데이터다 — 수집기가 misplaced_data 로 표시한다
+                    "api_video_id": s.get("videoId") or it["snippet"].get("videoId"),
+                    # commentThreads 는 최상위 댓글만 준다
+                    "parent_id": None,
                 })
             yield items
             token = body.get("nextPageToken")

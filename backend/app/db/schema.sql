@@ -59,7 +59,15 @@ CREATE TABLE IF NOT EXISTS comments (
     text              TEXT NOT NULL,      -- 원문. 절대 수정하지 않는다
     published_at      TEXT NOT NULL,
     like_count        INTEGER NOT NULL DEFAULT 0,
-    fetched_at        TEXT NOT NULL
+    fetched_at        TEXT NOT NULL,
+    -- 아래는 분석 포함 여부. 원문 보존(H3)과 분리한다 — 제외는 삭제가 아니라 표시다.
+    -- 필드·규칙: docs/design/comment-eligibility.md, 로직: pipeline/eligibility.py
+    parent_id              TEXT,       -- 답글이면 부모 댓글 id. 최상위 댓글은 NULL
+    author_is_channel_owner INTEGER,   -- 작성자 = 영상 채널이면 1. 모르면 NULL
+    analysis_eligible      INTEGER NOT NULL DEFAULT 1,
+    exclusion_reason       TEXT,       -- NULL | own_channel | misplaced_data | spam_confirmed
+    exclusion_source       TEXT,       -- collect | migration | comment_screens:<버전>/<모델>
+    timestamps_json        TEXT NOT NULL DEFAULT '[]'  -- 원문에 적힌 것만 [{"text":"32:19","seconds":1939}]
 );
 CREATE INDEX IF NOT EXISTS idx_comments_video ON comments(video_id, published_at);
 
@@ -198,7 +206,7 @@ CREATE TABLE IF NOT EXISTS comment_engagement (
     neutral        INTEGER NOT NULL DEFAULT 0,
     approval       REAL,          -- 긍정 ÷ (긍정+부정). neutral 은 분모에서 뺀다
     contention     REAL,          -- 2·min(긍정,부정) ÷ (긍정+부정). 0 쏠림 ~ 1 반반
-    labeled_ratio  REAL,          -- 라벨된 댓글 ÷ 그 영상의 수집 댓글
+    labeled_ratio  REAL,          -- 라벨된 댓글 ÷ 그 영상의 분석 대상 댓글 (analysis_eligible=1)
     basis          TEXT NOT NULL,
     computed_at    TEXT NOT NULL,
     PRIMARY KEY (video_id, run_id, prompt_version, model)

@@ -18,6 +18,7 @@ import urllib.parse
 from typing import Callable
 
 from app.clients.youtube import QuotaExhausted, YouTubeClient, classify_live
+from app.pipeline.eligibility import SOURCE_COLLECT, decide, timestamps_json
 
 Progress = Callable[[str], None]
 
@@ -111,6 +112,30 @@ def upsert_video(conn: sqlite3.Connection, item: dict, channel_id: str,
 # 댓글 — 커서 두 개
 # --------------------------------------------------------------------------
 
+def save_comment(conn: sqlite3.Connection, c: dict, video_id: str,
+                 video_channel_id: str | None) -> None:
+    """댓글 한 건을 원문 그대로 넣고, 분석 포함 여부를 같이 적는다.
+
+    제외돼도 행은 들어간다 (H3). own_channel·misplaced_data 는 ID 비교라 여기서
+    바로 정해진다. 스팸 확정은 규칙 단계 뒤(`eligibility.apply_screen_exclusions`)다.
+    """
+    eligible, reason, owner = decide(
+        video_id, c.get("api_video_id"), c.get("author_channel_id"), video_channel_id)
+    conn.execute(
+        """INSERT INTO comments (comment_id, video_id, author_channel_id,
+               author_name, text, published_at, like_count, fetched_at,
+               parent_id, author_is_channel_owner, analysis_eligible,
+               exclusion_reason, exclusion_source, timestamps_json)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+           ON CONFLICT(comment_id) DO NOTHING""",
+        (c["comment_id"], video_id, c.get("author_channel_id"),
+         c.get("author_name"), c["text"], c["published_at"],
+         c.get("like_count") or 0, _now(),
+         c.get("parent_id"), owner, eligible, reason,
+         SOURCE_COLLECT if reason else None, timestamps_json(c["text"])),
+    )
+
+
 def collect_comments(
     conn: sqlite3.Connection,
     yt: YouTubeClient,
@@ -123,10 +148,11 @@ def collect_comments(
     영상 중간에 멈췄을 때 못 받은 구간을 다음 실행이 영원히 건너뛴다.
     """
     row = conn.execute(
-        "SELECT comments_newest_at, comments_oldest_at, comments_complete"
+        "SELECT channel_id, comments_newest_at, comments_oldest_at, comments_complete"
         " FROM videos WHERE video_id=?", (video_id,)
     ).fetchone()
     newest_seen = row["comments_newest_at"] if row else None
+    video_channel_id = row["channel_id"] if row else None
 
     got, page_newest, oldest, stop = 0, None, None, False
     for page in yt.iter_comment_pages(video_id):
@@ -136,15 +162,7 @@ def collect_comments(
             if newest_seen and c["published_at"] <= newest_seen:
                 stop = True
                 break
-            conn.execute(
-                """INSERT INTO comments (comment_id, video_id, author_channel_id,
-                       author_name, text, published_at, like_count, fetched_at)
-                   VALUES (?,?,?,?,?,?,?,?)
-                   ON CONFLICT(comment_id) DO NOTHING""",
-                (c["comment_id"], c["video_id"], c["author_channel_id"],
-                 c["author_name"], c["text"], c["published_at"],
-                 c["like_count"], _now()),
-            )
+            save_comment(conn, c, video_id, video_channel_id)
             if page_newest is None:
                 page_newest = c["published_at"]
             oldest = c["published_at"]
