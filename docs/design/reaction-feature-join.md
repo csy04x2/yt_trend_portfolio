@@ -57,7 +57,7 @@ reference manifest (opt-in) ──────────────► join_r
 | `shares.reaction_share_R1…R10` | 코드가 붙은 댓글 ÷ `n_labeled`. 다중 코드라 합이 1이 아니다 |
 | `shares.reaction_none_share` | Reaction=None(`[]`) ÷ `n_labeled` |
 | `shares.reaction_unknown_share` | Reaction=`["UNKNOWN"]` ÷ `n_labeled` |
-| `shares.reaction_target_share_T1…T5`, `reaction_target_unknown_share` | Target 코드 ÷ `reacting_n`(Reaction이 None도 UNKNOWN도 아닌 댓글) **[제안]** |
+| `shares.reaction_target_share_T1…T5`, `reaction_target_unknown_share` | Target 코드 ÷ 해당 집계 단위의 전체 analysis-eligible audience comments. None·UNKNOWN도 분모에 포함하고, 다중 Target은 각 코드에 독립 집계 |
 | `counts`, `target_counts`, `review_flag_share` | 원 건수(비율이 null이어도 남긴다)와 review 표시 비율 |
 | `invalid_label_n`, `ineligible_labeled_n` | 규칙 위반 판정 수, 분석 제외 댓글에 붙은 판정 수(집계에서 뺐다) |
 | `status`, `reason` | `available` / `no_eligible_comments` / `no_reaction_labels` / `insufficient_labeled_n` |

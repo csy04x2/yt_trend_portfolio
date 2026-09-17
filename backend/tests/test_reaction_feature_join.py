@@ -26,11 +26,12 @@ SECRET = "합성원문표식"  # 보고서에 절대 나오면 안 되는 문자
 RATIONALE = "합성근거표식"
 
 
-def c(vid, i, reactions, targets=None, *, eligible=1, parent=None, review=False):
+def c(vid, i, reactions, targets=None, *, eligible=1, parent=None, review=False, owner=None, reason=None):
     return {"video_id": vid, "comment_id": f"{vid}-c{i}", "parent_id": parent, "analysis_eligible": eligible,
             "reactions": reactions, "targets": targets if targets is not None else ([] if reactions is None else
                                                                                    (["T2"] if reactions else [])),
-            "review_flag": review}
+            "review_flag": review, "author_is_channel_owner": owner,
+            "exclusion_reason": reason}
 
 
 # ------------------------------------------------------------------ 프로필 계산
@@ -49,10 +50,10 @@ def test_profile_math_multi_label_none_unknown_and_target_denominator():
     assert s["reaction_share_R2"] == 0
     assert s["reaction_none_share"] == pytest.approx(1 / 5)
     assert s["reaction_unknown_share"] == pytest.approx(1 / 5)
-    # Target 분모 = 반응이 있는 3건. UNKNOWN Reaction 댓글의 Target 은 세지 않는다
-    assert s["reaction_target_share_T2"] == pytest.approx(1 / 3)
-    assert s["reaction_target_share_T3"] == pytest.approx(1 / 3)
-    assert s["reaction_target_unknown_share"] == pytest.approx(1 / 3)
+    # Target 분모 = 전체 판정 eligible 5건. None·UNKNOWN도 분모에 포함한다.
+    assert s["reaction_target_share_T2"] == pytest.approx(1 / 5)
+    assert s["reaction_target_share_T3"] == pytest.approx(1 / 5)
+    assert s["reaction_target_unknown_share"] == pytest.approx(2 / 5)
     assert p["review_flag_share"] == pytest.approx(1 / 5)
     assert p["validation_status"] == "검증 전 AI 판정" and p["mvp_input_eligible"] is False
     assert set(s) == set(rprof.SHARE_KEYS) and all(k.startswith("reaction_") for k in s)
@@ -65,6 +66,16 @@ def test_eligibility_filter_uses_only_confirmed_eligible_comments():
     p = rprof.build_profile("v", rows, prompt_version=PV, model=MODEL, min_labeled=1)
     assert (p["eligible_n"], p["n_labeled"], p["ineligible_labeled_n"]) == (3, 3, 4)
     assert p["shares"]["reaction_share_R1"] == 1 and p["shares"]["reaction_share_R4"] == 0
+
+
+def test_owner_comment_is_excluded_even_if_analysis_eligible():
+    rows = [c("v", 0, ["R1"]), c("v", 1, ["R4"], owner=True),
+            c("v", 2, ["R4"], reason="own_channel")]
+    p = rprof.build_profile("v", rows, prompt_version=PV, model=MODEL, min_labeled=1)
+    assert p["eligible_n"] == 1 and p["n_labeled"] == 1
+    assert p["ineligible_labeled_n"] == 2
+    assert p["shares"]["reaction_share_R1"] == 1
+    assert p["shares"]["reaction_share_R4"] == 0
 
 
 def test_replies_excluded_by_default_and_opt_in():
@@ -95,10 +106,11 @@ def test_exactly_min_n_is_available_and_invalid_labels_are_dropped():
     assert p["status"] == "available" and p["n_labeled"] == 30 and p["invalid_label_n"] == 3
 
 
-def test_no_reacting_comments_keeps_target_shares_null():
+def test_no_reacting_comments_keeps_target_prevalence_zero():
     p = rprof.build_profile("v", [c("v", 0, []), c("v", 1, [])], prompt_version=PV, model=MODEL, min_labeled=1)
     assert p["shares"]["reaction_none_share"] == 1
-    assert p["shares"]["reaction_target_share_T1"] is None and p["target_share_reason"]
+    assert p["shares"]["reaction_target_share_T1"] == 0
+    assert p["target_share_reason"] is None
 
 
 def test_min_labeled_must_be_positive():

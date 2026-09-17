@@ -23,8 +23,8 @@ DB 로더는 `comments.text`, `comment_reactions.rationale`, timestamp 열을
   `include_replies=True` 면 답글도 센다.
 - Reaction 코드 비율 = 그 코드를 가진 판정 댓글 수 ÷ 판정된 분석 대상 댓글 수(n_labeled).
   한 댓글이 코드를 여럿 가질 수 있어 합이 1이 아니다. None 비율·UNKNOWN 비율도 같은 분모.
-- Target 비율 = 그 Target 을 가진 댓글 ÷ **반응이 있는 댓글**(Reaction 이 None 도
-  UNKNOWN 도 아닌 댓글). Reaction=None 댓글에 붙은 Target 은 세지 않는다.
+- Target 비율 = 그 Target 을 가진 댓글 ÷ 분석 대상 댓글 전체(n_labeled).
+  Reaction=None·UNKNOWN 댓글도 분모에 포함한다. 다중 Target은 각 코드의 numerator에 독립적으로 들어간다.
 - n_labeled 가 `MIN_LABELED_PER_VIDEO` 미만이면 비율을 내지 않고(null) 사유를 남긴다.
 """
 from __future__ import annotations
@@ -56,9 +56,15 @@ NO_LABELS = "no_reaction_labels"
 INSUFFICIENT = "insufficient_labeled_n"
 
 
-def _eligible(value) -> bool:
+def _eligible(value, *, exclusion_reason=None, author_is_channel_owner=None) -> bool:
     """분석 대상은 1 로 **확정된** 것만. NULL·문자열·0 은 대상이 아니다."""
-    return not isinstance(value, bool) and value == 1 or value is True
+    if not (not isinstance(value, bool) and value == 1 or value is True):
+        return False
+    if exclusion_reason == "own_channel":
+        return False
+    if author_is_channel_owner in (1, True, "1"):
+        return False
+    return True
 
 
 def _ratio(num, den):
@@ -79,9 +85,17 @@ def build_profile(video_id: str, comments: list[dict], *, prompt_version: str, m
     if min_labeled < 1:
         raise ValueError("min_labeled 는 1 이상이어야 한다")
     unit = [c for c in comments if include_replies or not c.get("parent_id")]
-    eligible = [c for c in unit if _eligible(c.get("analysis_eligible"))]
+    eligible = [c for c in unit if _eligible(
+        c.get("analysis_eligible"),
+        exclusion_reason=c.get("exclusion_reason"),
+        author_is_channel_owner=c.get("author_is_channel_owner"),
+    )]
     ineligible_labeled = sum(1 for c in unit
-                             if not _eligible(c.get("analysis_eligible")) and c.get("reactions") is not None)
+                             if not _eligible(
+                                 c.get("analysis_eligible"),
+                                 exclusion_reason=c.get("exclusion_reason"),
+                                 author_is_channel_owner=c.get("author_is_channel_owner"),
+                             ) and c.get("reactions") is not None)
 
     labels, invalid = [], 0
     for c in eligible:
@@ -99,7 +113,7 @@ def build_profile(video_id: str, comments: list[dict], *, prompt_version: str, m
     none_n = sum(lab["reactions"] == [] for lab in labels)
     unknown_n = sum(lab["reactions"] == [UNKNOWN] for lab in labels)
     reacting = [lab for lab in labels if lab["reactions"] and lab["reactions"] != [UNKNOWN]]
-    target_counts = {t: sum(t in lab["targets"] for lab in reacting) for t in (*TARGETS, UNKNOWN)}
+    target_counts = {t: sum(t in lab["targets"] for lab in labels) for t in (*TARGETS, UNKNOWN)}
 
     if not eligible:
         status, reason = NO_ELIGIBLE, "분석 대상(analysis_eligible=1) 댓글이 없다"
@@ -117,12 +131,12 @@ def build_profile(video_id: str, comments: list[dict], *, prompt_version: str, m
             shares[f"reaction_share_{code}"] = reaction_counts[code] / n
         shares["reaction_none_share"] = none_n / n
         shares["reaction_unknown_share"] = unknown_n / n
-        if reacting:
+        if n:
             for t in TARGETS:
-                shares[f"reaction_target_share_{t}"] = target_counts[t] / len(reacting)
-            shares["reaction_target_unknown_share"] = target_counts[UNKNOWN] / len(reacting)
+                shares[f"reaction_target_share_{t}"] = target_counts[t] / n
+            shares["reaction_target_unknown_share"] = target_counts[UNKNOWN] / n
         else:
-            target_reason = "반응이 있는 댓글이 없어 Target 분모가 0이다"
+            target_reason = "분석 대상 댓글이 없어 Target 분모가 0이다"
 
     return {
         "video_id": video_id,
@@ -197,8 +211,11 @@ def load_comment_reactions(conn, video_ids, *, prompt_version: str, model: str) 
     out = []
     for part in _chunks(video_ids):
         marks = ",".join("?" * len(part))
+        owner = "c.author_is_channel_owner" if "author_is_channel_owner" in cols else "NULL"
+        reason = "c.exclusion_reason" if "exclusion_reason" in cols else "NULL"
         sql = f"""
             SELECT c.video_id, c.comment_id, c.parent_id, c.analysis_eligible,
+                   {reason} AS exclusion_reason, {owner} AS author_is_channel_owner,
                    r.reactions_json, r.targets_json, r.review_flag
             FROM comments c
             LEFT JOIN comment_reactions r
@@ -212,6 +229,8 @@ def load_comment_reactions(conn, video_ids, *, prompt_version: str, model: str) 
                 "comment_id": r["comment_id"],
                 "parent_id": r["parent_id"],
                 "analysis_eligible": r["analysis_eligible"],
+                "exclusion_reason": r["exclusion_reason"],
+                "author_is_channel_owner": r["author_is_channel_owner"],
                 "reactions": json.loads(r["reactions_json"]) if labeled else None,
                 "targets": json.loads(r["targets_json"]) if labeled and r["targets_json"] else ([] if labeled else None),
                 "review_flag": bool(r["review_flag"]) if labeled else False,
