@@ -66,11 +66,15 @@
 
 향후 제작자가 할 수 있는 **콘텐츠, 구성, 출연, 진행 등 미래 행동에 대한 요청이나 제안**.
 
-### 9. 행동 유발
+### 9. 행동 지향
 
-콘텐츠를 본 결과 댓글 밖에서 발생하거나 발생하려는 **구매, 방문, 학습, 복습, 사용 등 행동 의향 또는 실제 전환**.
+콘텐츠를 본 뒤 댓글 작성자가:
 
-단순 감상이나 의견과 구분한다.
+* 현실의 행동을 하거나 했다고 보고하거나,
+* 현실 행동을 하려는 의향을 표현하거나,
+* 다른 개인·집단·기관 등의 구체적 현실 행동을 요구·촉구하는 반응.
+
+콘텐츠 바깥 현실 행동 또는 그 행동 촉구를 포함한다. 단순 의견·해석은 행동 지향이 아니며, 콘텐츠 제작 행위에 대한 요청은 `요청·제안`과 구분한다.
 
 ### 10. 성과 참여
 
@@ -225,10 +229,14 @@ Phase 2 시작 후 200개가 끝날 때까지:
 
 200개 실행 종료 후 한꺼번에 검토한다.
 
+## Phase 2 종료 및 최종 closeout
+
+Phase 2는 완료되었으며, 결과에 따라 R9를 `행동 유발`에서 `행동 지향`으로 최소 수정했다. Reaction 11이나 Target 6은 추가하지 않았다. 최종 상태와 Phase 2 표본의 fresh-blind 사용 금지는 [Reaction track closeout](reaction-track-closeout-2026-09-17.md)에 기록한다.
+
 ## 문서 성격
 
 - Human-approved: yes
 - Phase 1 checkpoint: yes
 - Frozen for Phase 2: yes
-- Permanent final taxonomy: no
+- Permanent final taxonomy: no (최종 track 상태는 closeout 문서에 기록)
 - Mid-Phase-2 revision allowed: no

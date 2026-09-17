@@ -201,6 +201,8 @@ Reaction fresh blind=CONDITIONAL / 확인 필요, 상태=source check needed다.
 - raw: `backend/data/phase2-reaction/2026-09-17/raw_collection.json` (gitignored, 수집 PC `C:/Users/EZ/Desktop/yt-trend`에만 있음). 312,891 bytes, SHA-256 `a3f2d521d4db1ab647bea41b677b78aa7c2733cbe3128ef042c31349fae20202`. 같은 파일을 판정 담당자에게 파일로 전달했다.
 - 봉인 표본: `backend/fixtures/phase2-reaction/sealed_sample.jsonl`, SHA-256 `197f9b07028ceb6daf4be7dde66c1642828535483dec4995c30347e1b6737910`. 원문 없이 `text_sha256`만 담는다. `.gitattributes`의 `backend/fixtures/phase2-reaction/** -text` 규칙으로 줄바꿈 변환을 막아 윈도우 체크아웃에서도 해시가 유지된다.
 - 판정 결과는 새 파일로 저장하고 raw와 봉인 표본은 수정하지 않는다. 판정을 시작하면 이 항목의 사용 이력과 노출 범위를 갱신한다.
+- 최종 사용 이력: Reaction Phase 2 AI coding 및 review audit에 사용했고, R9 행동 유발 → 행동 지향 구조 수정의 근거가 되었다. review audit은 APPLICATION_ERROR 5 / DEFINITION_BOUNDARY 6 / STRUCTURE_CANDIDATE 18, 제3자·기관·대중 대상 행동 요구·촉구 중첩 집계는 19건이다.
+- 위 200개는 taxonomy 구조 수정에 사용되었으므로 resh-blind validation eligibility = NO이며, 수정된 vNext의 독립 성능 증거로 재사용하지 않는다. 상태: Phase 2 completed / Reaction track CLOSED.
 
 ### 알려진 계보 요약
 
