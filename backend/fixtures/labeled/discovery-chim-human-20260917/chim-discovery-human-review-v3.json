@@ -1,0 +1,454 @@
+{
+  "version": 3,
+  "sheet": "chim-recent300-seed42-human-review-2836dff59ac0d0fa-v3",
+  "features": [
+    {
+      "id": "f_mtwbzng0_44jto2hbrr4",
+      "name": "게스트 O"
+    },
+    {
+      "id": "f_mtwc03uq_kco4xpcgdgj",
+      "name": "레시피"
+    },
+    {
+      "id": "f_mtwc0xz1_6po7csvik24",
+      "name": "월드컵"
+    },
+    {
+      "id": "f_mtwc2vll_9in5xfqi1jh",
+      "name": "포켓몬"
+    },
+    {
+      "id": "f_mtwc7vgv_k9yn0uhnkll",
+      "name": "음식 리뷰"
+    },
+    {
+      "id": "f_mtwcahyo_s0xbc1ms6wn",
+      "name": "알아보기"
+    },
+    {
+      "id": "f_mtwcn78y_2czeo6wosnx",
+      "name": "먹방"
+    },
+    {
+      "id": "f_mtwcslfp_411o0kpl11j",
+      "name": "동물"
+    },
+    {
+      "id": "f_mtwcw8of_aikfzoscpk6",
+      "name": "역사"
+    },
+    {
+      "id": "f_mtwcz09b_6mhmig6n1lb",
+      "name": "채널 주인 없음"
+    },
+    {
+      "id": "f_mtwd1vqt_hsy5d7c3qe",
+      "name": "콘텐츠 리뷰"
+    },
+    {
+      "id": "f_mtwd3vic_rwq3usak97b",
+      "name": "토크"
+    },
+    {
+      "id": "f_mtwd5yfp_5hz8crgxww4",
+      "name": "체험"
+    },
+    {
+      "id": "f_mtwd8a44_7g6nwriy7jr",
+      "name": "맞히기"
+    },
+    {
+      "id": "f_mtwe3drl_qsxc7iy78fi",
+      "name": "쿡방"
+    },
+    {
+      "id": "f_mtwe4a0m_1vg019eyjip",
+      "name": "티어메이커"
+    },
+    {
+      "id": "f_mtwe4jfw_jxdi6al4h1e",
+      "name": "애니메이션"
+    },
+    {
+      "id": "f_mtwebi3z_8zia2909qro",
+      "name": "연애"
+    },
+    {
+      "id": "f_mtwj8ikf_cyvr8frug56",
+      "name": "스튜디오 외"
+    },
+    {
+      "id": "f_mtwjme2x_esz8avxjcnd",
+      "name": "슬랩스틱"
+    },
+    {
+      "id": "f_mtwjrqin_75gx1uq7kts",
+      "name": "챌린지"
+    },
+    {
+      "id": "f_mtwjsado_kjj3eeeqxlh",
+      "name": "썰"
+    }
+  ],
+  "checks": {
+    "-30Nu-uxzoU": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc03uq_kco4xpcgdgj",
+      "f_mtwe3drl_qsxc7iy78fi"
+    ],
+    "-777O-1HBVs": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwc2vll_9in5xfqi1jh"
+    ],
+    "-RZ2JGfibEs": [
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "-wloGLMI224": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc2vll_9in5xfqi1jh"
+    ],
+    "0am_oiizzag": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc03uq_kco4xpcgdgj",
+      "f_mtwd5yfp_5hz8crgxww4",
+      "f_mtwe3drl_qsxc7iy78fi"
+    ],
+    "2TZ5gk3QW9w": [
+      "f_mtwcslfp_411o0kpl11j"
+    ],
+    "3-3h3JxiwQQ": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "3aB84SDUZs4": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "5FktDdztwA8": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "5ISS1Gkhfw0": [
+      "f_mtwcahyo_s0xbc1ms6wn",
+      "f_mtwcw8of_aikfzoscpk6"
+    ],
+    "5Nj7PB4HmfM": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwcz09b_6mhmig6n1lb",
+      "f_mtwd1vqt_hsy5d7c3qe",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "7OGOX1xOqTo": [
+      "f_mtwd8a44_7g6nwriy7jr"
+    ],
+    "7tbf_RvRH_k": [
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "7yCjPPjkB70": [
+      "f_mtwcslfp_411o0kpl11j"
+    ],
+    "8P3Zu9kw7JQ": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b",
+      "f_mtwe3drl_qsxc7iy78fi"
+    ],
+    "9LPb7jmebRE": [
+      "f_mtwe4a0m_1vg019eyjip",
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "9ZsGvwr5Cxs": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "AKKHWJkB2_o": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwebi3z_8zia2909qro"
+    ],
+    "Ai50SCO02Uc": [
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwcz09b_6mhmig6n1lb"
+    ],
+    "B-7Feni_nFw": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "Bqc--Cd-J4I": [
+      "f_mtwcslfp_411o0kpl11j",
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "DfXsbmTwzHE": [
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "EO7WzK34mP0": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "EhxclobXIyY": [
+      "f_mtwd1vqt_hsy5d7c3qe",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "KL3sCj7GXCI": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "L5GlgbUjXOc": [
+      "f_mtwd1vqt_hsy5d7c3qe"
+    ],
+    "LYXe9yi9XKk": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "M93KW1ilBJo": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "MmllgHu8SAw": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "NSnaKWEb5dw": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "NYGNN7jWwdY": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "NxaFi-cwsGw": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "OAabxELQae8": [
+      "f_mtwcahyo_s0xbc1ms6wn",
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "OK2OpwAxQe8": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "RxPjBOhOiQk": [
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "SJMJQMtg_yU": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "T4M95IRJD-c": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "TBqvX5m2qlI": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "TPHmNpRfmi4": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwcw8of_aikfzoscpk6",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "TR48wye2ouk": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "Tslysu_mtyc": [
+      "f_mtwd1vqt_hsy5d7c3qe",
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "Ty-CTEIGpJE": [
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "UJ-Zgs0DVK8": [
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "UfC8r1wiV8Q": [
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "VH5ROHnrCss": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "VrxtTEOGH78": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwcahyo_s0xbc1ms6wn",
+      "f_mtwd8a44_7g6nwriy7jr"
+    ],
+    "XYKEtDT1NKo": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwj8ikf_cyvr8frug56",
+      "f_mtwd3vic_rwq3usak97b",
+      "f_mtwcn78y_2czeo6wosnx"
+    ],
+    "Y9ASmFc17Xk": [
+      "f_mtwd5yfp_5hz8crgxww4",
+      "f_mtwcn78y_2czeo6wosnx"
+    ],
+    "YWExqab4YVM": [
+      "f_mtwd5yfp_5hz8crgxww4",
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwj8ikf_cyvr8frug56"
+    ],
+    "ZCueAar_lxs": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd1vqt_hsy5d7c3qe",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "ZKj27m16JDs": [
+      "f_mtwj8ikf_cyvr8frug56",
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwjme2x_esz8avxjcnd"
+    ],
+    "_li0tjLkAME": [
+      "f_mtwcw8of_aikfzoscpk6"
+    ],
+    "bEwGLTxqCOI": [
+      "f_mtwd5yfp_5hz8crgxww4",
+      "f_mtwe3drl_qsxc7iy78fi",
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc7vgv_k9yn0uhnkll"
+    ],
+    "bSFTX2mSdCQ": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "bosI6UT7Ct0": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "cRn6BBMfiDM": [
+      "f_mtwjrqin_75gx1uq7kts"
+    ],
+    "chU8n0F1_fM": [
+      "f_mtwjsado_kjj3eeeqxlh"
+    ],
+    "cuxG-Ps6J4Y": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwj8ikf_cyvr8frug56",
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwcn78y_2czeo6wosnx"
+    ],
+    "fVTuKhp9Iwg": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "g4V3a_fMd98": [
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "gUMNomHmB50": [
+      "f_mtwe4jfw_jxdi6al4h1e"
+    ],
+    "jAhSOhgCvbY": [
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwjsado_kjj3eeeqxlh"
+    ],
+    "jHdOWEa20k0": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "k3ZFZJGDetQ": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "kiJLTmwOTvk": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwd5yfp_5hz8crgxww4",
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "ljaDzn0Sh_M": [],
+    "loclMyhLjGs": [
+      "f_mtwcz09b_6mhmig6n1lb",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "mI8uiYlpXM4": [
+      "f_mtwcz09b_6mhmig6n1lb",
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwebi3z_8zia2909qro",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "meXFUIcHAyw": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwjsado_kjj3eeeqxlh",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "n3B4F8mlKRM": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwe3drl_qsxc7iy78fi"
+    ],
+    "ptxaH5gboBM": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "qMWnmxZFLvw": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc0xz1_6po7csvik24",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "r1O9xBypakA": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd5yfp_5hz8crgxww4"
+    ],
+    "rNKeFpnZrUs": [
+      "f_mtwjsado_kjj3eeeqxlh"
+    ],
+    "re5l6zWCPfs": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwcn78y_2czeo6wosnx",
+      "f_mtwe3drl_qsxc7iy78fi"
+    ],
+    "rj9FxrxuoJI": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwcn78y_2czeo6wosnx"
+    ],
+    "tC1pbt-7SaI": [
+      "f_mtwcahyo_s0xbc1ms6wn",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "tIn41HvAz6w": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "vXhSVW6QZdA": [
+      "f_mtwebi3z_8zia2909qro",
+      "f_mtwbzng0_44jto2hbrr4"
+    ],
+    "wPRZXxKc75s": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwc7vgv_k9yn0uhnkll",
+      "f_mtwcn78y_2czeo6wosnx"
+    ],
+    "wUe5W32b7VE": [
+      "f_mtwjsado_kjj3eeeqxlh"
+    ],
+    "xDbg1M-HaiA": [
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "xHqk6GJHZpg": [
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "zQFuXFitL3k": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ],
+    "zVgQgq-a_UI": [
+      "f_mtwcahyo_s0xbc1ms6wn"
+    ],
+    "zxr_OTypTMY": [
+      "f_mtwbzng0_44jto2hbrr4",
+      "f_mtwd3vic_rwq3usak97b"
+    ]
+  },
+  "notes": {
+    "-777O-1HBVs": "곤충 덕후가 이런 것 갖고 진지하게 몸으로 시연해주는 게 좀 골때리는 듯(p)\n토크: 게스트랑 하는 거? 유튜버 혼자서 하는 건 음 고려하지 말기",
+    "-RZ2JGfibEs": "알아보기: 침착맨 특유의 관련 웹페이지 보면서 코멘트 달기, 나무위키 보기 이런 거",
+    "36mgSsuCQ-o": "게스트가 있긴 한데 쇼츠에서 지금 중요한 게 게스트가 있고없고가 아니라 그냥 체크 안 함",
+    "8P3Zu9kw7JQ": "뒤에 불닭냉면 쿡방도하는데 사람들이 많이본장면이 어느장면일까 좀궁금"
+  }
+}

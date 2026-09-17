@@ -89,4 +89,17 @@ Repository에는 Phase 2의 raw/coded/audit 원문 파일을 새로 만들지 �
 
 ## Product decision
 
-전체 Reaction classifier는 MVP Finding의 Audience Behavior 입력으로 사용하지 않는다. R3 애착·응원, R2 비판·불만 등 selective semantic signal은 후보로만 보존하며 production-ready 또는 empirically valuable이라고 선언하지 않는다. 다음 제품 우선순위는 observable Audience Behavior와 Finding input contract다.
+전체 Reaction classifier는 MVP Finding의 Audience Behavior 입력으로 사용하지 않는다. R2 관계·정서(애착·응원), R4 비판·불만 등 selective semantic signal은 후보로만 보존하며 production-ready 또는 empirically valuable이라고 선언하지 않는다. 다음 제품 우선순위는 observable Audience Behavior와 Finding input contract다.
+
+## 2026-09-17 재개 결정 (인간 결정)
+
+위 CLOSED 기록은 당시 결정으로 보존한다. 같은 날 사람이 Reaction track을 다시 열기로 결정했다.
+
+- 상태: **REOPENED — Phase 3 (AI 판정기 검증)**
+- 기준: 위 Final Reaction vNext(R1–R10, R9 행동 지향)와 Target T1–T5 + UNKNOWN, H1–H4를 그대로 사용한다. 재개는 taxonomy 변경을 뜻하지 않는다.
+- 범위:
+  1. Reaction·Target AI 판정 프롬프트와 판정기 구현
+  2. 사람 판정과의 일치도 평가 도구 구현. Phase 2 200개는 fresh-blind NO이므로 개발·보정용으로만 쓰고, 독립 검증은 새로 수집한 fresh 표본으로 한다.
+  3. 판정 결과의 Stage 08 집계(사실), Stage 09 해석, 대시보드 연결
+  4. Reaction 결과와 Content Feature·성과의 결합 분석
+- 제품 사용 조건: 독립 fresh 표본 검증을 통과하기 전까지 Reaction 결과는 MVP Finding 입력으로 쓰지 않는다. 대시보드·리포트에 싣는 경우 "검증 전 AI 판정"임을 표시한다.
