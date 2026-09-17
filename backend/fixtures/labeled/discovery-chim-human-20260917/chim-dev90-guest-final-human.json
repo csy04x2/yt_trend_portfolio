@@ -1,0 +1,493 @@
+{
+  "version": "chim-dev90-guest-final-human-v0.1",
+  "existing_pilot_guest": {
+    "3ICKqPmH_Qo": "0",
+    "rYxNP7hxDIA": "1",
+    "feyYvvM-Qio": "1",
+    "It4VJznOw8Y": "1",
+    "JxHWHCPnHeA": "1",
+    "2KOobRb54VI": "1",
+    "oEK13uJ77PU": "1",
+    "qAqppHz30SM": "1"
+  },
+  "new_reviews": {
+    "10_smVDvCzw": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "1Ukfau4IeIE": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "1rDCaM3LUoo": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "3NeJ20nwD7o": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "6i1X8JBcffU": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "6knv4lwmUZo": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "7RCWN97TwM0": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "9cy3LlAa-4M": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "A2FJQACZzoM": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "AdCduGpyRAI": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "AeKnXiMhYCc": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "AzTLk6sU01I": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "C2s8vZ5z9-M": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "D98N0tOZX3E": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "DROLZLT7dAU": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "EONlXsPEoJA": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "ErNPMmdjLMs": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "U"
+      },
+      "note": "게스트한테서 강의 듣는 거긴 함\n근데 롱폼은 게스트 중심 토크에 대해 딱딱 나누기가 어려운 게 쇼츠랑 다르게 일단 게스트와 하는 토크는 기본으로 깔려 있어서... 앞으로 롱폼의 경우 애매하다면 U로 표시하겠음"
+    },
+    "F9XqC3dOp38": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "U"
+      },
+      "note": ""
+    },
+    "G-ks4NZLKs0": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "HJmZsYJVt_8": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "HrdLYO5vwh0": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "U"
+      },
+      "note": "월드컵 함"
+    },
+    "JV6Topsze2o": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "JlWf25KigPo": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "KcwFW1HaaPA": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "N6gTqKGcrzw": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "NUHGUb0BcTE": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "OFhG9krs6UM": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "Odl9lO4CKF4": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "PC_IJo9CN_8": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "PCdFGHom87E": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "RzycfhMgvd4": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "U"
+      },
+      "note": ""
+    },
+    "SjIyU5h7-VE": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "Smx_hiWDXmo": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "TH1f6hjxlMM": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "UaIPRdKm7ME": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "U"
+      },
+      "note": "정승제가 수학 가르쳐주는 거"
+    },
+    "V-vTapkCD-8": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "VkU0gF-SVBY": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "WuVU1AQjUhI": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": "월드컵도 하긴 함"
+    },
+    "X_sZRLpRPTM": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "Xlmk9B16kHs": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "Y8z7JDL1BTk": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "YY0hAt4QT6g": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "Yjoz2Jc9deY": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "YrXdRzD6nmM": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "ZGomfRrFBkU": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "_HIgSteWMnI": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "a7LdFQ2jYWo": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "aSmmVHIiqFw": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "am6XlA_WGcw": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "b18XRBJcc94": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "b1dq_KQGREQ": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "bRovKR3fllc": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "c6-kWFRX8wY": {
+      "labels": {
+        "guest_present": "0"
+      },
+      "note": ""
+    },
+    "cBhtR7C1lUg": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "d08X2gMNBpg": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "dRXqaMmJHWM": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "diIdRF7ingQ": {
+      "labels": {
+        "guest_present": "1",
+        "guest_conversation": "1"
+      },
+      "note": ""
+    },
+    "eN2z-K4s05I": {
+      "labels": {},
+      "note": ""
+    },
+    "hOxad5PCbRo": {
+      "labels": {},
+      "note": ""
+    },
+    "ixoMrj5OXYs": {
+      "labels": {},
+      "note": ""
+    },
+    "jBMGQYLctVU": {
+      "labels": {},
+      "note": ""
+    },
+    "mgVbaBm7xQ8": {
+      "labels": {},
+      "note": ""
+    },
+    "oNPMiXvzVe0": {
+      "labels": {},
+      "note": ""
+    },
+    "oiBFiuodP7g": {
+      "labels": {},
+      "note": ""
+    },
+    "ouI0nkdW980": {
+      "labels": {},
+      "note": ""
+    },
+    "prUt_K-OvTA": {
+      "labels": {},
+      "note": ""
+    },
+    "prnNgMpyQGw": {
+      "labels": {},
+      "note": ""
+    },
+    "qTAZE-7gZzs": {
+      "labels": {},
+      "note": ""
+    },
+    "rt2W49fMFhc": {
+      "labels": {},
+      "note": ""
+    },
+    "s4cC87xg9l0": {
+      "labels": {},
+      "note": ""
+    },
+    "scELIUOduz8": {
+      "labels": {},
+      "note": ""
+    },
+    "sei4wS2RthI": {
+      "labels": {},
+      "note": ""
+    },
+    "stgByVAh0F8": {
+      "labels": {},
+      "note": ""
+    },
+    "v-PY-JKz37g": {
+      "labels": {},
+      "note": ""
+    },
+    "vBUPVo_FXnA": {
+      "labels": {},
+      "note": ""
+    },
+    "vd8uEtd8ufs": {
+      "labels": {},
+      "note": ""
+    },
+    "vv_echatwd0": {
+      "labels": {},
+      "note": ""
+    },
+    "vxj2Kk5O1tY": {
+      "labels": {},
+      "note": ""
+    },
+    "wbfy9Tm0UjA": {
+      "labels": {},
+      "note": ""
+    },
+    "wi7Sfjrx8rU": {
+      "labels": {},
+      "note": ""
+    },
+    "yN_GxazmPT8": {
+      "labels": {},
+      "note": ""
+    },
+    "zqgc-He09yA": {
+      "labels": {},
+      "note": ""
+    }
+  }
+}
