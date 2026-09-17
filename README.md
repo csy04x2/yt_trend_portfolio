@@ -20,7 +20,20 @@ backend/
   tests/
 ```
 
-## 문서
+## 현재 인간 확정 방법론 정본
+
+아래 정본을 먼저 읽는다. 이전 설계·보고서는 당시 상태를 보존하며 상충하는 과거 표현은 현재 결정을 대체하지 않는다. 이번 문서 복구는 구현 완료를 의미하지 않는다.
+
+| 정본 | 보존 범위 |
+|---|---|
+| [Reaction Phase 1 Checkpoint](docs/reaction-phase1-checkpoint.md) | Reaction 10·Target 5+UNKNOWN 정의, H1~H4, Phase 2 새 채널 2×100 고정 프로토콜 |
+| [Woni discovery checkpoint](docs/reports/woni-reaction-discovery-checkpoint.md) | 종료된 독립 discovery, 27 후보, correction audit |
+| [Content Feature Structure](docs/design/content-feature-structure.md) | A-1/A-2/A-3와 인간 discovery → AI 자동 추출 → 인간 검증 |
+| [Architecture 현재 경계](docs/design/youtube-trend-architecture.md) | Stage 08 사실·관계 계산 / Stage 09 Insight 해석 |
+| [Data Ledger](docs/data-ledger.md) | 데이터 provenance·사용 이력 및 Phase 2 채널 제외 정책 구분 |
+| [Control Tower checkpoint](docs/reports/control-tower-checkpoint-2026-09-15.md) | 변경 없이 유지하는 별도 고정 reference population 정책 |
+
+## 이전 설계·진행 문서
 
 | 파일 | 내용 |
 |---|---|
@@ -35,9 +48,9 @@ backend/
 보고서는 크게 고칠 때마다 `_v2`, `_v3`으로 번호를 올리고 이전 판을 남긴다.
 위 표는 항상 최신판을 가리킨다.
 
-읽는 순서는 위 표 순서와 같다.
+현재 방법론은 위 정본 표를 우선하고, 이전 설계·진행 문서는 역사적 맥락으로 읽는다.
 
-## 현재 상태
+## 과거 상태 (2026-09-09 기록)
 
 - 2026-09-09: 구상, 결정, 아키텍처 문서 작성 완료. 구현 전.
 - 2026-09-09: 세 문서와 다이어그램 교차 검수 후 반영. 해석 테이블 키에 모델 추가, 댓글 커서

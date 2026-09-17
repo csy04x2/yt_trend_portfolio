@@ -1,6 +1,8 @@
 # 관측 가능한 변수 우선 관계 분석: 실행 프로세스
 
-## 결정
+현재 방법론 정본: [Stage 08/09 책임 경계](youtube-trend-architecture.md), [Feature A-1/A-2/A-3 구조](content-feature-structure.md), [Reaction/Target 및 Phase 2](../reaction-phase1-checkpoint.md). 아래 실행 계획은 과거 기록이며 구현 완료를 뜻하지 않는다. 현재 Feature 작업은 Reaction보다 후순위로 일시 정지돼 있다.
+
+## 당시 결정 (과거 실행 계획)
 개인서사·진정성·정보밀도 semantic feature는 보류한다. 관측 변수로 콘텐츠 특성 → 행동 차이 → 성과 차이 → 시간 변화 → 신뢰도를 먼저 계산한다. 이는 관측된 관계 분석이며 성공 원인이나 조회수 보장으로 표현하지 않는다. 설명되지 않는 패턴이 반복될 때만 semantic feature를 추가한다.
 
 ## 실행 순서와 완료 기준
@@ -13,7 +15,7 @@
 | 4 | 조회배수·초과성과 + Reaction lift + reply/thread + timestamp cluster 계산 | 아래 A+ 계약 충족; 실데이터와 작은 정답 fixture로 검증 |
 | 5 | feature별 관계 계산: 비교군, 효과크기, 영상 단위 분산/구간, leave-one-video-out | 작은 표본·결측·한 영상 의존도를 결론 옆에 표시; 탐색적 다중 비교 명시 |
 | 6 | snapshot 누적 후 rolling·feature 효과 변화·변곡 후보 | 동일 관측 나이/정의로 비교; 과거 24h 조회수를 현재 누적치에서 역산하지 않음 |
-| 7 | 08 evidence JSON → 해석 LLM → 09 조회·대시보드 | LLM 문장마다 evidence_id; 숫자는 계산 결과 인용; 부족한 근거는 보류; 원문/그래프 클릭 가능 |
+| 7 | 08 사실·관계 계산/evidence JSON → 09 Insight 결과 선택·해석 → 조회·대시보드 | LLM 문장마다 evidence_id; 숫자는 계산 결과 인용; 부족한 근거는 보류; 원문/그래프 클릭 가능 |
 
 신뢰도는 마지막 부가기능이 아니라 1단계부터 모든 결과에 붙인다. 현재 댓글 2개 영상 표본은 수집·집계 검증용이며 관계 효과 검증에 부족하다. 기간·길이축·코너를 나눈 표본 확장 계획을 먼저 확정한다. 정확한 목표 n은 관측 분산과 검출하려는 최소 효과로 정하며 n≥5만으로 신뢰성을 인정하지 않는다.
 

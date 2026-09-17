@@ -45,7 +45,7 @@ A–F는 데이터 계보 식별자다. B-V는 B 댓글과 별개인 영상 자�
 | B. Woni Reaction 댓글 | Woni / 안원잘부 | 400 unique comments / 2영상 / 200건씩 | 댓글·discovery·라벨 | raw 별도 보존 여부 확인 필요 | 확인 필요 | `backend/fixtures/woni-reaction-open-discovery-400.json`; `backend/fixtures/labeled/comment-labels_woni_400.json` | independent Reaction open discovery, 27 initial candidates 및 comment-level assignments, taxonomy/vNext 설계 | 인간의 구체적 열람 범위 확인 필요 | NO | used | 두 파일 shared IDs=400; 800건 아님 |
 | B-V. Woni Content Feature | Woni / 안원잘부 | 정확한 규모 확인 필요 | 영상 Content Feature | 확인 필요 | 확인 필요 | `backend/fixtures/labeled/video-types_woni_107.json` | 정확한 provenance/use 확인 필요 | 확인 필요 | 확인 필요; 댓글 후보로 자동 등록하지 않음 | source check needed | 파일명 107만으로 규모 확정하지 않음; B의 댓글과 합산 금지 |
 | C. 침착맨 Reaction Phase 1 | 침착맨 | 300 unique comments / 300행 / 10영상 | 댓글 raw·Phase 1 분할 | 있음(제공된 audit) | `OUTPUTS/raw-comment-pilot-seed42/collection/comments.jsonl` | `OUTPUTS/reaction-matrix-phase1/`의 50/250 comments 및 manifest | 300 전체 Reaction Phase 1/vNext 검토 | 전체 실험 사용 확정; 인간의 구체적 열람 범위 확인 필요 | NO | used | raw 유실 아님; reserve 파일 250건은 fresh reserve 아님 |
-| D. 침착맨 sentiment/topic 댓글 | 침착맨 | 400 unique comments / 2영상 / 200건씩 | sentiment/topics v2 라벨 | raw 별도 보존 여부 확인 필요 | 확인 필요 | `backend/exports/resumed-analysis-20260910T074639Z/chim-labels.json`, `chim-report.json` | 현재 검색에서 확인된 사용은 sentiment/topic; resumed analysis에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | CONDITIONAL CANDIDATE | conditional | C와 댓글·영상 overlap 모두 0; 사용 이력 검색의 한계 유지 |
+| D. 침착맨 sentiment/topic 댓글 | 침착맨 | 400 unique comments / 2영상 / 200건씩 | sentiment/topics v2 라벨 | raw 별도 보존 여부 확인 필요 | 확인 필요 | `backend/exports/resumed-analysis-20260910T074639Z/chim-labels.json`, `chim-report.json` | 현재 검색에서 확인된 사용은 sentiment/topic; resumed analysis에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | 댓글 단위 확인 필요; Phase 2 채널 제외 | conditional | C와 댓글·영상 overlap 모두 0; 침착맨 채널 전체 Phase 2 제외 |
 | E. 침착맨 영상 DB / Content Feature | 침착맨 | 300영상; comments=0 | 영상·통계·Feature 자산 | 있음(영상 DB; 제공된 audit) | `LEGACY/backend/data/chim.db` | content/discovery/split/90-video packet 및 `docs/prototype/chim-evidence.json` | Content Feature / Feature Discovery; 세부 이력 확인 필요 | 확인 필요 | 확인 필요; 댓글 raw로 사용 불가 | source check needed | 댓글 300/400과 별도 축; 관련 파일과 DB의 세부 대응 확인 필요 |
 | F. Carden 댓글 분석 | 카더정원 | 과거 채널 300영상; 댓글 표본 2영상 × 200건=400 | sentiment/topic v2 라벨·report | 현재 audited workspace에서 raw source 미복구 | historical `backend/data/carden.db`, `backend/data/backups/carden-<timestamp>.db` | `backend/exports/resumed-analysis-20260910T074639Z/carden-labels.json`, `carden-report.json`; historical batches | sentiment/topic v2; 해당 분석에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | CONDITIONAL / 확인 필요 | source check needed | raw 복구와 Reaction 사용 이력 확인은 별도 조건 |
 | G. Feature Discovery 파생 산출물 | source별 확인 필요 | 독립 규모 확인 필요; 추가 댓글로 계산하지 않음 | probe·split·registry·predictions·annotations·report 등 | source별 확인 필요 | source dataset에 연결; 불명확하면 확인 필요 | 아래 G 목록 | 산출물별 이력 확인 필요 | 산출물별 확인 필요 | source 및 사용 이력 확인 필요 | source check needed | source가 확인되면 해당 계보의 파생본으로 연결 |
@@ -77,6 +77,8 @@ A–F는 데이터 계보 식별자다. B-V는 B 댓글과 별개인 영상 자�
 Gold/Holdout/PassA/PassB/hybrid 파일은 추가 독립 댓글이 아니다. historical Reaction 출력은 작업공간 섹션의 OneDrive 저장소에 다수 보존되어 있다. 개별 파일별 canonical 경로는 확인 필요다. 전체 282는 과거 Reaction/comment-pilot 등에 노출되었으므로 Reaction fresh blind=NO, 상태=used다.
 
 ### B. Woni / 안원잘부
+
+완료/종료된 discovery track이다. 27개 후보와 Pass 2 correction audit(CORRECT 32, KEEP_UNCLEAR 5)의 정본은 [Woni discovery checkpoint](reports/woni-reaction-discovery-checkpoint.md)다.
 
 `backend/fixtures/woni-reaction-open-discovery-400.json`과 `backend/fixtures/labeled/comment-labels_woni_400.json`은 각각 400 IDs를 가지며 shared IDs=400이다. 동일 원본 400댓글의 서로 다른 분석/표현으로 기록한다. 2영상에서 각 200댓글이다.
 
@@ -117,7 +119,7 @@ raw는 유실되지 않았다. repo 밖 실제 위치:
 
 제공된 ID audit에서 total distinct comments=700으로 확인되었다. 두 자산은 완전히 별개의 댓글 표본이다. 현재까지 사용 이력 검색에서 확인된 것은 sentiment/topic 분석뿐이며 Reaction taxonomy/Reaction Matrix 입력으로 사용됐다는 증거는 발견되지 않았다. 이것을 절대로 사용되지 않았다는 의미로 확대하지 않는다.
 
-Reaction fresh blind=CONDITIONAL CANDIDATE, 상태=conditional이다. sentiment/topic 라벨 존재 자체와 Reaction blind contamination을 구분한다. 조건부 후보를 즉시 사용 승인 또는 fresh 확정으로 해석하지 않는다. 원문 입력 확보, Reaction 설계 노출 및 기존 판정 여부는 확인 필요다.
+댓글 단위 Reaction fresh 여부는 확인 필요이며 상태=conditional을 유지한다. sentiment/topic 라벨 존재 자체와 Reaction blind contamination을 구분한다. 댓글 단위로 미사용일 수 있으나 Phase 2는 채널 일반화 검증을 위해 침착맨 채널 전체를 제외한다. 기존 Phase 2 조건부 후보 표기는 현재 [Phase 2 프로토콜](reaction-phase1-checkpoint.md)로 대체한다. 원문 입력 확보, Reaction 설계 노출 및 기존 판정 여부는 여전히 확인 필요다. 데이터 삭제나 오염 확정을 뜻하지 않는다.
 
 ### E. 침착맨 영상 300 DB와 Content Feature
 
@@ -201,17 +203,17 @@ Reaction fresh blind 판정에서는 다음을 각각 확인하고 기록한다.
 
 다른 목적의 라벨이 있다는 이유만으로 자동 Reaction contamination으로 판정하지 않는다. 반대로 comment_id가 달라도 taxonomy 설계 과정에서 내용이 사용됐다면 fresh라고 단정하지 않는다. ID/영상 비중복과 설계 목적의 내용 노출을 별도로 확인한다. 인간 gold validation 미수행과 인간 원문 미노출도 구분한다. 확인되지 않은 데이터에 fresh=YES를 부여하지 않는다.
 
-## 5. 현재 Phase 2 후보 요약
+## 5. 현재 Phase 2 입력 자격 요약
 
 | 자산 | 현재 판정 | 근거 및 남은 조건 |
 |---|---|---|
 | 14F 282 | fresh 제외 | 과거 Reaction/comment-pilot 노출 |
 | Woni 400 | fresh 제외 | Reaction open discovery 및 taxonomy/vNext 설계 사용 |
 | 침착맨 Reaction Phase 1 300 | fresh 제외 | 300 전체 Phase 1/vNext 검토 사용 |
-| 침착맨 sentiment/topic 400 | conditional candidate | Phase1과 comment overlap=0, video overlap=0; 확인된 사용은 sentiment/topic; raw 입력 및 Reaction 사용/노출 이력 최종 확인 필요 |
+| 침착맨 sentiment/topic 400 | Phase 2 채널 제외 | Phase1과 comment/video overlap=0 및 sentiment/topic 사용 이력은 유지; 댓글 단위 fresh 여부 확인 필요와 별개로 침착맨 전체 제외 |
 | Carden 400 | 조건부, source check needed | Reaction 사용 증거 현재 미확인; raw DB/source 미복구; source recovery/provenance 및 사용/노출 확인 필요 |
 
-**따라서 Phase 2를 위해 즉시 신규 수집이 반드시 필요하다고 결론내릴 수 없다.** 단, 기존 데이터만으로 충분하다고도 아직 단정하지 않는다. 현재 조건부 후보는 존재하지만 fresh 사용이 확정된 데이터로 표기하지 않는다.
+현재 Phase 2는 taxonomy 설계에 사용하지 않은 새로운 채널 2개 × 100댓글 = 200댓글을 기본 설계로 한다. 14F, Woni / 안원잘부, 침착맨은 댓글 ID 비중복 여부와 무관하게 채널 단위로 제외한다. Carden은 raw 복구 및 provenance/사용 이력 확인이 필요한 조건부 자산이며 선정 확정이 아니다. 기존 데이터의 충분성이나 추가 수집 필요성을 이 장부에서 단정하지 않는다. 기준 정본은 [Phase 1 checkpoint의 Phase 2 운영 원칙](reaction-phase1-checkpoint.md)이다.
 
 ## 6. 확인 필요 항목과 갱신 규칙
 
