@@ -32,6 +32,7 @@ backend/
 | [Architecture 현재 경계](docs/design/youtube-trend-architecture.md) | Stage 08 사실·관계 계산 / Stage 09 Insight 해석 |
 | [Data Ledger](docs/data-ledger.md) | 데이터 provenance·사용 이력 및 Phase 2 채널 제외 정책 구분 |
 | [Control Tower checkpoint](docs/reports/control-tower-checkpoint-2026-09-15.md) | 변경 없이 유지하는 별도 고정 reference population 정책 |
+| [Reaction Phase 2 수집 보고](docs/reports/phase2-reaction-sampling-2026-09-17.md) | 슈카월드·MBCNEWS 200댓글 표본 수집 방식과 봉인 해시 (원문·판정 없음) |
 
 ## 이전 설계·진행 문서
 

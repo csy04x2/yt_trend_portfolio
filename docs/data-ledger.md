@@ -50,6 +50,7 @@ A–F는 데이터 계보 식별자다. B-V는 B 댓글과 별개인 영상 자�
 | F. Carden 댓글 분석 | 카더정원 | 과거 채널 300영상; 댓글 표본 2영상 × 200건=400 | sentiment/topic v2 라벨·report | 현재 audited workspace에서 raw source 미복구 | historical `backend/data/carden.db`, `backend/data/backups/carden-<timestamp>.db` | `backend/exports/resumed-analysis-20260910T074639Z/carden-labels.json`, `carden-report.json`; historical batches | sentiment/topic v2; 해당 분석에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | CONDITIONAL / 확인 필요 | source check needed | raw 복구와 Reaction 사용 이력 확인은 별도 조건 |
 | G. Feature Discovery 파생 산출물 | source별 확인 필요 | 독립 규모 확인 필요; 추가 댓글로 계산하지 않음 | probe·split·registry·predictions·annotations·report 등 | source별 확인 필요 | source dataset에 연결; 불명확하면 확인 필요 | 아래 G 목록 | 산출물별 이력 확인 필요 | 산출물별 확인 필요 | source 및 사용 이력 확인 필요 | source check needed | source가 확인되면 해당 계보의 파생본으로 연결 |
 | H. backup tree | source별 | 독립 규모로 계산하지 않음 | 안전 복사본·과거 상태 | 파일별 확인 필요 | `BASE/backups/feature-discovery-pre-integration-20260914T041808Z` | 같은 backup tree | 보존 | 원본 이력 및 별도 열람 확인 필요 | 원본의 사용/노출 이력 승계; 확인 필요 | source check needed | 복사본은 새 blind 데이터가 아님 |
+| I. Reaction Phase 2 표본 | 슈카월드, MBCNEWS | 200 top-level comments / 4영상 / 50건씩 | 댓글 raw·봉인 표본 | 있음 | 수집 PC(`C:/Users/EZ/Desktop/yt-trend`)의 gitignored `backend/data/phase2-reaction/2026-09-17/raw_collection.json`; 판정 담당자에게 파일로 전달한 사본 | `backend/fixtures/phase2-reaction/sealed_sample.jsonl`, `manifest.json`(원문 없음); `docs/reports/phase2-reaction-sampling-2026-09-17.md` | Reaction Phase 2 판정용으로 수집; 수집 시점 판정·분포 계산 없음 | 수집 과정에서 사람·모델 원문 열람 없음; 판정용 원문 전달은 2026-09-17 | YES(수집 시점) | usable | 봉인 표본·raw 수정 금지, 판정 결과는 별도 파일; raw는 GitHub에 올리지 않음 |
 
 ## 3. 데이터별 출처와 계보
 
@@ -181,6 +182,24 @@ Reaction fresh blind=CONDITIONAL / 확인 필요, 상태=source check needed다.
 
 동일 파일의 안전 복사본/과거 상태 보존으로 취급한다. 새로운 독립 데이터가 아니며 복사·복구가 기존 사용/노출 이력을 초기화하지 않는다. 파일별 source 대응과 복구 가능성은 확인 필요다.
 
+### I. Reaction Phase 2 표본 (2026-09-17 수집)
+
+기준 정본 [Phase 1 checkpoint](reaction-phase1-checkpoint.md)의 Phase 2 설계(새 채널 2개 × 100댓글)를 채널 2개 × 영상 2편 × 원댓글 50개로 수집했다. 수집기는 `backend/scripts/phase2_collect.py`다.
+
+| 슬롯 | 채널 | channel_id | video_id | 원댓글 |
+|---|---|---|---|---:|
+| A1 | 슈카월드 | `UCsJ6RuBiTVWRX156FVbeaGg` | `tmYmdAykjuQ` | 50 |
+| A2 | 슈카월드 | `UCsJ6RuBiTVWRX156FVbeaGg` | `q836AS_27GE` | 50 |
+| B1 | MBCNEWS | `UCF4Wxdo3inmxP-Y59wXDsFw` | `bM1KNajYwK0` | 50 |
+| B2 | MBCNEWS | `UCF4Wxdo3inmxP-Y59wXDsFw` | `J2qqlnRZPFI` | 50 |
+
+- 수집 시각: 2026-09-17T02:43:49Z–02:43:58Z (UTC). 정렬: YouTube Data API v3 `commentThreads.list order=relevance`. 웹 화면의 Top comments와 같은지는 검증하지 않았다.
+- 규모: raw 200, analysis_eligible 200, 채널 본인 댓글 0, 교체 없음.
+- 제외 채널: 14F, Woni / 안원잘부, 침착맨, Carden / 카더정원 (수집 지시에서 사람이 지정).
+- raw: `backend/data/phase2-reaction/2026-09-17/raw_collection.json` (gitignored, 수집 PC `C:/Users/EZ/Desktop/yt-trend`에만 있음). 312,891 bytes, SHA-256 `a3f2d521d4db1ab647bea41b677b78aa7c2733cbe3128ef042c31349fae20202`. 같은 파일을 판정 담당자에게 파일로 전달했다.
+- 봉인 표본: `backend/fixtures/phase2-reaction/sealed_sample.jsonl`, SHA-256 `197f9b07028ceb6daf4be7dde66c1642828535483dec4995c30347e1b6737910`. 원문 없이 `text_sha256`만 담는다. `.gitattributes`의 `backend/fixtures/phase2-reaction/** -text` 규칙으로 줄바꿈 변환을 막아 윈도우 체크아웃에서도 해시가 유지된다.
+- 판정 결과는 새 파일로 저장하고 raw와 봉인 표본은 수정하지 않는다. 판정을 시작하면 이 항목의 사용 이력과 노출 범위를 갱신한다.
+
 ### 알려진 계보 요약
 
 - A: historical DB → 282 export(JSON/CSV) → 74 fixture / 117 recheck / Gold90·Set4·Gold120·Holdout60·PassA·PassB·hybrid. 이 계보의 독립 댓글은 282.
@@ -189,6 +208,7 @@ Reaction fresh blind=CONDITIONAL / 확인 필요, 상태=source check needed다.
 - D: 별도 댓글 400 → sentiment/topic labels/report. C와 댓글·영상 overlap 0. raw 위치 확인 필요.
 - E: 영상 DB 300과 관련 content/discovery 자산. 상세 연결은 확인 필요; C/D 댓글로 연결하지 않음.
 - F: historical Carden DB/batches → 400 sentiment/topic labels/report. 현재 raw source 미복구.
+- I: Phase 2 raw 200 → 원문 없는 봉인 표본 200 + manifest. 기존 A–F와 채널·댓글 모두 겹치지 않음.
 - G/H: source에 연결되는 파생본/보존본. source 미확정 시 확인 필요.
 
 ## 4. Blind 사용 규칙
@@ -214,6 +234,8 @@ Reaction fresh blind 판정에서는 다음을 각각 확인하고 기록한다.
 | Carden 400 | 조건부, source check needed | Reaction 사용 증거 현재 미확인; raw DB/source 미복구; source recovery/provenance 및 사용/노출 확인 필요 |
 
 현재 Phase 2는 taxonomy 설계에 사용하지 않은 새로운 채널 2개 × 100댓글 = 200댓글을 기본 설계로 한다. 14F, Woni / 안원잘부, 침착맨은 댓글 ID 비중복 여부와 무관하게 채널 단위로 제외한다. Carden은 raw 복구 및 provenance/사용 이력 확인이 필요한 조건부 자산이며 선정 확정이 아니다. 기존 데이터의 충분성이나 추가 수집 필요성을 이 장부에서 단정하지 않는다. 기준 정본은 [Phase 1 checkpoint의 Phase 2 운영 원칙](reaction-phase1-checkpoint.md)이다.
+
+2026-09-17 실제 수집분은 I항목(슈카월드, MBCNEWS 200댓글)이다. 이 수집에서는 사람 지시에 따라 Carden도 제외했다. 위 표의 Carden 조건부 판정은 과거 자산 400건에 대한 것으로, 이번 수집과 별개로 유지한다.
 
 ## 6. 확인 필요 항목과 갱신 규칙
 
