@@ -64,6 +64,9 @@ def recompute_multiples(videos, flags, min_peers=5):
     """같은 (축, 분기) 동료 중앙값 대비 배수. 자기 자신과 급등 영상을 분모에서 뺀다.
 
     동료가 min_peers 미만이면 None — 숫자를 만들지 않고 이유를 남기는 저장소 원칙.
+
+    non-canonical: 급등 민감도 확인용 보조 분모다. canonical 정의는
+    app.pipeline.reference.canonical_view_multiple (docs/design/reference-population.md).
     """
     groups = defaultdict(list)
     for v in videos:

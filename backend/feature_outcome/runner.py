@@ -6,6 +6,7 @@ Shared input JSON is decoded by frozen.prepare; only Development rows are analyz
 """
 import argparse
 import datetime as dt
+import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -17,8 +18,12 @@ from .labels import load_registry
 VERSION = "0.1"
 
 
-def run(*, registry, labels, split, evidence, out, split_name="development"):
-    """Run the existing engine without changing inputs or allowing other splits."""
+def run(*, registry, labels, split, evidence, out, split_name="development", reference_manifest=None):
+    """Run the existing engine without changing inputs or allowing other splits.
+
+    reference_manifest (opt-in path): frozen reference population manifest JSON.
+    None keeps the provisional/legacy supplied view_multiple and the same artifacts.
+    """
     if split_name != "development":
         raise ValueError("Finding Runner v0.1 only analyzes the Development split")
     # Reject plain registries (including a forged internal _envelope marker).
@@ -31,7 +36,12 @@ def run(*, registry, labels, split, evidence, out, split_name="development"):
                            unseal_holdout=False, u_as_control=False,
                            events=None, evidence_out=None)
     videos, _, _, scoped_labels, provenance = prepare(args, loaded)
-    findings = build_findings(videos, scoped_labels, loaded, split_name="development")
+    reference = None
+    if reference_manifest is not None:
+        reference_bytes = Path(reference_manifest).read_bytes()
+        reference = json.loads(reference_bytes.decode("utf-8"))
+    findings = build_findings(videos, scoped_labels, loaded, split_name="development",
+                              reference_manifest=reference)
     manifest = {
         "runner_version": VERSION,
         "engine_version": ENGINE_VERSION,
@@ -45,6 +55,14 @@ def run(*, registry, labels, split, evidence, out, split_name="development"):
         "bootstrap_note": "Not implemented by this engine version",
         "created_at": dt.datetime.now(dt.timezone.utc).isoformat(),
     }
+    if reference is not None:
+        manifest["relative_performance"] = {
+            "mode": "canonical_reference",
+            "reference_manifest": str(Path(reference_manifest).resolve()),
+            "reference_manifest_file_sha256": hashlib.sha256(reference_bytes).hexdigest(),
+            "reference_manifest_sha256": reference["manifest_sha256"],
+            "reference_rules_status": reference["rules"]["rules_status"],
+        }
     # Serialize before reserving the directory; mkdir also rejects concurrent reuse.
     artifacts = {"manifest.json": manifest, "findings.json": findings}
     serialized = {name: json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
@@ -62,6 +80,8 @@ def main(argv=None):
     for name in ("registry", "labels", "split", "evidence", "out"):
         parser.add_argument("--" + name, required=True)
     parser.add_argument("--split-name", default="development", choices=["development"])
+    parser.add_argument("--reference-manifest", default=None,
+                        help="opt-in: frozen reference population manifest (canonical view_multiple)")
     args = parser.parse_args(argv)
     try:
         destination = run(**vars(args))
