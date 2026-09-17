@@ -27,7 +27,7 @@ backend/
 | 정본 | 보존 범위 |
 |---|---|
 | [Reaction Phase 1 Checkpoint](docs/reaction-phase1-checkpoint.md) | Reaction 10·Target 5+UNKNOWN 정의, H1~H4, Phase 2 새 채널 2×100 고정 프로토콜 |
-| [Reaction Track Closeout](docs/reaction-track-closeout-2026-09-17.md) | Phase 1·2 CLOSED, R9 행동 지향, Phase 2 fresh-blind eligibility=NO |
+| [Reaction Track Closeout](docs/reaction-track-closeout-2026-09-17.md) | Phase 1·2 CLOSED, R9 행동 지향, Phase 2 fresh-blind eligibility=NO. 09-17 재개(Phase 3 AI 판정기 검증) |
 | [Woni discovery checkpoint](docs/reports/woni-reaction-discovery-checkpoint.md) | 종료된 독립 discovery, 27 후보, correction audit |
 | [Content Feature Structure](docs/design/content-feature-structure.md) | A-1/A-2/A-3와 인간 discovery → AI 자동 추출 → 인간 검증 |
 | [Architecture 현재 경계](docs/design/youtube-trend-architecture.md) | Stage 08 사실·관계 계산 / Stage 09 Insight 해석 |
