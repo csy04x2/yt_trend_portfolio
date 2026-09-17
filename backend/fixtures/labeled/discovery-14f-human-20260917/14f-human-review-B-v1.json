@@ -1,0 +1,523 @@
+{
+  "version": 1,
+  "sheet": "14f-recent300-seed42-human-review-B-v1-c072848ce945de95",
+  "features": [
+    {
+      "id": "f_mu2g6tjb_tozci859l38",
+      "name": "국제"
+    },
+    {
+      "id": "f_mu2g6xqh_13kshfgf9cik",
+      "name": "문화"
+    },
+    {
+      "id": "f_mu2g76p9_x45q5bs8b4q",
+      "name": "한류"
+    },
+    {
+      "id": "f_mu2g7cvy_jjrc5qfzb8",
+      "name": "뷰티"
+    },
+    {
+      "id": "f_mu2g8ed6_sr412yojp1",
+      "name": "음식"
+    },
+    {
+      "id": "f_mu2gafxy_jk8ddqdqac7",
+      "name": "트렌드"
+    },
+    {
+      "id": "f_mu2qsqbt_e67sowcxj9v",
+      "name": "의료"
+    },
+    {
+      "id": "f_mu2quxf3_rv9xm4v9ow",
+      "name": "광고"
+    },
+    {
+      "id": "f_mu2r6bzw_ujut3x2l0l",
+      "name": "신조어"
+    },
+    {
+      "id": "f_mu2r6cz6_kchb26dakp",
+      "name": "인사이트"
+    },
+    {
+      "id": "f_mu2r7k2k_hzzi7fl8uy",
+      "name": "마케팅"
+    },
+    {
+      "id": "f_mu2rcucs_2le4ky6uy2k",
+      "name": "인플루언서"
+    },
+    {
+      "id": "f_mu2rdn7x_sqzlntf9z1",
+      "name": "콘텐츠"
+    },
+    {
+      "id": "f_mu2rezur_tvqlbwwo6ab",
+      "name": "후기"
+    },
+    {
+      "id": "f_mu2rfkun_yrz1cunr4vm",
+      "name": "스포츠"
+    },
+    {
+      "id": "f_mu2rg07m_qq7v870df3m",
+      "name": "개념"
+    },
+    {
+      "id": "f_mu2rjg4p_7rt2ayd5ewg",
+      "name": "실험"
+    },
+    {
+      "id": "f_mu2rksgl_2jpujarq64o",
+      "name": "이유"
+    },
+    {
+      "id": "f_mu2rmmfm_czkrczm3sll",
+      "name": "인터뷰"
+    },
+    {
+      "id": "f_mu2rmrir_p4hsrpqxe",
+      "name": "전문가"
+    },
+    {
+      "id": "f_mu2rny9z_upsyg4yb55",
+      "name": "국내"
+    },
+    {
+      "id": "f_mu2rpxaf_vao6tlngdwi",
+      "name": "브랜드"
+    },
+    {
+      "id": "f_mu2rtbto_padbit48dw",
+      "name": "성공"
+    },
+    {
+      "id": "f_mu2rukxb_4v8a89n6ufw",
+      "name": "토론"
+    },
+    {
+      "id": "f_mu2rvcbj_h39v009kzi",
+      "name": "주식"
+    },
+    {
+      "id": "f_mu2rxd09_v56hmuf0iea",
+      "name": "사회"
+    },
+    {
+      "id": "f_mu2rxdjd_ga2jajd2ktw",
+      "name": "경제"
+    },
+    {
+      "id": "f_mu2s266g_orv6u68xbl",
+      "name": "문제"
+    },
+    {
+      "id": "f_mu2s3d9n_iznp1j8dxbs",
+      "name": "정치"
+    },
+    {
+      "id": "f_mu2s4qsl_qazepkgsjqr",
+      "name": "역사"
+    },
+    {
+      "id": "f_mu2s7ouq_20zx11li7jsh",
+      "name": "신화"
+    },
+    {
+      "id": "f_mu2s7t05_xtj954g1vk",
+      "name": "이론"
+    },
+    {
+      "id": "f_mu2sqe7g_i7wg0uhyiz",
+      "name": "전쟁"
+    },
+    {
+      "id": "f_mu2t153t_dkzg0gy37kn",
+      "name": "자연재해"
+    },
+    {
+      "id": "f_mu2ujf69_r1klxums2ho",
+      "name": "문명"
+    },
+    {
+      "id": "f_mu2umsvp_meel95niovr",
+      "name": "제도"
+    }
+  ],
+  "checks": {
+    "-tWfcFPNdg8": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2g7cvy_jjrc5qfzb8"
+    ],
+    "2y_NW5FlO5o": [
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2gafxy_jk8ddqdqac7"
+    ],
+    "3crMnc7CMBA": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g7cvy_jjrc5qfzb8",
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2qsqbt_e67sowcxj9v",
+      "f_mu2g6xqh_13kshfgf9cik"
+    ],
+    "3fqm6ptoTKY": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2quxf3_rv9xm4v9ow"
+    ],
+    "3yT6WxEw7Gc": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2r6bzw_ujut3x2l0l",
+      "f_mu2r6cz6_kchb26dakp",
+      "f_mu2r7k2k_hzzi7fl8uy"
+    ],
+    "4dVEhjqU0pc": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2r6bzw_ujut3x2l0l",
+      "f_mu2rcucs_2le4ky6uy2k"
+    ],
+    "4mz7H1VikW4": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2rdn7x_sqzlntf9z1"
+    ],
+    "4n9xpV6COCs": [
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rezur_tvqlbwwo6ab",
+      "f_mu2g6xqh_13kshfgf9cik"
+    ],
+    "7AcfNXxkwII": [
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rfkun_yrz1cunr4vm",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2quxf3_rv9xm4v9ow",
+      "f_mu2r7k2k_hzzi7fl8uy",
+      "f_mu2rjg4p_7rt2ayd5ewg",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rmrir_p4hsrpqxe"
+    ],
+    "8UVFsff9M_k": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2r7k2k_hzzi7fl8uy",
+      "f_mu2quxf3_rv9xm4v9ow",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2rfkun_yrz1cunr4vm",
+      "f_mu2rtbto_padbit48dw"
+    ],
+    "9ieX84e_bbA": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rfkun_yrz1cunr4vm",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rmrir_p4hsrpqxe"
+    ],
+    "9ygNOckhcf8": [
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rvcbj_h39v009kzi",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rxdjd_ga2jajd2ktw"
+    ],
+    "AfC_58UGr7s": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2r7k2k_hzzi7fl8uy"
+    ],
+    "BOAelK7yZvI": [
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rezur_tvqlbwwo6ab",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rny9z_upsyg4yb55"
+    ],
+    "CuktQC7bbw4": [
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2rezur_tvqlbwwo6ab"
+    ],
+    "CxomDVsez3U": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2s266g_orv6u68xbl"
+    ],
+    "D7Efrohet4s": [
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2s7ouq_20zx11li7jsh",
+      "f_mu2s7t05_xtj954g1vk",
+      "f_mu2r6cz6_kchb26dakp"
+    ],
+    "DT8zU_845IU": [
+      "f_mu2rfkun_yrz1cunr4vm",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2r7k2k_hzzi7fl8uy",
+      "f_mu2quxf3_rv9xm4v9ow"
+    ],
+    "DufQHp4F4gk": [
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rg07m_qq7v870df3m"
+    ],
+    "EDrllyuK-Cw": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rtbto_padbit48dw",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rxdjd_ga2jajd2ktw"
+    ],
+    "EErlqejybJ8": [
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rg07m_qq7v870df3m"
+    ],
+    "ElcO2ILmAh4": [
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rksgl_2jpujarq64o"
+    ],
+    "GhZtfD9lud8": [
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rezur_tvqlbwwo6ab",
+      "f_mu2rny9z_upsyg4yb55"
+    ],
+    "HcBBrKBRQNg": [
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2s266g_orv6u68xbl"
+    ],
+    "I6XD4ONYaUk": [
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rtbto_padbit48dw",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2r7k2k_hzzi7fl8uy"
+    ],
+    "Lu8bvUheKK0": [
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2r7k2k_hzzi7fl8uy"
+    ],
+    "M0cRnRXI2Pw": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rny9z_upsyg4yb55"
+    ],
+    "MhUFNmSuxiM": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rfkun_yrz1cunr4vm",
+      "f_mu2rcucs_2le4ky6uy2k",
+      "f_mu2rtbto_padbit48dw",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2rmmfm_czkrczm3sll"
+    ],
+    "Mri3KwayiEI": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rvcbj_h39v009kzi",
+      "f_mu2r6cz6_kchb26dakp",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2sqe7g_i7wg0uhyiz"
+    ],
+    "N2_WId2Vu70": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rmrir_p4hsrpqxe"
+    ],
+    "P7TblauaCxw": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2r6cz6_kchb26dakp"
+    ],
+    "Q3UFvK-fY2U": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2sqe7g_i7wg0uhyiz",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2r6cz6_kchb26dakp"
+    ],
+    "QF0zwLLXP0Q": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rksgl_2jpujarq64o"
+    ],
+    "R_wD0Nr1cgU": [
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2s266g_orv6u68xbl"
+    ],
+    "RjRoW4284cs": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2t153t_dkzg0gy37kn"
+    ],
+    "TMHJm0qXQmE": [
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2rxdjd_ga2jajd2ktw"
+    ],
+    "TqTlcEr8gIY": [
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rxdjd_ga2jajd2ktw"
+    ],
+    "U5gk3lYDgJM": [
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2rcucs_2le4ky6uy2k",
+      "f_mu2rdn7x_sqzlntf9z1",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rezur_tvqlbwwo6ab"
+    ],
+    "UbKOR4EW7Do": [
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2rezur_tvqlbwwo6ab"
+    ],
+    "X3cmzHBN_kI": [
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rukxb_4v8a89n6ufw",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2s3d9n_iznp1j8dxbs",
+      "f_mu2r6cz6_kchb26dakp",
+      "f_mu2ujf69_r1klxums2ho"
+    ],
+    "X6CoduUj64o": [
+      "f_mu2g76p9_x45q5bs8b4q",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2rksgl_2jpujarq64o",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rmmfm_czkrczm3sll",
+      "f_mu2r6cz6_kchb26dakp"
+    ],
+    "XB2eQSLUoq8": [
+      "f_mu2rxd09_v56hmuf0iea",
+      "f_mu2rezur_tvqlbwwo6ab",
+      "f_mu2g8ed6_sr412yojp1",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2r6cz6_kchb26dakp",
+      "f_mu2g6xqh_13kshfgf9cik",
+      "f_mu2rmrir_p4hsrpqxe",
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2umsvp_meel95niovr"
+    ],
+    "XQQgFe2pb5A": [
+      "f_mu2rxdjd_ga2jajd2ktw",
+      "f_mu2rg07m_qq7v870df3m",
+      "f_mu2rvcbj_h39v009kzi",
+      "f_mu2umsvp_meel95niovr",
+      "f_mu2rny9z_upsyg4yb55",
+      "f_mu2g6tjb_tozci859l38",
+      "f_mu2s4qsl_qazepkgsjqr",
+      "f_mu2rpxaf_vao6tlngdwi",
+      "f_mu2s266g_orv6u68xbl",
+      "f_mu2gafxy_jk8ddqdqac7",
+      "f_mu2r6cz6_kchb26dakp",
+      "f_mu2rksgl_2jpujarq64o"
+    ]
+  },
+  "notes": {}
+}
