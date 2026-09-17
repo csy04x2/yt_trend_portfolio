@@ -27,3 +27,8 @@
 # CSV 따옴표 안의 줄바꿈은 댓글 원문의 일부라, 정규화하면 데이터가 바뀐다.
 backend/exports/** -text
 *.csv -text
+
+# 봉인 표본은 바이트 그대로 둔다. manifest 에 파일의 SHA-256 을 기록해
+# 표본이 바뀌지 않았음을 증명하는데, 윈도우 체크아웃이 줄바꿈을 CRLF 로
+# 바꾸면 내용은 같아도 해시가 달라져 검증이 실패한다.
+backend/fixtures/phase2-reaction/** -text
