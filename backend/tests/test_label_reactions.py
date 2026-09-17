@@ -225,7 +225,10 @@ def _db(tmp: pathlib.Path, eligible_col: bool = False):
         conn.execute("""INSERT INTO comments (comment_id, video_id, text, published_at, fetched_at)
                         VALUES (?,?,?,?,?)""", (cid, "v1", text, f"2026-01-0{i + 1}", "2026-01-09"))
     if eligible_col:
-        conn.execute("ALTER TABLE comments ADD COLUMN analysis_eligible INTEGER")
+        # 수집기 브랜치가 합쳐지면 스키마에 이미 있다. 없는 옛 스키마일 때만 추가한다
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(comments)")}
+        if "analysis_eligible" not in cols:
+            conn.execute("ALTER TABLE comments ADD COLUMN analysis_eligible INTEGER")
         conn.execute("UPDATE comments SET analysis_eligible = 0 WHERE comment_id='c3'")
     return conn
 
