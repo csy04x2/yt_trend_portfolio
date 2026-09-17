@@ -165,6 +165,7 @@ def check_against_db(conn) -> list[str]:
 
     for table, col in (("comment_labels", "prompt_version"),
                        ("comment_screens", "prompt_version"),
+                       ("comment_reactions", "prompt_version"),
                        ("video_type_labels", "prompt_version")):
         try:
             rows = conn.execute(

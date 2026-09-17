@@ -19,6 +19,15 @@
     prompts        프롬프트 파일과 DB 버전 대조
     stats          수집 현황과 설정 상태
 
+Reaction Phase 3 (결과는 전부 「검증 전 AI 판정」 — docs/design/reaction-classifier-phase3.md)
+
+    export-reaction-batch  Reaction·Target 판정용 묶음 파일 (Claude Code 가 판정, 비용 0)
+    import-reaction-batch  판정 결과를 검증하고 DB 또는 라벨 파일에 저장
+    label-reactions        Reaction·Target 을 API 로 판정 (돈이 나간다)
+    export-reactions       DB 의 Reaction 판정을 평가용 라벨 파일로
+    reaction-sheet         사람 판정 시트 HTML 생성 (원문이 들어가 backend/data/ 에만)
+    reaction-eval          두 라벨 파일의 일치도 (숫자와 comment_id 만 출력)
+
 지금 답이 필요한 질문 — 규칙이 무엇을 잘못 버리는가 — 은 `rules`만으로
 답할 수 있다. 그 답을 모델과 대조하려면 `export-screen-batch` 로 비용 없이
 먼저 재 보고, 프롬프트가 쓸 만해진 뒤에 `screen` 을 켠다.
@@ -50,6 +59,9 @@ from app.pipeline import classify_videos as cv  # noqa: E402
 from app.pipeline import aggregate  # noqa: E402
 from app.pipeline import label_comments  # noqa: E402
 from app.pipeline import label_videos as lv  # noqa: E402
+from app.pipeline import label_reactions as lr  # noqa: E402
+from app.pipeline import reaction_eval  # noqa: E402
+from app.pipeline import reaction_sheet  # noqa: E402
 from app.pipeline import screen_comments as sc  # noqa: E402
 from app.pipeline import segments as sg  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
@@ -934,6 +946,194 @@ def cmd_label(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# Reaction Phase 3 — Reaction·Target 판정기와 평가 도구
+#   결과는 독립 fresh 표본 검증 전까지 전부 「검증 전 AI 판정」이다.
+#   원문이 들어가는 산출물(묶음·시트·rationale 이 든 라벨 파일)은 backend/data/ 에만.
+# --------------------------------------------------------------------------
+
+def _reaction_rows(args) -> tuple[list[dict], str] | None:
+    """--input(raw JSON) 이 있으면 그 파일에서, 없으면 DB 에서 판정 대상을 고른다."""
+    prompt = registry.get(lr.PROMPT_NAME)
+    if args.input:
+        rows, skipped = lr.load_raw_comments(args.input)
+        done: set[str] = set()
+        out = getattr(args, "labels_out", None)
+        if out and pathlib.Path(out).exists():
+            done = {x["comment_id"] for x in
+                    json.loads(pathlib.Path(out).read_text(encoding="utf-8")).get("labels", [])}
+        rows = [r for r in rows if r["comment_id"] not in done]
+        if args.video_id:
+            rows = [r for r in rows if r["video_id"] == args.video_id]
+        if args.limit:
+            rows = rows[: args.limit]
+        return rows, (f"raw {args.input} (분석 제외 {skipped}건 뺌, "
+                      f"라벨 파일에 이미 있는 {len(done)}건 뺌)")
+    conn = connect(args.db)
+    model = args.model or config.get("ANTHROPIC_MODEL", claude.DEFAULT_MODEL)
+    return (lr.pending(conn, prompt.version, model, args.video_id, args.limit),
+            f"DB {args.db}")
+
+
+def cmd_export_reaction_batch(args) -> int:
+    """판정 대상을 Reaction 판정용 파일로 내보낸다. 금전 비용 0."""
+    prompt = registry.get(lr.PROMPT_NAME)
+    if not args.model:
+        args.model = "claude-code-offline"
+    rows, source = _reaction_rows(args)
+    if not rows:
+        print(f"내보낼 댓글이 없다 ({source}).", file=sys.stderr)
+        return 1
+    batches = lr.chunk(rows, args.size)
+    ids = []
+    try:
+        for i, group in enumerate(batches, 1):
+            bid = args.batch_id if len(batches) == 1 else f"{args.batch_id}_{i:03d}"
+            lr.export(group, bid, args.out)
+            ids.append(bid)
+    except lr.UnsafePath as e:
+        print(e, file=sys.stderr)
+        return 1
+    print(f"출처: {source}")
+    print(f"댓글 {len(rows)}건을 {len(batches)}묶음으로 내보냈다 → {args.out}")
+    print(f"  프롬프트 {prompt.name} {prompt.version} · 결과는 검증 전 AI 판정")
+    print("\n다음: 각 묶음의 .md 를 읽고 판정해 <batch>.result.json 으로 저장한 뒤")
+    print(f"      python -m app.cli import-reaction-batch {ids[0]} --out {args.out}")
+    return 0
+
+
+def cmd_import_reaction_batch(args) -> int:
+    """판정 결과를 검증해 comment_reactions (또는 --labels-out 라벨 파일) 에 넣는다."""
+    out_dir = pathlib.Path(args.out)
+    map_path = out_dir / f"{args.batch_id}.map.json"
+    res_path = out_dir / f"{args.batch_id}.result.json"
+    for p in (map_path, res_path):
+        if not p.exists():
+            print(f"없다: {p}", file=sys.stderr)
+            return 1
+    meta = json.loads(map_path.read_text(encoding="utf-8"))
+    result = json.loads(res_path.read_text(encoding="utf-8"))
+    try:
+        prompt = registry.get(lr.PROMPT_NAME, version=result.get("prompt_version"))
+        rows = lr.validate_reactions(result, meta["map"], meta.get("texts"))
+    except registry.PromptError as e:
+        print(e, file=sys.stderr)
+        return 1
+    except lr.ValidationError as e:
+        print(f"검증 실패 — 저장하지 않았다.\n  {e}", file=sys.stderr)
+        return 1
+
+    model = result.get("model", "claude-code-offline")
+    flagged = sum(1 for r in rows if r["review_flag"])
+    print(f"검증 통과: {len(rows)}건 · review_flag {flagged}건 "
+          f"(prompt_version={prompt.version}, model={model}) · 검증 전 AI 판정")
+    if args.dry_run:
+        print("--dry-run 이라 저장하지 않았다.")
+        return 0
+    if args.labels_out:
+        try:
+            n = lr.merge_into_label_file(args.labels_out, rows,
+                                         prompt_version=prompt.version, model=model)
+        except (lr.UnsafePath, ValueError) as e:
+            print(e, file=sys.stderr)
+            return 1
+        print(f"라벨 파일 {args.labels_out} 에 반영했다 (누적 {n}건).")
+        return 0
+    n = lr.save_reactions(connect(args.db), rows, prompt.version, model,
+                          log=lambda m: print(m, file=sys.stderr))
+    print(f"comment_reactions 에 {n}건 저장했다.")
+    return 0
+
+
+def cmd_label_reactions(args) -> int:
+    """Reaction·Target 을 Anthropic API 로 판정한다. **금전 비용이 나간다.**"""
+    if args.dry_run:
+        client = claude.ClaudeClient(
+            api_key="", model=args.model or config.get("ANTHROPIC_MODEL", claude.DEFAULT_MODEL))
+    else:
+        client = claude.from_config(config, model=args.model)
+    try:
+        rows, source = _reaction_rows(args)
+        print(f"출처: {source}")
+        if args.labels_out:
+            lr.ensure_private_path(args.labels_out)
+        conn = None if (args.input or args.dry_run) else connect(args.db)
+        if args.input and not args.labels_out and not args.dry_run:
+            print("--input 으로 판정할 때는 --labels-out 이 필요하다 "
+                  "(raw 댓글은 DB 에 없을 수 있다).", file=sys.stderr)
+            return 1
+        p = lr.run(client, rows, conn=conn,
+                   labels_out=args.labels_out if args.input else None,
+                   model=args.model, size=args.size, dry_run=args.dry_run)
+    except lr.UnsafePath as e:
+        print(e, file=sys.stderr)
+        return 1
+    except claude.MissingPackage as e:
+        print(e, file=sys.stderr)
+        return 1
+    except claude.ClaudeError as e:
+        print(f"[중단] {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+    return 1 if p.failed else 0
+
+
+def cmd_export_reactions(args) -> int:
+    """DB 의 판정을 평가 도구가 읽는 라벨 파일로. rationale 이 들어가 data/ 에만 쓴다."""
+    try:
+        out = lr.ensure_private_path(args.out)
+    except lr.UnsafePath as e:
+        print(e, file=sys.stderr)
+        return 1
+    prompt = registry.get(lr.PROMPT_NAME)
+    version = args.prompt_version or prompt.version
+    model = args.model or config.get("ANTHROPIC_MODEL", claude.DEFAULT_MODEL)
+    data = lr.labels_from_db(connect(args.db), version, model)
+    if not data["labels"]:
+        print(f"({version}, {model}) 로 저장된 판정이 없다.", file=sys.stderr)
+        return 1
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"{len(data['labels'])}건 → {out} (검증 전 AI 판정)")
+    return 0
+
+
+def cmd_reaction_sheet(args) -> int:
+    """raw JSON → 사람 판정 시트 HTML. 원문이 들어가 backend/data/ 밖이면 거부한다."""
+    try:
+        info = reaction_sheet.write_sheet(args.raw, args.out)
+    except lr.UnsafePath as e:
+        print(e, file=sys.stderr)
+        return 1
+    print(f"시트 {info['path']}")
+    print(f"  댓글 {info['comments']}건 (분석 제외로 뺀 것 {info['skipped_ineligible']}건) · "
+          f"sheet_id {info['sheet_id']}")
+    print("  브라우저로 열어 판정하고 「JSON 내보내기」 결과를 backend/data/ 아래에 둔다.")
+    print("  이 HTML 에는 댓글 원문이 들어 있다 — 커밋하지 않는다.")
+    return 0
+
+
+def cmd_reaction_eval(args) -> int:
+    """두 라벨 파일의 일치도. 출력은 숫자와 comment_id 뿐이다."""
+    try:
+        a, meta_a = reaction_eval.load_labels(args.a)
+        b, meta_b = reaction_eval.load_labels(args.b)
+    except lr.ValidationError as e:
+        print(f"입력 검증 실패 — 계산하지 않았다.\n  {e}", file=sys.stderr)
+        return 1
+    report = reaction_eval.evaluate(a, b)
+    if report["n_compared"] == 0:
+        print("공통 comment_id 가 없다.", file=sys.stderr)
+        return 1
+    print(reaction_eval.render(report, meta_a, meta_b, max_ids=args.max_ids))
+    if args.out:
+        out = pathlib.Path(args.out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({"a": meta_a, "b": meta_b, **report},
+                                  ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"\nJSON → {out}")
+    return 0
+
+
+# --------------------------------------------------------------------------
 # report — 6단계 집계와 결론
 # --------------------------------------------------------------------------
 
@@ -1173,6 +1373,59 @@ def main() -> int:
     lb.add_argument("--dry-run", action="store_true",
                     help="대상 건수와 묶음 수만 세고 호출하지 않는다")
     lb.set_defaults(fn=cmd_label)
+
+    # -- Reaction Phase 3 -------------------------------------------------
+    def reaction_source(sp, default_model=None):
+        sp.add_argument("--input", help="raw 수집 JSON ({comments:[...]}). 없으면 DB")
+        sp.add_argument("--video-id")
+        sp.add_argument("--limit", type=int, help="이만큼만")
+        sp.add_argument("--size", type=int, default=20, help="묶음 크기")
+        sp.add_argument("--model", default=default_model,
+                        help="'이 모델로 아직 판정 안 된 것'을 고르는 기준")
+
+    erb = sub.add_parser("export-reaction-batch",
+                         help="Reaction·Target 판정용 묶음 파일 (API 불필요, 비용 0)")
+    erb.add_argument("batch_id")
+    reaction_source(erb, "claude-code-offline")
+    erb.add_argument("--out", default="./data/batches/reaction",
+                     help="원문이 들어가 backend/data/ 아래만 허용")
+    erb.set_defaults(fn=cmd_export_reaction_batch, labels_out=None)
+
+    irb = sub.add_parser("import-reaction-batch",
+                         help="Reaction 판정 결과를 검증하고 저장 (비용 0)")
+    irb.add_argument("batch_id")
+    irb.add_argument("--out", default="./data/batches/reaction")
+    irb.add_argument("--labels-out",
+                     help="DB 대신 이 라벨 파일에 반영 (fresh raw 표본용, backend/data/ 아래)")
+    irb.add_argument("--dry-run", action="store_true", help="검증만 하고 저장하지 않음")
+    irb.set_defaults(fn=cmd_import_reaction_batch)
+
+    lrp = sub.add_parser("label-reactions",
+                         help="Reaction·Target 을 API 로 판정 — 돈이 나간다 (검증 전 AI 판정)")
+    reaction_source(lrp)
+    lrp.add_argument("--labels-out",
+                     help="--input 과 함께: DB 대신 이 라벨 파일에 (backend/data/ 아래)")
+    lrp.add_argument("--dry-run", action="store_true",
+                     help="대상 건수와 묶음 수만 세고 호출하지 않는다 (키 없이도 돈다)")
+    lrp.set_defaults(fn=cmd_label_reactions)
+
+    erx = sub.add_parser("export-reactions", help="DB 의 Reaction 판정 → 평가용 라벨 파일")
+    erx.add_argument("--out", default="./data/reaction-labels/ai.json")
+    erx.add_argument("--prompt-version")
+    erx.add_argument("--model", help="기본은 .env 의 ANTHROPIC_MODEL")
+    erx.set_defaults(fn=cmd_export_reactions)
+
+    rsh = sub.add_parser("reaction-sheet", help="사람 판정 시트 HTML (원문 포함 → backend/data/ 만)")
+    rsh.add_argument("raw", help="raw 수집 JSON")
+    rsh.add_argument("--out", default="./data/reaction-sheets/sheet.html")
+    rsh.set_defaults(fn=cmd_reaction_sheet)
+
+    rev = sub.add_parser("reaction-eval", help="두 라벨 파일의 일치도 (A=기준, B=비교)")
+    rev.add_argument("a")
+    rev.add_argument("b")
+    rev.add_argument("--out", help="JSON 보고서 경로 (숫자와 comment_id 만 담긴다)")
+    rev.add_argument("--max-ids", type=int, default=50, help="화면에 보일 어긋난 ID 수")
+    rev.set_defaults(fn=cmd_reaction_eval)
 
     s = sub.add_parser("stats", help="수집 현황과 설정 상태")
     s.set_defaults(fn=cmd_stats)
