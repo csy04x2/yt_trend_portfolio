@@ -23,6 +23,8 @@ def clusters(comments,duration,window=30):
    buckets[b].add(c['comment_id'])
    if len(examples[b])<3:examples[b].append({'text':c['text'][:350],'comment_id':c['comment_id']})
  return {'timestamp_comments':n,'window_seconds':window,'bins':[{'start':b*window,'progress':b*window/duration,'n':len(ids),'examples':examples[b]} for b,ids in sorted(buckets.items())]}
+# non-canonical (provisional/legacy): peer 가 실험 split 전체에서 나온다.
+# canonical 정의는 app.pipeline.reference.canonical_view_multiple (docs/design/reference-population.md).
 def compare(video,videos):
  age=video['age_days'];tolerance=max(2,age*.2)
  peers=[v for v in videos if v['video_id']!=video['video_id'] and v['length_axis']==video['length_axis'] and abs(v['age_days']-age)<=tolerance and not v['is_live'] and v['view_count'] is not None]
