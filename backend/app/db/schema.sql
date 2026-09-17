@@ -308,3 +308,37 @@ CREATE TABLE IF NOT EXISTS comment_features (
 );
 CREATE INDEX IF NOT EXISTS idx_comment_features_ver
     ON comment_features(extractor_version);
+
+-- Reaction Phase 3 — Reaction·Target AI 판정 (pipeline/label_reactions.py).
+-- comment_labels(감성·주제) 와 **다른 체계**라 다른 표다. 같은 표에 넣으면
+-- topics_json 의 T1 (정보·내용) 과 여기의 T1 (콘텐츠 전체) 이 같은 이름으로
+-- 섞인다. 키는 comment_labels 와 같이 (댓글, 프롬프트 버전, 모델) 이다.
+--
+-- 기준: docs/reaction-phase1-checkpoint.md · docs/reaction-track-closeout-2026-09-17.md.
+-- 독립 fresh 표본 검증 전까지 이 표의 값은 전부 「검증 전 AI 판정」이다.
+--
+--   reactions_json  ["R1","R7"]. [] = Reaction=None (반응 없음).
+--                   ["UNKNOWN"] = 판정 불가. None 과 UNKNOWN 은 다르다.
+--   targets_json    ["T2","T3"] 또는 ["UNKNOWN"]. [] 는 Reaction=None 일 때만.
+--   timestamps_json 원문에 글자 그대로 있는 timestamp 문자열만 ["32:19"].
+--                   추정한 장면·시각은 들어오지 않는다 (H2).
+--   review_reason   APPLICATION_ERROR / DEFINITION_BOUNDARY / STRUCTURE_CANDIDATE.
+--                   review_flag=0 이면 NULL. review_flag=0 이 정답이라는 뜻은 아니다.
+--
+-- 분석 대상 여부(H3)는 이 표가 아니라 댓글 쪽 상태가 정한다. 채널 본인 댓글
+-- 제외는 집계 단계의 일이다.
+CREATE TABLE IF NOT EXISTS comment_reactions (
+    comment_id      TEXT NOT NULL REFERENCES comments(comment_id),
+    prompt_version  TEXT NOT NULL,
+    model           TEXT NOT NULL,
+    reactions_json  TEXT NOT NULL,
+    targets_json    TEXT NOT NULL,
+    timestamps_json TEXT NOT NULL DEFAULT '[]',
+    review_flag     INTEGER NOT NULL DEFAULT 0,
+    review_reason   TEXT,
+    rationale       TEXT,
+    labeled_at      TEXT NOT NULL,
+    PRIMARY KEY (comment_id, prompt_version, model)
+);
+CREATE INDEX IF NOT EXISTS idx_comment_reactions_version
+    ON comment_reactions(prompt_version, model);
