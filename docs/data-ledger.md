@@ -47,7 +47,7 @@ A–F는 데이터 계보 식별자다. B-V는 B 댓글과 별개인 영상 자�
 | C. 침착맨 Reaction Phase 1 | 침착맨 | 300 unique comments / 300행 / 10영상 | 댓글 raw·Phase 1 분할 | 있음(제공된 audit) | `OUTPUTS/raw-comment-pilot-seed42/collection/comments.jsonl` | `OUTPUTS/reaction-matrix-phase1/`의 50/250 comments 및 manifest | 300 전체 Reaction Phase 1/vNext 검토 | 전체 실험 사용 확정; 인간의 구체적 열람 범위 확인 필요 | NO | used | raw 유실 아님; reserve 파일 250건은 fresh reserve 아님 |
 | D. 침착맨 sentiment/topic 댓글 | 침착맨 | 400 unique comments / 2영상 / 200건씩 | sentiment/topics v2 라벨 | raw 별도 보존 여부 확인 필요 | 확인 필요 | `backend/exports/resumed-analysis-20260910T074639Z/chim-labels.json`, `chim-report.json` | 현재 검색에서 확인된 사용은 sentiment/topic; resumed analysis에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | 댓글 단위 확인 필요; Phase 2 채널 제외 | conditional | C와 댓글·영상 overlap 모두 0; 침착맨 채널 전체 Phase 2 제외 |
 | E. 침착맨 영상 DB / Content Feature | 침착맨 | 300영상; comments=0 | 영상·통계·Feature 자산 | 있음(영상 DB; 제공된 audit) | `LEGACY/backend/data/chim.db` | content/discovery/split/90-video packet 및 `docs/prototype/chim-evidence.json` | Content Feature / Feature Discovery; 세부 이력 확인 필요 | 확인 필요 | 확인 필요; 댓글 raw로 사용 불가 | source check needed | 댓글 300/400과 별도 축; 관련 파일과 DB의 세부 대응 확인 필요 |
-| F. Carden 댓글 분석 | 카더정원 | 과거 채널 300영상; 댓글 표본 2영상 × 200건=400 | sentiment/topic v2 라벨·report | 현재 audited workspace에서 raw source 미복구 | historical `backend/data/carden.db`, `backend/data/backups/carden-<timestamp>.db` | `backend/exports/resumed-analysis-20260910T074639Z/carden-labels.json`, `carden-report.json`; historical batches | sentiment/topic v2; 해당 분석에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | CONDITIONAL / 확인 필요 | source check needed | raw 복구와 Reaction 사용 이력 확인은 별도 조건 |
+| F. Carden 댓글 분석 | 카더정원 | 과거 채널 300영상; 댓글 표본 2영상 × 200건=400 | sentiment/topic v2 라벨·report | 있음(2026-09-17 저장소에 추가) | `backend/data/carden.db` (Git 추적; 이 파일만 `backend/data/` ignore 예외로 강제 추가); historical backup `backend/data/backups/carden-<timestamp>.db` | `backend/exports/resumed-analysis-20260910T074639Z/carden-labels.json`, `carden-report.json`; historical batches | sentiment/topic v2; 해당 분석에 R1–R8 미포함 | human gold validation 없음; 원문 열람 범위 확인 필요 | CONDITIONAL / 확인 필요 | source check needed | raw는 복구됨; Reaction 사용 이력 확인은 여전히 별도 조건; DB에 작성자 닉네임(author_name) 포함 |
 | G. Feature Discovery 파생 산출물 | source별 확인 필요 | 독립 규모 확인 필요; 추가 댓글로 계산하지 않음 | probe·split·registry·predictions·annotations·report 등 | source별 확인 필요 | source dataset에 연결; 불명확하면 확인 필요 | 아래 G 목록 | 산출물별 이력 확인 필요 | 산출물별 확인 필요 | source 및 사용 이력 확인 필요 | source check needed | source가 확인되면 해당 계보의 파생본으로 연결 |
 | H. backup tree | source별 | 독립 규모로 계산하지 않음 | 안전 복사본·과거 상태 | 파일별 확인 필요 | `BASE/backups/feature-discovery-pre-integration-20260914T041808Z` | 같은 backup tree | 보존 | 원본 이력 및 별도 열람 확인 필요 | 원본의 사용/노출 이력 승계; 확인 필요 | source check needed | 복사본은 새 blind 데이터가 아님 |
 | I. Reaction Phase 2 표본 | 슈카월드, MBCNEWS | 200 top-level comments / 4영상 / 50건씩 | 댓글 raw·봉인 표본 | 있음 | 수집 PC(`C:/Users/EZ/Desktop/yt-trend`)의 gitignored `backend/data/phase2-reaction/2026-09-17/raw_collection.json`; 판정 담당자에게 파일로 전달한 사본 | `backend/fixtures/phase2-reaction/sealed_sample.jsonl`, `manifest.json`(원문 없음); `docs/reports/phase2-reaction-sampling-2026-09-17.md` | Reaction Phase 2 판정용으로 수집; 수집 시점 판정·분포 계산 없음 | 수집 과정에서 사람·모델 원문 열람 없음; 판정용 원문 전달은 2026-09-17 | YES(수집 시점) | usable | 봉인 표본·raw 수정 금지, 판정 결과는 별도 파일; raw는 GitHub에 올리지 않음 |
@@ -156,7 +156,9 @@ historical batch 경로는 `backend/data/batches/carden/comments/carden_001.resu
 
 현재 audited workspace에서는 carden.db/backup raw source가 복구되지 않았다. 이 사실을 외부 백업까지 모두 없다는 의미로 확장하지 않는다. Reaction 사용 증거가 현재 확인되지 않은 문제와 raw source 미복구 문제를 별도로 관리한다. raw 미복구만으로 오염됐다고 단정하지 않는다.
 
-Reaction fresh blind=CONDITIONAL / 확인 필요, 상태=source check needed다. source recovery 및 provenance/Reaction 사용 이력 확인 전에는 Phase 2 입력으로 사용하지 않는다.
+2026-09-17 추가: 수집 PC(`C:/Users/EZ/Desktop/yt-trend`)에 남아 있던 `backend/data/carden.db`를 사람 지시에 따라 바이트 그대로 저장소에 올렸다. 1,024,000 bytes, SHA-256 `39b60f9e8a063ad2e99fc3c07d5d247febd86a4983b512488aeff6a41fcfb734`. `comments` 400건의 comment_id 집합이 `carden-labels.json` 400건과 정확히 같다. 같은 DB에 영상 300, 통계 스냅샷 302, 댓글 screen·라벨 각 400, 영상 유형 라벨 369, report 9행이 있다. 댓글 원문, `author_channel_id`, `author_name`이 포함되어 있으며 사람이 원본 그대로 올리기로 결정했다. raw source 복구 조건은 충족됐지만 Reaction 사용 이력 확인 조건은 그대로 남는다.
+
+Reaction fresh blind=CONDITIONAL / 확인 필요, 상태=source check needed다. Reaction 사용 이력 확인 전에는 Phase 2 입력으로 사용하지 않는다.
 
 ### G. Feature Discovery / 파생 산출물
 
@@ -231,7 +233,7 @@ Reaction fresh blind 판정에서는 다음을 각각 확인하고 기록한다.
 | Woni 400 | fresh 제외 | Reaction open discovery 및 taxonomy/vNext 설계 사용 |
 | 침착맨 Reaction Phase 1 300 | fresh 제외 | 300 전체 Phase 1/vNext 검토 사용 |
 | 침착맨 sentiment/topic 400 | Phase 2 채널 제외 | Phase1과 comment/video overlap=0 및 sentiment/topic 사용 이력은 유지; 댓글 단위 fresh 여부 확인 필요와 별개로 침착맨 전체 제외 |
-| Carden 400 | 조건부, source check needed | Reaction 사용 증거 현재 미확인; raw DB/source 미복구; source recovery/provenance 및 사용/노출 확인 필요 |
+| Carden 400 | 조건부, source check needed | Reaction 사용 증거 현재 미확인; raw DB는 2026-09-17 저장소에 추가됨; 사용/노출 확인 필요 |
 
 현재 Phase 2는 taxonomy 설계에 사용하지 않은 새로운 채널 2개 × 100댓글 = 200댓글을 기본 설계로 한다. 14F, Woni / 안원잘부, 침착맨은 댓글 ID 비중복 여부와 무관하게 채널 단위로 제외한다. Carden은 raw 복구 및 provenance/사용 이력 확인이 필요한 조건부 자산이며 선정 확정이 아니다. 기존 데이터의 충분성이나 추가 수집 필요성을 이 장부에서 단정하지 않는다. 기준 정본은 [Phase 1 checkpoint의 Phase 2 운영 원칙](reaction-phase1-checkpoint.md)이다.
 
@@ -246,7 +248,7 @@ Reaction fresh blind 판정에서는 다음을 각각 확인하고 기록한다.
 3. B의 raw 별도 보존 위치; B-V의 실제 규모, provenance 및 사용 이력.
 4. D의 원문 입력/raw 위치, Reaction taxonomy/Matrix 사용·노출 이력 및 Reaction 판정 존재 여부. C/D overlap은 이미 0으로 확정되어 미확정 항목으로 되돌리지 않음.
 5. E의 관련 content/discovery 파일 전체 경로, 영상 DB와의 세부 계보 및 사용 이력.
-6. F의 DB/backup/batch source 복구 가능성 및 provenance; Reaction 설계/판정 사용 이력; 표본 구성.
+6. F의 batch 파일 보존 여부(DB raw는 2026-09-17 복구); Reaction 설계/판정 사용 이력; 표본 구성.
 7. G/H 개별 산출물·복사본의 source 연결, 보존 위치 및 사용/노출 이력.
 8. 자산별 수집 방법·표본 추출 방법 등 이번 확정 사실에 포함되지 않은 세부 provenance.
 
