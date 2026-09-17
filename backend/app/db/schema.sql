@@ -350,3 +350,59 @@ CREATE TABLE IF NOT EXISTS comment_reactions (
 );
 CREATE INDEX IF NOT EXISTS idx_comment_reactions_version
     ON comment_reactions(prompt_version, model);
+
+-- Reaction 결과 연결 (Stage 08 사실) — pipeline/reaction_metrics.py,
+-- 설계: docs/design/reaction-report.md.
+--
+-- comment_reactions 를 분석 대상 댓글(analysis_eligible=1, own_channel 제외)만으로
+-- 접은 **수치**다. 문장·해석은 넣지 않는다 (해석은 Stage 09, app/interpret/).
+-- 한 (prompt_version, model) 만 접는다 — 섞으면 같은 댓글이 두 번 세어진다.
+--
+--   scope        video | channel | type | tier
+--   group_key    video_id | 'channel' | type_code | t1·t2·t3·unknown
+--   taxonomy_id  type 이면 체계 id, 아니면 0. PK 열에 NULL 을 두지 않는다
+--                (type_metrics 가 합침을 'all' 로 두는 것과 같은 이유)
+--   length_axis  shorts | longform | all
+--   *_counts_json  라벨별 댓글 수. 다중 라벨이라 합이 n_comments 를 넘을 수 있다
+--   *_shares_json  라벨별 「그 라벨을 가진 댓글 ÷ n_comments」. n_comments 가
+--                  최소치 미만이면 전부 null (masked=1, 이유는 basis). 수는 남긴다
+--   none_*       Reaction=None ([]) 댓글. UNKNOWN(판정 불가)과 따로 센다
+--   performance_json  tier 일 때 성과값 정의·canonical 여부·manifest 해시·경계. 아니면 {}
+--   sampling_json     observation_sampling 이 있으면 완결성·포함 확률 출처. 가중은 하지 않는다
+--   validation_status 독립 fresh 표본 검증 전까지 항상 '검증 전 AI 판정'
+--
+-- 이 표는 MVP Finding(feature_outcome) 입력이 아니다 (closeout 「2026-09-17 재개 결정」).
+CREATE TABLE IF NOT EXISTS reaction_metrics (
+    channel_id           TEXT NOT NULL,
+    run_id               TEXT NOT NULL,
+    prompt_version       TEXT NOT NULL,
+    model                TEXT NOT NULL,
+    scope                TEXT NOT NULL,
+    taxonomy_id          INTEGER NOT NULL DEFAULT 0,
+    group_key            TEXT NOT NULL,
+    length_axis          TEXT NOT NULL,
+    n_videos             INTEGER NOT NULL DEFAULT 0,
+    n_eligible_comments  INTEGER NOT NULL DEFAULT 0,
+    n_comments           INTEGER NOT NULL DEFAULT 0,
+    labeled_ratio        REAL,
+    reaction_counts_json TEXT NOT NULL,
+    reaction_shares_json TEXT NOT NULL,
+    none_count           INTEGER NOT NULL DEFAULT 0,
+    none_share           REAL,
+    unknown_count        INTEGER NOT NULL DEFAULT 0,
+    unknown_share        REAL,
+    target_counts_json   TEXT NOT NULL,
+    target_shares_json   TEXT NOT NULL,
+    no_target_count      INTEGER NOT NULL DEFAULT 0,
+    multi_reaction_count INTEGER NOT NULL DEFAULT 0,
+    review_flag_count    INTEGER NOT NULL DEFAULT 0,
+    masked               INTEGER NOT NULL DEFAULT 0,
+    basis                TEXT NOT NULL,
+    performance_json     TEXT NOT NULL DEFAULT '{}',
+    sampling_json        TEXT NOT NULL DEFAULT '{}',
+    metrics_version      TEXT NOT NULL,
+    validation_status    TEXT NOT NULL DEFAULT '검증 전 AI 판정',
+    computed_at          TEXT NOT NULL,
+    PRIMARY KEY (channel_id, run_id, prompt_version, model, scope, taxonomy_id,
+                 group_key, length_axis)
+);

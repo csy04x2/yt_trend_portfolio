@@ -27,6 +27,7 @@ Reaction Phase 3 (결과는 전부 「검증 전 AI 판정」 — docs/design/re
     export-reactions       DB 의 Reaction 판정을 평가용 라벨 파일로
     reaction-sheet         사람 판정 시트 HTML 생성 (원문이 들어가 backend/data/ 에만)
     reaction-eval          두 라벨 파일의 일치도 (숫자와 comment_id 만 출력)
+    reaction-metrics       판정을 영상·채널·유형·성과 층으로 접어 reaction_metrics 에 (Stage 08 사실, 비용 0)
 
 지금 답이 필요한 질문 — 규칙이 무엇을 잘못 버리는가 — 은 `rules`만으로
 답할 수 있다. 그 답을 모델과 대조하려면 `export-screen-batch` 로 비용 없이
@@ -1142,6 +1143,35 @@ def cmd_reaction_eval(args) -> int:
     return 0
 
 
+def cmd_reaction_metrics(args) -> int:
+    """comment_reactions → reaction_metrics (Stage 08 사실). 문장은 만들지 않는다."""
+    from app.pipeline import reaction_metrics as rm
+
+    conn = connect(args.db)
+    ch = args.channel_id or (conn.execute("SELECT channel_id FROM channels LIMIT 1").fetchone() or [None])[0]
+    if not ch:
+        print("채널이 없다.", file=sys.stderr)
+        return 1
+    if not rm.label_versions(conn):
+        print("comment_reactions 에 판정이 없다 — 먼저 import-reaction-batch 또는 "
+              "label-reactions 를 돌린다. (저장한 행 0)", file=sys.stderr)
+        return 1
+    manifest = None
+    if args.reference_manifest:
+        manifest = json.loads(pathlib.Path(args.reference_manifest).read_text(encoding="utf-8"))
+    run_id = uuid.uuid4().hex[:12]
+    records = rm.run(conn, ch, run_id, prompt_version=args.prompt_version, model=args.model,
+                     manifest=manifest, sampling_run_id=args.sampling_run)
+    by = {}
+    for r in records:
+        by[(r["prompt_version"], r["model"], r["scope"])] = by.get(
+            (r["prompt_version"], r["model"], r["scope"]), 0) + 1
+    for (pv, mdl, scope), n in sorted(by.items()):
+        print(f"  ({pv}, {mdl}) {scope}: {n}행")
+    print(f"reaction_metrics 에 {len(records)}행 저장 (run={run_id}) · {rm.VALIDATION_STATUS}")
+    return 0
+
+
 # --------------------------------------------------------------------------
 # report — 6단계 집계와 결론
 # --------------------------------------------------------------------------
@@ -1435,6 +1465,15 @@ def main() -> int:
     rev.add_argument("--out", help="JSON 보고서 경로 (숫자와 comment_id 만 담긴다)")
     rev.add_argument("--max-ids", type=int, default=50, help="화면에 보일 어긋난 ID 수")
     rev.set_defaults(fn=cmd_reaction_eval)
+
+    rmx = sub.add_parser("reaction-metrics",
+                         help="Reaction 판정 → 영상·채널·유형·성과 층 수치 (Stage 08, 비용 0, 검증 전 AI 판정)")
+    rmx.add_argument("--channel-id")
+    rmx.add_argument("--prompt-version", help="--model 과 함께. 없으면 DB 의 조합마다 따로")
+    rmx.add_argument("--model")
+    rmx.add_argument("--reference-manifest", help="동결 manifest. 주면 성과 층에 canonical 조회 배수")
+    rmx.add_argument("--sampling-run", help="observation_sampling 실행 id. 없으면 최근 실행")
+    rmx.set_defaults(fn=cmd_reaction_metrics)
 
     s = sub.add_parser("stats", help="수집 현황과 설정 상태")
     s.set_defaults(fn=cmd_stats)
