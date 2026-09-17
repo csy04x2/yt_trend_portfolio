@@ -89,4 +89,4 @@ Repository에는 Phase 2의 raw/coded/audit 원문 파일을 새로 만들지 �
 
 ## Product decision
 
-전체 Reaction classifier는 MVP Finding의 Audience Behavior 입력으로 사용하지 않는다. R3 애착·응원, R2 비판·불만 등 selective semantic signal은 후보로만 보존하며 production-ready 또는 empirically valuable이라고 선언하지 않는다. 다음 제품 우선순위는 observable Audience Behavior와 Finding input contract다.
+전체 Reaction classifier는 MVP Finding의 Audience Behavior 입력으로 사용하지 않는다. R2 관계·정서(애착·응원), R4 비판·불만 등 selective semantic signal은 후보로만 보존하며 production-ready 또는 empirically valuable이라고 선언하지 않는다. 다음 제품 우선순위는 observable Audience Behavior와 Finding input contract다.
