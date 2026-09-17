@@ -42440,5 +42440,134 @@
         "new": 0.42117536664238625
       }
     ]
+  },
+  "reaction_report": {
+    "validation_status": "검증 전 AI 판정",
+    "state": "empty",
+    "empty_message": "아직 판정 결과 없음 — 판정 실행 후 채워짐",
+    "finding_input": false,
+    "metrics_version": "reaction-metrics-v0.1",
+    "interpret_version": "reaction-interpret-v0.1",
+    "codes": {
+      "reactions": [
+        [
+          "R1",
+          "평가·칭찬"
+        ],
+        [
+          "R2",
+          "관계·정서"
+        ],
+        [
+          "R3",
+          "즐거움·놀이"
+        ],
+        [
+          "R4",
+          "비판·불만"
+        ],
+        [
+          "R5",
+          "시청 어려움·회피"
+        ],
+        [
+          "R6",
+          "당혹·의문"
+        ],
+        [
+          "R7",
+          "내용 참여"
+        ],
+        [
+          "R8",
+          "요청·제안"
+        ],
+        [
+          "R9",
+          "행동 지향"
+        ],
+        [
+          "R10",
+          "성과 참여"
+        ]
+      ],
+      "targets": [
+        [
+          "T1",
+          "콘텐츠 전체"
+        ],
+        [
+          "T2",
+          "내용·소재"
+        ],
+        [
+          "T3",
+          "인물"
+        ],
+        [
+          "T4",
+          "제작·표현"
+        ],
+        [
+          "T5",
+          "채널·커뮤니티"
+        ],
+        [
+          "UNKNOWN",
+          "판정 불가"
+        ]
+      ]
+    },
+    "source": {
+      "db": "chim.db",
+      "channel_id": "UCUj6rrhMTR9pipbAWBAMvUQ",
+      "prompt_version": null,
+      "model": null,
+      "versions_available": [],
+      "comment_reactions_table": false,
+      "n_labeled_comments": 0
+    },
+    "min_comments": 10,
+    "taxonomies": [],
+    "rows": [],
+    "performance": {},
+    "sampling": {},
+    "interpretation": {
+      "version": "reaction-interpret-v0.1",
+      "validation_status": "검증 전 AI 판정",
+      "finding_input": false,
+      "thresholds": {
+        "min_comments": 50,
+        "min_videos": 5,
+        "max_unknown_share": 0.2,
+        "min_diff": 0.1
+      },
+      "caveats": [
+        "모든 문장은 검증 전 AI 판정을 집계한 것이며 독립 fresh 표본 검증 전이다.",
+        "관계만 나타낸다. 원인이나 앞으로의 성과를 뜻하지 않는다.",
+        "여러 묶음 × 15개 라벨을 한꺼번에 비교했다. 우연히 기준을 넘는 차이가 섞일 수 있다.",
+        "표본 설계 가중치를 적용하지 않은 비가중 비율이다."
+      ],
+      "sentences": [],
+      "withheld": [],
+      "state": "empty"
+    },
+    "display_rules": [
+      "모든 Reaction·Target 값은 「검증 전 AI 판정」이다. 독립 fresh 표본 검증을 통과하기 전까지 배지를 뗄 수 없다.",
+      "MVP Finding 입력이 아니다. 화면의 문장은 참고용 해석이며 Finding 카드로 올리지 않는다.",
+      "비율은 「그 라벨을 가진 댓글 ÷ 판정된 분석 대상 댓글」이다. 한 댓글이 여러 Reaction 을 가질 수 있어 합이 100%를 넘는다.",
+      "Reaction 없음(None)과 판정 불가(UNKNOWN)는 따로 표시한다.",
+      "판정이 최소치보다 적은 묶음은 비율 대신 「표본 부족」으로 가린다.",
+      "판정 결과가 없으면 숫자를 만들지 않고 빈 상태를 보여 준다."
+    ],
+    "how_to_fill": [
+      "# backend/ 에서. <DB> 는 ./data/<채널>.db",
+      "python -m app.cli --db <DB> export-reaction-batch rx --out ./data/batches/reaction   # 오프라인 판정 묶음 (비용 0)",
+      "# 각 묶음 .md 를 Claude Code 로 판정해 rx_NNN.result.json 으로 저장한 뒤",
+      "python -m app.cli --db <DB> import-reaction-batch rx_001 --out ./data/batches/reaction  # → comment_reactions",
+      "python -m app.cli --db <DB> reaction-metrics                                          # Stage 08 수치 → reaction_metrics",
+      "python scripts/export_reaction_report.py --db <DB> --render                           # evidence JSON + 대시보드"
+    ],
+    "generated_at": "2026-09-17T07:40:34+00:00"
   }
 }

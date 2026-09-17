@@ -2,7 +2,7 @@
 
 기준 정본: [Reaction Phase 1 checkpoint](../reaction-phase1-checkpoint.md) (Reaction·Target 정의, H1–H4), [Reaction track closeout](../reaction-track-closeout-2026-09-17.md) (Final vNext, R9 행동 지향, 「2026-09-17 재개 결정」), [데이터 장부](../data-ledger.md) I항목 (Phase 2 200개, fresh-blind = NO).
 
-이 문서는 재개 결정의 범위 1(AI 판정 프롬프트와 판정기)과 범위 2(사람 판정과의 일치도 평가 도구)에서 **만든 것**과 **돌리는 법**, **검증 절차**를 적는다. taxonomy는 바꾸지 않았다. 범위 3(Stage 08 집계·09 해석·대시보드)과 범위 4(Content Feature·성과 결합)는 이 작업에 포함되지 않는다.
+이 문서는 재개 결정의 범위 1(AI 판정 프롬프트와 판정기)과 범위 2(사람 판정과의 일치도 평가 도구)에서 **만든 것**과 **돌리는 법**, **검증 절차**를 적는다. taxonomy는 바꾸지 않았다. 범위 3(Stage 08 집계·09 해석·대시보드)과 범위 4(Content Feature·성과 결합)는 이 작업에 포함되지 않는다. 범위 3은 [Reaction 결과를 리포트에 연결](reaction-report.md)에 있다.
 
 > **결과의 지위: 검증 전 AI 판정.** 아래 도구로 만든 Reaction·Target 값은 독립 fresh 표본 검증을 통과하기 전까지 전부 「검증 전 AI 판정」이다. MVP Finding 입력으로 쓰지 않고, 대시보드·리포트에 싣는 경우 그 사실을 표시한다(재개 결정의 제품 사용 조건).
 
