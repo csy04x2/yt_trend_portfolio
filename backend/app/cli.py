@@ -64,6 +64,7 @@ from app.pipeline import reaction_eval  # noqa: E402
 from app.pipeline import reaction_sheet  # noqa: E402
 from app.pipeline import screen_comments as sc  # noqa: E402
 from app.pipeline import segments as sg  # noqa: E402
+from app.pipeline.eligibility import apply_screen_exclusions  # noqa: E402
 from app.pipeline.engagement import run as engagement_run  # noqa: E402
 from app.pipeline.normalize import run as normalize_run  # noqa: E402
 from app.pipeline.offline_llm import (  # noqa: E402
@@ -384,7 +385,8 @@ def _load_comments(args) -> tuple[list[dict], str]:
         data = json.loads(pathlib.Path(args.fixture).read_text(encoding="utf-8"))
         return data["comments"], f"표본 {args.fixture}"
     conn = connect(args.db)
-    q = "SELECT comment_id, video_id, author_channel_id, text, like_count FROM comments"
+    q = ("SELECT comment_id, video_id, author_channel_id, text, like_count,"
+         " analysis_eligible, exclusion_reason FROM comments")
     params: tuple = ()
     if args.video_id:
         q += " WHERE video_id=?"
@@ -441,6 +443,10 @@ def cmd_rules(args) -> int:
                  json.dumps(s.rule_flags, ensure_ascii=False), s.verdict, now()),
             )
         print(f"\ncomment_screens 에 저장했다 (prompt_version={RULES_VERSION}, model={MODEL_RULE})")
+        # 규칙이 확정한 홍보(promo)만 spam_confirmed 로 분석에서 뺀다. 원문은 남는다.
+        # 의심(suspect_repeat)은 빼지 않는다 — docs/design/comment-eligibility.md
+        n_spam = apply_screen_exclusions(conn)
+        print(f"확정 스팸 표시 {n_spam}건 (analysis_eligible=0, 원문 보존)")
     return 0
 
 
@@ -452,8 +458,11 @@ def cmd_export_batch(args) -> int:
     comments, source = _load_comments(args)
     screens = {s.comment_id: s for s in screen_comments(comments, DEFAULT_CONFIG)}
     # 규칙을 통과한 것만 LLM으로 간다 (keep, suspect_repeat)
+    # 분석 대상이 아닌 댓글(채널 자신·잘못 들어온 데이터·확정 스팸)은 라벨하지 않는다.
+    # 표본 파일에는 이 열이 없으니 포함으로 본다 (docs/design/comment-eligibility.md)
     target = [c for c in comments
-              if screens[c["comment_id"]].verdict in ("keep", "suspect_repeat")]
+              if screens[c["comment_id"]].verdict in ("keep", "suspect_repeat")
+              and c.get("analysis_eligible", 1)]
     if not target:
         print("판정할 댓글이 없다.", file=sys.stderr)
         return 1
