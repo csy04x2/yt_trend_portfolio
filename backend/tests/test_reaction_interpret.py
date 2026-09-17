@@ -144,7 +144,9 @@ def test_thresholds_are_reported_with_output():
 # --------------------------------------------------------------------------
 
 def test_finding_and_stage08_code_do_not_import_reaction_outputs():
-    pat = re.compile(r"(app\.interpret|reaction_metrics|reaction_report)")
+    # import 문만 본다. reaction_join 의 출력 키 이름 같은 문자열 언급은 경계 위반이 아니다
+    pat = re.compile(r"^\s*(?:from|import)\s+[\w.]*(?:app\.interpret|reaction_metrics|reaction_report)",
+                     re.MULTILINE)
     for path in sorted((ROOT / "feature_outcome").glob("*.py")):
         assert not pat.search(path.read_text(encoding="utf-8")), f"{path.name} 가 Reaction 결과를 import 한다"
     for name in ("aggregate.py", "reaction_metrics.py", "observable.py"):
