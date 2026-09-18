@@ -16,3 +16,7 @@ __pycache__/
 frontend/node_modules/
 frontend/.next/
 frontend/.env*.local
+
+# Stage 2 local evidence outputs
+stage2_output/
+tools/stage2_evidence/stage2_output/
