@@ -195,3 +195,31 @@ def test_evaluate_keeps_U_out_of_accuracy():
     r = ch.evaluate(pred, ref, {"a": "long", "b": "long", "c": "shorts", "d": "shorts"})["f"]
     assert r["ref_nonU"] == 3 and r["pred_nonU_on_ref_nonU"] == 2 and r["agree"] == 1 and r["false_1"] == 1
     assert r["coverage"] == pytest.approx(2 / 3) and r["accuracy_on_covered"] == 0.5
+
+
+def test_offline_visual_roundtrip(tmp_path):
+    ids = list(FEATURE_ROUTING)
+    content = write(tmp_path, "e.json", {"videos": [video(1)]})
+    reg = write(tmp_path, "r.json", registry(ids))
+    out = tmp_path / "run"
+    assert ch.main(["run", "--content", str(content), "--registry", str(reg), "--out", str(out)]) == 0
+    vid = video(1)["video_id"]
+    ans = tmp_path / "answers"; ans.mkdir()
+    (ans / f"{vid}.json").write_text(json.dumps({"judgments": judgments([feature(f) for f in ids], "U")}), encoding="utf-8")
+    ev = tmp_path / "frames" / vid; ev.mkdir(parents=True)
+    jpg = b"\xff\xd8\xff\xe0" + b"0" * 64
+    (ev / "frame_1.jpg").write_bytes(jpg)
+    (ev / "evidence_packet.json").write_text(json.dumps({"frames": [{"path": "frame_1.jpg", "timestamp_sec": 5.0, "ratio": 0.25}]}), encoding="utf-8")
+    # 1차 import: 시각 입력이 내보내진다
+    assert ch.main(["import", "--run", str(out), "--answers", str(ans), "--evidence-root", str(tmp_path / "frames")]) == 0
+    vi = json.loads((out / "visual_input" / f"{vid}.json").read_text(encoding="utf-8"))
+    assert {f["feature_id"] for f in vi["features"]} == {f for f, r in FEATURE_ROUTING.items() if r == TEXT_THEN_VISUAL}
+    assert json.loads((out / "labels.json").read_text(encoding="utf-8"))["labels"][vid]["eating_content"] == "U"
+    # 2차 import: 시각 답안 반영. 프레임 근거로 1, 배제 근거 없는 0은 U
+    vans = tmp_path / "vanswers"; vans.mkdir()
+    js = [{"feature_id": f["feature_id"], "label": "0", "confidence": "high", "reason": "안 보임", "positive_exclusion": None} for f in vi["features"]]
+    js[0].update(label="1", reason="프레임에 먹는 장면")
+    (vans / f"{vid}.json").write_text(json.dumps({"judgments": js}), encoding="utf-8")
+    assert ch.main(["import", "--run", str(out), "--answers", str(ans), "--evidence-root", str(tmp_path / "frames"), "--visual-answers", str(vans)]) == 0
+    labels = json.loads((out / "labels.json").read_text(encoding="utf-8"))["labels"][vid]
+    assert labels[js[0]["feature_id"]] == "1" and labels[js[1]["feature_id"]] == "U"

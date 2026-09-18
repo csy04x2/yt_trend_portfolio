@@ -1,0 +1,43 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1·frame_2에서 진행자 외에 두 남성이 같은 테이블에 앉아 대화에 참여하고, frame_3에서는 그중 수염 난 남성이 카메라를 보며 발화함. 두 프레임 이상에서 제2 출연자가 활동에 참여하나, 제목·자막에 이름이 없어 고정 크루 여부는 확인 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 야구장 사진 이야기를 나누는 잡담 장면이며 강의·설명 자료가 없음. 자막에 지식 발언 자체가 없어 배제 예시를 인용할 수 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위표·대진표·탈락 구조가 frame_1~3 어디에도 보이지 않음. 자막 배제 근거가 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "frame_2에서 그릇과 젓가락으로 먹는 모습이 보이지만 frame_1·frame_3 및 자막 전체가 야구장 직관 사진과 체격 이야기로, 먹는 것은 배경이고 토크가 중심임.",
+      "positive_exclusion": {
+        "exclusion": "평냉 먹으며 탈모 토크 — 먹는 것이 배경이고 토크가 중심이면 0 후보(자막으로 판정)",
+        "caption_quote": "야구장에 직관을 갔다 사진 찍은 거",
+        "explanation": "자막 전체가 사진 속 체격 비교 토크이고 음식에 대한 언급이 한 줄도 없음. 먹는 장면은 배경."
+      }
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "특정 작품(영화·드라마·만화·책)의 자료가 화면에 나오거나 평하는 장면이 없음. 자막 배제 근거가 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

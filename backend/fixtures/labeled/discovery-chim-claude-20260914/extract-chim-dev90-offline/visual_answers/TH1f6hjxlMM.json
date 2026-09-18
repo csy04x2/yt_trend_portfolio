@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 파티 장식과 케이크·음식을 앞에 둔 세 명의 토크 장면이며 특정 작품 자료가 화면에 없다. 자막에도 「넷플릭스 그냥 고르는 것만 해도」, 「야차의 세계를 안 봤어」처럼 언급만 있고 리뷰·추천 구간이나 비유 사용을 확정할 인용은 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

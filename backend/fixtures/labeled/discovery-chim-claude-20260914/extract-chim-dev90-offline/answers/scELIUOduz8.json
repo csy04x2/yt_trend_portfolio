@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「제비 이거 키우시는 거예요? >> 지들이 왔어요」처럼 현지 주민이 한마디 답하지만 초대된 게스트라 보기 어렵고 나머지 화자는 크루로 보여 판정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "41초 쇼츠 자막 전체가 제비 새끼를 보고 감탄하는 내용(「대박이야 진짜 귀여워」)이며 지식 설명이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "대결·탈락·순위 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "작품 리뷰·추천이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "IP·캐릭터 참조가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「묵호 제비」는 장소+대상 명사구이며 대사가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "말장난·패러디 요소가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 41 ≤ 3600."
+    }
+  ]
+}

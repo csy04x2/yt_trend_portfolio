@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1과 frame_3에서 진행자 옆에 금발의 인물이 같은 책상에 앉아 대화에 참여하고 자막도 화자 전환(>>)이 있는 대화임. 두 프레임에서 제2 출연자가 확인됨. 제목의 기안84는 대화 소재로 언급될 뿐 화면에 없으며, 동석한 인물의 이름은 제목·자막에 없어 고정 크루 여부는 확인 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "침착맨·주펄·의중·종수가 배도라지 회원들에게 전화를 돌리고 통천·원박·기형 등이 전화로 발화하지만(「27일 날 시간 돼요?」), 이들이 고정 크루인지 외부 게스트인지 크루 명단 없이는 가릴 수 없고 스튜디오 초대 출연도 아니다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "high",
+      "reason": "전체 자막이 「베도라지 침목회를 부활시키겠습니다」, 「MT 추진 위원장」, 등산 날짜 조율 잡담이며 지식 설명 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "high",
+      "reason": "등산지 후보(대둔산·청계산·관악산)를 정하지만 대결·탈락·순위 구조가 아니라 일정 조율 대화다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「비빔밥 먹고. 한옥마을 가」처럼 계획 언급만 있고 먹거나 만드는 행위가 등장하지 않는다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "high",
+      "reason": "영화·드라마·책 등 작품을 보고 평하거나 추천하는 대목이 전체 자막에 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「롤하고 있어」, 「히오스했잖아」처럼 게임을 활동으로 지나가듯 말할 뿐 IP나 캐릭터를 소재·비유로 쓰지 않는다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "1",
+      "confidence": "low",
+      "reason": "「등산 갈 사람 구합니다」는 활동 설명이 아니라 사람을 모집하는 구어체 한 문장이며, 실제로 영상 내내 「더 갈 사람 있으면 오라 그래」 하며 전화를 돌린다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "발음 유사·합성어·표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 등 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 2580 ≤ 3600."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1·2는 침착맨 혼자 검은 의상과 칼로 동작, frame_3에 녹색 셔츠 남성이 가발을 만져 주는 듯 서 있으나 스태프인지 참여자인지 한 프레임으로 알 수 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 챌린지 동작뿐이며 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 순위 구조가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 작품 자료가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에서 뾰족한 검은 가발·선글라스·칼 차림의 '꼬마선장' 코스튬이 소재이지만 어떤 IP의 캐릭터인지 프레임과 제목만으로 특정되지 않는다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

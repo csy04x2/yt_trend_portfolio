@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '초대석' 형식이고 자막에서 '돌아온 김세정 님 그리고 소희 님 인사드리겠습니다' 이후 두 사람이 영상 내내 발화·참여한다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막이 I.O.I 재결합 준비, 안무 연습, 연기 이야기 등 토크로만 이어지며 특정 분야를 설명·강의하는 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "영상 본편은 토크 구조이며, 자막 마지막에 '월드컵 하나 하고 가면 좋으실 것 같아서'라고 예고만 하고 끝나므로 이 영상 안에 대결·순위 구조는 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "high",
+      "reason": "3만 자가 넘는 전체 자막에서 음식을 먹거나 만들거나 평가하는 장면이 전혀 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'아기레 신의 분노', '더 스퀘어' 등은 침팬지 연습 계기로 잠깐 언급될 뿐이고 자기 앨범 티저를 보는 것도 리뷰가 아니므로 특정 작품을 평하거나 추천하는 구간이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'혹성 탈출', '시저', '킹콩 펀치'를 비유로 잠깐 쓰는 대목은 있으나 한 시간 토크 중 스쳐 가는 농담 수준이라 소재·비유로 쓴다고 확정하기 어렵다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'I.O.I 김세정 & 김소혜 초대석'은 출연자와 코너를 적은 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "'초대석'은 채널이 게스트 코너에 반복해 쓰는 제목 표식이다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "'김세정 & 김소혜 초대석'으로 초대석 형식과 출연자 이름을 명시한다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 3423으로 3,600초 이하다."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1 「실리카겔 - NO PAIN」 라이브 공연, frame_2 「김한주의 얼굴 개인기」, frame_3 「실리카겔의 싸움 방식」 토크로 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위·대진 구조가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1은 밴드 본인의 곡을 공연하는 장면이며 타 작품을 평하는 자료가 아니다. frame_3의 삽입 영상도 카드 개인기 클립이다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2 삽입 사진은 실존 인물 얼굴 비교이고 IP 캐릭터가 아니다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

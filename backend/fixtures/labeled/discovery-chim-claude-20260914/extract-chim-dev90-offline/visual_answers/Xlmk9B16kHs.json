@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 두 여성 게스트와 진행자의 토크 장면이며 IP 캐릭터·소품이 화면의 소재로 등장하지 않는다(frame_2 배경의 오징어게임 피규어는 장식). 다만 자막에 '킹콩 펀치 봤을 때 킹콩 이거다'처럼 킹콩을 비유로 쓰는 대목과 영화 '신의 분노' 언급이 있어 0은 불가하고, 프레임으로 확인되지 않아 1도 아니다.",
+      "positive_exclusion": null
+    }
+  ]
+}

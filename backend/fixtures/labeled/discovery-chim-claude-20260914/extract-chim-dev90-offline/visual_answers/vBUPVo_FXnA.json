@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3 모두 진행자 혼자 방에서 말한다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3은 커피를 마시게 된 사연 잡담이며 강의 세팅이 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 순위·대진 구조가 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에서 커피 이야기('보급으로 커피를 줬어', '먹다 보니까 커피 중독됐잖아')를 하지만 실제로 먹거나 만드는 장면이 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 작품 자료가 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 IP 캐릭터·소품이 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    }
+  ]
+}

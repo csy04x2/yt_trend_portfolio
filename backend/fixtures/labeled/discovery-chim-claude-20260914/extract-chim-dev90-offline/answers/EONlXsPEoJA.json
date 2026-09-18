@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목의 「침철단」(침착맨·철면수심·단군) 세 사람이 「의중 씨」「병거 씨」「종수 씨」로 서로 부르며 진행하고, 외부 인물이 발화·참여하는 대목이 자막 전체에 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「나무위키 채널에 가요. 제시어를 시간 안에 링크를 타서 클릭만으로 도달하는 거예요」라는 게임 진행이 전부이며 지식 강의 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「제일 오래 걸린 사람이 벌칙을 받는 거죠」처럼 세 명의 기록을 시간순으로 줄 세워 꼴찌를 정하는 대결 구조가 뼈대이지만, 출연진 게임 대결이 여러 후보를 순위로 좁히는 월드컵 형식에 해당하는지는 정의상 불명확하다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「짜장면 먹기」가 벌칙 농담으로 잠깐 나올 뿐 먹거나 만드는 행위가 전혀 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「원피스 완결 나오면 보려고 아껴놨단 말이야」처럼 작품 언급은 있으나 특정 작품을 보고 평하거나 추천하는 구간은 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "랜덤 제시어 「번쩍번쩍 열매」로 「원피스」「악마의 열매」 문서를 타는 구간과 「울트라맨」「니달리」 언급이 있지만, 우연히 뽑힌 제시어일 뿐 영상의 소재·비유로 쓰였다고 보기엔 부족하다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「침철단 나무위키 스피드런 대결」은 활동을 서술하는 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「침철단」은 세 진행자 이름을 합친 줄임말성 팀명이며, 발음 유사나 기존 표현 비틀기의 말장난이 아니다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "「침철단」은 세 진행자 조합을 가리키는 채널의 반복 관계 표식이며, 자막에서도 「다음 침철단을 경주로 가기」처럼 시리즈로 언급된다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "「침철단」은 침착맨·철면수심·단군을 합친 진행자 별칭으로, 침풍뼈와 같은 방식으로 진행자를 명시한다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 형식의 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 2730 ≤ 3600."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「제가 최근에 라스 오브 어스 하잖아요」라고 존댓말로 말하는 상대가 고정 크루인지 초대 게스트인지 20초 쇼츠 자막만으로는 알 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "20초 전체가 게임 난이도에 관한 잡담(「어려우면 나한테 얘기하라고」)이며 지식 강의 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "20초 잡담 전체에 후보를 대결·순위로 좁히는 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막 전체가 게임 이야기이며 먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「라스 오브 어스」「고스트…」 등 특정 게임을 하다가 「어려웠어요」라고 말하지만, 20초 잡담이 작품을 보고 평하거나 추천하는 리뷰에 해당하는지는 불충분하다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「라스 오브 어스」라는 게임 IP가 대화 주제로 나오지만 자막이 짧고 표기가 뭉개져(「고스트 실심」) 소재·비유로 쓰였다고 확정하기 어렵다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "1",
+      "confidence": "high",
+      "reason": "「편하게 얘기해~」는 물결표까지 붙은 구어체 한마디로, 자막의 「어려우면 나한테 얘기하라고」 발화를 그대로 딴 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·기존 표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 형식의 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 20 ≤ 3600."
+    }
+  ]
+}

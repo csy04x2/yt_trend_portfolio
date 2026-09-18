@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "65자 자막(「동물원에서 회사한 동물들 어케해 …」)만으로는 화자 구성을 알 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「동물용 화영장이 따로 있음」 한 문장은 농담이며, 65자 자막으로 영상 전체를 판정할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 65자라 구조를 알 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 65자라 판정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 65자라 판정할 수 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목 「마수사냥」이 게임·작품 용어인지 불명확하고 자막에도 근거가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「마수사냥」은 명사구이며 영상 속 대사로 볼 근거가 없다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "low",
+      "reason": "「마수사냥」이 특정 표현을 비튼 것인지 확인할 수 없어 말장난으로 인정하지 않는다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 10 ≤ 3600."
+    }
+  ]
+}

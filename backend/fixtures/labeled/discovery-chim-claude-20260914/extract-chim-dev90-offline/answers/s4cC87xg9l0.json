@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '레거시 예능인 주우재의 필살기'와 자막 '기타의 달인입니다 여러분 ... 주우제 씨' 등에서 TV 예능인 주우재가 출연해 발화·공연하며 참여한다. 고정 크루 명단은 미확인이라 medium."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막이 주우재의 개인기·놀면 뭐하니 근황·식사 잡담이며 특정 분야 지식을 설명하는 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'화재성 1위 프로그램' 같은 표현만 있고 여러 후보를 대결·탈락·순위로 좁히는 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "'밥이 왔습니다', '양파 먹어', '다 드셨죠?'처럼 식사 장면이 있으나 중심은 '기타의 달인' 개인기와 토크로, 먹는 것이 중심 활동인지 자막만으로 판단하기 어렵다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "'돌싱 못솔 ... 아 봐봐 재밌어 재밌어'처럼 예능 프로그램을 잠깐 추천·설명하는 대목이 있으나 영화·드라마·만화·책 같은 작품 리뷰라기보다 잡담 속 언급이라 판정을 보류한다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'롤 티어 실버 2', '메이플' 등 게임 언급이 있으나 IP나 캐릭터를 소재·비유로 쓰는 것인지 단순 근황 언급인지 불분명하다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'레거시 예능인 주우재의 필살기'는 명사구 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 남매·매너·킹콩·챌린지류 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '주우재의 필살기'가 출연자 주우재를 명시한다. 포함 예시 '김신영이 알려주는 진짜 행복'과 같은 형식."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 2971 ≤ 3600."
+    }
+  ]
+}

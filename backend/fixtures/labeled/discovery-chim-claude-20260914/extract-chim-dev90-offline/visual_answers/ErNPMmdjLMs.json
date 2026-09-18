@@ -1,0 +1,32 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1 코너 자막에 '교수님' 호칭이 보이고, frame_2·3에서 회색 머리에 안경 쓴 남성이 진행자와 나란히 앉아 슬라이드를 놓고 설명한다. 고정 크루가 아닌 초대 전문가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_2에 '호메로스는 누구인가?' 슬라이드(조각상 이미지·불릿), frame_3에 '오뒷세우스의 손자?' 슬라이드와 원문 인용이 화면 대부분을 차지한다. 전형적인 강의 형식.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "슬라이드 강의 화면만 있고 순위·대진 구조는 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "세 프레임에 음식·먹는 장면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

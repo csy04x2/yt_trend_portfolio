@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 진행자 외 남성 한 명이 등장해 frame_3에서 조리함. 제목의 '맛피자'와 일치하는 단일 인물로 보이며 맛피자는 배제 예시에 명시된 고정 크루라 게스트가 아님. 그러나 자막이 null이라 0을 줄 수 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_3의 조리 장면은 요리 실연이지 강의·설명 자료 형식이 아님. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위표·대진표·탈락 구조가 frame_1~3 어디에도 보이지 않음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "특정 작품(영화·드라마·만화·책)의 자료가 화면에 나오거나 평하는 장면이 없음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 배경의 미키마우스·포켓몬 인형과 헬멧은 스튜디오 장식일 뿐 소재로 다뤄지지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2 코너명 '가루 종류', frame_3 '아이돌이 되기까지'로 초대석 토크이며 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 순위판·대진표가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 작품 자료가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1의 분홍 고양이 귀 모자는 특정 IP로 식별되지 않고 배경 인형은 소품이다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

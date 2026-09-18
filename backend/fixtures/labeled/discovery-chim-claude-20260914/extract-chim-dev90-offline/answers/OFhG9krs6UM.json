@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목 「가시 갑옷」만으로는 게스트 출연 여부를 알 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목에 특강·알아보기 표식이 없어 판정할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목에 순위·월드컵 표식이 없어 판정할 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목에 음식 관련 표식이 없어 판정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목에 작품 리뷰 표식이 없어 판정할 수 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「가시 갑옷」은 게임 아이템 명칭일 수도, 문자 그대로의 표현일 수도 있어 자막 없이는 IP 참조 여부를 확정할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「가시 갑옷」은 사물을 가리키는 명사구이며 영상 속 발화를 그대로 딴 구어체가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 발음 유사·합성어·기존 표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 형식의 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 29 ≤ 3600."
+    }
+  ]
+}

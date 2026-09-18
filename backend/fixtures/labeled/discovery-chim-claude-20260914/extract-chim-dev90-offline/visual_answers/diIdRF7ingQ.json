@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1 코너 자막 '오프닝'에서 선글라스·하와이안 셔츠의 중년 남성이 단독으로 말하고, frame_2·3에서 그가 진행자(우측, '침착맨' 이름표)와 나란히 앉아 '조선 길냥이, 호랑이', '왕들은 어떻게 여행을 다녔을까?' 코너에서 대화를 주도한다. 별도 이름표가 붙은 고정 크루 아닌 인물.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "대담 장면만 있고 순위·대진 구조가 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "음식·먹는 장면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "특정 작품 화면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "배경 소품 외 IP 캐릭터·코스튬이 주제가 아니다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

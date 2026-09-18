@@ -1,0 +1,39 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1(오이스 아메리카노)·frame_2(계란초코파이)·frame_3(요플레참치밥) 모두 남색 상의 남성 한 명만 출연한다. 제2의 출연자가 없지만 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "시청자 레시피를 먹어보며 반응하는 구도이며 강의·설명 형식이 아니다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "순위판·대진표가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "작품 자료가 화면에 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "IP 캐릭터·소품이 주제로 등장하지 않는다. 배경 피규어는 세트 장식. 자막 없음 → U.",
+   "positive_exclusion": null
+  }
+ ]
+}

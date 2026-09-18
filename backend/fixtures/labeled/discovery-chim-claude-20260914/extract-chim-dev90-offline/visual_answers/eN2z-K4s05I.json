@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 진행자 혼자 그림을 그리며 엘리베이터 이야기를 하는 장면이고 자막도 혼자 말하는 독백임. 다른 출연자는 없으나 배제 예시를 확정하는 자막 인용(크루 명단·게스트 언급)이 없어 0 대신 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

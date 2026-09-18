@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「그거는 정승제의 수강증을 끊으면 돼요」라는 대화에서 정승제가 직접 출연해 말하는 것인지 제3자로 언급되는 것인지 305자 쇼츠 자막으로는 확정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「아 나 진짜 농담이에요」로 끝나는 수강증 농담 쇼츠이며, 47초 전체 자막에 지식을 설명·강의하는 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "47초 농담 대화 전체에 후보를 대결·순위로 좁히는 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막 전체가 수강증·문제집 농담이며 먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「문제집을 통해서 풀어보면 되겠죠」 등 학습 농담뿐, 특정 작품을 평하거나 추천하지 않는다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "언급되는 「정승제」는 실존 인물이며(실존 인물 언급은 0) 기존 IP·캐릭터 참조가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「농담의 신」은 인물을 규정하는 명사구 제목이며, 자막의 「농담이고」 발화를 그대로 딴 구어체 문장이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「농담의 신」은 흔한 '~의 신' 관용 표현을 그대로 쓴 것으로 발음 유사·비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목 「농담의 신」에 출연자 이름 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 47 ≤ 3600."
+    }
+  ]
+}

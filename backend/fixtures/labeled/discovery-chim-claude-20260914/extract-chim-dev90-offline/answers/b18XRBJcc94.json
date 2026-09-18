@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「사진 속의 장소가 해외인지 국내인지 맞히는 시간」을 진행자 혼자 채팅을 읽으며 진행하고, 자막 전체에 초대되어 발화하는 외부 인물이 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「아파트가 많으면 한국일 확률이 굉장히 높아요」 같은 감별 요령은 퀴즈 풀이의 일부일 뿐, 특정 분야 지식을 강의하는 구간이 중심이 아니다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「해외냐 국내냐 맞히기」 사진 퀴즈를 순서대로 푸는 구조이며 후보를 대결·탈락·순위로 좁히는 형식이 아니다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「청보리 맥주가 있나?」 잡담이 잠깐 있을 뿐 먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막 전체가 장소 사진 퀴즈이며 영화·드라마·만화 등 특정 작품을 평하거나 추천하지 않는다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "사진 속 「레고가 있어」 정도의 사물 언급뿐, 기존 IP나 캐릭터를 소재·비유로 쓰는 대목이 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「사진만 보고 해외일까? 국내일까? 맞히기」는 활동을 서술하는 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·기존 표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「맞히기」는 일반적인 퀴즈 서술이며 채널 고유의 코너·관계·챌린지 표식이 아니다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 형식의 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 2182 ≤ 3600."
+    }
+  ]
+}

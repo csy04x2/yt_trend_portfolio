@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "「난 널 버리Gee 않아」는 「난 널 버리지 않아」라는 구어체 한마디를 딴 형태다(말장난이 덧붙었으나 발화 인용형)."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "high",
+      "reason": "「버리Gee」— 「버리지」와 발음이 같은 「Gee」를 끼워 넣은 발음 유사 말장난이다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 게스트 표기 형식이 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 29 ≤ 3600."
+    }
+  ]
+}

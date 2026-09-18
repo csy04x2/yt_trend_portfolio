@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·2·3 모두 진행자 혼자 앉아 '오공삼무선생' 이야기를 하며 웃는다. 자막에 '>>'로 다른 발화자가 섞여 있으나 화면에 나오지 않아 크루인지 게스트인지 알 수 없고, 자막이 게스트 부재를 확정하는 문구도 없어 0이 아닌 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

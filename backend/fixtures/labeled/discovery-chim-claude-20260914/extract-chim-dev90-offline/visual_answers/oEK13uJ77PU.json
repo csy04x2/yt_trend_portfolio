@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에서 진행자 옆에 안경 쓴 중년 남성이 앉아 있고 frame_2에서 그가 '당신이 결정 내릴 때까지'라며 이야기를 이어감. 두 프레임에서 제2 출연자가 대화의 중심에 있음. 이름은 제목·자막에 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에 그림과 함께 '페넬로페 / 왕비 (오디세우스의 아내)' 설명 자막이 붙고, frame_2에서 동석한 남성이 그 이야기를 계속 설명함. 자료 오버레이+설명자 구도가 두 프레임에서 이어지나 쇼츠라 영상 중심인지 확신은 중간.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "제목 '프로듀스 108'은 서바이벌 프로그램 말장난이지만 frame_1~3에 순위·대진 구조가 보이지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "먹거나 조리하는 행위가 중심인 프레임이 없음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1의 페넬로페 그림은 오디세이아 이야기를 설명하는 자료이지 특정 작품을 보고 평하거나 추천하는 형식이 아님. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

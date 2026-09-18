@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '침착맨을 만난 밴드 실리카겔'이 외부 밴드 실리카겔이 진행자와 만나 출연함을 명시한다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 특강·알아보기 등 지식 전달 형식 표지가 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 대결·순위 구조 표지가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 음식 관련 표지가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 작품 리뷰·추천 표지가 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 IP·캐릭터 참조가 없다. '실리카겔'은 실존 밴드다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'침착맨을 만난 밴드 실리카겔'은 상황을 서술한 설명형 제목이지 대사 인용이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'침착맨을 만난 밴드 실리카겔'은 밴드명을 그대로 쓴 것으로 '실리카겔 실례카겔' 같은 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 반복 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '침착맨을 만난 밴드 실리카겔'에 진행자 이름 '침착맨'이 명시된다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목이 '밴드 실리카겔'로 출연자를 명시한다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 3489로 3,600초 이하다."
+    }
+  ]
+}

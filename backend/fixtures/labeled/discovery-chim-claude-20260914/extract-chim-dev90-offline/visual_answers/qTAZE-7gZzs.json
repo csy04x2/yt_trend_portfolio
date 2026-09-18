@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2·3에 NY 모자를 쓴 남성이 침착맨과 함께 식당에서 대화·식사하지만 제목이 '맛피자와 함께한'이므로 고정 크루 맛피자일 가능성이 높고, 제목의 정호영 셰프는 세 프레임 어디에도 보이지 않는다. 자막은 주소 정정뿐이라 배제 확정 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 식당 대기·식사 장면이며 강의 장치가 없다. 자막은 주소뿐.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 순위 구조가 없다. 자막은 주소뿐이라 배제 확정 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 식당 리뷰이며 영화·책 등 작품 자료가 없다. 자막은 주소뿐.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 IP 캐릭터·소품이 없다. 자막은 주소뿐.",
+      "positive_exclusion": null
+    }
+  ]
+}

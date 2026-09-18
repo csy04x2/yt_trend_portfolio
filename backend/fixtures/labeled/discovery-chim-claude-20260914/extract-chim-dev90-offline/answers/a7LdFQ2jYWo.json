@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막이 침착맨 혼자 채팅을 읽고 시청자 사연(「짠돌이 여러분들의 그 사연글을 읽고」)을 판정하는 구성이며 다른 인물의 발화가 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "high",
+      "reason": "시청자 사연 판정과 잡담뿐이며 지식을 설명·강의하는 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「최고의 짠돌이를 찾아라」대로 사연들을 하나씩 심사해 「이분은 탈락입니다」, 「보류」, 「킵하겠습니다」, 「당신이 1등입니다」로 좁혀 가는 구조가 영상의 뼈대다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "초반에 「오늘 맛있는 거 먹습니다. 삼겹 김치찜입니다」 하며 먹지만 곧 짠돌이 사연 판정으로 넘어가 먹는 것은 배경이고 토크가 중심이다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "high",
+      "reason": "작품을 보고 평하거나 추천하는 대목이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「야 울버린이냐?」, 「소림 축구 운동화 생각난다」처럼 캐릭터·영화를 한 마디 비유로 스치지만 소재로 다룬다고 보기엔 짧아 판정을 보류한다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「최고의 짠돌이를 찾아라」는 미션을 서술하는 제목이지 영상 속 대사를 그대로 딴 말이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "말장난·패러디 요소가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 1696 ≤ 3600."
+    }
+  ]
+}

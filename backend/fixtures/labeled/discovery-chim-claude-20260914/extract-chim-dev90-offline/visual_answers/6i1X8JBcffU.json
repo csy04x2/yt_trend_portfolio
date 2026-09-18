@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1·2·3 모두 진행자 혼자 카메라를 보고 말한다(frame_2 코너 자막 '국정원 추리 퀴즈'). 제2의 인물이 없고 자막도 null이라 0의 근거는 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_2·3 코너 자막이 '국정원 추리 퀴즈'로 퀴즈 진행이며 강의·판서·슬라이드 장면이 없다. 제목의 'AI'만으로는 지식 전달 형식이라 볼 수 없고 자막이 null이라 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "세 프레임 어디에도 순위판·대진표가 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_3에서 아이스커피를 마시지만 토크 중 배경 행위일 뿐 먹는 것이 활동이 아니다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "세 프레임에 특정 작품 화면·표지가 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "배경 선반의 피규어·헬멧은 상시 소품이며 프레임의 주제가 아니다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

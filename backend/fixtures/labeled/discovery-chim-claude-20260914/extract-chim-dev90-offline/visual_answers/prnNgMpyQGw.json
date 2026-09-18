@@ -1,0 +1,25 @@
+{
+  "judgments": [
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·3의 게스트 리액션('아줌마!', '감사합니다!')과 frame_2 진행자 웃음은 초대석 토크이며 강의·요리 시연 장면이 없다. 자막도 아줌마 호칭·업장 재오픈·아기 개월수 잡담이지만 자막이 전반부만 있어 지식 전달 구간 부재를 확정할 수 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "세 프레임에 음식·조리 장면이 없고 토크만 있다. 자막도 '메뉴가 바뀌어요' 등 요리 이야기일 뿐 실제 먹는 장면 언급이 없으나, 먹는 것이 배경이라는 점을 확정하는 문구도 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'중식 마녀'는 셰프 본인의 페르소나이고 IP 캐릭터·코스튬이 주제가 아니다. 자막의 '흑백' 언급은 실제 방송 프로그램 언급이지 IP 캐릭터 참조로 볼 근거가 부족해 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

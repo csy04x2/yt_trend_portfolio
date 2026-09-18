@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1은 두건을 쓴 여성이 단독으로 영국 이야기를 하고, frame_2·3은 남성과 여성이 분할 화면으로 함께 웃으며 대화한다. 두 프레임에서 제2의 인물이 능동적으로 참여한다. 다만 어느 쪽이 진행자이고 고정 크루인지는 얼굴로 판별 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1 자막 '쥐도 나와요 그리고 런던은'은 여행담 잡담이며 강의 장치가 없다. 자막이 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 순위·대결 구조가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2·3 책상 위에 바나나 모양 소품이 있으나 먹는 행위는 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 작품 자료가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1 배경 선반에 미키마우스 등 인형이 있으나 배경 소품일 뿐 소재가 아니다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

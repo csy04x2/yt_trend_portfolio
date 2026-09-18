@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "자막 첫머리에 '토스 증권 리서치 센터에서 애널리스트로 근무하고 있는 한상원입니다'라고 외부 인물이 자기소개 후 대화에 참여한다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '애널리스트란'이 개념 설명형이고, 자막에서 현직 애널리스트가 '주식 샀다 팔았다' 하는 사람이 아니라 '증권사 리포트'를 쓰는 직업이라고 설명한다. 다만 18초 쇼츠라 짧다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "18초 쇼츠 자막 전체가 애널리스트 소개·설명이라 대결·순위 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막에 음식을 먹거나 만드는 내용이 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막에 작품을 평하거나 추천하는 대목이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막에 IP·캐릭터 참조가 없다. '토스 증권'은 실존 기업이다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'애널리스트란'은 개념을 설명하는 형식의 제목이지 대사 인용이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'애널리스트란'에 말장난·패러디가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 반복 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목 '애널리스트란'에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 등 게스트 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 18로 3,600초 이하다."
+    }
+  ]
+}

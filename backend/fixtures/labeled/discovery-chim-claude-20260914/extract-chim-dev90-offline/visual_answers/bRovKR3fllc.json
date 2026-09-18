@@ -1,0 +1,25 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에서 안경 쓴 중년 남성이 진행자 스튜디오에 앉아 '좀 짜증이 나더라고'라고 발화하고, 자막 전체가 두 사람의 대화(>>) 형식임. frame_2·frame_3은 진행자. 제2 출연자가 대화에 참여하나 이름은 제목·자막에 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막에서 게임('라스트 오브 어스')을 하다 말았다는 이야기를 나누지만 frame_1~3에 작품 자료가 화면에 나오지 않고, 평하거나 추천하는 형식도 아님. 배제 예시(비유로만 사용)에도 해당하지 않아 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막에 게임 제목이 화제로 나오지만 frame_1~3에 IP 캐릭터·소품이 소재로 보이지 않음. 배제 예시(실존 인물·기업)에 해당하는 인용이 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

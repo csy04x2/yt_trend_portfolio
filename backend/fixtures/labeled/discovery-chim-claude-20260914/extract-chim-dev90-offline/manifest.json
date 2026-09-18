@@ -1,0 +1,40 @@
+{
+  "extractor_version": "channel-extractor-v0.1",
+  "generated": "2026-09-18 18:27",
+  "content": "docs/prototype/chim-evidence.json",
+  "registry": "backend/fixtures/labeled/discovery-chim-claude-20260914/registry-claude-v0.1.json",
+  "registry_sha256": "59d911262906c3ed2deb5e9d851e211b3f52cfc3974a3ebec530037ced785f53",
+  "registry_frozen": false,
+  "registry_version": "0.1",
+  "routing_source": "all_visual_fallback",
+  "routing": {
+    "guest_external": "TEXT_THEN_VISUAL",
+    "expert_knowledge": "TEXT_THEN_VISUAL",
+    "tournament_ranking": "TEXT_THEN_VISUAL",
+    "food_eating": "TEXT_THEN_VISUAL",
+    "media_review": "TEXT_THEN_VISUAL",
+    "pop_culture_ip": "TEXT_THEN_VISUAL",
+    "title_quote": "TEXT_THEN_VISUAL",
+    "title_wordplay": "TEXT_THEN_VISUAL",
+    "recurring_bit": "TEXT_THEN_VISUAL",
+    "host_in_title": "TEXT_THEN_VISUAL",
+    "guest_in_title": "TEXT_THEN_VISUAL",
+    "one_hour_plus": "TEXT_THEN_VISUAL"
+  },
+  "split": "backend/fixtures/labeled/discovery-chim-claude-20260914/split.csv",
+  "scope": "development",
+  "captions": "backend/data/captions/chim",
+  "evidence_root": null,
+  "judge": "offline",
+  "model": null,
+  "cache_hits": 0,
+  "rows": 90,
+  "judge_inputs": 90,
+  "captions_found": 39,
+  "review_queue": 90,
+  "label_counts": {
+    "0": 600,
+    "1": 169,
+    "U": 311
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "「오디세이, 이 영상 보고 가면 얼마나 좋았을까?」는 관람 전 사전 지식 영상을 강하게 시사하지만 자막이 없어 강의 형식이 중심인지 확정할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목에 순위·월드컵 구조가 없고 자막이 없어 0으로 바꿀 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 없고 제목만으로는 판정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「오디세이」가 특정 작품을 영상의 주제로 명시하며 「이 영상 보고 가면」은 그 작품 관람과 연결된 해설·추천 성격을 보인다. 다만 자막이 없어 세부는 확인 불가."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「오디세이」— 기존 서사 작품(호메로스 서사시·동명 영화)이 영상의 소재다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「오디세이, 이 영상 보고 가면 얼마나 좋았을까?」는 시청자에게 건네는 안내·홍보문이며 영상 속 발화를 그대로 딴 한마디가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 게스트 표기 형식이 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "1",
+      "confidence": "high",
+      "reason": "duration_sec 6802 > 3600."
+    }
+  ]
+}

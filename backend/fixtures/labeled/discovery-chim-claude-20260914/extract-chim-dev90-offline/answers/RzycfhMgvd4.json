@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "쇼츠이며 자막 124자로 짧고 깨져 있다. '오리 한 마리를 내가 잡아줬다'가 셰프의 발화일 수 있으나 게스트 출연을 확정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 짧고 깨져 있어 지식 전달 구간 유무를 판단할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 순위·대결 구조 여부를 판단할 근거가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '중식마녀닭'이 요리명이고 자막 '오리 한 마리를 내가 잡아줬다 ... 너무 맛있어. 맛있어. 맛있어.'로 요리를 먹고 평가하는 것이 중심임이 드러난다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 작품 리뷰·추천 여부를 판단할 근거가 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'중식마녀'는 실존 셰프의 별칭으로 IP가 아니며, 짧은 자막으로 IP 참조 유무를 확정할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'중식마녀닭'은 요리명 명사구로 대사 인용형이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "'중식마녀'와 '닭'을 붙여 요리명처럼 만든 합성어형 제목이다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 남매·매너·킹콩·챌린지류 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "low",
+      "reason": "제목 '중식마녀닭'에 셰프 별칭 '중식마녀'가 들어가지만 요리명의 일부라 출연자 표기 형식으로 보기에는 확신이 낮다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 35 ≤ 3600."
+    }
+  ]
+}

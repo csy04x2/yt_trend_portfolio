@@ -1,0 +1,32 @@
+{
+  "judgments": [
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3은 젊은 여성 출연자와 진행자의 토크 장면이며 강의·판서 세팅이 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 음식·먹는 행위가 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목이 '세계관'을 언급하지만 frame_1~3에 특정 작품 자료가 보이지 않는다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1·frame_3 배경 선반의 미키마우스·피카츄 인형은 장식이며 소재로 다루는 장면이 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    }
+  ]
+}

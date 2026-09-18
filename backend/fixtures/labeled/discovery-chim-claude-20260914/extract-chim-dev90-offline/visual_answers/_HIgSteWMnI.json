@@ -1,0 +1,18 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3 모두 진행자 혼자 캐릭터 이미지에 대해 말한다. 자막에도 다른 화자가 없지만 게스트 부재를 적극적으로 확정하는 문장은 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1과 frame_2에서 불닭볶음면 마스코트 캐릭터 '호치'와 새 캐릭터 '페포로'의 이미지가 화면 전체의 소재로 나오고 진행자가 이를 평한다. 자막도 '불닭볶음 면에 상징이었던 캐릭터 호치가 은퇴 위기'로 캐릭터 자체를 다룬다. 브랜드 마스코트라 대중문화 IP 범위 해석에 여지가 있어 medium.",
+      "positive_exclusion": null
+    }
+  ]
+}

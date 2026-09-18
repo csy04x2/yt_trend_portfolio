@@ -402,6 +402,9 @@ def cmd_run(a):
 
 
 def cmd_import(a):
+    """오프라인 답안 반영. --evidence-root 가 있으면 텍스트 U 중 시각 대상 특징에 대해 visual_input/ 을 내보내고,
+    --visual-answers 에 답안이 있으면 그것까지 합쳐 최종 판정을 만든다. 두 번 실행해도 된다."""
+    from .core import can_escalate_visual
     out = Path(a.run)
     meta = read_json(out / "manifest.json")
     pend = read_json(out / "_pending.json")
@@ -409,25 +412,53 @@ def cmd_import(a):
     features, _ = load_registry_any(meta["registry"])
     set_feature_routing(meta["routing"])
     definitions = definitions_by_id(features)
-    results, missing = [], []
+    results, missing, packet_ok, visual_exported = [], [], {}, 0
+    vdir = out / "visual_input"
     for r in rows:
-        p = Path(a.answers) / f"{r['video_id']}.json"
+        vid = r["video_id"]
+        p = Path(a.answers) / f"{vid}.json"
         if not p.is_file():
-            missing.append(r["video_id"])
+            missing.append(vid)
             continue
         ans = read_json(p)
         metadata = {k: v for k, v in r.items() if k in FIELDS}
-        cap = read_json(out / "judge_input" / f"{r['video_id']}.json").get("caption")
-        res = extract_video(metadata, cap, list(definitions.values()), text_judgments=ans["judgments"])
+        cap = read_json(out / "judge_input" / f"{vid}.json").get("caption")
+        text = list(validate_judgments(ans["judgments"], definitions).values())
+        eligible = [j["feature_id"] for j in text if can_escalate_visual(j)]
+        packet = packet_for(vid, a.evidence_root, metadata, cap, a.max_frames) if (a.evidence_root and eligible) else None
+        packet_ok[vid] = packet is not None
+        vj = None
+        if packet is not None:
+            vp = Path(a.visual_answers) / f"{vid}.json" if a.visual_answers else None
+            if vp and vp.is_file():
+                vans = read_json(vp)["judgments"]
+                vj = lambda pkt, subset, mdl, vans=vans: [j for j in vans if j["feature_id"] in {f["feature_id"] for f in subset}]
+            else:
+                vdir.mkdir(exist_ok=True)
+                frames_dir = Path(a.evidence_root) / vid
+                (vdir / f"{vid}.json").write_text(json.dumps({
+                    "video_id": vid, "mode": "visual", "features": [definitions[f] for f in eligible],
+                    "metadata": metadata, "caption": cap,
+                    "frames": [{"frame_id": f["frame_id"], "timestamp_sec": f["timestamp_sec"],
+                                "path": str(frames_dir / f"frame_{i + 1}.jpg")} for i, f in enumerate(packet["frames"])],
+                    "answer_format": {"judgments": [{"feature_id": f, "label": "0|1|U", "confidence": "low|medium|high",
+                                                     "reason": "근거", "positive_exclusion": None} for f in eligible]},
+                    "rule": "프레임에 안 보인다는 이유로 0을 주지 않는다. 0은 자막 인용으로 배제 근거가 있을 때만(positive_exclusion). 아니면 U.",
+                }, ensure_ascii=False, indent=1), encoding="utf-8")
+                visual_exported += 1
+        res = extract_video(metadata, cap, list(definitions.values()), text_judgments=text,
+                            visual_judge=vj, visual_packet=packet if vj else None)
         res["chunks"], res["api_calls"] = 1, 0
         results.append(res)
+    if visual_exported:
+        print(f"시각 단계 입력 {visual_exported}건 → {vdir} (답안 후 --visual-answers 로 다시 import)", file=sys.stderr)
     if missing:
         print(f"답안 없음 {len(missing)}건 (예: {missing[:3]}) — 그 영상은 제외했다", file=sys.stderr)
     if not results:
         raise ValueError("가져올 답안이 없다")
     done = {r["video_id"] for r in results}
     m = write_outputs(out, results, [r for r in rows if r["video_id"] in done], definitions, meta,
-                      {k: v for k, v in caption_src.items() if k in done}, {k: False for k in done},
+                      {k: v for k, v in caption_src.items() if k in done}, {k: packet_ok.get(k, False) for k in done},
                       meta["registry_sha256"], a.review_share)
     print(f"가져오기 완료: {m['rows']}편 · 판정 {m['label_counts']} → {out}/labels.json")
     return 0
@@ -513,6 +544,9 @@ def main(argv=None):
     i.add_argument("--run", required=True)
     i.add_argument("--answers", required=True)
     i.add_argument("--review-share", type=float, default=0.1)
+    i.add_argument("--evidence-root", help="장면 패킷 폴더. 있으면 텍스트 U 특징의 시각 입력을 내보낸다")
+    i.add_argument("--visual-answers", help="시각 단계 답안 폴더")
+    i.add_argument("--max-frames", type=int, default=DEFAULT_MAX_FRAMES)
     i.set_defaults(fn=cmd_import)
     e = sub.add_parser("evaluate")
     e.add_argument("--run", required=True)

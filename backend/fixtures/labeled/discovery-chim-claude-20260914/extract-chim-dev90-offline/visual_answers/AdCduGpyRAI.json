@@ -1,0 +1,46 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2·frame_3 모두 단발머리 여성 한 사람만 화면에 있고 제목에도 출연자 정보가 없다. 제2의 출연자가 보이지 않으며 자막이 없어 0으로 배제할 근거도 없다.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "상단 자막 '프로 의식'과 frame_3의 검은 기기(오즈모 카메라로 보이는 소품)만 있고 강의·설명 구도가 아니다. 24초 농담 쇼츠로 보이지만 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1~3에 순위판·대진표가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "food_eating",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "세 프레임 모두 음식·식기가 보이지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "특정 작품 자료가 화면에 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_3의 검은 기기는 촬영 장비(제목의 오즈모)로 보이며 IP 캐릭터·코스튬이 아니다. 배경 선반의 인형은 세트 장식일 뿐 주제가 아니다. 자막 없음 → U.",
+   "positive_exclusion": null
+  }
+ ]
+}

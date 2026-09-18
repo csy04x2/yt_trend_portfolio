@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 진행자 혼자 앉아 말하는 장면이며 다른 출연자가 없음. 자막이 null이라 0 대신 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1에 아이스크림 콘 사진과 '콘 끝 초콜릿' 자막이 뜨지만 일화 이야기이며 강의 형식이 아님. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위표·대진표·탈락 구조가 frame_1~3 어디에도 보이지 않음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1의 아이스크림 콘은 사진 자료일 뿐 먹거나 만드는 행위가 없음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "특정 작품(영화·드라마·만화·책)의 자료가 화면에 나오거나 평하는 장면이 없음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_2·frame_3의 시청자 채팅에 호크아이·소울스톤 언급이 보이나 채팅은 시청자 데이터이고, 프레임 본편에 IP 캐릭터·소품이 소재로 등장하지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·frame_2는 체육관에서 조끼를 입은 출연자들이 마이크로 진행하는 운동회 장면, frame_3은 침대에 누운 남성(드래곤볼 프린트 티셔츠)이 말하는 장면. IP 캐릭터·소품이 영상의 소재로 쓰이는 프레임이 없고 티셔츠는 의상일 뿐임. 자막도 운동회 개회 인사 위주로 배제 예시(실존 인물·기업)에 해당하는 인용이 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

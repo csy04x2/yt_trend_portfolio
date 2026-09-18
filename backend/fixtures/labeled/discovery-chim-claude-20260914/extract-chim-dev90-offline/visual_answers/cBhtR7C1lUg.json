@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에서 안경 쓴 남성이 스튜디오에서 '공무원 남자 반바지 가능합니다'라고 직접 발화하고, frame_3에서는 진행자가 아닌 두 남성이 함께 웃으며 대화에 참여한다. 자막도 '>>'로 화자가 교대하는 대화다. 고정 크루 여부는 특정할 수 없어 medium.",
+      "positive_exclusion": null
+    }
+  ]
+}

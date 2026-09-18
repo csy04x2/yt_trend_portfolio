@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2에 진행자와 검은 후드 남성, frame_3에 세 명이 함께 대화하지만 자막은 「우리 오랜만에 모였는데」, 「베도라지 MT 추진위원회」처럼 정기 멤버 모임을 가리키고 손님으로 소개되는 인물이 없다. 외부 게스트라고도, 고정 크루뿐이라고도 확정할 인용이 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

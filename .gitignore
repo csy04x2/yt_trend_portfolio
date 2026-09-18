@@ -20,3 +20,7 @@ frontend/.env*.local
 # Stage 2 local evidence outputs
 stage2_output/
 tools/stage2_evidence/stage2_output/
+
+# 특징 추출 실행 폴더 안의 자막 사본 (원문은 backend/data/captions 에만)
+backend/fixtures/labeled/**/extract-*/judge_input/
+backend/fixtures/labeled/**/extract-*/visual_input/

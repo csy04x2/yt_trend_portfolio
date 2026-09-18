@@ -1,0 +1,46 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "1",
+   "confidence": "medium",
+   "reason": "frame_1에 두 남성이 한 식탁에 나란히 앉아 있고, frame_2는 왼쪽 남성이 '억지로 안 올리셔도 돼요'라고 말하는 장면, frame_3은 오른쪽 남성이 그릇을 들고 반응하는 장면이다. 두 사람이 모두 능동적으로 대화에 참여하는 것이 세 프레임에서 확인된다. 어느 쪽이 진행자이고 고정 크루인지는 화면으로 판단할 수 없어 medium.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "식탁 대화 장면뿐이고 강의·설명 구도가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "순위판·대진표가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "food_eating",
+   "label": "1",
+   "confidence": "medium",
+   "reason": "frame_1에서 두 사람이 그릇과 반찬(김치 등)이 놓인 식탁에서 젓가락·숟가락을 들고 식사 중이고, frame_3에서 오른쪽 남성이 그릇을 입에 대고 마시고 있다. 두 프레임이 식사 행위를 보여준다. 다만 제목 '텐션 올리기'와 자막 문구는 식사 중 농담 토크에 가까워 먹는 것이 배경일 가능성이 있어 medium.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "작품 자료가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "IP 캐릭터·소품이 주제로 등장하지 않는다. 배경 베어브릭·오징어게임 인형은 세트 장식이다. 자막 없음 → U.",
+   "positive_exclusion": null
+  }
+ ]
+}

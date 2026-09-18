@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "low",
+      "reason": "제목 「셰프에게 배우는 고기 굽는 방법」이 셰프가 가르치며 참여함을 전제하지만 자막이 없어 이름·발화를 확인하지 못했다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「셰프에게 배우는 고기 굽는 방법」이 특정 기술을 배우는 지식 전달 형식(알아보기 계열)임을 명시한다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 순위·대결 표식이 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「고기 굽는 방법」이 음식을 만드는 행위를 중심 활동으로 명시한다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 작품 언급이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 IP·캐릭터가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「~하는 방법」 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "말장난·패러디 요소가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「배우는」은 형식 서술이며 코너·관계·챌린지 표식이 아니다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "low",
+      "reason": "「셰프에게 배우는」이 출연자를 표기하지만 이름이 아닌 직함이라 (with X)·특별출연 형식과는 거리가 있다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 2009 ≤ 3600."
+    }
+  ]
+}

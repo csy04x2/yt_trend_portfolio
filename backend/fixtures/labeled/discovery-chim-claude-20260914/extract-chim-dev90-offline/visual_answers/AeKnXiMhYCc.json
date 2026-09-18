@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1 코너 자막 '김헌 교수님 초대석'과 함께 안경 쓴 남성이 '저는 고전학자라고 보통 불리는데'라고 발화하고, frame_2·3에서 진행자 옆에 나란히 앉아 대화에 참여한다. 고정 크루가 아닌 초대 인물.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1에서 게스트가 자신을 고전학자로 소개하고, frame_2 코너 자막 '철학의 출발점', frame_3 코너 자막 '특강 시작'이 강의 형식을 명시한다. 제목 '철학 이야기'와도 일치.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "세 프레임 모두 대담 장면이며 순위·대진 구조가 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "세 프레임에 음식·조리 장면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "특정 작품의 표지·화면이 프레임에 없다. 철학 특강이지 작품 리뷰라 볼 근거는 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "배경 소품 외에 IP 캐릭터·코스튬이 주제로 등장하지 않는다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

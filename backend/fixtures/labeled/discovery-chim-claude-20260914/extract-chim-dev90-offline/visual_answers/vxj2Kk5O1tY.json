@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1은 폭발 CG 앞에서 진행자가 '오늘의 요리 소개', frame_2·3은 버너·닭·볼이 놓인 조리 세트에서 두 게스트가 요리한다. IP 캐릭터·코스튬·소품이 주제로 등장하지 않는다. 자막도 닭볶음탕·북경오리 조리 이야기라 IP 언급이 없으나, 실존 인물·기업 언급 같은 배제 근거 문구도 없어 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

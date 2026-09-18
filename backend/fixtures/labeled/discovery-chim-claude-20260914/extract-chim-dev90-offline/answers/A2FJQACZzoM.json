@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "「소혜는 진짜 연기를 사랑해요」라며 소혜를 소개하고 「어 소혜 씨 아니에요」라고 말을 건네는 듯하지만, 소혜가 실제로 발화·참여했다는 인용이 159자 자막에 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "21초 전체가 「침팬지 연습을 해요」라는 즉흥 연기 일화 농담이며 지식 강의가 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "21초 일화 전체에 후보를 대결·순위로 좁히는 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막 전체가 연기 연습 일화이며 먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "특정 작품을 보고 평하거나 추천하는 내용이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「침팬지」는 동물 흉내 연습을 가리키며 기존 IP·캐릭터 참조가 아니다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「침팬지 소혜」는 인물을 규정하는 명사구이며 자막에서 그대로 발화된 한마디가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「침팬지 소혜」는 침팬지 흉내를 내는 소혜를 서술한 것으로 발음 유사·비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「침팬지」는 동물이며 제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「침팬지 소혜」가 출연자 이름 소혜를 명시한다 (「김신영이 알려주는 진짜 행복」과 같은 이름 명시 형식)."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 21 ≤ 3600."
+    }
+  ]
+}

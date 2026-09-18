@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막이 진행자 혼자 화면과 채팅을 읽으며 진행하고, 유일한 타인 발화는 스태프인 '총무님'의 '저희 쿠팡에서 구매하고 있어요' 한마디뿐이라 외부 게스트가 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '다이소가 잘나가는 이유'대로 자막 대부분이 '유통 산업 발전법', '매장 면적 900평 이상', 'PB 상품 비중이 70%', '매출 원가율' 등 유통 규제와 다이소 수익 구조를 설명·해설하는 알아보기 구간이다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막에 후보를 대결·탈락·순위로 좁히는 구조가 없다. 화장지 미터당 가격 비교는 순위 매기기 형식이 아니다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막에서 음식을 먹거나 만드는 장면이 없고 다이소몰 상품(스킨팩, 화장지, 물티슈)과 유통업 이야기만 다룬다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막에 영화·드라마·만화·책 등 작품을 보고 평하거나 추천하는 대목이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "스타필드를 '완전 어벤져스거든'이라 빗대는 한 단어 비유만 있고, 나머지는 다이소·코스트코·돈키호테 등 실존 기업 언급이라 IP 참조로 볼 수 있는지 확정하기 어렵다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'다이소가 잘나가는 이유 (광고 아님)'은 주제를 서술한 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'다이소가 잘나가는 이유 (광고 아님)'에 말장난·패러디가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 남매·매너·챌린지 같은 반복 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목 '다이소가 잘나가는 이유 (광고 아님)'에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 (with X)·초대석·feat 등 게스트 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 1958로 3,600초 이하다."
+    }
+  ]
+}

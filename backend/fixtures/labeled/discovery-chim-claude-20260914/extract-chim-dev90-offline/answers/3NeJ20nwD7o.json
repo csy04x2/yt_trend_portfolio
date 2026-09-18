@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "출연자는 마피자·카라미이며 「은하무님이 떠난 상태였어요. 비오감만 나와 버렸습니다」— 정의의 제외 예시가 은하·맛피자·카라미를 고정 크루로 명시하므로 외부 게스트가 아니다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "셰프가 「디저트 식재료가 가격 변동폭이 커요」·「파인다이닝이 가격을 올린다는 거는…」 등 업계 지식을 설명하지만 잡담 형식이며 후반은 문신·사주·팔씨름으로 흐른다. 지식 전달이 있긴 하나 특강처럼 중심 구조인지는 확정되지 않는다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막에 후보를 대결·탈락·순위로 좁히는 구조가 없다. 「포켓 원정대 대장 결정전」은 과거 언급일 뿐이다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "제목 「미식 이야기」대로 음식 평가 문화가 대화의 중심이지만 「이따가 뭐 또 먹으러 가요」처럼 먹는 행위는 영상 밖이고 조리·시식 장면도 없다. 음식 토크만으로 정의를 충족하는지 확정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「흑백 요리사」·「천하제빵」 언급은 심사·출연 경험 이야기이며 특정 작품을 보고 평하거나 추천하지 않는다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "「베가펑크 진짜 크잖아」·「유희왕으로 치면 지금 이쪽은 그냥 전사족」— 원피스·유희왕 캐릭터를 비유로 쓴다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「미식가들과 미식 이야기」는 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「미식가들과」는 익명 지칭이며 (with X)·초대석·특별출연·feat 형식이 아니다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 1763 ≤ 3600."
+    }
+  ]
+}

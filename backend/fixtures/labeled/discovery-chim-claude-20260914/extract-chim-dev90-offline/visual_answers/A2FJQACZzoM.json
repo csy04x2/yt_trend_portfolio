@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에 진행자 외 여성 두 명이 세트에서 대화에 참여하고 있고 frame_2에서 그중 한 명이 자막과 함께 발화 중이다(「작은 즉흥 연기를 거기서 펼친 거죠」). frame_3의 남성이 「소혜 씨 아니에요?」라고 말해 자막의 소혜 언급과 일치한다. 크루 명단(은하·맛피자·카라미)과 대조할 얼굴 정보는 없어 medium.",
+      "positive_exclusion": null
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목이 래퍼 「키드밀리」를 명시하고, 자막에서 「저는 좀 집착형이긴 하거든요 … 형 주변에 잠수형 좀 많죠?」라며 진행자를 형이라 부르는 화자가 대화에 참여한다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "18초 클립 자막 전체가 「최악의 인간 유형 월드컵」 진행 대화이며 지식 설명이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "1",
+      "confidence": "high",
+      "reason": "「최악의 인간 유형 월드컵 해보도록 하겠습니다. 잠수형대 집착형입니다」 — 후보를 맞붙이는 월드컵 구조가 명시된다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "작품 리뷰·추천이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「명탐정」은 일반 단어이고 자막에 IP·캐릭터 참조가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「명탐정 키드밀리」는 출연자를 수식하는 명사구이며 대사가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「명탐정」은 일반 명사로 쓰였고 발음 유사·표현 비틀기라고 볼 근거가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 「명탐정 키드밀리」가 외부 인물 키드밀리를 출연자로 명시한다 (「김신영이 알려주는」과 같은 이름 표기 형식)."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 18 ≤ 3600."
+    }
+  ]
+}

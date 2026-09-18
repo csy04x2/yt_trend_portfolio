@@ -1,0 +1,46 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2 하단과 frame_3 모두 책장 앞의 남성 한 명만 출연한다. 상단의 인물 사진은 화면 자료이지 출연자가 아니다. 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2에 제프 베이조스·워런 버핏의 재산(401조 원·228조 원) 자료 화면이 뜨지만 제목 '꺼드럭 재능'과 frame_3의 웃는 반응으로 보아 농담 쇼츠이며 강의 형식이 아니다. 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "부자 두 명의 재산 수치가 순서대로 나오지만 순위판·대진표 구조가 화면에 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "food_eating",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "음식·식기가 보이지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "작품 자료가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2에 등장하는 것은 실존 인물(제프 베이조스·워런 버핏) 사진이며 IP 캐릭터가 아니다. 배제 예시 '실존 인물·기업 언급은 0'에 해당하지만 자막이 없어 인용할 수 없으므로 U.",
+   "positive_exclusion": null
+  }
+ ]
+}

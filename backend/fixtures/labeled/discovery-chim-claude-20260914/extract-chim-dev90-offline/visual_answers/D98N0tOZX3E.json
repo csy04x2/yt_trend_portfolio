@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1과 frame_3에서 안경 쓴 남성이 교실 세트에서 '그거는 정승제의…', '어우 나 진짜 농담이에요' 라고 직접 발화하고, frame_2에서는 두 사람이 하이파이브하며 함께 활동한다. 자막도 '>>'로 화자가 교대하는 대화이며, 고정 크루가 아닌 인물이 참여하는 것이 세 프레임에서 일관된다.",
+      "positive_exclusion": null
+    }
+  ]
+}

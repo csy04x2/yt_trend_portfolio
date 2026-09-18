@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·2·3 모두 진행자 혼자 시청자 사연('저희 아버지는 물건을 절대 버리지 않습니다')을 읽으며 반응한다. 자막에 게스트 부재를 확정하는 문구는 없어 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "사연 읽기 쇼츠로 강의·판서 장면이 없다. 자막이 지식 전달 부재를 확정하지 않아 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "순위·대진 구조가 없다. 자막에도 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "음식 장면이 없다. 자막에도 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "작품 화면이 없다. 자막에도 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "IP 캐릭터·소품이 주제로 등장하지 않는다(병뚜껑·변기 손잡이 발명 사연). 자막이 IP 부재를 확정하지 않아 U.",
+      "positive_exclusion": null
+    }
+  ]
+}

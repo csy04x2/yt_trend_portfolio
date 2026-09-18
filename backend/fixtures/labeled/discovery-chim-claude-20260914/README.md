@@ -123,6 +123,17 @@ python -m tools.feature_extractor.channel run --content docs/prototype/chim-evid
 증거를 모은다. 사람 정답과의 대조는 `channel.py evaluate`로 잰다 — 침착맨 development 90의
 게스트 출연 사람 정답이 `../discovery-chim-human-20260917/`에 있다.
 
+### 2026-09-18 침착맨 development 90 실전 시험 (`extract-chim-dev90-offline/`)
+
+- 증거: 자동 자막 39/90 (수집 도중 유튜브 속도 제한, 나머지는 재시도 대상), 장면 이미지 3장 90/90
+  (유튜브 공개 썸네일 서버의 25·50·75% 지점, 영상 내려받기 없음 — `tools/stage2_evidence/fetch_frames.py`).
+- 판정: Claude Code 오프라인 판정(API 미사용). 텍스트 단계 90편 → 시각 단계 82편.
+- 사람 정답 대조(팀원의 게스트 출연 판정 64편): 텍스트만 23% 덮고 87% 일치 → 장면까지 **70% 덮고 96% 일치**
+  (틀린 2건은 모두 「없다」고 한 것). 쇼츠는 3/37 → 26/37로 전부 일치. `eval-text-only.json`, `eval-final-vs-human-guest.json`.
+- 다른 내용형 특징은 U가 53~69%로 남았다 — 장면 3장으로는 게스트 유무는 보이지만 먹방·특강·순위·리뷰는 잘 안 보인다.
+  자막 확보(51편)와 「자막이 가리키는 시각에 장면 찍기」가 다음 단계다.
+- `judge_input/`·`visual_input/`은 자막 사본이 들어 있어 커밋하지 않는다. 재생성: run(offline) → import.
+
 ## 14F 특징 적용 결과가 오면 — 진행 절차
 
 팀원이 친구에게 맡긴 14F Human Discovery(90편) 결과와 그 뒤의 LLM Discovery가 오면 아래 순서로

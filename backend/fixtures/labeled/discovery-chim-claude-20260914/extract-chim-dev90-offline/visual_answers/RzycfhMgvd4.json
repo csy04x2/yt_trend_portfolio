@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "low",
+      "reason": "frame_1에 흰 상의의 여성이 스튜디오 세트에서 '게임은 이미 시작됐어'라고 발화하고, frame_3은 침착맨이 '중식마녀닭 이건 예술이야'라며 먹는다. 자막에도 '오리 한 마리를 내가 잡아줬다'는 요리한 쪽의 발화가 따로 있어 진행자 외 인물이 참여한다. 다만 한 프레임뿐이고 고정 크루 여부는 미확인.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_2 오리 손질 접사와 자막 '집에서이 할 수 없는 환경이' 정도의 조리 설명이 있으나 강의 형식은 아니다. 배제를 확정하는 자막 인용도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 순위·대결 구조가 없고 자막도 순위와 무관하다. 배제 확정 문구 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3에 작품 자료가 없다. 자막에 작품 언급 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1 배경 인형은 소품이고 '중식마녀닭'은 요리 이름이다. 자막에 IP 언급 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

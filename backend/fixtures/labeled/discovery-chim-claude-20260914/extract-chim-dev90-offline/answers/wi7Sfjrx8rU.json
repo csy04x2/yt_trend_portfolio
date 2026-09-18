@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "18초 쇼츠의 자막이 117자에 불과해 외부 게스트 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'이게 천재… 수학계가' 정도의 짧은 대화만 있어 지식 전달 형식인지 판단할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 150자 미만이라 순위·대결 구조 유무를 판단할 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 150자 미만이라 먹방·쿡방 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 150자 미만이라 작품 리뷰 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 150자 미만이라 IP·캐릭터 참조 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'서순'은 순서가 뒤바뀐 상황을 가리키는 단어 라벨이며 자막에도 그 말이 나오지 않아 대사 인용으로 볼 수 없다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'서순'은 널리 쓰이는 유행어 단독 사용이라 배제 예 '단순 유행어 사용은 0'에 해당한다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 채널의 반복 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 18로 3,600초 이하다."
+    }
+  ]
+}

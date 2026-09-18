@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1·frame_2에 진행자가 아닌 여성이 단독 화면에서 「parasol 얘도 스페인어예요」, 「한국어로 하면 해 막기?」라며 발화하고 frame_3에서 진행자가 받는다. 두 프레임 일치, 다만 크루 여부는 확인 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·2에 스페인어 단어 이야기가 나오지만 18초 쇼츠의 농담 흐름 속 한마디로 보이며 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위·대진 구조가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "작품 자료가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "제목 「빠라바라바라밤」은 의성어이며 프레임에 IP 캐릭터·소품이 소재로 등장하지 않는다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

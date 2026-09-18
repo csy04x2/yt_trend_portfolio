@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1에서 안경 쓴 남성이 '도박 아니에요?'라고 발화하고, frame_2 자막 '아무래도 교육계에 계시다 보니까'가 그를 외부 인물로 가리키며, frame_3에서 그와 또 다른 남성이 세트에서 함께 웃으며 참여한다. 고정 크루(은하·맛피자·카라미)로 식별되는 인물은 없다. 다만 자막이 null이라 신원 확인은 불가해 medium.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목 '선생님의 농담'과 frame_1~3의 웃음 장면은 농담 쇼츠에 가깝지만 자막이 null이라 0을 확정할 수 없다. 강의 장면도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "순위판·대진표가 어느 프레임에도 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "음식·먹는 장면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "특정 작품 화면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "IP 캐릭터·코스튬·소품이 주제로 나오지 않는다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

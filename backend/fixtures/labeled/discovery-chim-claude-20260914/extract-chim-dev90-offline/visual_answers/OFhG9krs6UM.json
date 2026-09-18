@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_2에 진행자가 아닌 여성이 세트 중앙에서 「그 관객이 어떻게 돼도 상관 없냐고」라고 발화하며 대화에 참여한다. frame_1·3은 진행자 단독이라 한 프레임 근거이며 크루 여부도 확인 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_3의 가시 갑옷 사진을 두고 「몇 명은 꽂혀있어!」 농담을 하는 토크로 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위·대진 구조가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_3의 삽입 사진은 특정 작품 자료가 아니라 가시 의상 사진이다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_3의 가시 갑옷 의상은 식별 가능한 IP 캐릭터가 아니다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

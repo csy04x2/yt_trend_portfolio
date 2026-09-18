@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 진행자 스튜디오에서 젊은 여성이 마이크를 잡고 노래하고(frame_1 가사 자막), frame_2·frame_3에서는 뒤에서 남성이 춤추는 모습까지 보임. 세 프레임에서 제2 출연자가 활동의 중심에 있음. 제목·자막에 이름이 없어 고정 크루 여부는 확인 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "강의·화이트보드·설명 자료 같은 전문 지식 전달 설정이 어느 프레임에도 보이지 않음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "순위표·대진표·탈락 구조가 frame_1~3 어디에도 보이지 않음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "먹거나 조리하는 행위가 중심인 프레임이 없음. 자막 배제 근거가 없어 U. (자막 null)",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 노래 부르기·춤 장면으로 특정 작품을 평하는 자료가 없음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "제목의 'Gee'는 노래 제목 말장난이며 프레임에 IP 캐릭터·소품이 소재로 등장하지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

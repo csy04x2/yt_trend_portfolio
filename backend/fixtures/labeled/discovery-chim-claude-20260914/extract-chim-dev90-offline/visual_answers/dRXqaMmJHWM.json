@@ -1,0 +1,46 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "1",
+   "confidence": "medium",
+   "reason": "frame_1은 남성이 '완전 남자랑 똑같은 친구는'이라고 말하는 장면이고, frame_2·frame_3에서 두건을 쓴 여성이 같은 남성 옆에 앉아 함께 웃고 반응한다. 두 프레임에서 제2의 출연자가 능동적으로 참여하는 것이 확인된다. 고정 크루 여부는 화면으로 알 수 없어 medium.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "잡담·농담 구도이며 강의·설명 형식이 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "순위판·대진표가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "food_eating",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "음식·식기가 보이지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "작품 자료가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "IP 캐릭터·소품이 주제로 등장하지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  }
+ ]
+}

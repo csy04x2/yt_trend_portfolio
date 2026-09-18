@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "47초 리믹스 쇼츠의 짧은 자막만으로는 외부 게스트 참여 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막이 '노 벽 노 간파 노 메디신 노련함으로… 패턴만 보고'라는 노래 리믹스 가사이며 지식을 설명·강의하는 내용이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막에 대결·탈락·순위 구조가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "자막에 음식을 먹거나 만드는 행위가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "게임 플레이를 노래로 만든 것이며 특정 작품을 보고 평하거나 추천하는 내용이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '오공삼무선생'과 자막 '오공을 깰 때 쓰지 않은 세 가지'에서 게임 캐릭터 오공(손오공 IP)을 소재로 쓴다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'오공삼무선생 리믹스'는 콘텐츠 형식을 적은 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "'오공삼무선생'은 오공·삼무(세 가지 없음)·선생을 붙여 만든 합성어 별명이다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'리믹스'는 채널의 반복 코너·관계·챌린지 표식으로 볼 근거가 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨이나 진행자 별칭이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 47로 3,600초 이하다."
+    }
+  ]
+}

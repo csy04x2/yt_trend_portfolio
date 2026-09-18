@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1·frame_2·frame_3 모두 진행자가 아닌 긴 머리 여성이 스튜디오에서 '아 그 배 타고 다닌다는 게', '그니까!' 등 직접 발화하며 대화를 이끈다. 고정 크루로 보이지 않으나 인물 특정은 불가하여 medium.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3은 잡담 형식이며 강의 세팅이 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 순위·대진 구조가 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 음식이 없고 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목의 '루피'가 작품 캐릭터를 가리킬 수 있으나 frame_1~3에 작품 자료가 없다. 자막이 없어 배제 근거도 없다.",
+      "positive_exclusion": null
+    }
+  ]
+}

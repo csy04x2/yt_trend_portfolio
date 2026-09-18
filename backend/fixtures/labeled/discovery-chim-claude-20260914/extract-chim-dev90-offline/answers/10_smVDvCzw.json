@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "쇼츠이며 자막 199자로 짧다. '매직박', '종수'가 언급되지만 게스트 여부는 확인할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "야구장 사진 이야기뿐이라 지식 전달 구간 유무를 판단할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 순위·대결 구조 여부를 판단할 근거가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 음식 관련 내용이 없으나 부재를 확정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 작품 리뷰·추천 여부를 판단할 근거가 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '거다이맥스 매직박'이 포켓몬의 '거다이맥스'를 사람의 덩치에 대한 비유로 쓰고, 자막에도 '포켓몬 지나한 느낌'이 나온다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'거다이맥스 매직박'은 인물을 지칭하는 명사구로 대사 인용형이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "포켓몬 용어 '거다이맥스'를 사람 별칭 '매직박'에 붙인 합성어·비유형 제목이다. 포함 예시 '천연 위고비'와 같은 방식."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 남매·매너·킹콩·챌린지류 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "low",
+      "reason": "제목이 인물 별칭 '매직박'을 명시하지만 (with)·초대석 형식이 아니고 크루 여부도 확인할 수 없어 확신이 낮다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 22 ≤ 3600."
+    }
+  ]
+}

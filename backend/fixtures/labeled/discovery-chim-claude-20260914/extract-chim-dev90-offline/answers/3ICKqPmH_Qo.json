@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목의 '스피드좌'가 외부 게스트인지 크루 별칭인지 제목만으로 확정할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목 '스피드좌에게 도전하는 침착맨'에 지식 전달 형식 표지가 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목의 '도전'은 1:1 대결로 읽히나 후보를 좁혀 가는 순위 구조인지 알 수 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 음식 관련 표지가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 작품 리뷰·추천 표지가 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 IP·캐릭터 참조가 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'스피드좌에게 도전하는 침착맨'은 상황을 서술한 설명형 제목이지 대사 인용이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'스피드좌'의 '-좌'는 단순 유행어 접미사로, 발음 유사·합성어·표현 비틀기에 해당하지 않는다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 남매·매너·챌린지 같은 반복 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '스피드좌에게 도전하는 침착맨'에 진행자 이름 '침착맨'이 명시된다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목이 '스피드좌에게 도전하는'으로 상대 출연자를 명시한다. 다만 (with X)·초대석 형식이 아니고 별칭이라 확신은 중간이다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 1433으로 3,600초 이하다."
+    }
+  ]
+}

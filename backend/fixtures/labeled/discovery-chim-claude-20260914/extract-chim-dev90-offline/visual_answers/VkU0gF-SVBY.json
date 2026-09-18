@@ -1,0 +1,46 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1 코너 자막 '히나, 마젠타와 틱톡 배워보기'와 함께 두 여성이 진행자 얼굴 인서트 양옆에 앉아 있고, frame_2·3에서 붉은 머리 여성이 휴대폰으로 틱톡 3분할·필터를 직접 체험한다. 고정 크루(은하·맛피자·카라미)가 아닌 초대 인물이 활동에 참여.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "코너 자막이 '틱톡 배워보기'이지만 frame_2·3은 필터 체험 놀이 장면이지 강의·판서 형식이 아니다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "순위·대진 구조가 프레임에 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "음식 장면이 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "특정 작품이 화면에 없다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "틱톡은 플랫폼이며 IP 캐릭터·코스튬이 주제로 등장하지 않는다. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

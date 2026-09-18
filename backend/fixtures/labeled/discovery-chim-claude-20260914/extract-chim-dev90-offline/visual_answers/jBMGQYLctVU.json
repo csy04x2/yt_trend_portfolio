@@ -1,0 +1,46 @@
+{
+ "judgments": [
+  {
+   "feature_id": "guest_external",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2·frame_3 모두 보라색 상의 남성 한 명만 출연한다. 제2의 출연자가 없지만 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "expert_knowledge",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "제목 '개박사'는 농담이고 frame_3 '넌 그냥 개알못이야~' 등 퀴즈·농담 구도다. 강의·설명 형식이 없지만 자막이 없어 0 불가.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1 자막 '흔한 강아지 이름 7위 맞히는 중'과 채팅 '공동7위네'로 순위 목록을 맞히는 퀴즈임은 보이지만, 순위판·대진표 자체가 화면에 없고 frame_2·frame_3에는 순위 요소가 없다. 한 프레임의 간접 단서만으로 순위 매기기 형식으로 확정할 수 없다.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "food_eating",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "음식·식기가 보이지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "media_review",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "작품 자료가 없다. 자막 없음 → U.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_2의 '개박사 해피' 뱃지는 채널 자체 자막이고 IP 캐릭터·소품이 주제로 등장하지 않는다. 자막 없음 → U.",
+   "positive_exclusion": null
+  }
+ ]
+}

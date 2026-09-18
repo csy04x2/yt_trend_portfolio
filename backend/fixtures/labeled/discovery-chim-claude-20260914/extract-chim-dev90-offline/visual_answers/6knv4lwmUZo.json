@@ -1,0 +1,25 @@
+{
+  "judgments": [
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3은 진행자와 검은 옷의 남성이 피자 먹방·근황 토크를 하는 장면(자막 오버레이 '레이먼킴 피자 먹방', '맛피자 근황 토크')으로 순위·대진 구조가 보이지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1에 노래하는 남성의 PIP 화면과 가사 자막이 있으나 특정 작품을 평하거나 추천하는 자료가 아님. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 배경 선반의 포켓몬·오징어게임·베어브릭 피규어는 스튜디오 장식이며 소재로 다뤄지지 않음. 자막 null이라 0 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

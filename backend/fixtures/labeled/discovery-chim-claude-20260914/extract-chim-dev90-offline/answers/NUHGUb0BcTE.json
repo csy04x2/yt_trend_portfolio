@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없는 23초 쇼츠로, 제목 '거제 루피'만으로 게스트 출연 여부를 알 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 지식 전달 형식 표지가 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 대결·순위 구조 표지가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 음식 관련 표지가 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "자막이 없고 제목에 작품 리뷰·추천 표지가 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "제목 '거제 루피'가 기존 IP 캐릭터 이름 '루피'를 비유·별명으로 쓴다. 자막이 없어 어떤 루피인지는 확정할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'거제 루피'는 대상을 지칭하는 명사형 제목이지 구어체 대사 인용이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "low",
+      "reason": "'거제 루피'는 지명과 캐릭터 이름을 붙인 별명식 합성 표현으로 '천연 위고비' 예와 같은 비틀기로 볼 수 있으나 단순 지칭일 가능성도 있다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 반복 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목 '거제 루피'에 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 게스트 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 23으로 3,600초 이하다."
+    }
+  ]
+}

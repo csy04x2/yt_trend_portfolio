@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "U",
+      "confidence": "low",
+      "reason": "쇼츠이며 자막 271자로 짧다. '저희 침창미 님이 선물 드리면은'이라 말하는 상대가 게스트인지 크루인지 확인할 수 없다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "low",
+      "reason": "자막이 짧고 가짜 책 선물 이야기뿐이라 지식 전달 구간 유무를 판단할 수 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 순위·대결 구조 여부를 판단할 근거가 없다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 음식 관련 내용이 없으나 전체 영상의 부재를 확정할 수 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "'가짜 책 이렇게 된 거 있죠? 안에 빈 거'는 소품 이야기로, 특정 작품 리뷰 여부를 판단할 수 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "짧은 자막에 IP·캐릭터 언급이 없으나 부재를 확정할 수 없다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'가짜 책'은 명사구 제목으로 대사 인용형이 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'가짜 책'에 발음 유사·합성어·표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 남매·매너·킹콩·챌린지류 코너 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "0",
+      "confidence": "high",
+      "reason": "duration_sec 28 ≤ 3600."
+    }
+  ]
+}

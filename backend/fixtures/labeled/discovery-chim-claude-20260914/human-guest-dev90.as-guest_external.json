@@ -1,0 +1,200 @@
+{
+ "note": "팀원 guest_present → 재현본 guest_external 로 이름만 대응. 값은 그대로.",
+ "labels": {
+  "3ICKqPmH_Qo": {
+   "guest_external": "0"
+  },
+  "rYxNP7hxDIA": {
+   "guest_external": "1"
+  },
+  "feyYvvM-Qio": {
+   "guest_external": "1"
+  },
+  "It4VJznOw8Y": {
+   "guest_external": "1"
+  },
+  "JxHWHCPnHeA": {
+   "guest_external": "1"
+  },
+  "2KOobRb54VI": {
+   "guest_external": "1"
+  },
+  "oEK13uJ77PU": {
+   "guest_external": "1"
+  },
+  "qAqppHz30SM": {
+   "guest_external": "1"
+  },
+  "10_smVDvCzw": {
+   "guest_external": "1"
+  },
+  "1Ukfau4IeIE": {
+   "guest_external": "0"
+  },
+  "1rDCaM3LUoo": {
+   "guest_external": "1"
+  },
+  "3NeJ20nwD7o": {
+   "guest_external": "1"
+  },
+  "6i1X8JBcffU": {
+   "guest_external": "0"
+  },
+  "6knv4lwmUZo": {
+   "guest_external": "1"
+  },
+  "7RCWN97TwM0": {
+   "guest_external": "0"
+  },
+  "9cy3LlAa-4M": {
+   "guest_external": "0"
+  },
+  "A2FJQACZzoM": {
+   "guest_external": "1"
+  },
+  "AdCduGpyRAI": {
+   "guest_external": "1"
+  },
+  "AeKnXiMhYCc": {
+   "guest_external": "1"
+  },
+  "AzTLk6sU01I": {
+   "guest_external": "1"
+  },
+  "C2s8vZ5z9-M": {
+   "guest_external": "0"
+  },
+  "D98N0tOZX3E": {
+   "guest_external": "1"
+  },
+  "DROLZLT7dAU": {
+   "guest_external": "0"
+  },
+  "EONlXsPEoJA": {
+   "guest_external": "1"
+  },
+  "ErNPMmdjLMs": {
+   "guest_external": "1"
+  },
+  "F9XqC3dOp38": {
+   "guest_external": "1"
+  },
+  "G-ks4NZLKs0": {
+   "guest_external": "1"
+  },
+  "HJmZsYJVt_8": {
+   "guest_external": "0"
+  },
+  "HrdLYO5vwh0": {
+   "guest_external": "1"
+  },
+  "JV6Topsze2o": {
+   "guest_external": "0"
+  },
+  "JlWf25KigPo": {
+   "guest_external": "1"
+  },
+  "KcwFW1HaaPA": {
+   "guest_external": "0"
+  },
+  "N6gTqKGcrzw": {
+   "guest_external": "0"
+  },
+  "NUHGUb0BcTE": {
+   "guest_external": "1"
+  },
+  "OFhG9krs6UM": {
+   "guest_external": "1"
+  },
+  "Odl9lO4CKF4": {
+   "guest_external": "1"
+  },
+  "PC_IJo9CN_8": {
+   "guest_external": "0"
+  },
+  "PCdFGHom87E": {
+   "guest_external": "1"
+  },
+  "RzycfhMgvd4": {
+   "guest_external": "1"
+  },
+  "SjIyU5h7-VE": {
+   "guest_external": "0"
+  },
+  "Smx_hiWDXmo": {
+   "guest_external": "1"
+  },
+  "TH1f6hjxlMM": {
+   "guest_external": "1"
+  },
+  "UaIPRdKm7ME": {
+   "guest_external": "1"
+  },
+  "V-vTapkCD-8": {
+   "guest_external": "1"
+  },
+  "VkU0gF-SVBY": {
+   "guest_external": "1"
+  },
+  "WuVU1AQjUhI": {
+   "guest_external": "1"
+  },
+  "X_sZRLpRPTM": {
+   "guest_external": "0"
+  },
+  "Xlmk9B16kHs": {
+   "guest_external": "1"
+  },
+  "Y8z7JDL1BTk": {
+   "guest_external": "1"
+  },
+  "YY0hAt4QT6g": {
+   "guest_external": "0"
+  },
+  "Yjoz2Jc9deY": {
+   "guest_external": "1"
+  },
+  "YrXdRzD6nmM": {
+   "guest_external": "0"
+  },
+  "ZGomfRrFBkU": {
+   "guest_external": "1"
+  },
+  "_HIgSteWMnI": {
+   "guest_external": "0"
+  },
+  "a7LdFQ2jYWo": {
+   "guest_external": "0"
+  },
+  "aSmmVHIiqFw": {
+   "guest_external": "1"
+  },
+  "am6XlA_WGcw": {
+   "guest_external": "0"
+  },
+  "b18XRBJcc94": {
+   "guest_external": "0"
+  },
+  "b1dq_KQGREQ": {
+   "guest_external": "0"
+  },
+  "bRovKR3fllc": {
+   "guest_external": "1"
+  },
+  "c6-kWFRX8wY": {
+   "guest_external": "0"
+  },
+  "cBhtR7C1lUg": {
+   "guest_external": "1"
+  },
+  "d08X2gMNBpg": {
+   "guest_external": "1"
+  },
+  "dRXqaMmJHWM": {
+   "guest_external": "1"
+  },
+  "diIdRF7ingQ": {
+   "guest_external": "1"
+  }
+ }
+}

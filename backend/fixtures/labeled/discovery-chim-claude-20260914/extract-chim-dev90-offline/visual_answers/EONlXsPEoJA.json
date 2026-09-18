@@ -1,0 +1,18 @@
+{
+ "judgments": [
+  {
+   "feature_id": "tournament_ranking",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_3 좌상단에 '1위 단군 - 13:29.19'라는 기록 표시가 있고 frame_2 자막은 '벌칙 정하기'다. 자막에 따르면 형식은 나무위키 랜덤 페이지에서 목표 문서까지 '빠른 시간 안에 도달하는' 스피드런 대결이며, 세 사람의 기록 순서가 붙을 뿐 항목을 순위 매기는 월드컵·티어 형식은 아니다. 순위 표시가 한 프레임에만 있고 대결 결과 표시인지 순위 형식인지 화면만으로 확정할 수 없다.",
+   "positive_exclusion": null
+  },
+  {
+   "feature_id": "pop_culture_ip",
+   "label": "U",
+   "confidence": "medium",
+   "reason": "frame_1·frame_2·frame_3 모두 세 남성의 리액션이고 IP 캐릭터·코스튬·소품이 주제로 등장하지 않는다. 배경 선반의 미키마우스 인형·베어브릭은 세트 장식이다. 자막에는 스피드런 도중 나무위키 '원피스' 문서와 악마 열매 이야기가 여러 번 나오므로 0으로 배제할 수는 없고, 화면 근거가 없어 U.",
+   "positive_exclusion": null
+  }
+ ]
+}

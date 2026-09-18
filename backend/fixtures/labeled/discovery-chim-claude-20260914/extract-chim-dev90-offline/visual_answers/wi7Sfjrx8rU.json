@@ -1,0 +1,50 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1과 frame_3에서 안경 쓴 남성이 칠판 앞 교실 세트에서 '천재야! 여기 지금 다 천재라 그러잖아' 등 직접 발화하고, frame_2에서는 다른 인물이 '그럼 나는 없지 지금!'이라 받아친다. 자막도 '>>'로 화자가 교대하는 대화다. 고정 크루 여부는 특정할 수 없어 medium.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "frame_1~3에 칠판이 있으나 낙서뿐이고 지식 설명 장면이 없다. 자막 전체(117자)가 '천재'·'먼저 태어나셨는데요' 식 농담 주고받기로 끝나고 [웃음]으로 마무리되는 18초 쇼츠다.",
+      "positive_exclusion": {
+        "exclusion": "헌팅의 과학 — 제목이 '과학'이어도 농담 쇼츠면 0",
+        "caption_quote": "지금 먼저 태어나셨는데요.",
+        "explanation": "자막의 내용이 수학계·천재를 소재로 한 농담 주고받기이며 어떤 분야의 지식도 설명하지 않는다. 교실 세트라는 외형만으로 강의 형식이라 볼 수 없다."
+      }
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 순위·대진 구조가 없다. 자막에도 배제를 확정하는 문장은 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 음식이 없다. 자막에도 배제를 확정하는 문장은 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 특정 작품 자료가 없다. 자막에도 배제를 확정하는 문장은 없다.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_1~3에 IP 캐릭터·소품이 없다(frame_2 배경 인형은 장식). 자막에도 배제를 확정하는 문장은 없다.",
+      "positive_exclusion": null
+    }
+  ]
+}

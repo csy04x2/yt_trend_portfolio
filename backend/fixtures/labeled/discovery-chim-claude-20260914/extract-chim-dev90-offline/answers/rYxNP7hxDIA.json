@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목의 '(with 곽튜브, 키드밀리)' 표기와 자막 '키드밀리 님이 하나 골라 주시죠'로 게스트가 실제 발화·참여함이 확인된다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "전체 자막이 최악의 인간 유형을 놓고 잡담·대결하는 내용이며 특정 분야를 설명·강의하는 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 '최악의 인간 유형 월드컵'과 자막 '첫 번째 매치', '4강', '준결승', '결승', '월드컵 우승자는'으로 대결·탈락 구조가 뼈대임이 확인된다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "긴 자막 전체에서 음식은 '빵 같은 거 먹으면서' 같은 비유적 언급뿐이고 먹거나 만드는 활동이 없다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "'타짜 만화책', '콜로세움 영화' 등 작품명은 비유로만 쓰이고 특정 작품을 보고 평하거나 추천하는 대목이 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "자막에서 '포켓몬 좋아하시니까', '막시무스가 여기 돌아와', '오징어 게임이 나오는 그 이쁜 관' 등 기존 IP·캐릭터를 인간 유형의 비유로 길게 끌어다 쓴다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "'최악의 인간 유형 월드컵 (with 곽튜브, 키드밀리)'는 기획을 서술하는 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 발음 유사·합성어·표현 비틀기가 없다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "제목에 남매·매너·킹콩·챌린지류 코너 표식이 없다. '월드컵'은 형식이며 tournament_ranking에서 다룬다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목이 '(with 곽튜브, 키드밀리)' 형식으로 출연자를 명시한다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "1",
+      "confidence": "high",
+      "reason": "duration_sec 3933 > 3600."
+    }
+  ]
+}

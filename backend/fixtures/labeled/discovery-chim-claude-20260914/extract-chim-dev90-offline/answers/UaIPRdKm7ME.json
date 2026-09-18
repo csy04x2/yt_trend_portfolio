@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 「수학 강사 정승제 … 특강」이 초대 강사를 명시하고, 자막에서 정승제가 직접 강의한다 (「그거는 정승제의 수강증을 끊으면 돼요」, 「2026년부터는 게스트 선물을 좀 드리기로 해서 뽑기를」)."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "1",
+      "confidence": "high",
+      "reason": "영상 전체가 미분·적분 강의다 (「접선의 기울기가 미분 계수고」, 「넓이를 미분하면 길이가 된다 … 미적분의 기본 정리」). 제목도 「특강」."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "high",
+      "reason": "4만 자 전체 자막이 강의 대화이며 후보를 대결·탈락시키는 구조가 없다. 「정승제 1번 침착맨 2번 외모」는 농담 한 마디일 뿐이다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「킨더 부에노 수업 중에 먹어도 돼요?」 한 마디뿐이고 먹거나 만드는 행위가 중심이 아니다. 강의가 중심."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "배트맨·조커·GTA가 언급되지만 미분과 적분의 관계를 설명하는 비유로 쓰였을 뿐 특정 작품을 보고 평하거나 추천하지 않는다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "「조커와 배트맨의 관계」를 미분·적분의 역관계 비유로 길게 끌어 쓰고(「배트맨이 조커를 만들어요」), 「GTA 같네요」도 비유로 등장한다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「수학 강사 정승제 '…' 특강」은 강의 내용을 설명하는 제목이지 영상 속 대사가 아니다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "0",
+      "confidence": "high",
+      "reason": "발음 유사·합성어·표현 비틀기가 없는 설명형 제목이다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「특강」은 지식 전달 형식을 나타내는 일반 단어로 보고, 남매·매너·킹콩·챌린지 같은 코너·관계 표식으로는 보지 않았다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목에 침착맨·침풍뼈 등 진행자 이름이 없다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "1",
+      "confidence": "high",
+      "reason": "제목 「수학 강사 정승제 … 특강」이 출연 강사를 이름으로 명시한다 (「김신영이 알려주는」과 같은 형식)."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "1",
+      "confidence": "high",
+      "reason": "duration_sec 5176 > 3600."
+    }
+  ]
+}

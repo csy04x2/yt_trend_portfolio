@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1~3 모두 두 남성이 채팅(「주방」, 「뼈골름」, 「혼자 신남」)을 보며 웃는 장면으로 강의 장치가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "채팅 답 맞히기 놀이로 보이나 순위판·대진표는 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "음식이 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "작품 자료가 없다. 자막 없음.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1 선반의 미키 인형은 배경이며 화면 소재는 채팅 텍스트다. 자막 없음.",
+      "positive_exclusion": null
+    }
+  ]
+}

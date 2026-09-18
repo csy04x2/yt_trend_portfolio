@@ -1,0 +1,11 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "medium",
+      "reason": "frame_1·frame_2에서 체크 셔츠의 여성이 진행자 옆에 앉아 '오빠로서 좋은 순 아니야?'라고 발화하며 티어 매기기에 참여함. 두 프레임과 자막의 대화 전환(>>)으로 제2 출연자가 확인됨. 이름은 제목·자막에 없어 고정 크루 여부는 확인 불가.",
+      "positive_exclusion": null
+    }
+  ]
+}

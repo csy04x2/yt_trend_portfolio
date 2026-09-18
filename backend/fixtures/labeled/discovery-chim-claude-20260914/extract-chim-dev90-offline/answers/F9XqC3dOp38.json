@@ -1,0 +1,76 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "자막에서 「과학 커뮤니케이터 궤도입니다」「안녕하세요. 케인입니다」 등 고정 크루가 아닌 인물들(궤도·케인·고영배·넉살·오존 등)이 직접 인사하고 경기에 참여한다."
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "0",
+      "confidence": "high",
+      "reason": "전체 자막이 신발 양궁·거북이 등씨름·방석 퀴즈 등 운동회 진행이며, 궤도의 「정지 마찰력」 농담 해설은 잡담 중 한마디에 그쳐 강의 구간이 없다."
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "83팀 대 그밖팀의 팀 대항 운동회로 「최종 점수 30대 40」 승패를 가리지만, 여러 후보를 순위·탈락으로 좁혀 가는 월드컵·순위 매기기 형식은 아니다."
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「15만 원 상당의 한우 세트」는 상품이고 쉬는 시간에 「허겁지겁 드시고 계십니다」 정도로 먹는 장면은 배경일 뿐, 먹거나 만드는 행위가 중심이 아니다."
+    },
+    {
+      "feature_id": "media_review",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "퀴즈에 「만화 슬램덩크」「드라마 파리의 연인」이 문제로 나올 뿐 특정 작품을 보고 평하거나 추천하는 구간은 없다."
+    },
+    {
+      "feature_id": "pop_culture_ip",
+      "label": "U",
+      "confidence": "low",
+      "reason": "방석 퀴즈에서 「슬램덩크 강백호 등번호」「스타크래프트 드라군 히드라」 등 IP가 문제 소재로 등장하지만 2시간 영상 중 일부 문제에 그쳐 영상의 소재로 볼 만큼 중심적인지 판단하기 어렵다."
+    },
+    {
+      "feature_id": "title_quote",
+      "label": "0",
+      "confidence": "high",
+      "reason": "「드디어 개최된《제1회 침투부 운동회》」는 행사를 서술하는 설명형 제목이다."
+    },
+    {
+      "feature_id": "title_wordplay",
+      "label": "1",
+      "confidence": "low",
+      "reason": "「침투부」는 침착맨+유튜브(침튜브)를 발음대로 비튼 합성어 표기로, 자막에서는 「침튜브 운동회」로 발화된다."
+    },
+    {
+      "feature_id": "recurring_bit",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「제1회」라고 명시된 첫 개최 행사이며, 제목에 채널이 반복해 쓰는 코너·관계·챌린지 표식이 없다."
+    },
+    {
+      "feature_id": "host_in_title",
+      "label": "0",
+      "confidence": "medium",
+      "reason": "「침투부」는 채널을 가리키는 말이며 제목에 침착맨이나 진행자 별칭이 명시되지 않았다."
+    },
+    {
+      "feature_id": "guest_in_title",
+      "label": "0",
+      "confidence": "high",
+      "reason": "제목 「제1회 침투부 운동회」에 (with X)·초대석·feat 등 출연자 표기가 없다."
+    },
+    {
+      "feature_id": "one_hour_plus",
+      "label": "1",
+      "confidence": "high",
+      "reason": "duration_sec 7130 > 3600."
+    }
+  ]
+}

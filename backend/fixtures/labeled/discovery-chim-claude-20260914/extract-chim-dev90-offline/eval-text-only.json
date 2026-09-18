@@ -1,0 +1,29 @@
+{
+ "guest_external": {
+  "n_ref": 64,
+  "ref_nonU": 64,
+  "pred_nonU_on_ref_nonU": 15,
+  "agree": 13,
+  "false_1": 0,
+  "false_0": 2,
+  "by_axis": {
+   "long": {
+    "ref_nonU": 25,
+    "covered": 11,
+    "agree": 9
+   },
+   "shorts": {
+    "ref_nonU": 37,
+    "covered": 3,
+    "agree": 3
+   },
+   "standard": {
+    "ref_nonU": 2,
+    "covered": 1,
+    "agree": 1
+   }
+  },
+  "coverage": 0.234375,
+  "accuracy_on_covered": 0.8666666666666667
+ }
+}

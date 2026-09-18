@@ -1,0 +1,39 @@
+{
+  "judgments": [
+    {
+      "feature_id": "guest_external",
+      "label": "1",
+      "confidence": "high",
+      "reason": "frame_1·2 화면 자막 'AKMU & 궤도 특강 중'과 함께 파란 재킷 남성과 곱슬머리 남성이 세트에 앉아 있고, frame_3에서 여성 출연자가 웃으며 자막 '한 대 맞고 나 눈을 못 마주치겠어!'로 대화에 참여한다. 고정 크루가 아닌 초대 인물들.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "expert_knowledge",
+      "label": "U",
+      "confidence": "medium",
+      "reason": "frame_1·2 자막에 '특강 중'이 있으나 실제 프레임은 펀치 맞은 경험담으로 웃는 장면이고, 자막도 '눈을 한대 맞고 [웃음]' 같은 잡담이다. 원본 특강의 농담 컷일 가능성이 높지만 자막이 강의 부재를 확정하지는 못해 U.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "tournament_ranking",
+      "label": "U",
+      "confidence": "low",
+      "reason": "순위·대진 구조가 없다. 자막에도 관련 문구가 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "food_eating",
+      "label": "U",
+      "confidence": "low",
+      "reason": "frame_3 테이블에 머그컵이 있을 뿐 먹는 활동이 없다. 자막에도 음식 언급이 없어 0 불가.",
+      "positive_exclusion": null
+    },
+    {
+      "feature_id": "media_review",
+      "label": "U",
+      "confidence": "low",
+      "reason": "제목의 '킹콩'은 펀치 비유이며 프레임에 작품 화면이 없다. 자막이 작품 리뷰 부재를 직접 확정하지는 않아 U.",
+      "positive_exclusion": null
+    }
+  ]
+}
