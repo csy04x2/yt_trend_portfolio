@@ -51,3 +51,27 @@ python -B -m pytest -q -p no:cacheprovider backend/tests/test_guest_extractor.py
 ```
 
 합성 데이터와 mock judge/collector로 계약을 검사한다. 외부 수집/모델 호출/DB write는 하지 않는다. Vision request 형식 참고: https://platform.claude.com/docs/en/build-with-claude/vision
+
+## 채널 단위 실행기 — `channel.py` (2026-09-18)
+
+`multi.extract_video`(한 영상 · 텍스트 한 번 · 필요 시 시각 한 번)를 채널 전체에 돌리는 실행기.
+싼 단서부터 보고 판정이 끝난 특징은 더 보지 않는다. U를 0으로 바꾸는 일은 없다.
+
+```
+python -m tools.feature_extractor.channel run --content docs/prototype/chim-evidence.json \
+    --registry <plain 또는 frozen registry> --out <새 폴더> \
+    [--split split.csv --scope development] [--captions <vid>.txt 폴더] [--evidence-root stage2 패킷 폴더] \
+    [--judge offline | --judge api --model <ID>] [--cache <폴더>] [--routing routing.json]
+python -m tools.feature_extractor.channel import   --run <폴더> --answers <답안 폴더>     # offline 답안 반영
+python -m tools.feature_extractor.channel evaluate --run <폴더> --reference <사람 정답> --out eval.json
+```
+
+- 입력 content는 허용 필드(제목·설명·길이·게시일·길이축)만 남기고 `blind.validate_rows`로 검사한다. 성과값은 들어갈 수 없다.
+- 자막은 `--captions` 폴더의 `<video_id>.txt` 또는 `stage2_collect` 패킷에서 읽는다. 아주 길면 나눠 묻고 합친다(하나라도 1 → 1, 전부 0 → 0, 섞이면 U).
+- 시각 단계는 텍스트 U이면서 경로 표가 `TEXT_THEN_VISUAL`인 특징에만, 패킷에 프레임이 있을 때만 쓴다. 프레임에 안 보인다는 이유로 0이 되지 않는다(`multi.py` 규칙 그대로).
+- 다른 12개(예: 14F 레지스트리)를 쓰면 `--routing routing.json`으로 특징별 경로를 준다. 없으면 전부 시각 허용으로 두고 manifest에 `all_visual_fallback`을 남긴다. `core.set_feature_routing`이 이를 위해 추가됐다.
+- 분할 파일이 있으면 기본은 development만, holdout은 `--unseal-holdout` 없이는 거부. 분할 파일이 없으면 채널 전체(제품 모드).
+- `--cache`를 주면 같은 영상·레지스트리·프롬프트·모델·증거에 대해 다시 부르지 않는다.
+- 출력: `labels.json`(전체 행렬, `feature_outcome`·대시보드가 그대로 읽음), `predictions.jsonl`(근거·단계), `review_queue.jsonl`(자신 없는 판정·시각 단계·무작위 10%), `summary.md`(특징별 0/1/U와 축별 U 비율), `manifest.json`.
+- `--judge offline`은 영상마다 판정 입력 JSON을 내보내고, 답안을 `import`로 받는다. 저장소의 기존 오프라인 판정 방식과 같다.
+- 자막·프레임을 **모으는** 일은 이 실행기가 하지 않는다. `tools/stage2_evidence/stage2_collect.py`(yt-dlp·ffmpeg)를 쓰며, 영상·자막 내려받기의 약관 판단은 미결이다.

@@ -107,6 +107,22 @@ HTML을 다시 그린다. 주의: `build_chim_prototype.py`로 DB에서 evidence
 - 특징 이름은 레지스트리의 `name`, 판정은 판정 파일에서 온다. 팀원의 12개로 바꾸고 같은 명령을
   돌리면 선택 목록·칩·④ 표가 전부 그 12개로 바뀐다. 템플릿을 고칠 필요가 없다.
 
+## 판정 파일을 AI로 만들기 — 채널 단위 추출기
+
+제목 정규식 자리표시자를 대체할 판정 파일은 `tools/feature_extractor/channel.py`가 만든다
+(저장소 루트에서 실행). 제목·설명 → 자막 → 장면 순서로 보고, 한 영상에 한 번 물어 모든 특징을
+0/1/U로 받는다. 출력 `labels.json`은 이 폴더의 `labels-title-regex-300.json` 자리에 그대로 들어간다.
+
+```
+python -m tools.feature_extractor.channel run --content docs/prototype/chim-evidence.json \
+  --registry <레지스트리> --split <split.csv> --scope development --out <새 폴더> \
+  --captions <자막 폴더> --evidence-root <stage2 패킷 폴더> --judge api --model <ID> --cache <캐시 폴더>
+```
+
+자막·장면 없이 돌리면 제목만 보는 것과 같으니(U가 대부분) 먼저 `tools/stage2_evidence`로
+증거를 모은다. 사람 정답과의 대조는 `channel.py evaluate`로 잰다 — 침착맨 development 90의
+게스트 출연 사람 정답이 `../discovery-chim-human-20260917/`에 있다.
+
 ## 14F 특징 적용 결과가 오면 — 진행 절차
 
 팀원이 친구에게 맡긴 14F Human Discovery(90편) 결과와 그 뒤의 LLM Discovery가 오면 아래 순서로

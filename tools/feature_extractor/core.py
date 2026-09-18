@@ -17,8 +17,10 @@ FIELDS = {"video_id", "title", "description", "duration_sec", "published_at", "l
 
 TEXT_ONLY = "TEXT_ONLY"
 TEXT_THEN_VISUAL = "TEXT_THEN_VISUAL"
-# Frozen A-v0.1 evidence routing only; this table never assigns a label.
-FEATURE_ROUTING = MappingProxyType({
+# Frozen A-v0.1 evidence routing by default; this table never assigns a label.
+# The channel orchestrator may swap in the routing of another registry with
+# set_feature_routing(); the proxy object stays the same so importers see it.
+_ROUTING = {
     "guest_present": TEXT_THEN_VISUAL,
     "guest_conversation": TEXT_THEN_VISUAL,
     "browse_and_comment": TEXT_THEN_VISUAL,
@@ -31,7 +33,17 @@ FEATURE_ROUTING = MappingProxyType({
     "work_or_character_focus": TEXT_ONLY,
     "on_location": TEXT_THEN_VISUAL,
     "challenge_activity": TEXT_ONLY,
-})
+}
+FEATURE_ROUTING = MappingProxyType(_ROUTING)
+
+
+def set_feature_routing(mapping):
+    """Replace the routing table in place (values TEXT_ONLY / TEXT_THEN_VISUAL)."""
+    bad = {k: v for k, v in dict(mapping).items() if v not in (TEXT_ONLY, TEXT_THEN_VISUAL)}
+    if bad or not mapping:
+        raise ValueError(f"Invalid routing: {bad or 'empty'}")
+    _ROUTING.clear()
+    _ROUTING.update(mapping)
 
 
 def validate_text_judgment(judgment):
