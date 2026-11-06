@@ -23,6 +23,8 @@ def clusters(comments,duration,window=30):
    buckets[b].add(c['comment_id'])
    if len(examples[b])<3:examples[b].append({'text':c['text'][:350],'comment_id':c['comment_id']})
  return {'timestamp_comments':n,'window_seconds':window,'bins':[{'start':b*window,'progress':b*window/duration,'n':len(ids),'examples':examples[b]} for b,ids in sorted(buckets.items())]}
+# non-canonical (provisional/legacy): peer 가 실험 split 전체에서 나온다.
+# canonical 정의는 app.pipeline.reference.canonical_view_multiple (docs/design/reference-population.md).
 def compare(video,videos):
  age=video['age_days'];tolerance=max(2,age*.2)
  peers=[v for v in videos if v['video_id']!=video['video_id'] and v['length_axis']==video['length_axis'] and abs(v['age_days']-age)<=tolerance and not v['is_live'] and v['view_count'] is not None]
@@ -62,15 +64,17 @@ def build(c):
   videos.append(v)
  for v in videos:v.update(compare(v,videos))
  all_comments=[dict(x) for x in c.execute('select * from observation_comments where run_id=?',(rid,))];author_videos=defaultdict(set)
- for x in all_comments:
+ # 시청자 행동은 분석 대상 댓글만 센다 (analysis_eligible, docs/design/comment-eligibility.md). 수집 커버리지는 raw 전체로 센다
+ audience=[x for x in all_comments if x.get('analysis_eligible',1)]
+ for x in audience:
   if x['author_id']:author_videos[x['author_id']].add(x['video_id'])
  for v in videos:
-  vid=v['video_id'];rows=[x for x in all_comments if x['video_id']==vid];authors={x['author_id'] for x in rows if x['author_id']};collection=c.execute('select * from observation_collection where run_id=? and video_id=?',(rid,vid)).fetchone();threads=[dict(x) for x in c.execute('select * from observation_threads where run_id=? and video_id=?',(rid,vid))]
-  v['collection_status']=collection['status'] if collection else 'not_sampled';v['collected_comments']=len(rows);v['unique_commenters']=len(authors) if collection else None;v['author_missing_rate']=ratio(sum(x['author_id'] is None for x in rows),len(rows));v['observed_repeat_share']=ratio(sum(len(author_videos[a])>1 for a in authors),len(authors));v['participant_breadth']=ratio(len(authors),v['view_count']) if collection else None
+  vid=v['video_id'];rows=[x for x in all_comments if x['video_id']==vid];aud=[x for x in rows if x.get('analysis_eligible',1)];authors={x['author_id'] for x in aud if x['author_id']};collection=c.execute('select * from observation_collection where run_id=? and video_id=?',(rid,vid)).fetchone();threads=[dict(x) for x in c.execute('select * from observation_threads where run_id=? and video_id=?',(rid,vid))]
+  v['collection_status']=collection['status'] if collection else 'not_sampled';v['collected_comments']=len(rows);v['eligible_comments']=len(aud);v['excluded_comments']=dict(Counter(x['exclusion_reason'] for x in rows if not x.get('analysis_eligible',1)));v['unique_commenters']=len(authors) if collection else None;v['author_missing_rate']=ratio(sum(x['author_id'] is None for x in rows),len(rows));v['observed_repeat_share']=ratio(sum(len(author_videos[a])>1 for a in authors),len(authors));v['participant_breadth']=ratio(len(authors),v['view_count']) if collection else None
   v['collection_to_api_ratio']=ratio(len(rows),v['comment_count']) if collection else None
   v['threads']=len(threads) if collection else None;v['replies_collected']=sum(t['collected_replies'] for t in threads) if collection else None;v['api_replies_sampled_threads']=sum(t['api_replies'] for t in threads) if threads and all(t['api_replies'] is not None for t in threads) else None;v['reply_rate']=ratio(v['replies_collected'],v['threads']);v['reply_incomplete_threads']=sum(t['status']!='complete' for t in threads);v['reply_fetch_coverage']=ratio(v['replies_collected'],v['api_replies_sampled_threads']);v['max_thread_size']=max((1+t['collected_replies'] for t in threads),default=None)
-  v['timestamp']=clusters(rows,v['duration_sec']);v['timestamp']['sensitivity_60s']=max((b['n'] for b in clusters(rows,v['duration_sec'],60)['bins']),default=0)
-  legacy=[dict(x) for x in c.execute('select l.* from comment_labels l join comments co using(comment_id) where co.video_id=?',(vid,))];v['sentiment']=dict(Counter(x['sentiment'] for x in legacy));v['sentiment_sources']=dict(Counter(x['model'] for x in legacy));v['sentiment_n']=len(legacy)
+  v['timestamp']=clusters(aud,v['duration_sec']);v['timestamp']['sensitivity_60s']=max((b['n'] for b in clusters(aud,v['duration_sec'],60)['bins']),default=0)
+  legacy=[dict(x) for x in c.execute('select l.* from comment_labels l join comments co using(comment_id) where co.video_id=? and co.analysis_eligible=1',(vid,))];v['sentiment']=dict(Counter(x['sentiment'] for x in legacy));v['sentiment_sources']=dict(Counter(x['model'] for x in legacy));v['sentiment_n']=len(legacy)
   v['reaction']={'status':'not_labeled_for_this_channel','lift':None}
  evidence=[]
  for axis in ['shorts','standard','long']:
@@ -91,4 +95,4 @@ def build(c):
   for axis in ['shorts','standard','long']:
    vs=[v for v in videos if v['month']==month and v['length_axis']==axis];vals=[v['view_multiple'] for v in vs if v['view_multiple'] is not None]
    monthly.append({'month':month,'length_axis':axis,'n':len(vs),'comparable_n':len(vals),'median_multiple':median(vals)})
- return {'version':VERSION,'run_id':rid,'run_status':run['status'],'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'channel':'침착맨','videos':videos,'evidence':evidence,'monthly':monthly,'sampling':json.loads(run['policy_json']),'summary':{'video_n':len(videos),'sample_video_n':sum(v['collection_status']!='not_sampled' for v in videos),'comment_n':len(all_comments),'unique_authors':len(author_videos),'comparable_n':sum(v['view_multiple'] is not None for v in videos),'labeled_n':sum(v['sentiment_n'] for v in videos)},'limitations':['Shorts/일반/롱폼은 180초·1200초 기준 길이 proxy','라이브/프리미어 판정 미확정 영상 포함','비교군은 같은 길이축·게시 후 나이 ±20%(최소 2일), 5편 이상. 동일 7일 성과가 아님','최신 댓글 최대 100개/영상의 비확률 표본. 댓글 전수 대표성 없음','수집/API 댓글 비율은 서로 다른 시점과 공개 범위 때문에 coverage의 근사치','코너는 기존 단일 할당 자료이며 다중 소속 미복원. 모음 목록 제외','감성 판정은 과거 2개 영상 표본이며 Reaction과 다름','특성 효과는 비교군 공유·계절성·다중 비교 영향을 받는 탐색 결과','장기 시간 변화 및 변곡 검증은 반복 snapshot 축적 필요']}
+ return {'version':VERSION,'run_id':rid,'run_status':run['status'],'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'channel':'침착맨','videos':videos,'evidence':evidence,'monthly':monthly,'sampling':json.loads(run['policy_json']),'summary':{'video_n':len(videos),'sample_video_n':sum(v['collection_status']!='not_sampled' for v in videos),'comment_n':len(all_comments),'eligible_comment_n':len(audience),'unique_authors':len(author_videos),'comparable_n':sum(v['view_multiple'] is not None for v in videos),'labeled_n':sum(v['sentiment_n'] for v in videos)},'limitations':['Shorts/일반/롱폼은 180초·1200초 기준 길이 proxy','라이브/프리미어 판정 미확정 영상 포함','비교군은 같은 길이축·게시 후 나이 ±20%(최소 2일), 5편 이상. 동일 7일 성과가 아님','최신 댓글 최대 100개/영상의 비확률 표본. 댓글 전수 대표성 없음','수집/API 댓글 비율은 서로 다른 시점과 공개 범위 때문에 coverage의 근사치','코너는 기존 단일 할당 자료이며 다중 소속 미복원. 모음 목록 제외','감성 판정은 과거 2개 영상 표본이며 Reaction과 다름','특성 효과는 비교군 공유·계절성·다중 비교 영향을 받는 탐색 결과','장기 시간 변화 및 변곡 검증은 반복 snapshot 축적 필요']}

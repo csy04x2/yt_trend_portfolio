@@ -118,6 +118,10 @@ def view_multiple(
 ) -> tuple[float | None, str]:
     """조회 배수와 그 근거를 함께 돌려준다.
 
+    **non-canonical (legacy).** 채널 전체(실험 split 포함) 안에서 비교군을 고른다.
+    final Finding 용 canonical 정의는 `app.pipeline.reference.canonical_view_multiple`
+    (docs/design/reference-population.md). 이 함수는 리포트·탐색용으로 남긴다.
+
     population 은 같은 채널의 모든 영상. 여기서 같은 길이 축·같은 분기이고
     라이브가 아닌 것만 골라 비교군으로 쓴다. 자기 자신은 뺀다 — 넣으면
     분모가 자기를 포함해 배수가 1 쪽으로 눌린다.

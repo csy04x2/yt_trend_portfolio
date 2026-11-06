@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 import statistics as st
+from collections import Counter
 
 VERSION = "finding-engine-v0.1"
 OUTCOME = "view_multiple"
@@ -26,6 +27,20 @@ RELATIVE_PERFORMANCE_CONTRACT = {
     "missingness": "live target, fewer than 5 peers with non-null views, missing target views, or nonpositive median -> None",
     "interpretation": "cross-sectional relative performance; not a predicted/expected view count",
     "provenance_verified": False,
+    # 2026-09-15 C 정책: split 내부 peer 를 쓰는 이 정의는 provisional/legacy 다.
+    # canonical 정의는 docs/design/reference-population.md (opt-in: reference_manifest).
+    "canonical": False,
+    "canonical_status": "provisional_legacy",
+}
+
+# Opt-in canonical outcome: frozen reference population outside the experiment split.
+CANONICAL_RELATIVE_PERFORMANCE_CONTRACT = {
+    "source": "app.pipeline.reference.canonical_view_multiple",
+    "definition": "snapshot views / median snapshot views of the frozen reference population in the same length axis; "
+                  "reference excludes every split video; target and reference both matured and non-live",
+    "design_doc": "docs/design/reference-population.md",
+    "canonical": True,
+    "supplied_view_multiple_ignored": True,
 }
 
 # Scalar audience observations eligible for exploratory associations.
@@ -59,6 +74,20 @@ SAMPLING_SENSITIVE_METRICS = (
     "unique_commenters", "participant_breadth", "threads",
     "replies_collected", "max_thread_size",
 )
+
+
+# Reaction 판정 결과는 독립 fresh 표본 검증 전까지 "검증 전 AI 판정"이며 MVP Finding
+# 입력이 아니다 (docs/reaction-track-closeout-2026-09-17.md 「2026-09-17 재개 결정」).
+# Reaction 결합 분석(feature_outcome.reaction_join)의 필드는 전부 이 접두를 쓴다.
+REACTION_FIELD_PREFIX = "reaction_"
+
+
+def _reject_unvalidated_reaction_inputs(videos):
+    for video in videos:
+        if video.get("mvp_input_eligible") is False or any(
+                isinstance(key, str) and key.startswith(REACTION_FIELD_PREFIX) for key in video):
+            raise ValueError("검증 전 AI 판정(Reaction) 행은 MVP Finding 입력이 아니다 — "
+                             "feature_outcome.reaction_join 보고서로만 본다")
 
 
 def _metric_metadata():
@@ -309,21 +338,60 @@ def _chain_candidate(videos, labels, feature_id, behavior, fp, fb, bp):
     }
 
 
-def build_findings(videos, labels, registry, split_name="development"):
+def _canonical_outcomes(videos, reference_manifest):
+    """Replace supplied view_multiple with the frozen-reference canonical value (copies only)."""
+    from app.pipeline.reference import canonical_view_multiple, verify_manifest
+
+    verify_manifest(reference_manifest)
+    replaced, per_video = [], {}
+    for video in videos:
+        canon = canonical_view_multiple(video, reference_manifest, verify=False)
+        replaced.append({**video, OUTCOME: canon["view_multiple"]})
+        per_video[video["video_id"]] = {
+            key: canon[key] for key in ("status", "length_axis", "target_age_days",
+                                        "reference_n", "reference_median_views")
+        }
+    rules = reference_manifest["rules"]
+    contract = {
+        **CANONICAL_RELATIVE_PERFORMANCE_CONTRACT,
+        "definition_version": reference_manifest["canonical_definition"],
+        "reference_manifest_sha256": reference_manifest["manifest_sha256"],
+        "reference_rules_version": rules["rules_version"],
+        "reference_rules_status": rules["rules_status"],
+        "final_eligible": rules["rules_status"] == "approved",
+        "maturity_days": rules["maturity_days"],
+        "min_per_axis": rules["min_per_axis"],
+        "status_counts": dict(sorted(Counter(v["status"] for v in per_video.values()).items())),
+        "per_video": per_video,
+    }
+    return replaced, contract
+
+
+def build_findings(videos, labels, registry, split_name="development", reference_manifest=None):
     """Return calculations and chain candidates for a frozen Development split.
 
     ``videos`` must already be projected by frozen.prepare; this function has no
     file/DB access and never accepts discovery or holdout analysis.
+
+    ``reference_manifest`` (opt-in, default None): a frozen reference population
+    manifest from app.pipeline.reference. When given, the outcome is recomputed as
+    the canonical reference-based view_multiple and the supplied value is ignored.
+    When None, behaviour and output are unchanged (provisional/legacy outcome).
     """
     if split_name != "development":
         raise ValueError("Finding Engine v0.1 only analyzes the Development split")
     if "_envelope" not in registry:
         raise ValueError("Finding Engine v0.1 requires a validated frozen registry envelope")
+    _reject_unvalidated_reaction_inputs(videos)
     feature_ids = [f["feature_id"] for f in registry["features"]]
     for video in videos:
         vid = video["video_id"]
         if set(labels.get(vid, {})) != set(feature_ids):
             raise ValueError("Every Development video needs every frozen feature label")
+
+    relative_performance = dict(RELATIVE_PERFORMANCE_CONTRACT)
+    if reference_manifest is not None:
+        videos, relative_performance = _canonical_outcomes(videos, reference_manifest)
 
     available_behaviors = [m for m in AUDIENCE_METRICS if any(_number(v.get(m)) for v in videos)]
     fp = [_binary_leg(videos, labels, fid, OUTCOME, "feature_to_performance") for fid in feature_ids]
@@ -351,7 +419,7 @@ def build_findings(videos, labels, registry, split_name="development"):
         "candidate_rule": "emit when all three association estimates are calculable; no magnitude/significance cutoff",
         "input_contract": {
             "version": "finding-input-v0.1",
-            "relative_performance": dict(RELATIVE_PERFORMANCE_CONTRACT),
+            "relative_performance": relative_performance,
             "metrics": _metric_metadata(),
             "sampling_note": "Flagged metrics depend on current comment sampling policy; not validated or unbiased audience behavior. Null means not explicitly flagged, not sampling-independent; observed_repeat_share and reply_rate also depend on collection.",
         },

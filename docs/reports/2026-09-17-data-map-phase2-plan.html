@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YT Trend 데이터 지도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #FAFAFB; --surface: #FFFFFF; --sunk: #F2F4F7;
+    --ink: #0E1420; --ink-2: #4A5462; --muted: #79828F;
+    --line: #E2E6EC; --line-strong: #CBD2DB;
+    --accent: #2E7CF6; --accent-bg: #EDF4FF; --accent-line: #B7D2FB;
+    --good: #2F8F5B; --good-bg: #E8F5ED;
+    --warn: #B4761A; --warn-bg: #FBF2E2;
+    --crit: #C0453C; --crit-bg: #FBECEA;
+    --used: #8A94A3; --used-bg: #EEF0F3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+      --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+      --line: #262E38; --line-strong: #3A4350;
+      --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+      --good: #5FBE87; --good-bg: #12231A;
+      --warn: #D79B45; --warn-bg: #241C0F;
+      --crit: #E0736A; --crit-bg: #26140F;
+      --used: #5E6875; --used-bg: #1B222B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D1117; --surface: #141A22; --sunk: #10161D;
+    --ink: #E7ECF3; --ink-2: #B4BDC8; --muted: #7E8895;
+    --line: #262E38; --line-strong: #3A4350;
+    --accent: #5C9BFF; --accent-bg: #16233A; --accent-line: #2F5490;
+    --good: #5FBE87; --good-bg: #12231A;
+    --warn: #D79B45; --warn-bg: #241C0F;
+    --crit: #E0736A; --crit-bg: #26140F;
+    --used: #5E6875; --used-bg: #1B222B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 940px; margin: 0 auto; padding-inline: 24px; padding-block: 56px 96px; }
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 0; text-wrap: balance; }
+  h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 4px; text-wrap: balance; }
+  h3 { font-size: 15.5px; font-weight: 700; margin: 0 0 6px; }
+  p { margin: 0 0 14px; max-width: 68ch; color: var(--ink-2); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+  .lede { font-size: 16px; max-width: 64ch; margin-top: 12px; }
+  .eyebrow, .mono, th, .k, code {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  code { font-size: 0.86em; background: var(--sunk); padding: 1px 5px; border-radius: 4px; color: var(--ink); word-break: break-all; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .meta { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 12.5px; color: var(--muted); }
+  section { margin-top: 56px; }
+  .sec-head { margin-bottom: 20px; }
+  .sec-head p { font-size: 14.5px; margin: 0; }
+
+  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 28px; }
+  .cell { background: var(--surface); padding: 16px 18px; }
+  .k { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+  .v { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.3; }
+  .v small { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-left: 2px; }
+  .n { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  .v.acc { color: var(--accent); }
+
+  .gloss { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .gloss div { background: var(--surface); padding: 14px 18px; }
+  .gloss dt { font-weight: 700; font-size: 14.5px; }
+  .gloss dd { margin: 3px 0 0; font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .gloss dl { margin: 0; }
+
+  .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 22px 18px; }
+  .row { display: grid; grid-template-columns: 110px 1fr 64px; align-items: center; gap: 14px; padding: 7px 0; }
+  .row .ch { font-weight: 600; font-size: 14px; }
+  .row .tot { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 14px; }
+  .track { position: relative; height: 24px; background: var(--sunk); border-radius: 4px; overflow: hidden; }
+  .bar { display: flex; height: 100%; }
+  .seg { height: 100%; display: flex; align-items: center; padding-left: 8px; font-size: 11.5px; font-weight: 600; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+  .seg + .seg { border-left: 2px solid var(--surface); }
+  .s-used { background: var(--used); color: #fff; }
+  .s-other { background: var(--warn); color: #fff; }
+  .s-new { background: var(--accent); color: #fff; }
+  .ticks { display: grid; grid-template-columns: 110px 1fr 64px; gap: 14px; margin-top: 6px; }
+  .ticks .scale { position: relative; height: 16px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .ticks .scale span { position: absolute; transform: translateX(-50%); }
+  .ticks .scale span:first-child { transform: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 7px; }
+
+  .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; background: var(--sunk); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td .sub { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  .wide { min-width: 820px; }
+
+  .chip { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 9px; border-radius: 999px; white-space: nowrap; }
+  .c-used { background: var(--used-bg); color: var(--ink-2); }
+  .c-cond { background: var(--warn-bg); color: var(--warn); }
+  .c-new { background: var(--accent-bg); color: var(--accent); }
+  .c-done { background: var(--good-bg); color: var(--good); }
+  .c-wait { background: var(--sunk); color: var(--muted); }
+
+  .pcs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .pc ul { margin: 8px 0 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); }
+  .pc li { margin: 4px 0; }
+  .pc .where { font-size: 12.5px; color: var(--muted); }
+  .note { margin-top: 14px; background: var(--warn-bg); border-radius: 8px; padding: 13px 16px; font-size: 14px; color: var(--ink-2); }
+  .note strong { color: var(--warn); }
+
+  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .why > div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .why .k { margin-bottom: 8px; }
+
+  .steps { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
+  .steps li { display: grid; grid-template-columns: 34px 1fr auto; gap: 14px; padding: 16px 18px; border-bottom: 1px solid var(--line); align-items: start; }
+  .steps li:last-child { border-bottom: 0; }
+  .steps .no { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line-strong); display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .steps li.done .no { border-color: var(--good); color: var(--good); }
+  .steps li.now .no { border-color: var(--accent); background: var(--accent); color: var(--surface); }
+  .steps h3 { margin: 2px 0 2px; }
+  .steps p { font-size: 14px; margin: 0; }
+
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+  .rules li { font-size: 14px; color: var(--ink-2); padding-left: 16px; position: relative; line-height: 1.6; }
+  .rules li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--ink-2); }
+  .rules li strong { display: block; }
+
+  .open { border: 1px dashed var(--line-strong); border-radius: 10px; padding: 18px 20px; }
+  .open ul { margin: 8px 0 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); }
+  .open li { margin: 6px 0; }
+
+  footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+  footer p { font-size: 12.5px; color: var(--muted); max-width: none; }
+
+  @media (max-width: 720px) {
+    .board { grid-template-columns: repeat(2, 1fr); }
+    .gloss, .pcs, .why, .rules { grid-template-columns: 1fr; }
+    .row, .ticks { grid-template-columns: 76px 1fr 44px; gap: 10px; }
+    .row .ch { font-size: 13px; }
+    .seg { font-size: 0; padding: 0; }
+    .steps li { grid-template-columns: 30px 1fr; }
+    .steps li .chip { grid-column: 2; justify-self: start; }
+    h1 { font-size: 25px; }
+  }
+  .rx .row, .rx .ticks { grid-template-columns: 124px 1fr 44px; }
+  .rx .row { padding: 5px 0; }
+  .rx .track { height: 18px; }
+  .rx .row.zero .ch { color: var(--muted); }
+  .built { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
+  .built li { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .built li:last-child { border-bottom: 0; }
+  .built b { font-weight: 700; }
+  .built span { color: var(--ink-2); }
+  @media (max-width: 720px) {
+    .rx .row, .rx .ticks { grid-template-columns: 96px 1fr 36px; }
+    .built li { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+<header>
+  <span class="eyebrow">YT Trend · 데이터 현황 · 2026-09-17 오후</span>
+  <h1>지금 가진 데이터와 Phase 2 결과</h1>
+  <p class="lede">채널 6개의 영상과 댓글이 각각 무엇이고 어디에 쓰였는지, Phase 2 시험에서 무엇이 나왔는지, 그리고 리액션 작업을 다시 열어 새로 만든 것과 남은 결정을 정리했습니다.</p>
+  <div class="meta"><span>근거: 데이터 장부, 리액션 기준·종료 문서, Phase 2 수집 보고, 이 PC의 DB 행 수</span><span>댓글 원문은 이 문서에 싣지 않음</span></div>
+</header>
+
+<div class="board">
+  <div class="cell"><span class="k">채널</span><div class="v">6<small>개</small></div><div class="n">기존 4개 + Phase 2용 새 채널 2개</div></div>
+  <div class="cell"><span class="k">영상 기록</span><div class="v">1,011<small>편</small></div><div class="n">제목·길이·조회수 같은 정보만. 영상 파일은 없음</div></div>
+  <div class="cell"><span class="k">댓글</span><div class="v">1,982<small>개</small></div><div class="n">채널·영상이 달라 서로 겹치지 않는 원댓글</div></div>
+  <div class="cell"><span class="k">리액션 작업</span><div class="v acc">Phase 3</div><div class="n">Phase 2 완료 후 09-17 재개. AI 판정기 검증 단계</div></div>
+</div>
+
+<section>
+  <div class="sec-head">
+    <h2>먼저 알아둘 말</h2>
+    <p>아래 표와 설명에 반복해서 나오는 말입니다.</p>
+  </div>
+  <div class="gloss">
+    <div><dl><dt>영상 기록</dt><dd>유튜브에서 받아온 영상 정보. 제목, 올린 날짜, 길이, 조회수·좋아요·댓글 수가 들어 있습니다.</dd></dl></div>
+    <div><dl><dt>원댓글</dt><dd>영상에 직접 달린 댓글. 댓글에 달린 답글은 따로 셉니다.</dd></dl></div>
+    <div><dl><dt>원문 파일</dt><dd>댓글 글자가 그대로 들어 있는 파일. 대부분 PC에만 두고, 카더정원 DB만 사람 결정으로 GitHub에 올렸습니다.</dd></dl></div>
+    <div><dl><dt>판정</dt><dd>사람이나 AI가 댓글마다 "어떤 반응인가(리액션)", "무엇에 반응했나(타깃)"를 매기는 일.</dd></dl></div>
+    <div><dl><dt>파생본</dt><dd>같은 댓글로 만든 다른 파일(판정 결과, 요약, 복사본). 새 데이터로 세지 않습니다.</dd></dl></div>
+    <div><dl><dt>처음 보는 데이터</dt><dd>기준을 만들거나 고칠 때 한 번도 보지 않은 댓글. 기준이 정말 통하는지 증명할 때는 이런 댓글만 씁니다.</dd></dl></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>채널별 댓글, 어디에 썼나</h2>
+    <p>막대 길이는 댓글 수, 색은 그 댓글이 어떤 작업에 쓰였는지를 나타냅니다. 회색은 리액션 기준을 만들거나 고칠 때 이미 본 댓글이라, 기준이 맞는지 증명하는 시험에는 더 쓸 수 없습니다.</p>
+  </div>
+  <div class="chart" role="img" aria-label="채널별 댓글 수와 사용 이력">
+    <div class="row"><span class="ch">14F 일사에프</span><div class="track"><div class="bar"><div class="seg s-used" style="width:40.29%">282</div></div></div><span class="tot">282</span></div>
+    <div class="row"><span class="ch">원이</span><div class="track"><div class="bar"><div class="seg s-used" style="width:57.14%">400</div></div></div><span class="tot">400</span></div>
+    <div class="row"><span class="ch">침착맨</span><div class="track"><div class="bar"><div class="seg s-used" style="width:42.86%">300 기준 설계</div><div class="seg s-other" style="width:57.14%">400 감성·주제</div></div></div><span class="tot">700</span></div>
+    <div class="row"><span class="ch">카더정원</span><div class="track"><div class="bar"><div class="seg s-other" style="width:57.14%">400 감성·주제</div></div></div><span class="tot">400</span></div>
+    <div class="row"><span class="ch">슈카월드</span><div class="track"><div class="bar"><div class="seg s-used" style="width:14.29%">100</div></div></div><span class="tot">100</span></div>
+    <div class="row"><span class="ch">MBCNEWS</span><div class="track"><div class="bar"><div class="seg s-used" style="width:14.29%">100</div></div></div><span class="tot">100</span></div>
+    <div class="ticks" aria-hidden="true"><span></span><div class="scale"><span style="left:0">0</span><span style="left:28.57%">200</span><span style="left:57.14%">400</span><span style="left:85.71%">600</span></div><span></span></div>
+    <div class="legend">
+      <span><i style="background:var(--used)"></i>리액션 기준을 만들거나 고칠 때 이미 봄</span>
+      <span><i style="background:var(--warn)"></i>감성(긍정·부정)·주제 분석에만 씀</span>
+    </div>
+  </div>
+  <p style="margin-top:12px;font-size:13.5px">리액션 판정기가 맞는지 증명하려면, 위 어느 채널도 아닌 새 댓글을 다시 모아야 합니다.</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>채널별 상세</h2>
+    <p>기존 채널 4개는 영상을 300편 안팎 받아 영상 유형을 나눴고, 댓글은 영상 2편에서만 받았습니다. 침착맨만 리액션 기준을 만들기 위해 영상 10편에서 댓글을 따로 더 받았습니다.</p>
+  </div>
+  <div class="tw">
+    <table class="wide">
+      <thead><tr><th>채널</th><th class="num">영상 기록</th><th class="num">댓글</th><th>어디에 썼나</th><th>검증 시험에 쓸 수 있나</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>14F 일사에프</strong><span class="sub">MBC의 시사·정보 채널</span></td>
+          <td class="num">300편</td>
+          <td class="num">282개<span class="sub">영상 2편</span></td>
+          <td>감성·주제 판정, 초기 리액션 실험(옛 8분류), 사람이 정답을 단 연습 문제<span class="sub">연습 문제 파일들은 모두 이 282개의 파생본</span></td>
+          <td><span class="chip c-used">쓸 수 없음</span><span class="sub">리액션 실험에 이미 노출</span></td>
+        </tr>
+        <tr>
+          <td><strong>원이</strong><span class="sub">안녕하세요원이입니다잘부탁드립니다</span></td>
+          <td class="num">107편</td>
+          <td class="num">400개<span class="sub">영상 2편, 200개씩</span></td>
+          <td>감성·주제 판정, 리액션 열린 탐색(후보 27개를 뽑아 지금 기준의 바탕이 됨)</td>
+          <td><span class="chip c-used">쓸 수 없음</span><span class="sub">기준 설계에 사용</span></td>
+        </tr>
+        <tr>
+          <td><strong>침착맨</strong><span class="sub">묶음 두 개</span></td>
+          <td class="num">300편</td>
+          <td class="num">300개<span class="sub">영상 10편</span></td>
+          <td>리액션 Phase 1: 50개로 기준을 다듬고 250개로 확인. 영상 300편은 영상 유형·특징 찾기와 대시보드에도 씀</td>
+          <td><span class="chip c-used">쓸 수 없음</span><span class="sub">기준 설계에 사용</span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="num"></td>
+          <td class="num">400개<span class="sub">영상 2편, 200개씩</span></td>
+          <td>감성·주제 판정만. 위 300개와 댓글·영상 모두 겹치지 않음</td>
+          <td><span class="chip c-used">채널째 제외</span><span class="sub">기준을 만든 채널이라 시험이 공정하지 않음</span></td>
+        </tr>
+        <tr>
+          <td><strong>카더정원</strong><span class="sub">가수 카더가든 채널</span></td>
+          <td class="num">300편</td>
+          <td class="num">400개<span class="sub">영상 2편, 200개씩</span></td>
+          <td>감성·주제 판정만. 리액션에 쓴 기록은 아직 못 찾음<span class="sub">원본 DB를 09-17 GitHub에 올림</span></td>
+          <td><span class="chip c-cond">조건부</span><span class="sub">리액션 사용 이력 확인 필요</span></td>
+        </tr>
+        <tr>
+          <td><strong>슈카월드</strong><span class="sub">경제·시사 해설</span></td>
+          <td class="num">2편</td>
+          <td class="num">100개<span class="sub">50개씩</span></td>
+          <td>Phase 2: AI 판정 1회, 사람 검토, 9번 리액션 정의 수정의 근거</td>
+          <td><span class="chip c-used">쓸 수 없음</span><span class="sub">기준 수정에 사용</span></td>
+        </tr>
+        <tr>
+          <td><strong>MBCNEWS</strong><span class="sub">방송사 뉴스</span></td>
+          <td class="num">2편</td>
+          <td class="num">100개<span class="sub">50개씩</span></td>
+          <td>Phase 2: AI 판정 1회, 사람 검토, 9번 리액션 정의 수정의 근거</td>
+          <td><span class="chip c-used">쓸 수 없음</span><span class="sub">기준 수정에 사용</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:14px;font-size:13.5px">14F는 댓글을 284개 받았고 그중 282개를 분석했습니다. 원이의 영상 기록이 107편인 것은 채널에 올라온 영상이 그만큼이기 때문입니다.</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>데이터는 어디에 있나</h2>
+    <p>작업이 PC 두 대에서 나뉘어 진행돼 원문 파일도 두 곳에 흩어져 있습니다. GitHub에는 판정 결과와 요약, 그리고 카더정원 원본 DB가 있습니다.</p>
+  </div>
+  <div class="pcs">
+    <div class="pc">
+      <h3>이 PC</h3>
+      <span class="where mono">Desktop/yt-trend/backend/data</span>
+      <ul>
+        <li>14F 댓글 284개와 영상 300편</li>
+        <li>원이 댓글 400개와 영상 107편</li>
+        <li>침착맨 감성·주제용 댓글 400개와 영상 300편</li>
+        <li>카더정원 댓글 400개와 영상 300편 (GitHub에도 있음)</li>
+        <li>Phase 2 댓글 200개 원문 (판정 담당자에게 사본 전달)</li>
+      </ul>
+    </div>
+    <div class="pc">
+      <h3>데이터 장부를 쓴 PC</h3>
+      <span class="where mono">Documents/Codex/…</span>
+      <ul>
+        <li>침착맨 Phase 1 댓글 300개 원문</li>
+        <li>침착맨 영상 300편 DB (댓글 없음)</li>
+        <li>영상 특징 찾기 결과와 백업 폴더</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><strong>장부에 아직 빈 곳.</strong> 카더정원 원본 위치는 장부에 기록했습니다. 14F·원이·침착맨 400개는 이 PC에 있고 댓글 번호도 장부와 맞지만, 장부에는 아직 "확인 필요"로 남아 있습니다. Phase 2 AI 판정 결과 파일의 보관 위치도 "확인 필요"입니다.</div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Phase 2 · 완료</span>
+    <h2>처음 보는 채널에서도 기준이 통했나</h2>
+    <p>리액션 10개와 타깃 6개는 14F·원이·침착맨 댓글을 보면서 만들었습니다. Phase 2는 성격이 다른 슈카월드(긴 경제 해설)와 MBCNEWS(짧은 뉴스) 댓글 200개로 이 기준이 맞는지 본 시험입니다.</p>
+  </div>
+
+  <ol class="steps">
+    <li class="done"><span class="no">1</span><div><h3>댓글 모으기</h3><p>영상 4편에서 인기순 댓글을 50개씩, 200개 받았습니다. 내용을 보고 고르지 않았고, 채널 본인 댓글은 0개였습니다.</p></div><span class="chip c-done">완료</span></li>
+    <li class="done"><span class="no">2</span><div><h3>봉인하기</h3><p>댓글 목록과 글자마다의 지문(해시)을 GitHub에 올렸습니다. 누가 댓글을 바꾸면 지문이 달라져 드러납니다.</p></div><span class="chip c-done">완료</span></li>
+    <li class="done"><span class="no">3</span><div><h3>판정하기</h3><p>사람이 아니라 <strong>AI가 한 번</strong> 200개를 판정했습니다. 사람 정답과 비교하지 않았기 때문에, 아래 숫자는 정확도가 아니라 AI가 매긴 분포입니다.</p></div><span class="chip c-done">완료</span></li>
+    <li class="done"><span class="no">4</span><div><h3>한꺼번에 돌아보기</h3><p>AI가 검토 표시를 붙인 29개를 사람이 봤습니다. 적용 실수 5개, 정의 경계 문제 6개, 칸 구조 문제 18개였습니다.</p></div><span class="chip c-done">완료</span></li>
+    <li class="done"><span class="no">5</span><div><h3>기준 정하기</h3><p>9번 "행동 유발"을 <strong>"행동 지향"</strong>으로 넓혔습니다. 정부·기관·다른 사람에게 행동을 요구하는 댓글이 19개 나와서입니다. 리액션·타깃 칸을 새로 만들지는 않았습니다.</p></div><span class="chip c-done">완료</span></li>
+  </ol>
+
+  <h3 style="margin-top:32px">AI가 매긴 리액션 (200개 중, 한 댓글에 여러 개 가능)</h3>
+  <div class="chart rx" role="img" aria-label="Phase 2 AI 판정 리액션 분포" style="margin-top:10px">
+    <div class="row"><span class="ch">내용 참여</span><div class="track"><div class="bar"><div class="seg s-new" style="width:91%">91</div></div></div><span class="tot">91</span></div>
+    <div class="row"><span class="ch">비판·불만</span><div class="track"><div class="bar"><div class="seg s-new" style="width:75%">75</div></div></div><span class="tot">75</span></div>
+    <div class="row"><span class="ch">즐거움·놀이</span><div class="track"><div class="bar"><div class="seg s-new" style="width:55%">55</div></div></div><span class="tot">55</span></div>
+    <div class="row"><span class="ch">당혹·의문</span><div class="track"><div class="bar"><div class="seg s-new" style="width:20%">20</div></div></div><span class="tot">20</span></div>
+    <div class="row"><span class="ch">평가·칭찬</span><div class="track"><div class="bar"><div class="seg s-new" style="width:18%">18</div></div></div><span class="tot">18</span></div>
+    <div class="row"><span class="ch">반응 없음</span><div class="track"><div class="bar"><div class="seg s-other" style="width:11%">11</div></div></div><span class="tot">11</span></div>
+    <div class="row"><span class="ch">관계·정서</span><div class="track"><div class="bar"><div class="seg s-new" style="width:6%">6</div></div></div><span class="tot">6</span></div>
+    <div class="row"><span class="ch">행동 유발 (옛 정의)</span><div class="track"><div class="bar"><div class="seg s-new" style="width:4%">4</div></div></div><span class="tot">4</span></div>
+    <div class="row"><span class="ch">요청·제안</span><div class="track"><div class="bar"><div class="seg s-new" style="width:1%">1</div></div></div><span class="tot">1</span></div>
+    <div class="row zero"><span class="ch">시청 어려움·회피</span><div class="track"></div><span class="tot">0</span></div>
+    <div class="row zero"><span class="ch">성과 참여</span><div class="track"></div><span class="tot">0</span></div>
+    <div class="ticks" aria-hidden="true"><span></span><div class="scale"><span style="left:0">0</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span></div><span></span></div>
+  </div>
+  <p style="margin-top:12px;font-size:14px">타깃은 내용·소재가 142개로 압도적이었고, 인물 51, 제작·표현 18, 콘텐츠 전체 9, 채널·커뮤니티 6개였습니다. 리액션이 두 개 이상인 댓글은 75개였습니다. 이 200개는 기준을 고치는 데 썼기 때문에, 고친 기준이 맞는지 증명하는 데는 다시 쓸 수 없습니다.</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Phase 3 · 진행 중</span>
+    <h2>종료했다가 같은 날 다시 열었습니다</h2>
+    <p>Phase 2 직후 팀은 "AI 판정이 믿을 만하다는 증거가 없으니 제품에 쓰지 않고 멈춘다"고 정했습니다. 같은 날 사람이 다시 열기로 결정했고, 증거를 만드는 Phase 3에 들어갔습니다. 기준(리액션 10개, 타깃 6개)은 바꾸지 않았습니다.</p>
+  </div>
+  <div class="note" style="margin:0 0 18px;background:var(--accent-bg)"><strong style="color:var(--accent)">검증을 통과하기 전까지의 약속.</strong> 리액션 결과는 제품 분석의 입력으로 쓰지 않고, 화면이나 보고서에 실을 때는 항상 "검증 전 AI 판정"이라고 표시합니다. 이 약속은 코드로도 막아 두었습니다.</div>
+  <h3>새로 만든 것 (공용 브랜치, 테스트 473개 통과)</h3>
+  <ul class="built" style="margin-top:10px">
+    <li><b>AI 판정기</b><span>리액션·타깃을 매기는 프롬프트와 판정 코드. 없는 번호, 댓글에 없는 영상 시간 같은 잘못된 답은 저장하지 않습니다.</span></li>
+    <li><b>일치율 도구</b><span>사람 판정과 AI 판정이 얼마나 같은지 리액션마다 잽니다. 사람이 판정하는 입력 화면도 만들었습니다.</span></li>
+    <li><b>수집기 규칙</b><span>댓글마다 분석에 넣을지와 뺀 이유(채널 본인, 엉뚱한 영상, 확정 스팸)를 표시하고, 댓글에 적힌 영상 시간을 따로 저장합니다.</span></li>
+    <li><b>댓글 수집 방식</b><span>영상 유형·길이·성과별로 영상을 골라 댓글을 받는 규칙과 비용 안 3가지.</span></li>
+    <li><b>고정 비교 기준</b><span>실험 영상과 겹치지 않는 옛 영상으로 조회 배수를 계산하는 방식. 아직 선택해서만 씁니다.</span></li>
+    <li><b>리포트·대시보드</b><span>영상 유형·성과별 리액션 비율과 해석 문장. 침착맨 대시보드에 칸을 만들었지만 판정 결과가 없어 비어 있습니다.</span></li>
+    <li><b>특징 결합 분석</b><span>리액션 비율, 영상 특징, 조회 배수를 한 표로 묶어 관계를 봅니다. 최종 시험용 영상은 열지 않습니다.</span></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>실제 숫자를 채우려면</h2>
+    <p>코드는 준비됐지만 실제 댓글로는 아직 아무것도 판정하지 않았습니다. 사람이 정해야 할 것은 다음과 같습니다.</p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>정할 것</th><th>제안</th></tr></thead>
+      <tbody>
+        <tr><td><strong>사람 정답을 누가 매기나</strong><span class="sub">판정기가 맞는지 재려면 사람 판정이 필요합니다</span></td><td>Phase 2 200개로 먼저 맞춰 본 뒤, 새로 모은 댓글에 사람이 정답을 달아 최종 확인</td></tr>
+        <tr><td><strong>합격선</strong><span class="sub">몇 %가 같으면 믿을 만하다고 볼지</span></td><td>아직 제안 없음. 사람이 정해야 합니다</td></tr>
+        <tr><td><strong>판정 비용</strong><span class="sub">실제 댓글로 AI 판정을 돌릴지</span></td><td>채널당 한도 $30</td></tr>
+        <tr><td><strong>댓글 수집 규모</strong></td><td>표준안: 300편 채널에서 약 195편, 판정 약 19,500개, 약 $22 (추정)</td></tr>
+        <tr><td><strong>비교 영상 받아오기</strong></td><td>유튜브 API 약 61유닛. 규칙값(1년 범위, 올린 지 90일, 최소 20편) 승인 필요</td></tr>
+        <tr><td><strong>침착맨 댓글 위치</strong><span class="sub">3,728개가 판정기가 읽지 않는 표에 있음</span></td><td>판정기가 그 표도 읽게 하거나 옮기기</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>근거 문서: <span class="mono">docs/data-ledger.md</span> · <span class="mono">docs/reaction-phase1-checkpoint.md</span> · <span class="mono">docs/reaction-track-closeout-2026-09-17.md</span> · <span class="mono">docs/reports/phase2-reaction-sampling-2026-09-17.md</span> · <span class="mono">docs/design/</span>의 Phase 3 설계 문서. 행 수는 이 PC의 <span class="mono">backend/data/*.db</span>에서 직접 셌습니다. 댓글 원문과 영상 제목은 싣지 않았습니다.</p>
+</footer>
+</div>
+</body>
+</html>

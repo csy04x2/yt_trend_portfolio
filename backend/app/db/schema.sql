@@ -59,7 +59,15 @@ CREATE TABLE IF NOT EXISTS comments (
     text              TEXT NOT NULL,      -- 원문. 절대 수정하지 않는다
     published_at      TEXT NOT NULL,
     like_count        INTEGER NOT NULL DEFAULT 0,
-    fetched_at        TEXT NOT NULL
+    fetched_at        TEXT NOT NULL,
+    -- 아래는 분석 포함 여부. 원문 보존(H3)과 분리한다 — 제외는 삭제가 아니라 표시다.
+    -- 필드·규칙: docs/design/comment-eligibility.md, 로직: pipeline/eligibility.py
+    parent_id              TEXT,       -- 답글이면 부모 댓글 id. 최상위 댓글은 NULL
+    author_is_channel_owner INTEGER,   -- 작성자 = 영상 채널이면 1. 모르면 NULL
+    analysis_eligible      INTEGER NOT NULL DEFAULT 1,
+    exclusion_reason       TEXT,       -- NULL | own_channel | misplaced_data | spam_confirmed
+    exclusion_source       TEXT,       -- collect | migration | comment_screens:<버전>/<모델>
+    timestamps_json        TEXT NOT NULL DEFAULT '[]'  -- 원문에 적힌 것만 [{"text":"32:19","seconds":1939}]
 );
 CREATE INDEX IF NOT EXISTS idx_comments_video ON comments(video_id, published_at);
 
@@ -198,7 +206,7 @@ CREATE TABLE IF NOT EXISTS comment_engagement (
     neutral        INTEGER NOT NULL DEFAULT 0,
     approval       REAL,          -- 긍정 ÷ (긍정+부정). neutral 은 분모에서 뺀다
     contention     REAL,          -- 2·min(긍정,부정) ÷ (긍정+부정). 0 쏠림 ~ 1 반반
-    labeled_ratio  REAL,          -- 라벨된 댓글 ÷ 그 영상의 수집 댓글
+    labeled_ratio  REAL,          -- 라벨된 댓글 ÷ 그 영상의 분석 대상 댓글 (analysis_eligible=1)
     basis          TEXT NOT NULL,
     computed_at    TEXT NOT NULL,
     PRIMARY KEY (video_id, run_id, prompt_version, model)
@@ -308,3 +316,93 @@ CREATE TABLE IF NOT EXISTS comment_features (
 );
 CREATE INDEX IF NOT EXISTS idx_comment_features_ver
     ON comment_features(extractor_version);
+
+-- Reaction Phase 3 — Reaction·Target AI 판정 (pipeline/label_reactions.py).
+-- comment_labels(감성·주제) 와 **다른 체계**라 다른 표다. 같은 표에 넣으면
+-- topics_json 의 T1 (정보·내용) 과 여기의 T1 (콘텐츠 전체) 이 같은 이름으로
+-- 섞인다. 키는 comment_labels 와 같이 (댓글, 프롬프트 버전, 모델) 이다.
+--
+-- 기준: docs/reaction-phase1-checkpoint.md · docs/reaction-track-closeout-2026-09-17.md.
+-- 독립 fresh 표본 검증 전까지 이 표의 값은 전부 「검증 전 AI 판정」이다.
+--
+--   reactions_json  ["R1","R7"]. [] = Reaction=None (반응 없음).
+--                   ["UNKNOWN"] = 판정 불가. None 과 UNKNOWN 은 다르다.
+--   targets_json    ["T2","T3"] 또는 ["UNKNOWN"]. [] 는 Reaction=None 일 때만.
+--   timestamps_json 원문에 글자 그대로 있는 timestamp 문자열만 ["32:19"].
+--                   추정한 장면·시각은 들어오지 않는다 (H2).
+--   review_reason   APPLICATION_ERROR / DEFINITION_BOUNDARY / STRUCTURE_CANDIDATE.
+--                   review_flag=0 이면 NULL. review_flag=0 이 정답이라는 뜻은 아니다.
+--
+-- 분석 대상 여부(H3)는 이 표가 아니라 댓글 쪽 상태가 정한다. 채널 본인 댓글
+-- 제외는 집계 단계의 일이다.
+CREATE TABLE IF NOT EXISTS comment_reactions (
+    comment_id      TEXT NOT NULL REFERENCES comments(comment_id),
+    prompt_version  TEXT NOT NULL,
+    model           TEXT NOT NULL,
+    reactions_json  TEXT NOT NULL,
+    targets_json    TEXT NOT NULL,
+    timestamps_json TEXT NOT NULL DEFAULT '[]',
+    review_flag     INTEGER NOT NULL DEFAULT 0,
+    review_reason   TEXT,
+    rationale       TEXT,
+    labeled_at      TEXT NOT NULL,
+    PRIMARY KEY (comment_id, prompt_version, model)
+);
+CREATE INDEX IF NOT EXISTS idx_comment_reactions_version
+    ON comment_reactions(prompt_version, model);
+
+-- Reaction 결과 연결 (Stage 08 사실) — pipeline/reaction_metrics.py,
+-- 설계: docs/design/reaction-report.md.
+--
+-- comment_reactions 를 분석 대상 댓글(analysis_eligible=1, own_channel 제외)만으로
+-- 접은 **수치**다. 문장·해석은 넣지 않는다 (해석은 Stage 09, app/interpret/).
+-- 한 (prompt_version, model) 만 접는다 — 섞으면 같은 댓글이 두 번 세어진다.
+--
+--   scope        video | channel | type | tier
+--   group_key    video_id | 'channel' | type_code | t1·t2·t3·unknown
+--   taxonomy_id  type 이면 체계 id, 아니면 0. PK 열에 NULL 을 두지 않는다
+--                (type_metrics 가 합침을 'all' 로 두는 것과 같은 이유)
+--   length_axis  shorts | longform | all
+--   *_counts_json  라벨별 댓글 수. 다중 라벨이라 합이 n_comments 를 넘을 수 있다
+--   *_shares_json  라벨별 「그 라벨을 가진 댓글 ÷ n_comments」. n_comments 가
+--                  최소치 미만이면 전부 null (masked=1, 이유는 basis). 수는 남긴다
+--   none_*       Reaction=None ([]) 댓글. UNKNOWN(판정 불가)과 따로 센다
+--   performance_json  tier 일 때 성과값 정의·canonical 여부·manifest 해시·경계. 아니면 {}
+--   sampling_json     observation_sampling 이 있으면 완결성·포함 확률 출처. 가중은 하지 않는다
+--   validation_status 독립 fresh 표본 검증 전까지 항상 '검증 전 AI 판정'
+--
+-- 이 표는 MVP Finding(feature_outcome) 입력이 아니다 (closeout 「2026-09-17 재개 결정」).
+CREATE TABLE IF NOT EXISTS reaction_metrics (
+    channel_id           TEXT NOT NULL,
+    run_id               TEXT NOT NULL,
+    prompt_version       TEXT NOT NULL,
+    model                TEXT NOT NULL,
+    scope                TEXT NOT NULL,
+    taxonomy_id          INTEGER NOT NULL DEFAULT 0,
+    group_key            TEXT NOT NULL,
+    length_axis          TEXT NOT NULL,
+    n_videos             INTEGER NOT NULL DEFAULT 0,
+    n_eligible_comments  INTEGER NOT NULL DEFAULT 0,
+    n_comments           INTEGER NOT NULL DEFAULT 0,
+    labeled_ratio        REAL,
+    reaction_counts_json TEXT NOT NULL,
+    reaction_shares_json TEXT NOT NULL,
+    none_count           INTEGER NOT NULL DEFAULT 0,
+    none_share           REAL,
+    unknown_count        INTEGER NOT NULL DEFAULT 0,
+    unknown_share        REAL,
+    target_counts_json   TEXT NOT NULL,
+    target_shares_json   TEXT NOT NULL,
+    no_target_count      INTEGER NOT NULL DEFAULT 0,
+    multi_reaction_count INTEGER NOT NULL DEFAULT 0,
+    review_flag_count    INTEGER NOT NULL DEFAULT 0,
+    masked               INTEGER NOT NULL DEFAULT 0,
+    basis                TEXT NOT NULL,
+    performance_json     TEXT NOT NULL DEFAULT '{}',
+    sampling_json        TEXT NOT NULL DEFAULT '{}',
+    metrics_version      TEXT NOT NULL,
+    validation_status    TEXT NOT NULL DEFAULT '검증 전 AI 판정',
+    computed_at          TEXT NOT NULL,
+    PRIMARY KEY (channel_id, run_id, prompt_version, model, scope, taxonomy_id,
+                 group_key, length_axis)
+);

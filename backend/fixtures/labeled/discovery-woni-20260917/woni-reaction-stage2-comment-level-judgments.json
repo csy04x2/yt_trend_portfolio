@@ -1,0 +1,3895 @@
+[
+  {
+    "comment_id": "UgyiwLPbut-cni6L8sd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwW7K7sKOJaLFxLQVF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzJiu4VLUNFK40U_s14AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxnVbrwPuBTDSkLdMh4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyphLyXX-P6DZQtpn14AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzAz11wMS3w14vNTdp4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz8QNQxLYYMbpnZGDp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxuxJEEydzJVpQ7bHl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzbL-F6futwPeX--aN4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyww1bbtcKMR6tXOhd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyGbyvrCx4kt4eS9jF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxagodBISAACgXGL-F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzTtUaNvKpCZLOC1pR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzqtrg8z0prR4w6Fop4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzGYiImSFHSSErtl5R4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy0Qd3MU9G14I_f6fB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "비유·연결하기",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx8SMPaqsbh6CXG5zR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기",
+      "시청 경험 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw67NFZmQ-azuhZyap4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "구매·행동 의향 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxy29QH5BnIoMDKg0t4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx8Ii0wwAhNj1YSQyt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwrUOff9opqLsMrM5p4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzGN47AGuIabC9_YYV4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "콘텐츠 자체 평가",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxFoN1P6wXGCM_-04V4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx2K8mct2QzHMh3MAl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwUDC7oHYiCnp2o48N4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyivZrJWpVgCokVitd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwrOzah9rz2LWekmyN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxZxvdDZ_o6Rie8a9h4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzls__InXlhJv9QBqR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugykyn7HP1dPrXBnUiJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz1IgMd8FqGT4p5I654AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxBiUeTNcvpn1U1jNp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwo-u7UroCeuVhi5GF4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxTArb332qajvPFs394AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxWkReycgZ8FAoNhjJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxSmmEoiAAcVQ4pX5x4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "시청 경험 보고",
+      "예상 밖 몰입 자각",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxYOkw-ZLuLmwPiVNp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxwHiPQUCoBUrONm2F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz98RPBydJj4pzcCoh4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyrn58D8DUjL2ep_AF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyk8qkeJ6bii6nyJLt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz0t7hnzwEES8uIXHt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwUAK0Pn6CaIdIep_h4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxvq1I6afTSbfwVwTx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzXbrwDRyn777x0n-l4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz6ciwbjErcShEpwYx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy5V89DQ6kdr-M97Mx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzqLfE3_cD02JrtIv54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwrPeII6m0g5OPvBNB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxvn85Xp3U9UFf5znZ4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxguGU7rF-FdJLoiGx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzeiSU3pGzKwvfozYx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgztzeDteCYXYEDqYJN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzLu_bRzGWZI1XWffl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyQdE5CTQ1VgHISjIt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy7BXeUIS50xjH75Cd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "능력·완성도 칭찬",
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzHeXF1DCGOgaEBC3V4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw8vGPuItMNz7hqGa14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "실제 전환 보고",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxSH7r6UKpqOBb_bU94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgweRBZrUxcDtP43Rdx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyhv_wX70EoepDNTJB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz9ft0LFvRbMCya3jd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxIJ9CXcMlIKIVF7Sh4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzVa9G0ocZW7Xa0iLN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzfg5xlkYfg9j6isXF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgztGWkYv5q3cAwPcQ54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgybP3vWdyrDU_t6nmp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwcfIGjWWNK-u7xr8h4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "특정 장면/표현 포착",
+      "해석·의미 붙이기",
+      "당혹·의문 제기",
+      "시청 경험 보고",
+      "예상 밖 몰입 자각",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwpDsw9cMtZeg-mAU54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxq1ogQ2eO4yLyeK894AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "당혹·의문 제기",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwIg_ik-_19tl5kHKp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx6aCwhsw99AwTXMll4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzmXlMxQ6B5CJuz6ox4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwMuUOwdTFTsAXyKxB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwGOp3hkyl-8aLmdxt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyYkTD6hs0UR6tJLzF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxuoRvflAFiYEgh7U14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwF_SQK8jjAVY0hHkZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy0QX6e5jkYclXddyJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzlkBcY_cL8MV9Efq54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzIItw2WSq-rLeZejN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출",
+      "당혹·의문 제기",
+      "성과 상태 관찰",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzXldFLW_oMv9OiLHt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyIFB_kujGsvUYbs314AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxq6C1zgU91125oZJp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "실제 전환 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx-iSfZydC8hTH5Wg94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxLcw_FaCJblMk4bcR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxkX7SqC6cFrHkJ5D14AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxDaF_tmOmUGX_kE_94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyDaMv9xjDIBNEGWxZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxUn1sXXkJ_0ILlF1h4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착",
+      "콘텐츠 자체 평가",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx8uC0UHAhxipoeKMp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzTP8BLUBVzc5ROCDp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyg96LF6AevUuasHc54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "시청 경험 보고",
+      "예상 밖 몰입 자각",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy1YzZTrGukAe73sa94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxeJc-2nt6h8iBC8LJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwWw9NDr3fS03d77Zp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwHYbZNvIRRY3vzC6F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzo4qwYOK4gGnZvVSJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx2enkr3wbPb6iH-G54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwWvi29s4LabsjRrcZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwsaiGPqmPm7E6h1rp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxWavT73Fg8jBZErMN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwiYBYUP9-dS8vM-9F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcvwejFiGJW4C1AmR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxMYKFDVrhvB85ws4d4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy9xPeIXvkYnwDEtXx4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwQLQPcK78-NvhXwQN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "당혹·의문 제기",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzjV578RT_L21FK5LN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxEjkawZRkzB2sOHQ14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "질문·정보 요청",
+      "구매·행동 의향 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwlKiL2zK4CeiUpWoV4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyw9lnPUp0dIoYMFHR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzP5ktaFs1p-EKOb9B4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxwIF0-eSQLBA_iqQF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyBGzvprcSu-pTWEK94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx-oFJM2bdpRxKJhGp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx5ski_S5cVvAufJTZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyt6aE_KxcI0lpWA4R4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx9YCqUxd0l8oZDze14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxNXMV_C48roqOxGYB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxC40sZ-krlYTwXaK94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyAwZyHyeIFCjVu_Jh4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy-3mDoWD_bK_fqRs94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwsm7eGq8U6yMR8kH14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwMeNrV1LDawL3dCax4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugys8G7rCwJRN7HTlgB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwxu2k19SocthNR25d4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "구매·행동 의향 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyOWQvcoLTtgjX-FvZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxczXfXZrIzP_vBdH94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwOheAQ0_io-bHmLE54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzyWokXSirBdfvaVtB4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwjQrNOjysSCJai5t54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw_KusxJhaOIALzpKp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw1AVpv-8KsKk4pcx54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwt0idV_wdvekRxJmB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx9qG8hSoArfSXB4nd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw1MjmctKdh-l_AMdd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "비유·연결하기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxrcSQ7y2UH9zbifax4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxv_ItgPkd-u3Iq2qB4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzLN5ltoRpYNJuAYoN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwrAAMNXqg6CZOfB954AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwXs9SlzW3i3_glvhp4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyimlbXh1s2beSNb8x4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "능력·완성도 칭찬",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw48AnC6mcUPieKglx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyaFsRPXs3uLCMjuSR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxwW1sqZu-0eFqyc7R4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwmfAKb2ck5SimSElZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy33sZmVc-kjYVryQd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxYQf5Jkk8vk9buAVx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwQUPt9JSsk40qAYSl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "구매·행동 의향 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyNZ7Tp3DynD5AOalF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzuDNjedESWf7MzfnR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "당혹·의문 제기",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyKXe3CyD5Hknv_2Ah4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwLm1D4_OvCn9jQBf54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxbRX36eVEHkFvnWQx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxAUtAlgla4OntCy2F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwfN_TbXnJj-BLKo1B4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxIxuZsjKXb0K7-Itt4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "예상 밖 몰입 자각",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyQ_UE3KhN0Tm6QZR54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "시청 경험 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx23JSkSGTXZCQVeih4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy1Zdm0ksFGKzuR_5d4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwu-G9JYYvwx1Ba68d4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy5LGYWlfy8IttSS6F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwMp0SBcJeMTf2YuUl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxvmdiErQOr9nyj_px4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx81qQ9QDNy8RfbbjV4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzPcQ1JjS8COXX4pyF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxBHmQRrKOn6r7_5IV4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxUgod70XhrFyom5Z94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "변형해서 놀기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyt7Jtn106sl6Qxaj14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "시청 경험 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyIx8_ys6gXqrzl8iB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "콘텐츠 자체 평가",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzr5NCb-07B7rb-Pz14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxIqVREUiA1jjiBISF4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwdHt3O45FIr8VgoHl4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzuChR-8ZJgiopGsYd4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxDbS-vt-nOY_VoEtN4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzS1_A3IjY873-V7tx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyUYESkeVNwPpFaS094AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx2B3GzuJdbVpCKs4p4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwhPzwgFou086l8_914AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzYpMO6ddyfY1HypNN4AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzVMKu5gs1M7eIn6Yx4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzzih8VfLoXmcLYCtR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyWxNjrT7fpThLSAeR4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyWl5mGkK7bJBcD0tZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "능력·완성도 칭찬"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzrIqvvmYg1prbikWB4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyP_0AuLkJvKgRmIBJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwDbiqml4xiE2GDz8h4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "비유·연결하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw7IqvY3pNRfEcs8h54AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxezQ8D4GQgyfjUzxZ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwEbCrGs8pkFgg5aqJ4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwhl450tC1MQla0F1F4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "비유·연결하기",
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyvZc4fu0hcnz5BAL94AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwGW_AbDeejUol9iot4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxUSdTVyt6B6MXu3Q14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgykDHRRYOV_wOoseet4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxNjWjYrYcVTQ7UQOF4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyDfyoGL2N7qAgdeC14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgybcEP_gyKnhWMkOv14AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "능력·완성도 칭찬",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzKrMwZ-KugNUWh6B54AaABAg",
+    "video": "video_1",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwd1S4GJEIRwQabT6J4AaABAg",
+    "video": "video_1",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyJKyDsTka7RVEXRtx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzLwM2yMWjT3xQvlEp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰",
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgySe_nFGjWM2abHTiF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxtyP7i4f1dhyH-hmV4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxs7T7kltWSXWt1-ax4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy8Od4cSyFrVjqivFR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwXo4dtYG9RFw_SymB4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyNsv2cUuorLyf5IqN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "비유·연결하기",
+      "시청의 어려움·회피 보고",
+      "팬심·의리 수행",
+      "성과 상태 관찰",
+      "응원·성공 기원",
+      "콘텐츠 요청·제안",
+      "채널 역사 되짚기",
+      "자기 경험 공유",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzONcHbNGFRvJZU8mF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy9Z3dCIfIRMsaUp7Z4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgycyYHnVgIKs_3kLtB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzvxir3Bnr-jjMAoFJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyOsdS7X-0qs7nccSl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwRA72P-3Pp4HIytxt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "당혹·의문 제기",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzLJpCcpvhe-XIdl194AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcWpKYxbevtUlNZSh4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzT-UtGVUmgOcLgt4F4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgybrhetsS56rz33-Cl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxd4RMRnePbTD0PV-p4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "당혹·의문 제기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgztldYEgOG8JnF3TiN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "특정 장면/표현 포착",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx9PKovS3dRwpsS8DF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxkVUcCqf0Mr5pGf9F4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyHjhv8SKGCmNtt2MR4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwuClMv1-VADPOZgVR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxTa8ZdIWmZSe_n1ol4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "해석·의미 붙이기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwxOpf1gzVF0FgEG1x4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가",
+      "배운 내용 사용·복습",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxD2QgUKq1eMWwvAn54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "콘텐츠 자체 평가",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw3tKUMfuXNyaXipZd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가",
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyu4663zM2ERpIPxsJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwE7eWyNsd7dUsspR54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxwRKQSAz0K2gDHqph4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고",
+      "시청의 어려움·회피 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz8HrKw70BgT8hBboJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxtSOwRf4OfH8uNV2l4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzM3sPr7q_mUfjn-Tt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyJ6ZnCLsWliHuk5Q14AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyOfonbjxGLbePOd-t4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxu7QRcwGahkroKFAl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwwOIiyAhURQyxm0LF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzs_tIsunMCvqxGrV14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxWSe6YHCyAXmA1V1x4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고",
+      "시청의 어려움·회피 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxQGBgwmxwm218f0_14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기",
+      "질문·정보 요청"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx15_Ueu4dTmfWQ3e94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwpnu5zPk_OjlTqpA14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwPFuP4KwXsnIcea2t4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzngPhdHJNjDFv7HVB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyZBBszyJ9PCv6aobB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyDhnTrnm_qZrhwrIZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzqW-ehLNzZVl3mPeN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "시청 경험 보고",
+      "콘텐츠 요청·제안",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyj6xbNECLz8-CZYnt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw4cekbU-aR2Fhr-uh4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "질문·정보 요청",
+      "배운 내용 사용·복습",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx_tKfJX-LAApEyVyV4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyAM5W-ybQb4W3A5LR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyHKzIjoBdHDgSRv-p4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzMSOwHsFwe6VitbdF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxtqlGMmx4L6YCCFnN4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx64Q4nU3KxCrTX-5B4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz_3_da9LF7kDaqftl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxp2s0TxhYWlWIv5LV4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyDH1RjcqYH7embG-54AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw3ZusT7wb9ojaizD94AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwywnTnJy7xyksaHap4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyfv5Qh7y_npVikVKl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyrU0rvJ4Yc9pHtZBx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyXxJZodz02PvD_nc54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzfInXPTXV5X2FbBrt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "변형해서 놀기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgykCS_npEgNM3OCSm54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가",
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy3JzxW4t3cXfZ7sth4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzPP8jj_VApoqx1-xZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgylrK16E2ytN96f4CB4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgznrLfBKXNu8ykG14R4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcuGQgGuvglYqyeiZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청의 어려움·회피 보고",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy-B1UYZqnjspXkHm54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "성과 상태 관찰",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcDVRCf_kNhOh_Hid4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxvY77OkQst3G9yFK14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgysGZ1UUTDgPnK7FCB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxzqouxZZyG2n09XT94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "댓글/팬덤과 함께 놀기",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzg6W8IrDa1uOOxQ9Z4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxuV441XVSmzmc1B3d4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxJI_PBxKY89fZJC6d4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzDACQpXfiJQZcMlX94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy1YXhqotPNXAiGI2x4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxxkKGPF8SUwzTbavd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "당혹·의문 제기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzrYCNf2ixyHwlSQgF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxWbh2tqtnZypb0BIR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx5Q2TZ8STV3tSxOJB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxDhaGd0HyNPvOGRRl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzkYTlUWYL3tGJ9n0d4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwdURNQs4i9Gw9ROGd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "질문·정보 요청",
+      "팬심·의리 수행",
+      "콘텐츠 요청·제안",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgytmLLeadlXXii1lN14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwKUFJSORl-AfqkOYN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz8xqfZfBmWH-O7ByZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기",
+      "시청 경험 보고",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgySRpenAZBQD8cml6V4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx2GCRmsceBPDGduXB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyUrDcakDZZdBh6ESR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyLpxlGNhTMgEt28DN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwe8sa0_KqbMbyEMK14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "채널 역사 되짚기",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcmZZzTVXInMRjFft4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyKUyCx16ps-_plMF54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxj89lY--dCnqlb4Pd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxv__6-dxC6QFkvHwB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwIkMPrfxeeD7qyn-F4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz90JLYC46bR9hxvGB4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwvojKdCOEeey1weTZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyRaeb5tGEVPkEx9Dd4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyuh5J3cj4gw2CVcYt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw6l7EPyl3_KYmRohp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwSYZWeP_DaI7xzfBl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwzFBxB0aetOp8Z1zZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyRyBqZcrmoMu0_BUZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwK5wZ1cQzICRlBR854AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxVFkTCDpCXOC1bShB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgziKP85VrjLzwxhKoF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청의 어려움·회피 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz6FlEkoxyY5Cd3BEB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzyjXbvAkdWx4QnhxV4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "해석·의미 붙이기",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwbFIPol9LwN1SG0j54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "콘텐츠 자체 평가",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugycw5b7uuEr7FcPR6p4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxET9nymhjVyGK_xsF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzO87ZxRYYXzzSCya54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwB9Xyp3pwK5emKOHJ4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzbJXiKZuAILC-XCMB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxcqr-PHJkZuK7wmVZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "시청 경험 보고",
+      "시청의 어려움·회피 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyQXzlAb-eD57ENLnB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzFgNbzD9HiT4jf27Z4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyKLvAdvLQ-G51F02R4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz_SRZY7eJ7LemKdLh4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyo7Mben8m_E13I0gp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "해석·의미 붙이기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxNaH_wOhVVprdPWZp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzQSABJlNOqcELS-mJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwT8KILBjIcr6UhvuF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzbDa11sURko1poJy54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxz5U-Zf70k4mBlBqx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxP4vAlOBmamnScZol4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "변형해서 놀기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwTgMP8a1xTfbtEROF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxR7ygobuTjMUQP-HN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwrzbGRJVrM5Kj19Tt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "시청의 어려움·회피 보고",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzkN5cgxaI0hVgWJlp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwkK-ozH-uwF6F0aKx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyR0I7HaUeXdd4GbaB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwPrHkyFj-LVjbeOLN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxog7QSUfdCT8fJY9d4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxAXsL1AWOmUWJeKz14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "변형해서 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwEATMKW5ggtv0IY554AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgznBiLFq6hX74Ml3NZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "따라 하기·재연하기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyzySFdWF_qw-mQY3d4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyuvXRPUei0Dj2DQ3l4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyimrJ4o5NLAUjWCDx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가",
+      "질문·정보 요청",
+      "콘텐츠 요청·제안"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy6AvNm6oOPPSLpGY94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "해석·의미 붙이기",
+      "당혹·의문 제기",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxH33KCZ3HoYr9ACE14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyfq7jgunRxXphTtJt4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가",
+      "배운 내용 사용·복습"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxcxJL-csFRuki0o_Z4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx1oy_UmmRbie8PdG94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "시청 경험 보고",
+      "예상 밖 몰입 자각"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzU-5YzX6SU6dJFZJF4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "시청 경험 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwwL6Y_gV8YISWC8hh4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzyqyCQKRUIsBFn9DN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "호감·애정 표출",
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzYpKr8Sx6e0pHMc6Z4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy29LuENcu8yGBW11J4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzQOGaEKADcs7EEG8p4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwB_bwSmNcuesmP6w94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzq6Ir5Ho_3rLMVGLZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwIASuFJDoa3TDZEUx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "비유·연결하기",
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzNui3peD0gFNUHXL14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugwi-xlN8QXHMVwdl-p4AaABAg",
+    "video": "video_2",
+    "reactions": [],
+    "unclear": true,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw9-GWtXkXxh6n3n9R4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "비유·연결하기",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzk_bi0sUBj6i6czlZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz1ePqeWGI1cF0Ptx54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyRy83faRMTbVzUQvp4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw6f4TwZmixibieTix4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxyvNKKx_ax0cjZqRR4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "변형해서 놀기",
+      "창작적 상상 확장"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwQwWC5NmMyiwvdSDJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxGYMOrZNhCPv5HEld4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기",
+      "성과 올리기 참여",
+      "성과 상태 관찰",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw9uw-nRvTQAZGFcxl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰",
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwxkUlWsE5ILf8IVWd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxB38QUAf2Kuphempd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyLAh89deemc49OETd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugza17-ahrJIhFaPrn94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "변형해서 놀기",
+      "당혹·의문 제기",
+      "시청의 어려움·회피 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugx4ycKwmy_wCIcy67x4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "콘텐츠 자체 평가",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": "콘텐츠를 다른 사람에게 공유·확산하라고 촉구하는 행동. 기존 27개 후보에 정확히 맞지 않아 별도 메모."
+  },
+  {
+    "comment_id": "UgyMzgVppR3YZMmo4ex4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "시청의 어려움·회피 보고"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugxs4OxySga9dRM9Dvl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyokzjuU2eKw7UKp0F4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxYqo1PdZ63-mncV_h4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzP2szH9o2VPMF_vUh4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyaonug7jt8XIphu7l4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugzl15LGlbzrBFzQCLN4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzSIpf5TMfGNZ36lol4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "변형해서 놀기",
+      "팬심·의리 수행",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxWQ2ucml1KsosMKSZ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwiFXSXTDtSEfIPNTl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "해석·의미 붙이기",
+      "콘텐츠 자체 평가",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzA5hxnhLwTrP7t0Y14AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxJVyB8M0xVUP10BP94AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyyIuCHhyvJKv7mpcx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "해석·의미 붙이기",
+      "성과 상태 관찰",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgwSrd89CPn0BS6Xzpl4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "해석·의미 붙이기",
+      "채널 역사 되짚기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgxY2EUEj58xmGuSb_J4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugw0IJ_XDxJJfDF4-hJ4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "정보 확인·정정·추가"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugy6W1f7FjazR7lB-qB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "해석·의미 붙이기",
+      "응원·성공 기원"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugyn3Ipy3SuG3LxYBdB4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "팬심·의리 수행"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyPMFWUcC3-JRrL3Yd4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출",
+      "당혹·의문 제기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyiW7cxkkSxVzd2J-d4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "Ugz9ZVOJ-NTPGYHMuQ54AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "호감·애정 표출",
+      "시청 경험 보고",
+      "시청의 어려움·회피 보고",
+      "성과 올리기 참여",
+      "성과 상태 관찰",
+      "채널 역사 되짚기",
+      "자기 경험 공유"
+    ],
+    "unclear": false,
+    "new_candidate_note": "좋아요를 눌렀다는 플랫폼 참여 행동이 명시됨. 기존 27개 후보에 정확히 맞지 않아 별도 메모."
+  },
+  {
+    "comment_id": "UgyY7ZFZGT-pZOysD-t4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgyberkjAQDD5lrdeyV4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "특정 장면/표현 포착",
+      "따라 하기·재연하기",
+      "성과 올리기 참여",
+      "성과 상태 관찰"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  },
+  {
+    "comment_id": "UgzNdFCrs77CDcIoLSx4AaABAg",
+    "video": "video_2",
+    "reactions": [
+      "성과 올리기 참여",
+      "성과 상태 관찰",
+      "댓글/팬덤과 함께 놀기"
+    ],
+    "unclear": false,
+    "new_candidate_note": null
+  }
+]

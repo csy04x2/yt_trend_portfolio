@@ -12,7 +12,7 @@
 
     approval       긍정 ÷ (긍정 + 부정)              0 = 전부 부정, 1 = 전부 긍정
     contention     2 × min(긍정, 부정) ÷ (긍정 + 부정)  0 = 한쪽 쏠림, 1 = 완전 반반
-    labeled_ratio  라벨된 댓글 ÷ 그 영상의 수집 댓글    위 두 값을 얼마나 믿을지
+    labeled_ratio  라벨된 댓글 ÷ 그 영상의 분석 대상 댓글  위 두 값을 얼마나 믿을지
 
 approval 과 contention 은 같은 분포를 다른 각도에서 본다. approval 만으로는
 0.5 가 "반반으로 갈렸다"인지 "애매하다"인지 알 수 없고, contention 만으로는
@@ -65,7 +65,9 @@ def compute(
     """영상 하나의 참여 성격. 순수 함수 — DB 를 모른다.
 
     counts 는 {'positive': n, 'negative': n, 'neutral': n} 꼴.
-    collected_comments 는 그 영상에서 실제로 받아둔 댓글 수 (라벨 여부 무관).
+    collected_comments 는 그 영상에서 받아둔 댓글 중 분석 대상(analysis_eligible=1)의
+    수 (라벨 여부 무관). 채널 자신의 댓글·잘못 들어온 데이터·확정 스팸은 raw 에는
+    남지만 시청자 반응의 분모가 아니다 (checkpoint H3, docs/design/comment-eligibility.md).
     """
     positive = counts.get(POSITIVE, 0)
     negative = counts.get(NEGATIVE, 0)
@@ -90,7 +92,7 @@ def compute(
 
     if labeled == 0:
         out["basis"] = (
-            f"라벨된 댓글이 없다 (수집 댓글 {collected_comments}건) — "
+            f"라벨된 댓글이 없다 (분석 대상 댓글 {collected_comments}건) — "
             f"먼저 export-batch · import-batch 로 감성 라벨을 채운다"
         )
         return out
@@ -121,6 +123,7 @@ def read_label_counts(conn, prompt_version: str, model: str) -> dict[str, dict[s
            FROM comment_labels l
            JOIN comments c ON c.comment_id = l.comment_id
            WHERE l.prompt_version = ? AND l.model = ?
+             AND c.analysis_eligible = 1
            GROUP BY c.video_id, l.sentiment""",
         (prompt_version, model),
     )
@@ -171,7 +174,7 @@ def run(
     collected = {
         r["video_id"]: r["n"]
         for r in conn.execute(
-            "SELECT video_id, COUNT(*) AS n FROM comments GROUP BY video_id"
+            "SELECT video_id, SUM(analysis_eligible = 1) AS n FROM comments GROUP BY video_id"
         )
     }
     if not collected:

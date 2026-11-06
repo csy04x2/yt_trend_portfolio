@@ -43,6 +43,7 @@ backend/
 | [youtube-trend-decisions.md](docs/design/youtube-trend-decisions.md) | 아키텍처 설계 전 확정한 결정 사항, 기본값, 실패·재개 정책, 미결 사항 |
 | [youtube-trend-architecture.md](docs/design/youtube-trend-architecture.md) | 아키텍처 v0.1. 모듈 구성, SQLite 스키마, 작업 상태 흐름, API 명세, Claude 호출 설계, 구현 순서 |
 | [ideas.md](docs/design/ideas.md) | 아직 결정이 아닌 아이디어. 채택되면 결정·아키텍처 문서로 옮긴다 |
+| [docs/reports/2026-09-17-data-map-phase2-plan.html](docs/reports/2026-09-17-data-map-phase2-plan.html) | 데이터 현황. 채널 6개의 영상·댓글 구성과 사용 이력, Phase 2 결과, Phase 3 재개 후 만든 것과 남은 결정 |
 | [docs/reports/2026-09-17-progress-report_v4.html](docs/reports/2026-09-17-progress-report_v4.html) | 진행 보고 (최신). 09-17 확정 정본(Reaction 10 + Target 5, Phase 2) 반영, 원천 자료 두 PC 분산, 다음 조치 6가지 |
 | [docs/reports/2026-09-10-progress-report_v3.html](docs/reports/2026-09-10-progress-report_v3.html) | 진행 보고 3판. 영상 유형 두 축, 쇼츠/롱폼 성과 역전, 2판 수치 정정 |
 | [docs/reports/2026-09-09-progress-report_v2.html](docs/reports/2026-09-09-progress-report_v2.html) | 진행 보고 2판. 댓글 판정 282건과 호응·논쟁 지표 |

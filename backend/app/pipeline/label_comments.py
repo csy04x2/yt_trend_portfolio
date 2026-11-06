@@ -63,6 +63,7 @@ def pending(conn, prompt_version: str, model: str,
                ON l.comment_id = c.comment_id
               AND l.prompt_version = ? AND l.model = ?
         WHERE s.verdict IN (%s) AND l.comment_id IS NULL
+          AND c.analysis_eligible = 1
     """ % ",".join("?" * len(SENDABLE))
     params: list = [prompt_version, model, *SENDABLE]
     if video_id:

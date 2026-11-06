@@ -1,0 +1,327 @@
+[
+  {
+    "comment_id": "UgzJiu4VLUNFK40U_s14AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "따라 하기·재연하기"
+    ],
+    "reason": "영상 속 표현을 거의 그대로 복창한 댓글로, 다른 짧은 복창 사례에 적용한 재연 기준과 동일하다."
+  },
+  {
+    "comment_id": "UgyphLyXX-P6DZQtpn14AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "응원·성공 기원"
+    ],
+    "reason": "시청자를 '든든한 빽'으로 생각하라는 격려가 명시되어 있어 응원 행동이 드러난다."
+  },
+  {
+    "comment_id": "UgzAz11wMS3w14vNTdp4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "창작적 상상 확장"
+    ],
+    "reason": "원이의 목이 돌아가겠다는 과장된 상황을 만들어 표현한다."
+  },
+  {
+    "comment_id": "UgzbL-F6futwPeX--aN4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "당혹·의문 제기"
+    ],
+    "reason": "'왜 ... 알 것 같냐'는 의문·당혹이 직접 표현된다."
+  },
+  {
+    "comment_id": "Ugwo-u7UroCeuVhi5GF4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "팬심·의리 수행"
+    ],
+    "reason": "'봐주겠어'라는 시청 의향이 해당 영상 맥락의 팬심/의리성 시청 표현과 일치한다."
+  },
+  {
+    "comment_id": "Ugxvn85Xp3U9UFf5znZ4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "KEEP_UNCLEAR",
+    "corrected_reactions": [],
+    "reason": "'나미'만으로는 시청자가 무엇을 하는지 안정적으로 판정할 수 없다."
+  },
+  {
+    "comment_id": "UgxkX7SqC6cFrHkJ5D14AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'초초초카와이'는 매우 귀엽다는 직접적인 호감 표현이다."
+  },
+  {
+    "comment_id": "Ugy9xPeIXvkYnwDEtXx4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "따라 하기·재연하기",
+      "능력·완성도 칭찬"
+    ],
+    "reason": "'ばばば/빱빠빠'를 재현하면서 '수고이'로 감탄·칭찬한다."
+  },
+  {
+    "comment_id": "UgzP5ktaFs1p-EKOb9B4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "능력·완성도 칭찬"
+    ],
+    "reason": "미나미가 원이를 이끌었다는 비교를 통해 수행 기여를 평가한다."
+  },
+  {
+    "comment_id": "UgzyWokXSirBdfvaVtB4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "KEEP_UNCLEAR",
+    "corrected_reactions": [],
+    "reason": "이모지만으로는 축하·즐거움 등 어느 행동인지 안정적으로 구분하기 어렵다."
+  },
+  {
+    "comment_id": "Ugxv_ItgPkd-u3Iq2qB4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "reason": "'원이 언니의 오이시이는 웃게 된다'는 직접적인 웃음 반응이다."
+  },
+  {
+    "comment_id": "UgxwW1sqZu-0eFqyc7R4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "변형해서 놀기"
+    ],
+    "reason": "'굴톤'이라는 기존 소재의 말장난을 문장에 변형해 사용한다."
+  },
+  {
+    "comment_id": "UgxIqVREUiA1jjiBISF4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "KEEP_UNCLEAR",
+    "corrected_reactions": [],
+    "reason": "엄지 이모지만으로는 호감·칭찬·동의 중 어느 Reaction인지 안정적으로 특정하기 어렵다."
+  },
+  {
+    "comment_id": "UgyUYESkeVNwPpFaS094AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "두 사람의 조합이 잘 어울린다는 긍정적 호감 표현이 명시되어 있다."
+  },
+  {
+    "comment_id": "UgzYpMO6ddyfY1HypNN4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "예상 밖 몰입 자각"
+    ],
+    "reason": "'또 처음 보는 것'이라는 자각을 통해 예상 밖으로 계속 새로운 영상을 보게 되는 시청 경험을 드러낸다."
+  },
+  {
+    "comment_id": "UgzKrMwZ-KugNUWh6B54AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'점점 이뻐지네'는 외모에 대한 직접적인 호감 표현이다."
+  },
+  {
+    "comment_id": "UgwXo4dtYG9RFw_SymB4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "응원·성공 기원"
+    ],
+    "reason": "'하고 싶은 거 이제 다 해도 돼'는 창작자를 지지하고 격려하는 발화다."
+  },
+  {
+    "comment_id": "UgzLJpCcpvhe-XIdl194AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'안경 원이 귀하다'는 특정 모습의 원이에 대한 호감 표현이다."
+  },
+  {
+    "comment_id": "UgyHjhv8SKGCmNtt2MR4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'사탕해'는 '사랑해'를 변형한 직접적인 애정 표현으로 읽힌다."
+  },
+  {
+    "comment_id": "UgxtSOwRf4OfH8uNV2l4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "시청 경험 보고",
+      "팬심·의리 수행"
+    ],
+    "reason": "새 영상이 없어 '이거라도 봐야겠다'고 하며 시청 의향과 팬으로서 대체 시청 행동을 함께 드러낸다."
+  },
+  {
+    "comment_id": "UgyJ6ZnCLsWliHuk5Q14AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "변형해서 놀기"
+    ],
+    "reason": "'사람이 제일 무섭다'는 영상 소재를 원이에게 연결해 농담으로 변형한다."
+  },
+  {
+    "comment_id": "Ugx_tKfJX-LAApEyVyV4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "reason": "이 영상을 보면 도움이 된다고 콘텐츠의 효용을 직접 평가한다."
+  },
+  {
+    "comment_id": "UgxtqlGMmx4L6YCCFnN4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "KEEP_UNCLEAR",
+    "corrected_reactions": [],
+    "reason": "'당신..'만으로는 구체적인 시청자 행동을 안정적으로 판정할 수 없다."
+  },
+  {
+    "comment_id": "Ugx64Q4nU3KxCrTX-5B4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "시청의 어려움·회피 보고"
+    ],
+    "reason": "'다 깨야 볼 수 있다'는 표현으로 시청 진입 장벽·어려움을 드러낸다."
+  },
+  {
+    "comment_id": "Ugxp2s0TxhYWlWIv5LV4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "배운 내용 사용·복습"
+    ],
+    "reason": "영상의 위험 순위 맥락을 사람에게도 적용해 '조심'해야 한다는 배운 정보의 사용이 드러난다."
+  },
+  {
+    "comment_id": "UgyDH1RjcqYH7embG-54AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "해석·의미 붙이기"
+    ],
+    "reason": "화면 속 눈빛을 '조롱거리 찾는 눈빛'으로 해석해 의미를 붙인다."
+  },
+  {
+    "comment_id": "Ugw3ZusT7wb9ojaizD94AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "콘텐츠 자체 평가"
+    ],
+    "reason": "'정말 유용한 영상'이라고 콘텐츠의 효용을 직접 평가한다."
+  },
+  {
+    "comment_id": "UgylrK16E2ytN96f4CB4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "즉각적 즐거움 표출"
+    ],
+    "reason": "자음형 웃음 문자열로, 다른 웃음 표현에 적용한 즐거움 기준과 동일하다."
+  },
+  {
+    "comment_id": "Ugzg6W8IrDa1uOOxQ9Z4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "KEEP_UNCLEAR",
+    "corrected_reactions": [],
+    "reason": "하트 하나만으로는 애정 대상과 행동 맥락을 안정적으로 특정하기 어렵다."
+  },
+  {
+    "comment_id": "UgxuV441XVSmzmc1B3d4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "당혹·의문 제기"
+    ],
+    "reason": "개가 위험 순위에 있다는 사실에 놀람과 납득하기 어려움을 직접 표현한다."
+  },
+  {
+    "comment_id": "Ugz90JLYC46bR9hxvGB4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'thank u so much'는 원이에게 직접 감사를 표현하며 긍정적 관계 반응을 드러낸다."
+  },
+  {
+    "comment_id": "UgyRaeb5tGEVPkEx9Dd4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "팬심·의리 수행"
+    ],
+    "reason": "'시간 없을 땐 이런 거라도 봐줄 테니'는 창작자를 위해 콘텐츠를 봐주겠다는 의리성 시청 의향이다."
+  },
+  {
+    "comment_id": "UgwB9Xyp3pwK5emKOHJ4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "채널 역사 되짚기"
+    ],
+    "reason": "'어둠의 영역까지 찾아오다니'는 현재 시점에서 과거/묻힌 콘텐츠까지 찾아온 상황을 언급한다."
+  },
+  {
+    "comment_id": "UgzFgNbzD9HiT4jf27Z4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "변형해서 놀기"
+    ],
+    "reason": "영상의 '위험' 소재를 원이에게 돌려 농담으로 변형한다."
+  },
+  {
+    "comment_id": "UgxcxJL-csFRuki0o_Z4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "호감·애정 표출"
+    ],
+    "reason": "'원이 너무 귀여움'은 직접적인 호감·애정 표현이다."
+  },
+  {
+    "comment_id": "UgwwL6Y_gV8YISWC8hh4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "해석·의미 붙이기"
+    ],
+    "reason": "'인간이 가장 무섭다'는 결론으로 영상의 위험 주제를 확장해 의미를 부여한다."
+  },
+  {
+    "comment_id": "Ugwi-xlN8QXHMVwdl-p4AaABAg",
+    "original_status": "UNCLEAR",
+    "decision": "CORRECT",
+    "corrected_reactions": [
+      "해석·의미 붙이기"
+    ],
+    "reason": "이 콘텐츠를 'art'로 규정해 의미를 부여한다."
+  }
+]

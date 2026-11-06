@@ -36447,12 +36447,12 @@
     "Shorts/일반/롱폼은 180초·1200초 기준 길이 proxy",
     "라이브/프리미어 판정 미확정 영상 포함",
     "비교군은 같은 길이축·게시 후 나이 ±20%(최소 2일), 5편 이상. 동일 7일 성과가 아님",
-    "조회배수는 임시값이다. 또래를 발견·개발·봉인 분할을 가로질러 고르고, 코드에 정의가 세 가지 있다(이 화면은 게시 후 나이 기준). 정식 값은 별도 고정 기준 영상 집합을 확보한 뒤 계산한다(09-15 결정)",
+    "조회배수는 임시값이다. 또래를 발견·개발·봉인 분할을 가로질러 고르고, 코드에 정의가 세 가지 있다(이 화면은 게시 후 나이 기준). 고정 기준 영상 계산식은 구현됐지만 침착맨은 기준 영상을 아직 수집하지 않았다(09-17)",
     "최신 댓글 최대 100개/영상의 비확률 표본. 댓글 전수 대표성 없음",
     "수집/API 댓글 비율은 서로 다른 시점과 공개 범위 때문에 coverage의 근사치",
-    "채널 본인 댓글 2건(영상 2편의 원댓글)이 참여 지표에 포함돼 있다. H3(09-17)에 따라 집계에서 뺄 예정이며, 수집 댓글 3,728건 중 2건이다",
+    "채널 본인 댓글 2건(영상 2편의 원댓글)이 이 화면의 참여 지표에 아직 포함돼 있다. 분석 포함 여부 구분(H3)은 코드에 들어갔지만 이 화면의 수치는 그 전에 계산됐다. 수집 댓글 3,728건 중 2건이다",
     "코너는 기존 단일 할당 자료이며 다중 소속 미복원. 모음 목록 제외",
-    "감성 판정(sentiment v2)은 과거 2개 영상의 400개 표본이며 Reaction이 아니다. 현재 Reaction 체계는 Reaction 10 + Target 5(09-17 확정)이고, 침착맨은 체계 설계에 쓰인 채널이라 Phase 2 검증에서 제외된다",
+    "감성 판정(sentiment v2)은 과거 2개 영상의 400개 표본이며 Reaction이 아니다. Reaction 체계는 Reaction 10(R9 행동 지향) + Target 5 + UNKNOWN이고, 침착맨 댓글은 아직 Reaction 판정을 하지 않았다. 판정하더라도 독립 검증 전까지 「검증 전 AI 판정」이다",
     "특성 효과는 비교군 공유·계절성·다중 비교 영향을 받는 탐색 결과다. 특징 판정은 제목 정규식 자리표시자이고, 승인된 사람 특징 목록은 아직 없다(09-15 점검)",
     "장기 시간 변화 및 변곡 검증은 반복 snapshot 축적 필요"
   ],
@@ -42440,5 +42440,134 @@
         "new": 0.42117536664238625
       }
     ]
+  },
+  "reaction_report": {
+    "validation_status": "검증 전 AI 판정",
+    "state": "empty",
+    "empty_message": "아직 판정 결과 없음 — 판정 실행 후 채워짐",
+    "finding_input": false,
+    "metrics_version": "reaction-metrics-v0.1",
+    "interpret_version": "reaction-interpret-v0.1",
+    "codes": {
+      "reactions": [
+        [
+          "R1",
+          "평가·칭찬"
+        ],
+        [
+          "R2",
+          "관계·정서"
+        ],
+        [
+          "R3",
+          "즐거움·놀이"
+        ],
+        [
+          "R4",
+          "비판·불만"
+        ],
+        [
+          "R5",
+          "시청 어려움·회피"
+        ],
+        [
+          "R6",
+          "당혹·의문"
+        ],
+        [
+          "R7",
+          "내용 참여"
+        ],
+        [
+          "R8",
+          "요청·제안"
+        ],
+        [
+          "R9",
+          "행동 지향"
+        ],
+        [
+          "R10",
+          "성과 참여"
+        ]
+      ],
+      "targets": [
+        [
+          "T1",
+          "콘텐츠 전체"
+        ],
+        [
+          "T2",
+          "내용·소재"
+        ],
+        [
+          "T3",
+          "인물"
+        ],
+        [
+          "T4",
+          "제작·표현"
+        ],
+        [
+          "T5",
+          "채널·커뮤니티"
+        ],
+        [
+          "UNKNOWN",
+          "판정 불가"
+        ]
+      ]
+    },
+    "source": {
+      "db": "chim.db",
+      "channel_id": "UCUj6rrhMTR9pipbAWBAMvUQ",
+      "prompt_version": null,
+      "model": null,
+      "versions_available": [],
+      "comment_reactions_table": false,
+      "n_labeled_comments": 0
+    },
+    "min_comments": 10,
+    "taxonomies": [],
+    "rows": [],
+    "performance": {},
+    "sampling": {},
+    "interpretation": {
+      "version": "reaction-interpret-v0.1",
+      "validation_status": "검증 전 AI 판정",
+      "finding_input": false,
+      "thresholds": {
+        "min_comments": 50,
+        "min_videos": 5,
+        "max_unknown_share": 0.2,
+        "min_diff": 0.1
+      },
+      "caveats": [
+        "모든 문장은 검증 전 AI 판정을 집계한 것이며 독립 fresh 표본 검증 전이다.",
+        "관계만 나타낸다. 원인이나 앞으로의 성과를 뜻하지 않는다.",
+        "여러 묶음 × 15개 라벨을 한꺼번에 비교했다. 우연히 기준을 넘는 차이가 섞일 수 있다.",
+        "표본 설계 가중치를 적용하지 않은 비가중 비율이다."
+      ],
+      "sentences": [],
+      "withheld": [],
+      "state": "empty"
+    },
+    "display_rules": [
+      "모든 Reaction·Target 값은 「검증 전 AI 판정」이다. 독립 fresh 표본 검증을 통과하기 전까지 배지를 뗄 수 없다.",
+      "MVP Finding 입력이 아니다. 화면의 문장은 참고용 해석이며 Finding 카드로 올리지 않는다.",
+      "비율은 「그 라벨을 가진 댓글 ÷ 판정된 분석 대상 댓글」이다. 한 댓글이 여러 Reaction 을 가질 수 있어 합이 100%를 넘는다.",
+      "Reaction 없음(None)과 판정 불가(UNKNOWN)는 따로 표시한다.",
+      "판정이 최소치보다 적은 묶음은 비율 대신 「표본 부족」으로 가린다.",
+      "판정 결과가 없으면 숫자를 만들지 않고 빈 상태를 보여 준다."
+    ],
+    "how_to_fill": [
+      "# backend/ 에서. <DB> 는 ./data/<채널>.db",
+      "python -m app.cli --db <DB> export-reaction-batch rx --out ./data/batches/reaction   # 오프라인 판정 묶음 (비용 0)",
+      "# 각 묶음 .md 를 Claude Code 로 판정해 rx_NNN.result.json 으로 저장한 뒤",
+      "python -m app.cli --db <DB> import-reaction-batch rx_001 --out ./data/batches/reaction  # → comment_reactions",
+      "python -m app.cli --db <DB> reaction-metrics                                          # Stage 08 수치 → reaction_metrics",
+      "python scripts/export_reaction_report.py --db <DB> --render                           # evidence JSON + 대시보드"
+    ],
+    "generated_at": "2026-09-17T07:40:34+00:00"
   }
 }
